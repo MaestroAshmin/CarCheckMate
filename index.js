@@ -19,6 +19,8 @@ const userSchema = new mongoose.Schema({
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     isVerified: { type: Boolean, default: false },
+    firstName: String,
+    lastName: String,
     verificationToken: String,
     verificationTokenExpires: Date,
 });
@@ -28,23 +30,32 @@ const User = mongoose.model('User', userSchema);
 // Express route for user registration
 app.post('/register', async (req, res) => {
     try {
-            const { email, password } = req.body;
+            const { email, password, confirmPassword, firstName, lastName  } = req.body;
         
             // Check if the user already exists
             const existingUser = await User.findOne({ email });
             if (existingUser) {
                 return res.status(400).json({ error: 'User already exists' });
             }
-    
+            // Check if the password and confirm password match
+            if (password !== confirmPassword) {
+                return res.status(400).json({ error: 'Passwords do not match' });
+            }
             // Generate a verification token and set expiration time to 1 Day
             const verificationToken = token;;
             const verificationTokenExpires = new Date();
             verificationTokenExpires.setDate(verificationTokenExpires.getDate() + 1); // 1 day
             // Hash the password
             const hashedPassword = await bcrypt.hash(password, 10);
-    
             // Create a new user with the verification token and token expiration time
-            const newUser = new User({ email, password: hashedPassword, verificationToken,  verificationTokenExpires });
+            const newUser = new User({ 
+                email, 
+                password: hashedPassword,
+                firstName,
+                lastName, 
+                verificationToken,  
+                verificationTokenExpires
+            });
             await newUser.save();
         
             // Send verification email
