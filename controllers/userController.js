@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const User = require('../models/User');
 const token = require('crypto').randomBytes(20).toString('hex');
+const jwt = require('jsonwebtoken');
 
 // Express route for user registration
 async function register(req, res) {
@@ -105,4 +106,32 @@ async function verifyEmail(req, res) {
         }
 }
 
-module.exports = { register, sendVerificationEmail, verifyEmail };
+//Check login
+async function login (req, res){
+    try {
+        const { email, password } = req.body;
+  
+        // Find the user by email
+        const user = await User.findOne({ email });
+  
+        // If user not found or password doesn't match, return error
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+  
+        // If user is not verified, return error
+        if (!user.isVerified) {
+            return res.status(401).json({ error: 'Email not verified' });
+        }
+    
+        // Generate JWT token
+        // const token = jwt.sign({ userId: user._id }, 'your_secret_key', { expiresIn: '1h' });
+        // Send token in response
+        //  res.json({ token });
+        res.json({ message: 'Login Successful' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+module.exports = { register, sendVerificationEmail, verifyEmail, login };
