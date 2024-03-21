@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -15,6 +16,7 @@ mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection 
 
 // Use user routes
 app.use('/user', userRoutes);
+app.use('/payment', paymentRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
