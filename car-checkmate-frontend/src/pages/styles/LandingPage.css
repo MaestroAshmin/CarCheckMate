@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+}
+
+.button--container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgb(0 0 0 / 0.3);
+}
+
+.sign--in{
+    display: flex;
+    flex-direction: column;
+}
