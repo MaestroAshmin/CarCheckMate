@@ -1,28 +1,27 @@
-import React, { useEffect, useState, useContext } from 'react';
-import '../styles/LandingPage.css'
+// Dashboard.js
+import React from 'react';
+import '../styles/LandingPage.css';
+import Footer from '../../components/scripts/footer';
 
 export default function Dashboard() {
-    return(
-
-
+    return (
         <div>
-        <div>
-            <img className="background" src="background.jpg"/>
-        </div>
-        <div className="container">
-            <div className='welcome--container'>
-            <h1>Welcome to</h1>
-            <h1>Car CheckMate</h1>
+            <div className="container">
+                <div className='heading'>
+                    <img src="logo.png" alt="Logo"/>
+                </div>
+
+                <div className='welcome--container'>
+                    <h1 className='welcome--text'>Delighted to<br/> welcome you!</h1>
+                </div>
+
+                <div className='button--container'>
+                    <button className='bttn'>Continue as a guest</button>
+                    <button className='bttn'>Sign In</button>
+                    <button className='sign--up'>Create a new account</button>    
+                </div>
             </div>
-            <div className='button--container'>
-            <button>Continue as a guest</button>
-            <div className='sign--in'>
-            <h6>Already have an account ?</h6>
-            <button>Sign In</button>
-            </div>
-            <button>Signup</button>
-            </div>
+            <Footer />
         </div>
-        </div>
-    )
+    );
 }

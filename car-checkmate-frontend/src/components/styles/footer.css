@@ -1,0 +1,12 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Horizontally center the content */
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(74, 74, 71, 0.944);
+    color: white;
+    padding: 1px;
+}
