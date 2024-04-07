@@ -1,9 +1,9 @@
-// Dashboard.js
+
 import React from 'react';
 import '../styles/LandingPage.css';
 import Footer from '../../components/scripts/footer';
 
-export default function Dashboard() {
+export default function LandingPage() {
     return (
         <div>
             <div className="container">
