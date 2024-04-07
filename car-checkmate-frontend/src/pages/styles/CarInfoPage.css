@@ -4,3 +4,111 @@
     gap:20px;
     
 }
+
+.images {
+
+    border: 1px solid black; /* Added 'solid' to specify border style */
+}
+
+.car--container{
+top:20%;
+ width: 100%;
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap:10px;
+}
+.images  {
+    width: 600px;
+    height: 300px;
+    object-fit: cover;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+    border-radius: 10px;
+}
+
+.image--changer{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    justify-content: space-around;
+    width: 600px;
+}
+
+.images--controller{
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.images--controller button{
+    width: 50px; /* Set width of the button to be twice as big */
+    height: 50px; /* Set height of the button to be twice as big */
+    border-radius: 50%; /* Make the button round */
+    background-color: #1b1e1d; /* Example background color */
+    color: white; /* Example text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Add cursor pointer */
+
+}
+
+.inner--container{
+    display: flex;
+    gap:20px;
+}
+
+.option--container{
+    
+    display: flex;
+    flex-direction: column;
+  
+    align-items: center;
+    text-align: center;
+}
+
+.option{
+    width: 100px;
+    height: 50px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px;
+    border-radius: 10px;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.detail--container{
+    margin-right: auto;
+}
+/*
+grid test
+.car--container {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1.5fr 1.5fr 3fr 3fr;
+    grid-template-columns: 4fr 2fr;
+    gap: 20px; /* Add gap between grid items 
+}
+
+.images {
+    grid-column: 1; /* Place the images in column 1 
+    grid-row: 1 / span 3; /* Place the images in rows 1 to 3 
+}
+
+.item-1,.item-2,.item-3{
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+}
+
+*/
