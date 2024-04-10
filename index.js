@@ -1,11 +1,22 @@
-const express = require('express');
+
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 require('dotenv').config();
-
+const secretKey = require('crypto').randomBytes(20).toString('hex');
+const express = require('express');
+const session = require('express-session');
 const app = express();
+
+// Configure session middleware
+app.use(session({
+    secret: secretKey,
+    resave: false,
+    saveUninitialized: true
+}));
+
+
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
