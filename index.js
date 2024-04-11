@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const sellerRoutes = require('./routes/sellerVerificationRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 // const gridFSMiddleware = require('./middlewares/gridFSMiddleware');
 // const multerMiddleware = require('./middlewares/multerMiddleware');
 
@@ -56,6 +57,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
         app.use('/user', userRoutes);
         app.use('/payment', paymentRoutes);
         app.use('/verification', sellerRoutes);
+        app.use('/admin', adminRoutes);
 
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
