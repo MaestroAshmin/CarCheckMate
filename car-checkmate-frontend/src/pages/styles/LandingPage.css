@@ -7,7 +7,7 @@
     background-color: rgba(245, 245, 242, 0.944);
     align-self: center;
     text-align: center;
-    color:rgb(31, 243, 108); 
+    color:rgb(7, 82, 34); 
     margin-bottom: auto;  
 }
 
@@ -26,7 +26,7 @@
 .sign--up{
     background-color: #090909;
     color:rgb(243, 235, 225);
-    border: rgba(35, 159, 82, 0.81);
+    border: rgba(35, 159, 82);
     border-radius:10px;
     padding: 10px;
     margin-top: 1px;
@@ -42,7 +42,7 @@
     background-repeat: no-repeat;
     background-position: center;
     min-height: 100vh;
-    background-color: rgba(9, 9, 9, 0.8); /* Change opacity here */
+    background-color: rgba(9, 9, 9); /* Change opacity here */
     color: #fff; /* Set text color */
   }
   
@@ -55,9 +55,9 @@
     border-radius: 10px;
     margin-bottom: auto; /* Move button container to the center of the page */
     background-color: antiquewhite;
-    opacity: 0.9;
+
     padding: 50px;
-    border-radius: 5px;
+    border-radius: 15px;
     box-shadow: #fff;
   }
   
