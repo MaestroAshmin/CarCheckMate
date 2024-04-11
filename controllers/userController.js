@@ -148,7 +148,6 @@ async function login (req, res){
 
         // Ensure session data is saved
         req.session.save();
-
         res.status(200).json({ status: true, message: 'Login Successful', user });
     } 
     catch (error) {
