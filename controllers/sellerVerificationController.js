@@ -5,18 +5,20 @@ const path = require('path');
 async function verifySeller(req, res) {
     try {
         // Check if all required fields are provided
-        const requiredFields = ['userId', 'driverLicenseNumber', 'state', 'licenseExpiry', 'cardNumber'];
+        const requiredFields = ['driverLicenseNumber', 'state', 'licenseExpiry', 'cardNumber'];
         for (const field of requiredFields) {
             if (!req.body[field]) {
                 return res.status(400).json({ error: `${field} is required` });
             }
         }
+        // get userId from session
+        const userId = req.session.user._id;
         // Check if front and back images are provided
         if (!req.files || !req.files['frontImage'] || !req.files['backImage']) {
             return res.status(400).json({ error: 'Front and back images are required' });
         }
 
-        const { userId, driverLicenseNumber, state, licenseExpiry, cardNumber } = req.body;
+        const {driverLicenseNumber, state, licenseExpiry, cardNumber } = req.body;
         // Extract front and back images from req.files
         const frontImage = req.files['frontImage'][0];
         const backImage = req.files['backImage'][0];
@@ -29,7 +31,24 @@ async function verifySeller(req, res) {
         fs.writeFileSync(frontImagePath, frontImage.buffer);
         fs.writeFileSync(backImagePath, backImage.buffer);
 
-        
+        // Check if the verification has already been done by admin
+        const existingVerification = await SellerVerification.findOne({ user: userId });
+        if (existingVerification && existingVerification.verifiedByAdmin) {
+            // If verification has been approved by admin, disallow updating
+            return res.status(400).json({ error: 'Verification already approved by admin, update not allowed' });
+        }
+        if (existingVerification) {
+            // Update the existing verification record
+            existingVerification.driverLicenseNumber = driverLicenseNumber;
+            existingVerification.state = state;
+            existingVerification.licenseExpiry = licenseExpiry;
+            existingVerification.cardNumber = cardNumber;
+            existingVerification.frontImage = frontImagePath;
+            existingVerification.backImage = backImagePath;
+            await existingVerification.save();
+            return res.status(200).json({ status: true, message: 'Seller verification details updated successfully' });
+        }
+        // New Verification
         const verificationData = new SellerVerification({
             user: userId,
             driverLicenseNumber,
@@ -38,22 +57,6 @@ async function verifySeller(req, res) {
             cardNumber,
             frontImage: frontImagePath, // Save file path to database
             backImage: backImagePath // Save file path to database
-            // frontImage: {
-            //     data: frontImage.buffer, // Save image buffer
-            //     contentType: frontImage.mimetype // Save image mimetype
-            // },
-            // backImage: {
-            //     data: backImage.buffer, // Save image buffer
-            //     contentType: backImage.mimetype // Save image mimetype
-            // }
-            // frontImage: {
-            //     filename: frontImage.filename, // Extract filename from Multer file object
-            //     fileId: frontImage.id // Extract fileId from Multer file object
-            // },
-            // backImage: {
-            //     filename: backImage.filename, // Extract filename from Multer file object
-            //     fileId: backImage.id // Extract fileId from Multer file object
-            // }
         });
         await verificationData.save();
 
