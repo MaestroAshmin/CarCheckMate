@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-
+import '../styles/SignUpPage.css';
 export default function SignUp() {
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
         email: "",
+        phone:"",
         password: "",
         confirmPassword: "",
         register: ""
@@ -25,92 +26,113 @@ export default function SignUp() {
     };
 
     return (
+      
+        <div className='form--container'>
+        <div className='heading'>
+            <h3>carcheckmate.com.au</h3>
+        </div>
         <form onSubmit={handleSubmit}>
-            <label>
-                First Name:
+            <h3>Sign Up</h3>
+            <div className='two-by-2'>
+            <div className='input-box'>
+                <label> First Name</label>
                 <input
-                    type="text"
-                    placeholder="First Name"
+                    type="text"    
                     onChange={handleChange}
                     name="firstName"
                     value={formData.firstName}
+                    className='input-field'
                 />
-            </label>
-            <br />
-            <label>
-                Last Name:
+            </div>
+             
+            <div className='input-box'>
+            <label>Last Name</label>
                 <input
                     type="text"
-                    placeholder="Last Name"
                     onChange={handleChange}
                     name="lastName"
                     value={formData.lastName}
                 />
-            </label>
-            <br />
-            <label>
-                Email:
+            </div>
+            </div>
+            <div className='two-by-2'>
+            <div className='input-box'>
+            <label>Email</label>
                 <input
-                    type="email"
-                    placeholder="Email"
+                    type="email"   
                     onChange={handleChange}
                     name="email"
                     value={formData.email}
                 />
-            </label>
-            <br />
-            <label>
-                Password:
+            </div>
+            <div className='input-box'>
+            <label>Phone</label>
+                <input
+                    type="text"   
+                    onChange={handleChange}
+                    name="phone"
+                    value={formData.phone}
+                />
+            </div>
+            </div>
+            <div className='two-by-2'>
+            <div className='input-box'>
+            <label>Password</label>
                 <input
                     type="password"
-                    placeholder="Password"
                     onChange={handleChange}
                     name="password"
                     value={formData.password}
                 />
-            </label>
-            <br />
-            <label>
-                Confirm Password:
+            </div>
+            
+            <div className='input-box'>
+            <label>Confirm Password</label>
                 <input
-                    type="password"
-                    placeholder="Confirm Password"
+                    type="password"         
                     onChange={handleChange}
                     name="confirmPassword"
                     value={formData.confirmPassword}
                 />
-            </label>
-            <br />
-            <label>
-                Register as:
-                <input 
-                    type="radio"
-                    name="register"
-                    value="buyer"
-                    onChange={handleChange}
-                />
-                Buyer
-            </label>
-            <label>
-                <input 
-                    type="radio"
-                    name="register"
-                    value="seller"
-                    onChange={handleChange}
-                />
-                Seller
-            </label>
-            <label>
-                <input 
-                    type="radio"
-                    name="register"
-                    value="mechanic"
-                    onChange={handleChange}
-                />
-                Mechanic
-            </label>
-            <br />
-            <button type="submit">Submit</button>
+            </div>
+            </div>
+            <div >
+            <p>Register as</p>
+
+            <div className='radio'>
+                <div>
+                    <input 
+                        type="radio"
+                        name="register"
+                        value="buyer"
+                        onChange={handleChange}
+                    />
+                    <label>Buyer</label>
+                </div>
+                <div>
+                    <input 
+                        type="radio"
+                        name="register"
+                        value="seller"
+                        onChange={handleChange}
+                    />
+                    <label>Seller</label>
+                </div>
+                <div>
+                    <input 
+                        type="radio"
+                        name="register"
+                        value="mechanic"
+                        onChange={handleChange}
+                    />
+                    <label>Mechanic</label>
+                </div>
+                </div>
+            </div>
+            
+            <button className="signup--button"type="submit">Create an Account</button>
         </form>
+        </div>
+        
     );
 }
