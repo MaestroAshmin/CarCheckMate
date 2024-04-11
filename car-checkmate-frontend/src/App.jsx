@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import LandingPage from './pages/scripts/LandingPage';
-import CarInfoPage from './pages/scripts/CarInfoPage'
+import CarInfoPage from './pages/scripts/CarInfoPage';
+import ListingPage from './pages/scripts/ListingPage';
 
 function App() {
   return (
@@ -8,7 +10,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/CarInfoPage" element={<CarInfoPage />} />
+          <Route path="/carinfo" element={<CarInfoPage />} />
+          <Route path="/listing" element={<ListingPage />} />
         </Routes>
       </BrowserRouter>
     </div>
