@@ -8,6 +8,7 @@ import Footer from '../../components/scripts/footer';
 export default function CarInfoPage() {
   const { carId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState('details');
   const carImages = [
     'background.png',
     'car-image-2.jpg',
@@ -21,10 +22,24 @@ export default function CarInfoPage() {
     make: 'Toyota',
     model: 'Camry',
     year: 2020,
-    price: 7500,
+    price: 58990,
     details: 'This is the detailed information about the car.',
     features: ['Feature 1', 'Feature 2', 'Feature 3'],
-    specs: ['Spec 1', 'Spec 2', 'Spec 3'],
+    specs: {
+      kilometres: '62,613km',
+      'Seller type': 'Dealer: Used',
+      Price: '$58,990',
+      Transmission: 'Automatic',
+      'Body type': 'Hatch, 5 Doors, 4 Seats',
+      'Drive type': 'Front Wheel Drive',
+      Engine: '3 cyl, 1 L',
+      'Fuel type': 'Premium Unleaded Petrol',
+      'Fuel consumption': '5.50 L / 100 km',
+      'Colour ext / int': 'Silver / -',
+      Registration: 'YIQ841',
+      'Rego expiry': '03 Jun 2024',
+      VIN: 'MA3GFC31S003S9708',
+    },
   };
 
   const handlePrevImage = () => {
@@ -37,6 +52,10 @@ export default function CarInfoPage() {
     setCurrentImageIndex((prevIndex) =>
       (prevIndex + 1) % carImages.length
     );
+  };
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
   };
 
   return (
@@ -59,35 +78,66 @@ export default function CarInfoPage() {
         </div>
         <div className="details-container">
           <div className="price-container">
+            <p>Price</p>
             <p>${car.price}</p>
           </div>
           <div className="action-buttons">
-            <button>BUY THIS!</button>
+            <button>BUY THIS</button>
             <button>BOOK INSPECTION</button>
             <button>BOOK MECHANIC</button>
           </div>
         </div>
       </div>
       <div className="details-section">
-        <div className="details">
-          <h2>Details</h2>
-          <p>{car.details}</p>
+        <div className="tabs">
+          <button
+            className={activeTab === 'details' ? 'active' : ''}
+            onClick={() => handleTabClick('details')}
+          >
+            Details
+          </button>
+          <button
+            className={activeTab === 'features' ? 'active' : ''}
+            onClick={() => handleTabClick('features')}
+          >
+            Features
+          </button>
+          <button
+            className={activeTab === 'specs' ? 'active' : ''}
+            onClick={() => handleTabClick('specs')}
+          >
+            Specs
+          </button>
         </div>
-        <div className="features">
-          <h2>Features</h2>
-          <ul>
-            {car.features.map((feature, index) => (
-              <li key={index}>{feature}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="specs">
-          <h2>Specifications</h2>
-          <ul>
-            {car.specs.map((spec, index) => (
-              <li key={index}>{spec}</li>
-            ))}
-          </ul>
+        <div className="tab-content">
+          {activeTab === 'details' && (
+            <div className="details">
+              <h2>Details</h2>
+              <p>{car.details}</p>
+            </div>
+          )}
+          {activeTab === 'features' && (
+            <div className="features">
+              <h2>Features</h2>
+              <ul>
+                {car.features.map((feature, index) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {activeTab === 'specs' && (
+            <div className="specs">
+              <h2>Specifications</h2>
+              <ul>
+                {Object.entries(car.specs).map(([key, value]) => (
+                  <li key={key}>
+                    {key}: {value}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
       <Footer />
