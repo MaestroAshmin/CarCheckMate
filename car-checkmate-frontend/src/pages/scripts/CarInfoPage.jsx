@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import '../styles/CarInfoPage.css';
 import Navbar from '../../components/scripts/navbar';
 import SearchBar from '../../components/scripts/searchbar';
@@ -9,6 +9,7 @@ export default function CarInfoPage() {
   const { carId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('details');
+  const [showImageOverlay, setShowImageOverlay] = useState(false);
   const carImages = [
     'background.png',
     'car-image-2.jpg',
@@ -58,22 +59,66 @@ export default function CarInfoPage() {
     setActiveTab(tab);
   };
 
+  const handleImageClick = () => {
+    setShowImageOverlay(true);
+  };
+
+  const handleCloseImageOverlay = () => {
+    setShowImageOverlay(false);
+  };
+
   return (
     <div className="container">
-      <Navbar />
+      <div className="nav-container">
+        <img className="logo" src="logo.png" alt="Logo" />
+        <div className="nav-links">
+          <Link to="/">Home</Link>
+          <Link to="/listing">Listing</Link>
+          <Link to="/carinfo">About</Link>
+        </div>
+      </div>
       <div className="search-bar-container">
         <SearchBar />
       </div>
       <div className="inner-container">
-        <div className="car-container">
+        <div className="main-image-container">
           <img
             className="main-image"
             src={carImages[currentImageIndex]}
             alt={car.make}
+            onClick={handleImageClick}
           />
-          <div className="image-controls">
-            <button onClick={handlePrevImage}>&#8249;</button>
-            <button onClick={handleNextImage}>&#8250;</button>
+          {showImageOverlay && (
+            <div className="image-overlay show" onClick={handleNextImage}>
+              <img
+                className="enlarged-image"
+                src={carImages[currentImageIndex]}
+                alt={car.make}
+              />
+              <div className="image-controls">
+                <button onClick={handlePrevImage}>&#8249;</button>
+                <button onClick={handleNextImage}>&#8250;</button>
+              </div>
+              <button className="close-button" onClick={handleCloseImageOverlay}>
+                &times;
+              </button>
+            </div>
+          )}
+        </div>
+        <div className="additional-images-container">
+          <div className="photo-frame">
+            {carImages.map((image, index) => (
+              <div
+                key={index}
+                className={`thumbnail ${
+                  index === currentImageIndex ? 'active' : ''
+                }`}
+                onClick={() => setCurrentImageIndex(index)}
+              >
+                <img src={image} alt={`Car Image ${index + 1}`} />
+              </div>
+            ))}
+            <div className="image-count">+{carImages.length - 1}</div>
           </div>
         </div>
         <div className="details-container">
