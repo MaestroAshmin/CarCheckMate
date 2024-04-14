@@ -8,9 +8,9 @@ body {
     font-family: "Arial", "Verdana", "Tahoma", "Trebuchet MS", sans-serif;
 }
 
-.ctr-main {
+/*.ctr-main {
 
-}
+}*/
 
 .ctr-sub {
     position: absolute;
@@ -68,6 +68,12 @@ body {
 .ctr-sub-right-font {
     color: rgba(217,202,179,255);
     margin-top: -50px;
+}
+
+.ctr-sub-right-font-p {
+    color: rgba(217,202,179,255);
+    margin: 2%;
+    font-weight: bold;
 }
 
 hr {
@@ -145,4 +151,80 @@ img {
 .btn-signup:hover {
     font-weight: bold;
     transform: scale(1.05);
+}
+
+span:hover {
+    font-weight: bold;
+    text-decoration: solid; /* Underline text on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    color: blue; /* Change text color on hover */
+}
+
+.popup {
+    position: fixed; /* Fixed position to cover the entire viewport */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the popup */
+    background-color: white; /* White background */
+    padding: 40px; /* Padding inside the popup */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Shadow */
+    z-index: 999; /* Ensure it's above other content */
+    width: 30%;
+    border-radius: 10px; /* Rounded corners */
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.popup-content {
+    margin: 5%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-content form {
+    display: flex;
+    flex-direction: column;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+.popup-content label {
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.popup-content input {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 30px;;
+}
+
+.popup-content .button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin-top: 10px; /* Adjust top margin */
+}
+
+.popup-content button {
+    background-color: rgba(33,33,33,255);
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 45%; /* Match the width of .btn-signup */
+    height: 40px; /* Match the height of .btn-signup */
+    border-radius: 20px; /* Match the border radius of .btn-signup */
+    color: rgba(217,202,179,255);
+    text-transform: uppercase;
+}
+
+.popup-content button:hover {
+    background-color: rgba(217,202,179,255);
+    color: rgba(33,33,33,255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow */
 }
