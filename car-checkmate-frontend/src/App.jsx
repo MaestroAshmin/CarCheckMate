@@ -5,6 +5,9 @@ import SignUpPage from './pages/scripts/SignUpPage'
 import SignInPage from './pages/scripts/SignInPage'
 import ForgetPasswordPage from './pages/scripts/ForgetPasswordPage';
 
+// This is for testing the styling of the existing page. it can be removed when the implement phase is done
+import StyleTest from './pages/scripts/StyleTest';
+
 function App() {
   return (
     <div className="App">
@@ -15,6 +18,10 @@ function App() {
           <Route path="/SignUpPage" element= {<SignUpPage/>} />
           <Route path="/SignInPage" element= {<SignInPage/>} />
           <Route path="/ForgetPasswordPage" element= {<ForgetPasswordPage/>} />
+
+          {/** This is for testing the styling of the existing page */}
+          <Route path="/StyleTest" element= {<StyleTest/>} />
+
         </Routes>
       </BrowserRouter>
     </div>
