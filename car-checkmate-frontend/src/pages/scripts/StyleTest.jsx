@@ -39,6 +39,8 @@ export default function StyleTest() {
             </div>
 
             {showPopup && (
+                <>
+                    <div className='overlay'></div>
                     <div className='popup'>
                         <div className='popup-content'>
                             <span className='close' onClick={() => setShowForgotPassPopup(false)}>&times;</span>
@@ -54,9 +56,12 @@ export default function StyleTest() {
                             </form>
                         </div>
                     </div>
+                </>
             )}
 
             {showSignUpPopup && (
+                <>
+                    <div className='overlay'></div>
                     <div className='popup'>
                         <div className='popup-content'>
                             <span className='close' onClick={() => setShowSignInPopup(false)}>&times;</span>
@@ -76,6 +81,7 @@ export default function StyleTest() {
                             <p className='popup-link-align-right'>Don't have an accont yet? <span>Sign Up</span></p>
                         </div>
                     </div>
+                </>
             )}
         </div>
     );
