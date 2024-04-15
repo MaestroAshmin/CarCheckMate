@@ -6,7 +6,8 @@ import React, { useState } from 'react';
 
 export default function StyleTest() {
 
-    const [showPopup, setShowPopup] = useState(false);
+    const [showPopup, setShowForgotPassPopup] = useState(false);
+    const [showSignUpPopup, setShowSignInPopup] = useState(false);
 
     return (
         <div className='ctr-main'>
@@ -24,36 +25,58 @@ export default function StyleTest() {
                     <h1 className='ctr-sub-right-font'>Delighted to<br/> welcome you!</h1>
                     <div className='ctr-btn'>
                             <button className='btn-login'>Continue as a guest</button>
-                            <button className='btn-login'>Sign In</button>  
+                            <button className='btn-login' onClick={() => setShowSignInPopup(true)}>Sign In</button>  
                     </div>
                     <button className='btn-signup'>Create a new account</button>
                     <p className='ctr-sub-right-font-p'>Benefits of signing up with us.</p>
 
                     <h6 className='placeAtBottom-left'>
                         {/*<span>Forgot your login?</span>&nbsp;-&nbsp;*/}
-                        <span onClick={() => setShowPopup(true)}>Forgot your login?</span>&nbsp;-&nbsp;
+                        <span onClick={() => setShowForgotPassPopup(true)}>Forgot your login?</span>&nbsp;-&nbsp;
                         <span>Privacy Policy</span>
                     </h6>
                 </div>
             </div>
 
             {showPopup && (
-            <div className='popup'>
-                <div className='popup-content'>
-                    <span className='close' onClick={() => setShowPopup(false)}>&times;</span>
-                    <h2>Forgot Your Password?</h2>
-                    <p>Please enter your email address below to reset your password.</p>
-                    <form>
-                        <label htmlFor='email'>Email:</label>
-                        <input type='email' id='email' name='email' required />
-                        <div className='button-container'>
-                            <button type='submit'>Submit</button>
+                    <div className='popup'>
+                        <div className='popup-content'>
+                            <span className='close' onClick={() => setShowForgotPassPopup(false)}>&times;</span>
+                            <h2>Forgot Your Password?</h2>
+                            <p>Please enter your email address below to reset your password.</p>
+                            <br />
+                            <form>
+                                <label htmlFor='email'>Email:</label>
+                                <input type='email' id='email' name='email' required />
+                                <div className='button-container'>
+                                    <button type='submit'>Submit</button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-            </div>
-        )}
+                    </div>
+            )}
 
+            {showSignUpPopup && (
+                    <div className='popup'>
+                        <div className='popup-content'>
+                            <span className='close' onClick={() => setShowSignInPopup(false)}>&times;</span>
+                            <h2>Sign In</h2>
+                            <p>Enter email and password to sign in</p>
+                            <br />
+                            <form>
+                                <label htmlFor='email'>Email:</label>
+                                <input type='email' id='email' name='email' required />
+                                <label htmlFor='password'>Password:</label>
+                                <input type='password' id='password' name='password' required />
+                                <span><p className='popup-link-align-right'>Forgot Password?</p></span>
+                                <div className='button-container'>
+                                    <button type='submit'>Log In</button>
+                                </div>
+                            </form>
+                            <p className='popup-link-align-right'>Don't have an accont yet? <span>Sign Up</span></p>
+                        </div>
+                    </div>
+            )}
         </div>
     );
 }
