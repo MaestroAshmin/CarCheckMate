@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 // Express route for user registration
 async function register(req, res) {
     try {
-            const { email, password, confirmPassword, firstName, lastName  } = req.body;
+            const { email, password, confirmPassword, firstName, lastName, mobileNumber, userType  } = req.body;
         
             // Check if the user already exists
             const existingUser = await User.findOne({ email });
@@ -17,6 +17,10 @@ async function register(req, res) {
             // Check if the password and confirm password match
             if (password !== confirmPassword) {
                 return res.status(400).json({ error: 'Passwords do not match' });
+            }
+            // Ensure that only one user type is selected
+            if (!(userType === 'buyer' || userType === 'seller' || userType === 'mechanic')) {
+                return res.status(400).json({ error: 'Invalid user type' });
             }
             // Generate a verification token and set expiration time to 1 Day
             const verificationToken = token;;
@@ -29,7 +33,12 @@ async function register(req, res) {
                 email, 
                 password: hashedPassword,
                 firstName,
-                lastName, 
+                lastName,
+                mobileNumber,
+                [userType] : true, // Setting the selected user type to true
+                sellerVerified: false, // By default seller is not verified during account creation
+                mechanicVerified: false, // By default mechanic is not verified during account creation
+                emailVerified : false, // User has to verify email after account creation
                 verificationToken,  
                 verificationTokenExpires
             });
@@ -86,23 +95,23 @@ async function verifyEmail(req, res) {
         const user = await User.findOne({ email, verificationToken: token });
 
         if (!user || user.isVerified) {
-            return res.status(400).json({ error: 'Invalid verification link' });
+            return res.status(400).json({ status: false, error: 'Invalid verification link' });
         }
 
         // Check if the verification token has expired
         if (user.verificationTokenExpires < new Date()) {
-            return res.status(400).json({ error: 'Verification token has expired' });
+            return res.status(400).json({ status: false, error: 'Verification token has expired' });
         }
         // Update the user to mark them as verified
-        user.isVerified = true;
+        user.emailVerified = true;
         user.verificationToken = undefined; // Remove the verification token
         user.verificationTokenExpires = undefined; // Remove the expiration time
         await user.save();
 
-        res.json({ message: 'Email verified successfully' });
+        return res.status(200).json({ status: true, message: 'Email verified successfully' });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ error: 'Internal Server Error' });
+            res.status(500).json({ status: false, error: 'Internal Server Error' });
         }
 }
 
@@ -110,28 +119,56 @@ async function verifyEmail(req, res) {
 async function login (req, res){
     try {
         const { email, password } = req.body;
-  
+        
+        // Check if user is already logged in
+        if (req.session.user) {
+            return res.status(401).json({ status: false, error: 'User already logged in' });
+        }
+
         // Find the user by email
         const user = await User.findOne({ email });
   
         // If user not found or password doesn't match, return error
         if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).json({ error: 'Invalid email or password' });
+            return res.status(401).json({ status: false, error: 'Invalid email or password' });
         }
   
         // If user is not verified, return error
-        if (!user.isVerified) {
-            return res.status(401).json({ error: 'Email not verified' });
+        if (!user.emailVerified) {
+            return res.status(401).json({ status: false, error: 'Email not verified' });
         }
     
         // Generate JWT token
         // const token = jwt.sign({ userId: user._id }, 'your_secret_key', { expiresIn: '1h' });
         // Send token in response
         //  res.json({ token });
-        res.json({ message: 'Login Successful' });
-    } catch (error) {
+
+        // Save user data to session
+        req.session.user = user;
+
+        // Ensure session data is saved
+        req.session.save();
+        res.status(200).json({ status: true, message: 'Login Successful', user });
+    } 
+    catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).json({ status: false, error: 'Internal Server Error' });
     }
-  }
-module.exports = { register, sendVerificationEmail, verifyEmail, login };
+}
+// Logout endpoint
+function logout(req, res) {
+    try {
+        // Destroy session to logout
+        req.session.destroy((err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ status: false, error: 'Unable to logout' });
+            }
+            res.status(200).json({ status: true, message: 'Logout successful' });
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: false, error: 'Internal Server Error' });
+    }
+}
+module.exports = { register, sendVerificationEmail, verifyEmail, login, logout };

@@ -4,9 +4,15 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
-    isVerified: { type: Boolean, default: false },
     firstName: String,
     lastName: String,
+    mobileNumber: String,
+    buyer: { type: Boolean, default:false },
+    seller: { type: Boolean, default:false },
+    mechanic: { type: Boolean, default: false },
+    sellerVerified: { type: Boolean, default: false }, // New field
+    mechanicVerified: { type: Boolean, default: false }, // New field
+    emailVerified: { type: Boolean, default: false },
     verificationToken: String,
     verificationTokenExpires: Date,
 });
