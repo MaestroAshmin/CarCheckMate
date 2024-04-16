@@ -1,0 +1,69 @@
+
+
+.input-box{
+    display: flex;
+    flex-direction: column;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    gap:5px;
+}
+
+.form--container{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../../../public/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    color: rgb(9, 35, 1);
+    
+}
+
+form{
+    background-color: rgba(255, 255, 255); /* Change opacity here */
+    color: #02270b; /* Set text color */
+    display: flex;
+    flex-direction: column;
+    gap:3px;
+    margin-bottom: auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: #fff;
+}
+
+.two-by-2{
+    display: flex;
+    gap:20px;
+}
+p{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    margin-bottom: 1%;
+    margin-top: 0%;
+}
+.radio{
+    margin-top: 0%;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+}
+
+.signup--button{
+    margin-top: 3%;
+
+    background-color: rgb(9, 46, 21);
+    color: rgb(255, 255, 255); 
+    border: 2px solid #022a1b;
+    
+}
+
+.forgot-password{
+    margin-left: auto;
+}
