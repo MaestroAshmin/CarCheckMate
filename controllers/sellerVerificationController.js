@@ -76,4 +76,4 @@ async function handleLicenseUpload(req, res, next) {
     // Continue to the next middleware
     next();
 }
-module.exports = { verifySeller, handleLicenseUpload };
+module.exports = { verifySeller, handleLicenseUpload};

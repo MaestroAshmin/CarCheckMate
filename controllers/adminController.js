@@ -1,6 +1,7 @@
 // adminController.js
 
 const SellerVerification = require('../models/SellerVerification');
+const User = require('../models/User');
 
 // Get all pending seller verifications
 async function getPendingSellerVerifications(req, res) {
@@ -24,6 +25,10 @@ async function verifySellerVerification(req, res) {
         // Update verification status to verified by admin
         verification.verifiedByAdmin = true;
         await verification.save();
+
+        // Update sellerVerified field in the users schema
+        await User.updateOne({ _id: verification.user }, { sellerVerified: true });
+
         res.status(200).json({ status: true, message: 'Verification updated successfully' });
     } catch (error) {
         console.error('Error verifying verification:', error);

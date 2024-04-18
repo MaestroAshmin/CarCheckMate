@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const User = require('../models/User');
 const token = require('crypto').randomBytes(20).toString('hex');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
 // Express route for user registration
 async function register(req, res) {
@@ -119,7 +119,6 @@ async function verifyEmail(req, res) {
 async function login (req, res){
     try {
         const { email, password } = req.body;
-        
         // Check if user is already logged in
         if (req.session.user) {
             return res.status(401).json({ status: false, error: 'User already logged in' });
@@ -127,7 +126,7 @@ async function login (req, res){
 
         // Find the user by email
         const user = await User.findOne({ email });
-  
+        console.log(user);
         // If user not found or password doesn't match, return error
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return res.status(401).json({ status: false, error: 'Invalid email or password' });
