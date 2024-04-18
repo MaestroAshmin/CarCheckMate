@@ -126,7 +126,7 @@ async function login (req, res){
 
         // Find the user by email
         const user = await User.findOne({ email });
-        console.log(user);
+        // console.log(user);
         // If user not found or password doesn't match, return error
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return res.status(401).json({ status: false, error: 'Invalid email or password' });

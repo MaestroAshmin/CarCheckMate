@@ -3,8 +3,8 @@ const router = express.Router();
 const carController = require('../controllers/carController');
 const checkSellerVerification = require('../middlewares/checkSellerVerification');
 const authMiddleware = require('../middlewares/authMiddleware');
-// const { carPhotoUploadConfig } = require('../config/multer-config');
+const { carPhotoUploadConfig } = require('../config/multer-config');
 
-router.post('/upload-car-details', authMiddleware.requireLogin, checkSellerVerification, carController.uploadCarData);
+router.post('/upload-car-details', authMiddleware.requireLogin, checkSellerVerification, carPhotoUploadConfig, carController.uploadCarData);
 
 module.exports = router;

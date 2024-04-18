@@ -13,6 +13,6 @@ const sellerUploadFieldsConfig = upload.fields([{ name: 'frontImage', maxCount: 
 
 // console.log("carPhotoUploadConfig:", carPhotoUploadConfig);
 // Multer configuration for handling car image uploads
-// const carPhotoUploadConfig = upload.array('carPhotos', 20);
+const carPhotoUploadConfig = upload.fields([{ name: 'carPhotos', maxCount: 20 }]);
 
-module.exports = { upload, sellerUploadFieldsConfig};
+module.exports = {sellerUploadFieldsConfig, carPhotoUploadConfig};

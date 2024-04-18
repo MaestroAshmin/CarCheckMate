@@ -13,16 +13,7 @@ const carSchema = new mongoose.Schema({
     engineType: { type: String, required: true },
     fuelType: { type: String, required: true },
     bodyType: { type: String, required: true },
-    // carPhotos: {
-    //     type: [String],
-    //     validate: {
-    //         validator: function (carPhotos) {
-    //             return carPhotos.length >= 8 && carPhotos.length <= 20;
-    //         },
-    //         message: 'Photos must be between 8 and 20.',
-    //     },
-    //     required: false,
-    // },
+    carPhotos: { type: String,required: true },
 });
 
 const Car = mongoose.model('Car', carSchema);

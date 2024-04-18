@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-// const multer = require('multer');
+const multer = require('multer');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const sellerRoutes = require('./routes/sellerVerificationRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const carRoutes = require('./routes/carRoutes');
-const { sellerUploadFieldsConfig } = require('./config/multer-config');
+// const { sellerUploadFieldsConfig } = require('./config/multer-config');
 require('dotenv').config();
 
 const secretKey = require('crypto').randomBytes(20).toString('hex');
@@ -21,10 +21,10 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-// const upload = multer();
+const upload = multer();
 // app.use(upload.fields([{ name: 'frontImage', maxCount: 1 }, { name: 'backImage', maxCount: 1 }]));
 
-app.use(sellerUploadFieldsConfig);
+// app.use(sellerUploadFieldsConfig);
 // app.use(upload.array());
 const PORT = process.env.PORT || 3000;
 
@@ -39,7 +39,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
         // Routes
 
-        app.use('/user', userRoutes);
+        app.use('/user', upload.none(), userRoutes);
         app.use('/payment', paymentRoutes);
         app.use('/verification', sellerRoutes);
         app.use('/admin', adminRoutes);
