@@ -2,7 +2,6 @@
 const path = require('path');
 const fs = require('fs');
 const Car = require('../models/Car');
-const { carPhotoUploadConfig } = require('../config/multer-config');
 
 module.exports.config = {
     api: {
@@ -21,6 +20,8 @@ const ensureDirectoryExists = (directory) => {
 // Controller method to upload car data
 const uploadCarData = async (req, res) => {
     try {
+        // get userId from session
+        const userId = req.session.user._id;
 
         // Check if carPhotos are uploaded
         if (!req.files || !req.files.carPhotos || !Array.isArray(req.files.carPhotos)) {
@@ -37,6 +38,7 @@ const uploadCarData = async (req, res) => {
         // Ensure directory exists for saving car photos
         const uploadDirectory = path.join(__dirname, '..', 'uploads', 'car_photos');
         ensureDirectoryExists(uploadDirectory);
+
         // Save car photos to a separate folder
         const carPhotos = uploadedPhotos.map(photo => {
             // Generate a unique file name by adding the current date and time
@@ -58,6 +60,7 @@ const uploadCarData = async (req, res) => {
 
         // Create a new car instance
         const newCar = new Car({
+            seller_id: userId,
             title,
             make,
             model,
@@ -84,4 +87,36 @@ const uploadCarData = async (req, res) => {
     }
 };
 
-module.exports = { uploadCarData };
+// Controller function to get all unsold cars
+const getUnsoldCars = async (req, res) => {
+    try {
+        // Fetch unsold cars from the database
+        const unsoldCars = await Car.find({ hasBeenSold: false });
+
+        // Return the fetched unsold cars as a response
+        res.status(200).json(unsoldCars);
+    } catch (error) {
+        console.error('Error fetching unsold cars:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+const getCarById = async (req, res) => {
+    try {
+        const carId = req.params.carId;
+        // Retrieve the car details from the database based on the carId
+        const car = await Car.findById(carId);
+        
+        // Check if the car exists
+        if (!car) {
+            return res.status(404).json({ error: 'Car not found' });
+        }
+        
+        // If the car exists, send its details in the response
+        res.status(200).json(car);
+    } catch (error) {
+        console.error('Error fetching car details:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+module.exports = { uploadCarData, getUnsoldCars, getCarById };
