@@ -10,8 +10,8 @@ const userSchema = new mongoose.Schema({
     buyer: { type: Boolean, default:false },
     seller: { type: Boolean, default:false },
     mechanic: { type: Boolean, default: false },
-    sellerVerified: { type: Boolean, default: false }, // New field
-    mechanicVerified: { type: Boolean, default: false }, // New field
+    sellerVerified: { type: Boolean, default: false },
+    mechanicVerified: { type: Boolean, default: false },
     emailVerified: { type: Boolean, default: false },
     verificationToken: String,
     verificationTokenExpires: Date,
