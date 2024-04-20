@@ -1,11 +1,21 @@
-import React from 'react';
+import React , {useState}from 'react';
+import Select from 'react-select';
 
-export default function CarPricePage() {
+export default function CarPricePage({ formData, setFormData }) {
     return(
         <div>
-            <h1>
-                Price
-            </h1>
+                <div className='reg-input-box'>
+                <label>Price</label>
+                    <input
+                        type="text"   
+                        name="registration"   
+                        className='reg-input'  
+                        value={formData.price}
+                        onChange={(e) => {
+                            setFormData({ ...formData, price: e.target.value });
+                          }}       
+                    />
+                </div>
  
         </div>
     )

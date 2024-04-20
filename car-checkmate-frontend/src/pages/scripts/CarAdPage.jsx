@@ -7,14 +7,18 @@ import CarLocationPage from './CarLocationPage'
 import CarPricePage from './CarPricePage';
 export default function CarAdPage() {
     
-    const [page, setPage] = useState(3);
+    const [page, setPage] = useState(0);
 
     const [formData,setFormData] = useState({
         registration: "abc",
         make:"",
         model:"",
         state:"",
-        year:""
+        year:"",
+        state:"",
+        suburb:"",
+        postcode:"",
+        price:""
     })
 
     console.log(formData)
@@ -29,11 +33,17 @@ export default function CarAdPage() {
         }else if (page == 1){
             return <CarFeaturePage/>
         }else if (page == 2){
-            return <CarLocationPage/>
+            return <CarLocationPage
+            formData={formData} 
+            setFormData={setFormData}
+            />
         }else if (page == 3){
             return <CarPhotoPage/>
         }else if (page == 4){
-            return <CarPricePage/>
+            return <CarPricePage
+            formData={formData} 
+            setFormData={setFormData}
+            />
         }
     };
     return(
