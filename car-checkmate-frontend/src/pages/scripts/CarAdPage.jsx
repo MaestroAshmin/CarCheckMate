@@ -18,7 +18,13 @@ export default function CarAdPage() {
         state:"",
         suburb:"",
         postcode:"",
-        price:""
+        price:"",
+        color:"",
+        odometer:"",
+        transmission:"",
+        fuelType:"",
+        engineType:"",
+        bodyType:""
     })
 
     console.log(formData)
@@ -31,7 +37,10 @@ export default function CarAdPage() {
             setFormData={setFormData}
             />
         }else if (page == 1){
-            return <CarFeaturePage/>
+            return <CarFeaturePage
+            formData={formData} 
+            setFormData={setFormData}
+            />
         }else if (page == 2){
             return <CarLocationPage
             formData={formData} 
