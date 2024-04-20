@@ -1,0 +1,29 @@
+.build-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.basic-single{
+    width: 200px;
+}
+
+.selects .reg-input-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.select-two-by-two{
+    display: flex;
+    gap:10px;
+}
+
+.reg-input{
+   width:280px
+}
+
+.reg-input-box{
+    display: flex;
+    gap: 10px;
+}
