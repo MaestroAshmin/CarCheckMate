@@ -15,6 +15,7 @@ export default function CarAdPage() {
         model:"",
         state:"",
         year:"",
+        street:"",
         state:"",
         suburb:"",
         postcode:"",
@@ -24,7 +25,8 @@ export default function CarAdPage() {
         transmission:"",
         fuelType:"",
         engineType:"",
-        bodyType:""
+        bodyType:"",
+        images:""
     })
 
     console.log(formData)
@@ -47,7 +49,10 @@ export default function CarAdPage() {
             setFormData={setFormData}
             />
         }else if (page == 3){
-            return <CarPhotoPage/>
+            return <CarPhotoPage
+            formData={formData} 
+            setFormData={setFormData}
+            />
         }else if (page == 4){
             return <CarPricePage
             formData={formData} 

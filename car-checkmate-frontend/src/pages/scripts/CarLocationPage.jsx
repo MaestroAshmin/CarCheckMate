@@ -103,18 +103,46 @@ export default function CarLocationPage({ formData, setFormData }) {
         setFormData({ ...formData, state: selectedOption });
     };
 
-    
-    const handleSuburbChange = (selectedOption) => {
-        setFormData({ ...formData, suburb: selectedOption });
-    };
 
-    const handlePostcodeChange = (selectedOption) => {
-        setFormData({ ...formData, postcode: selectedOption });
-    };
 
     return(
         <div>
-                <div className='selects'>
+                        
+                        <label>Street</label>
+                        <input
+                            type="text"   
+                            name="street"   
+                            className='street-input'  
+                            value={formData.street}
+                            onChange={(e) => {
+                                setFormData({ ...formData, street: e.target.value });
+                                }}       
+                        />
+
+                
+                <label>Suburbs</label>
+                <input
+                    type="text"   
+                    name="suburb"   
+                    className='suburb-input'  
+                    value={formData.suburb}
+                    onChange={(e) => {
+                        setFormData({ ...formData, suburb: e.target.value });
+                    }}       
+                />
+
+ 
+                <label>Postcode</label>
+                <input
+                    type="text"   
+                    name="postcode"   
+                    className='postcode-input'  
+                    value={formData.postcode}
+                    onChange={(e) => {
+                        setFormData({ ...formData, postcode: e.target.value });
+                    }}       
+                />
+                        <div className='selects'>
                         <label>State</label>
                         <Select
                             className="basic-single"
@@ -138,54 +166,7 @@ export default function CarLocationPage({ formData, setFormData }) {
                             }}
                         ></div>
                 </div>
-                <div className='selects'>
-                        <label>Suburbs</label>
-                        <Select
-                            className="basic-single"
-                            classNamePrefix="select"
-                            isDisabled={isDisabled}
-                            isLoading={isLoading}
-                            isClearable={isClearable}
-                            isRtl={isRtl}
-                            isSearchable={isSearchable}
-                            name="state"
-                            options={suburbsVIC}
-                            onChange={handleSuburbChange}
-                        />
-                        <div
-                            style={{
-                            color: 'hsl(0, 0%, 40%)',
-                            display: 'inline-block',
-                            fontSize: 12,
-                            fontStyle: 'italic',
-                            marginTop: '1em',
-                            }}
-                        ></div>
-                </div>
-                <div className='selects'>
-                        <label>PostCode</label>
-                        <Select
-                            className="basic-single"
-                            classNamePrefix="select"
-                            isDisabled={isDisabled}
-                            isLoading={isLoading}
-                            isClearable={isClearable}
-                            isRtl={isRtl}
-                            isSearchable={isSearchable}
-                            name="state"
-                            options={postcodesVIC}
-                            onChange={handlePostcodeChange}
-                        />
-                        <div
-                            style={{
-                            color: 'hsl(0, 0%, 40%)',
-                            display: 'inline-block',
-                            fontSize: 12,
-                            fontStyle: 'italic',
-                            marginTop: '1em',
-                            }}
-                        ></div>
-                </div>
+                
         </div>
     )
 }

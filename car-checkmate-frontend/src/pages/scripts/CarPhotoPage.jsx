@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import '../styles/CarPhotoPage.css'
 
-export default function CarPhotoPage() {
+export default function CarPhotoPage({ formData, setFormData }) {
 
     const [images, setImages]=useState([]);
     const [isDragging, setIsDraging] = useState(false)
@@ -54,6 +54,10 @@ export default function CarPhotoPage() {
 
     function uploadImages(){
         console.log('Images: ', images)
+        
+            setFormData({ ...formData, images: images });
+        
+
     }
     return(
         <div className='card'>
