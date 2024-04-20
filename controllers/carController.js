@@ -53,7 +53,7 @@ const uploadCarData = async (req, res) => {
         // Convert carPhotos array to a comma-separated string
         const carPhotosString = carPhotos.join(',');
         // Extract other car data from the request body
-        const { make, model, location, color, price, odometer, transmission, year, engineType, fuelType, bodyType } = req.body;
+        const { make, model, streetName, suburb, postcode, state, color, price, odometer, transmission, year, engineType, fuelType, bodyType } = req.body;
 
         // Create title based on make, model, and year
         const title = `${year} ${make} ${model}`;
@@ -64,7 +64,10 @@ const uploadCarData = async (req, res) => {
             title,
             make,
             model,
-            location,
+            streetName,
+            suburb,
+            postcode,
+            state,
             color,
             price,
             odometer,
