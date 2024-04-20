@@ -2,7 +2,7 @@
 import React from 'react';
 import '../styles/LandingPage.css';
 import Footer from '../../components/scripts/footer';
-
+import { Link } from 'react-router-dom';
 export default function LandingPage() {
     return (
         <div>
@@ -18,7 +18,9 @@ export default function LandingPage() {
                 <div className='button--container'>
                     <button className='bttn'>Continue as a guest</button>
                     <button className='bttn'>Sign In</button>
-                    <button className='sign--up'>Create a new account</button>    
+                    <Link to="/SignUpPage">
+                        <button className='sign--up'>Create a new account</button>    
+                    </Link> 
                 </div>
             </div>
             <Footer />

@@ -14,7 +14,7 @@ const secretKey = require('crypto').randomBytes(20).toString('hex');
 const express = require('express');
 const session = require('express-session');
 const app = express();
-
+const cors = require('cors');
 // Configure session middleware
 app.use(session({
     secret: secretKey,
@@ -30,7 +30,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(express.json());
-
+app.use(cors({
+    origin: 'http://localhost:3001' // Frontend origin for my device
+  }));
 // Database connection
 const mongoURI = 'mongodb://localhost:27017/car_check_mate';
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
