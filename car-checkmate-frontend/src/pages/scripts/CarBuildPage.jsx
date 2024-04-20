@@ -1,7 +1,7 @@
 import React , {useState}from 'react';
 import Select from 'react-select';
 import '../styles/CarBuildPage.css';
-export default function CarAdPage() {
+export default function CarBuildPage({ formData, setFormData }) {
     const [isClearable, setIsClearable] = useState(true);
     const [isSearchable, setIsSearchable] = useState(true);
     const [isDisabled, setIsDisabled] = useState(false);
@@ -91,15 +91,33 @@ export default function CarAdPage() {
         { value: "X5", label: "X5" },
         { value: "7 Series", label: "7 Series" }
       ];
-      
+    
+    const handleMakeChange = (selectedOption) => {
+        setFormData({ ...formData, make: selectedOption });
+    };
+    const handleModelChange = (selectedOption) => {
+        setFormData({ ...formData, model: selectedOption });
+    };
+
+    const handleStateChange = (selectedOption) => {
+        setFormData({ ...formData, state: selectedOption });
+    };
+
+    const handleYearChange = (selectedOption) => {
+        setFormData({ ...formData, year: selectedOption });
+    };
     return(
             <div className='build-box'>
                 <div className='reg-input-box'>
                 <label>Registration No.</label>
                     <input
                         type="text"   
-                        name="reg"   
-                        className='reg-input'         
+                        name="registration"   
+                        className='reg-input'  
+                        value={formData.registration}
+                        onChange={(e) => {
+                            setFormData({ ...formData, registration: e.target.value });
+                          }}       
                     />
                 </div>
 
@@ -116,6 +134,7 @@ export default function CarAdPage() {
                             isSearchable={isSearchable}
                             name="make"
                             options={makes}
+                            onChange={handleMakeChange}
                         />
                         <div
                             style={{
@@ -128,7 +147,7 @@ export default function CarAdPage() {
                         ></div>
                 </div>
                 <div className='selects'>
-                    <label>Make</label>
+                    <label>Model</label>
                     <Select
                             className="basic-single"
                             classNamePrefix="select"
@@ -137,8 +156,9 @@ export default function CarAdPage() {
                             isClearable={isClearable}
                             isRtl={isRtl}
                             isSearchable={isSearchable}
-                            name="make"
+                            name="model"
                             options={Toyota}
+                            onChange={handleModelChange}
                         />
                         <div
                             style={{
@@ -165,6 +185,7 @@ export default function CarAdPage() {
                             isSearchable={isSearchable}
                             name="state"
                             options={states}
+                            onChange={handleStateChange}
                         />
                         <div
                             style={{
@@ -186,8 +207,9 @@ export default function CarAdPage() {
                             isClearable={isClearable}
                             isRtl={isRtl}
                             isSearchable={isSearchable}
-                            name="make"
+                            name="year"
                             options={years}
+                            onChange={handleYearChange}
                         />
                         <div
                             style={{

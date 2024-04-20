@@ -9,11 +9,23 @@ export default function CarAdPage() {
     
     const [page, setPage] = useState(3);
 
+    const [formData,setFormData] = useState({
+        registration: "abc",
+        make:"",
+        model:"",
+        state:"",
+        year:""
+    })
+
+    console.log(formData)
     const FormPages = ["CarBuildPage","CarFeaturePage","CarLocationPage","CarPhotoPage","CarPricePage"]
 
     const PageDisplay = () => {
         if(page == 0){
-            return <CarBuildPage/>
+            return <CarBuildPage 
+            formData={formData} 
+            setFormData={setFormData}
+            />
         }else if (page == 1){
             return <CarFeaturePage/>
         }else if (page == 2){
