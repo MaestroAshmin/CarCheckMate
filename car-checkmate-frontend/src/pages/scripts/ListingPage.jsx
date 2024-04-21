@@ -1,76 +1,147 @@
-import React, { useState } from 'react';
-import '../styles/main.css';
-import ForgotPasswordPopup from '../../components/scripts/ForgotPasswordPopup';
-import SignInPopup from '../../components/scripts/SignInPopup';
-import SignUpPopup from '../../components/scripts/SignUpPopup';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Listing from './Listing';
+import Navbar from '../../components/scripts/navbar';
+import SearchBar from '../../components/scripts/searchbar';
+import Footer from '../../components/scripts/footer';
+import '../styles/ListingPage.css';
 
-export default function StyleTest() {
+export default function ListingPage() {
+  const [cars, setCars] = useState([
+    {
+      id: 1,
+      make: 'Toyota',
+      model: 'Camry',
+      year: 2020,
+      price: 15000,
+      image: 'toyota-camry.jpg'
+    },
+    {
+      id: 2,
+      make: 'Honda',
+      model: 'Civic',
+      year: 2018,
+      price: 28000,
+      image: 'honda-civic.jpg'
+    },
+    {
+      id: 3,
+      make: 'Toyota',
+      model: 'Camry',
+      year: 2020,
+      price: 35000,
+      image: 'toyota-camry.jpg'
+    },
+    {
+      id: 4,
+      make: 'Honda',
+      model: 'Civic',
+      year: 2018,
+      price: 48000,
+      image: 'honda-civic.jpg'
+    },
+    {
+      id: 5,
+      make: 'Toyota',
+      model: 'Camry',
+      year: 2020,
+      price: 55000,
+      image: 'toyota-camry.jpg'
+    },
+    {
+      id: 6,
+      make: 'Honda',
+      model: 'Civic',
+      year: 2018,
+      price: 68000,
+      image: 'honda-civic.jpg'
+    },
+    {
+      id: 7,
+      make: 'Toyota',
+      model: 'Camry',
+      year: 2020,
+      price: 75000,
+      image: 'toyota-camry.jpg'
+    },
+    {
+      id: 8,
+      make: 'Honda',
+      model: 'Civic',
+      year: 2018,
+      price: 88000,
+      image: 'honda-civic.jpg'
+    },
+    {
+      id: 9,
+      make: 'Toyota',
+      model: 'Camry',
+      year: 2020,
+      price: 95000,
+      image: 'toyota-camry.jpg'
+    },
+    {
+      id: 10,
+      make: 'Honda',
+      model: 'Civic',
+      year: 2018,
+      price: 108000,
+      image: 'honda-civic.jpg'
+    },
+    {
+      id: 11,
+      make: 'Toyota',
+      model: 'Camry',
+      year: 2020,
+      price: 115000,
+      image: 'toyota-camry.jpg'
+    },
+    {
+      id: 12,
+      make: 'Honda',
+      model: 'Civic',
+      year: 2018,
+      price: 128000,
+      image: 'honda-civic.jpg'
+    },
+    // Add more car objects as needed
+  ]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const carsPerPage = 9;
 
-    const [showForgotPassPopup, setShowForgotPassPopup] = useState(false);
-    const [showSignInPopup, setShowSignInPopup] = useState(false);
-    const [showSignUpPopup, setShowSignUpPopup] = useState(false);
+  const navigate = useNavigate();
 
-    const openForgotPassPopup = () => {
-        setShowSignInPopup(false); // Close sign in popup
-        setShowSignUpPopup(false); // Close sign up popup
-        setShowForgotPassPopup(true); // Open forgot password popup
-    };
+  const handleCarClick = (carId) => {
+    navigate(`/car/${carId}`);
+  };
 
-    const openSignInPopup = () => {
-        setShowForgotPassPopup(false); // Close forgot password popup
-        setShowSignUpPopup(false); // Close sign up popup
-        setShowSignInPopup(true); // Open sign in popup
-    };
+  const indexOfLastCar = currentPage * carsPerPage;
+  const indexOfFirstCar = indexOfLastCar - carsPerPage;
+  const currentCars = cars.slice(indexOfFirstCar, indexOfLastCar);
 
-    const openSignUpPopup = () => {
-        setShowForgotPassPopup(false); // Close forgot password popup
-        setShowSignInPopup(false); // Close sign in popup
-        setShowSignUpPopup(true); // Open sign up popup
-    };
-    
-    return (
-        <div className='ctr-main'>
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-            <ForgotPasswordPopup showForgotPassPopup={showForgotPassPopup} 
-                setShowForgotPassPopup={setShowForgotPassPopup} />
-                
-            <SignInPopup showSignInPopup={showSignInPopup}
-                setShowSignInPopup={setShowSignInPopup}
-                setShowSignUpPopup={setShowSignUpPopup}
-                setShowForgotPassPopup={setShowForgotPassPopup}
-                openSignUpPopup={openSignUpPopup}
-                openForgotPassPopup={openForgotPassPopup} />
-                
-            <SignUpPopup showSignUpPopup={showSignUpPopup}
-                setShowSignUpPopup={setShowSignUpPopup}
-                openSignInPopup={openSignInPopup} />
-
-            <div className='ctr-sub'>
-                <div className='ctr-sub-left'>
-                    <img src='images/logo-cut.png' alt='Logo'/>
-                    <h1 className='ctr-sub-left-font'>CarCheckMate</h1>
-                    <br />
-                    <br />
-                    <hr />
-                    <h4 className='ctr-sub-left-font'>Selling your car in Victoria is easy with our simple process</h4>
-                    <h6 className='placeAtBottom-right'>carcheckmate@mail.com</h6>
-                </div>
-                <div className='ctr-sub-right'>
-                    <h1 className='ctr-sub-right-font'>Delighted to<br/> welcome you!</h1>
-                    <div className='ctr-btn'>
-                            <button className='btn-login'>Continue as a guest</button>
-                            <button className='btn-login' onClick={openSignInPopup}>Sign In</button>  
-                    </div>
-                    <button className='btn-signup' onClick={openSignUpPopup}>Create a new account</button>
-                    <p className='ctr-sub-right-font-p'><span>Benefits of signing up with us.</span></p>
-
-                    <h6 className='placeAtBottom-left'>
-                        {/*<span>Forgot your login?</span>&nbsp;-&nbsp;*/}
-                        <span onClick={openForgotPassPopup}>Forgot your login?</span>&nbsp;-&nbsp;
-                        <span>Privacy Policy</span>
-                    </h6>
-                </div>
-            </div>
+  return (
+    <div>
+      <Navbar />
+      <div className="search-bar-container">
+        <SearchBar />
+      </div>
+      <div className="listing-page-container">
+        <div className="listings-container">
+          {currentCars.map((car) => (
+            <Listing key={car.id} car={car} handleCarClick={handleCarClick} />
+          ))}
         </div>
-    );
+        <div className="pagination">
+          {[...Array(Math.ceil(cars.length / carsPerPage)).keys()].map((pageNumber) => (
+            <button key={pageNumber + 1} onClick={() => paginate(pageNumber + 1)}>
+              {pageNumber + 1}
+            </button>
+          ))}
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
 }
