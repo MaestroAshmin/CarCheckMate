@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Listing from './Listing';
 import Navbar from '../../components/scripts/navbar';
 import SearchBar from '../../components/scripts/searchbar';
-import Footer from '../../components/scripts/footer';
+import Footer from '../../components/scripts/Footer';
 import '../styles/ListingPage.css';
 
 export default function ListingPage() {

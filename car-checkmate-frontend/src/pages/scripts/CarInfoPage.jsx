@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import '../styles/CarInfoPage.css';
 import Navbar from '../../components/scripts/navbar';
 import SearchBar from '../../components/scripts/searchbar';
-import Footer from '../../components/scripts/footer';
+import Footer from '../../components/scripts/Footer';
 
 export default function CarInfoPage() {
   const { carId } = useParams();

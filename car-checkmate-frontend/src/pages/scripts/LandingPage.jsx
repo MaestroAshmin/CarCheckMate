@@ -31,19 +31,23 @@ export default function StyleTest() {
     return (
         <div className='ctr-main'>
 
-            <ForgotPasswordPopup showForgotPassPopup={showForgotPassPopup} 
-                setShowForgotPassPopup={setShowForgotPassPopup} />
-                
-            <SignInPopup showSignInPopup={showSignInPopup}
-                setShowSignInPopup={setShowSignInPopup}
-                setShowSignUpPopup={setShowSignUpPopup}
+            <ForgotPasswordPopup
+                showForgotPassPopup={showForgotPassPopup} 
                 setShowForgotPassPopup={setShowForgotPassPopup}
-                openSignUpPopup={openSignUpPopup}
-                openForgotPassPopup={openForgotPassPopup} />
+            />
                 
-            <SignUpPopup showSignUpPopup={showSignUpPopup}
+            <SignInPopup 
+                showSignInPopup={showSignInPopup}
+                setShowSignInPopup={setShowSignInPopup}
+                openForgotPassPopup={openForgotPassPopup} 
+                openSignUpPopup={openSignUpPopup}
+            />
+                
+            <SignUpPopup
+                showSignUpPopup={showSignUpPopup}
                 setShowSignUpPopup={setShowSignUpPopup}
-                openSignInPopup={openSignInPopup} />
+                openSignInPopup={openSignInPopup}
+            />
 
             <div className='ctr-sub'>
                 <div className='ctr-sub-left'>

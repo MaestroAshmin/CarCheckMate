@@ -18,12 +18,13 @@ export default function SignInPopup({ showSignInPopup, setShowSignInPopup, openF
                                 <input type='email' id='loginEmail' name='loginEmail' placeholder='Email' required />
                                 <label htmlFor='loginPassword'>Password:</label>
                                 <input type='password' id='loginPassword' name='loginPassword' placeholder='Password' required />
-                                <span><p className='popup-link-align-right' onClick={openForgotPassPopup}>Forgot Password?</p></span>
+                                <br />
+                                <span className='link-forgot-pass' onClick={openForgotPassPopup}>Forgot Password?</span>
                                 <div className='button-container'>
                                     <button type='submit'>Log In</button>
                                 </div>
                             </form>
-                            <p className='popup-link-align-right'>Don't have an accont yet? <span onClick={openSignUpPopup}>Sign Up</span></p>
+                            <p className='popup-link-align-right'>Don't have an account yet? <span onClick={openSignUpPopup}>Sign Up</span></p>
                         </div>
                     </div>
                 </>

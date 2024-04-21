@@ -212,6 +212,12 @@ span:hover {
     font-size: 20px;
 }
 
+.link-forgot-pass {
+    text-align: right;
+    font-size: 15px;
+    margin-top: -10px;
+}
+
 .popup-content {
     margin: 5%;
     text-align: left;
@@ -269,6 +275,7 @@ span:hover {
 .popup-link-align-right {
     text-align: right;
     margin-bottom: -40px;
+    font-size: 15px;;
 }
 
 .popup-signup {
