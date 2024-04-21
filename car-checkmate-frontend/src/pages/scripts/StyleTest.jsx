@@ -10,6 +10,24 @@ export default function StyleTest() {
     const [showSignInPopup, setShowSignInPopup] = useState(false);
     const [showSignUpPopup, setShowSignUpPopup] = useState(false);
 
+    const openForgotPassPopup = () => {
+        setShowSignInPopup(false); // Close sign in popup
+        setShowSignUpPopup(false); // Close sign up popup
+        setShowForgotPassPopup(true); // Open forgot password popup
+    };
+
+    const openSignInPopup = () => {
+        setShowForgotPassPopup(false); // Close forgot password popup
+        setShowSignUpPopup(false); // Close sign up popup
+        setShowSignInPopup(true); // Open sign in popup
+    };
+
+    const openSignUpPopup = () => {
+        setShowForgotPassPopup(false); // Close forgot password popup
+        setShowSignInPopup(false); // Close sign in popup
+        setShowSignUpPopup(true); // Open sign up popup
+    };
+
     return (
         <div className='ctr-main'>
             <div className='ctr-sub'>
@@ -26,14 +44,14 @@ export default function StyleTest() {
                     <h1 className='ctr-sub-right-font'>Delighted to<br/> welcome you!</h1>
                     <div className='ctr-btn'>
                             <button className='btn-login'>Continue as a guest</button>
-                            <button className='btn-login' onClick={() => setShowSignInPopup(true)}>Sign In</button>  
+                            <button className='btn-login' onClick={openSignInPopup}>Sign In</button>  
                     </div>
-                    <button className='btn-signup' onClick={() => setShowSignUpPopup(true)}>Create a new account</button>
+                    <button className='btn-signup' onClick={openSignUpPopup}>Create a new account</button>
                     <p className='ctr-sub-right-font-p'><span>Benefits of signing up with us.</span></p>
 
                     <h6 className='placeAtBottom-left'>
                         {/*<span>Forgot your login?</span>&nbsp;-&nbsp;*/}
-                        <span onClick={() => setShowForgotPassPopup(true)}>Forgot your login?</span>&nbsp;-&nbsp;
+                        <span onClick={openForgotPassPopup}>Forgot your login?</span>&nbsp;-&nbsp;
                         <span>Privacy Policy</span>
                     </h6>
                 </div>
@@ -74,12 +92,12 @@ export default function StyleTest() {
                                 <input type='email' id='loginEmail' name='loginEmail' placeholder='Email' required />
                                 <label htmlFor='loginPassword'>Password:</label>
                                 <input type='password' id='loginPassword' name='loginPassword' placeholder='Password' required />
-                                <span><p className='popup-link-align-right'>Forgot Password?</p></span>
+                                <span><p className='popup-link-align-right' onClick={openForgotPassPopup}>Forgot Password?</p></span>
                                 <div className='button-container'>
                                     <button type='submit'>Log In</button>
                                 </div>
                             </form>
-                            <p className='popup-link-align-right'>Don't have an accont yet? <span>Sign Up</span></p>
+                            <p className='popup-link-align-right'>Don't have an accont yet? <span onClick={openSignUpPopup}>Sign Up</span></p>
                         </div>
                     </div>
                 </>
@@ -133,7 +151,7 @@ export default function StyleTest() {
                                     <button type='submit'>Create Account</button>
                                 </div>
                             </form>
-                            <p className='popup-link-align-right'>Already have an account? <span>Login</span></p>
+                            <p className='popup-link-align-right'>Already have an account? <span onClick={openSignInPopup}>Login</span></p>
                         </div>
                     </div>
                 </>
