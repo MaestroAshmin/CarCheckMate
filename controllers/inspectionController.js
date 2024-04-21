@@ -47,4 +47,152 @@ async function createInspection (req,res) {
     }
 };
 
-module.exports = { createInspection }
+// Controller for retrieving upcoming Inspection for particular seller only
+
+async function getPendingInspectionsForSeller (req, res){
+    try {
+        // Get Seller id from user session
+        const seller_id = req.session.user._id;
+
+        // Get the current date
+        const currentDate = new Date();
+
+        // Find all inspections where sellerAcceptedInspectionRequest is null or false
+        // and car_id's seller_id matches the sellerId obtained from the session
+        const pendingInspections = await Inspection.find({ 
+            $and: [
+                { seller_id: seller_id },
+                { $or: [
+                    { sellerAcceptedInspectionRequest: false },
+                    { sellerAcceptedInspectionRequest: null }
+                ]},
+                { inspectionDate: { $gte: currentDate } }
+            ]
+        })
+        .sort({ inspectionDate: 1})
+        .exec();
+        // Fetch details of each car associated with the pending inspections
+        const inspectionsWithCarDetails = await Promise.all(pendingInspections.map(async (inspection) => {
+            let carDetails = await Car.findById(inspection.car_id);
+            carDetails = carDetails.toObject();
+            delete carDetails.__v; // Remove __v field
+            return { ...inspection.toObject(), car: carDetails };
+        }));
+        res.status(200).json({ inspectionsWithCarDetails });
+    } catch (error) {
+        console.error('Error fetcing pending inspections:', error);
+        res.status(500).json({error: 'Internal server error'});
+    }
+}
+
+// Controller function to accept an inspection request
+async function acceptInspection(req, res) {
+    try {
+        const { inspectionId } = req.params;
+
+        // Update the inspection record to mark it as accepted by the seller
+        await Inspection.findByIdAndUpdate(inspectionId, { sellerAcceptedInspectionRequest: true });
+
+        res.status(200).json({ message: 'Inspection request accepted successfully.' });
+    } catch (error) {
+        console.error('Error accepting inspection request:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+// Controller function to deny an inspection request
+async function denyInspection (req, res) {
+    try {
+        const { inspectionId } = req.params;
+
+        // Update the inspection record to mark it as denied by the seller
+        await Inspection.findByIdAndUpdate(inspectionId, { sellerAcceptedInspectionRequest: false });
+
+        res.status(200).json({ message: 'Inspection request denied successfully.' });
+    } catch (error) {
+        console.error('Error denying inspection request:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+// Controller function to get upcoming inspections for a buyer
+async function getUpcomingInspectionsBuyer(req, res) {
+    try {
+        const buyerId = req.session.user._id; 
+
+        // Get upcoming inspections for the buyer
+        const upcomingInspections = await Inspection.find({ buyer_id: buyerId, inspectionDate: { $gte: new Date() } }).sort({ inspectionDate: 1}).exec();
+        const inspectionsWithCarDetails = await Promise.all(upcomingInspections.map(async (inspection) => {
+            let carDetails = await Car.findById(inspection.car_id);
+            carDetails = carDetails.toObject();
+            delete carDetails.__v; // Remove __v field
+            return { ...inspection.toObject(), car: carDetails };
+        }));
+        res.status(200).json({ inspectionsWithCarDetails });
+        // res.status(200).json({ upcomingInspections });
+    } catch (error) {
+        console.error('Error fetching upcoming inspections:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+// Controller function to get past inspections for a buyer
+async function getPastInspectionsBuyer (req, res) {
+    try {
+        const buyerId = req.session.user._id;
+
+        // Get past inspections for the buyer
+        const pastInspections = await Inspection.find({ buyer_id: buyerId, inspectionDate: { $lt: new Date() } }).sort({ inspectionDate: 1}).exec();
+        const inspectionsWithCarDetails = await Promise.all(pastInspections.map(async (inspection) => {
+            let carDetails = await Car.findById(inspection.car_id);
+            carDetails = carDetails.toObject();
+            delete carDetails.__v; // Remove __v field
+            return { ...inspection.toObject(), car: carDetails };
+        }));
+        res.status(200).json({ inspectionsWithCarDetails });
+        // res.status(200).json({ pastInspections });
+    } catch (error) {
+        console.error('Error fetching past inspections:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+// Controller function to get upcoming inspections for a Seller
+async function getUpcomingInspectionsSeller(req, res) {
+    try {
+        const sellerId = req.session.user._id; 
+
+        const upcomingInspections = await Inspection.find({ seller_id: sellerId, inspectionDate: { $gte: new Date() } }).sort({ inspectionDate: 1}).exec();
+        const inspectionsWithCarDetails = await Promise.all(upcomingInspections.map(async (inspection) => {
+            let carDetails = await Car.findById(inspection.car_id);
+            carDetails = carDetails.toObject();
+            delete carDetails.__v; // Remove __v field
+            return { ...inspection.toObject(), car: carDetails };
+        }));
+        res.status(200).json({ inspectionsWithCarDetails });
+    } catch (error) {
+        console.error('Error fetching upcoming inspections:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+// Controller function to get past inspections for a Seller
+async function getPastInspectionsSeller (req, res) {
+    try {
+        const sellerId = req.session.user._id;
+
+        const pastInspections = await Inspection.find({ seller_id: sellerId, inspectionDate: { $lt: new Date() } }).sort({ inspectionDate: 1}).exec();
+        const inspectionsWithCarDetails = await Promise.all(pastInspections.map(async (inspection) => {
+            let carDetails = await Car.findById(inspection.car_id);
+            carDetails = carDetails.toObject();
+            delete carDetails.__v; // Remove __v field
+            return { ...inspection.toObject(), car: carDetails };
+        }));
+        res.status(200).json({ inspectionsWithCarDetails });
+
+    } catch (error) {
+        console.error('Error fetching past inspections:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+module.exports = { createInspection, getPendingInspectionsForSeller, acceptInspection, denyInspection, getUpcomingInspectionsBuyer, getPastInspectionsBuyer, getPastInspectionsSeller, getUpcomingInspectionsSeller }
