@@ -12,6 +12,8 @@ body {
     
 }*/
 
+
+/* Blur the below popup */
 .overlay {
     position: fixed;
     top: 0;
@@ -22,6 +24,7 @@ body {
     z-index: 999; /* Ensure it's above other elements */
 }
 
+/* sub container of the main container */
 .ctr-sub {
     position: absolute;
     top: 50%;
@@ -34,6 +37,7 @@ body {
     display: flex; /* Use flexbox */
 }
 
+/* the left sub container under ctr-sub container */
 .ctr-sub-left {
     width: 50%;
     height: 100%;
@@ -47,6 +51,7 @@ body {
     padding-right: 5%;
 }
 
+/* ctr-sub-left: transparent layer covering the left sub container */
 .ctr-sub-left::before {
     content: "";
     position: absolute;
@@ -54,9 +59,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Transparent white */
+    background-color: rgba(0, 0, 0, 0.8); /* Transparent */
 }
 
+/* the right sub container under ctr-sub container */
 .ctr-sub-right {
     width: 50%;
     height: 100%;
@@ -69,17 +75,20 @@ body {
     justify-content: center;
 }
 
+/* ctr-sub-left: font */
 .ctr-sub-left-font {
     color: #FFFFFF;
     position: relative; /* Add position relative */
     z-index: 1; /* Set a higher z-index */
 }
 
+/* ctr-sub-right: font */
 .ctr-sub-right-font {
     color: rgba(217,202,179,255);
     margin-top: -50px;
 }
 
+/* ctr-sub-right: font: paragraph */
 .ctr-sub-right-font-p {
     color: rgba(217,202,179,255);
     margin: 2%;
@@ -100,6 +109,7 @@ img {
     width: 150px;
 }
 
+/* ctr-sub-left: to place content at the bottom right */
 .placeAtBottom-right {
     position: absolute;
     bottom: 0;
@@ -107,6 +117,7 @@ img {
     color: #a8a8a8;
 }
 
+/* ctr-sub-right: to place content at the bottom left */
 .placeAtBottom-left {
     position: absolute;
     bottom: 0;
@@ -114,6 +125,7 @@ img {
     color: #a8a8a8;
 }
 
+/* ctr-btn: continue as a guest and sign in buttons layout*/
 .ctr-btn {
     display: flex;
     flex-direction: column;
@@ -123,6 +135,7 @@ img {
     margin-bottom: 50px;
 }
 
+/* ctr-btn: continue as a guest and sign in buttons styling*/
 .btn-login {
     width: 65%;
     height: 40px;
@@ -138,11 +151,13 @@ img {
     text-transform: uppercase;
 }
 
+/* ctr-btn: continue as a guest and sign in buttons hover styling*/
 .btn-login:hover {
     font-weight: bold;
     transform: scale(1.05); /* Grow the button a bit on hover */
 }
 
+/* sign up button */
 .btn-signup {
     width: 45%;
     height: 40px;
@@ -158,11 +173,13 @@ img {
     text-transform: uppercase;
 }
 
+/* sign up button: hover styling */
 .btn-signup:hover {
     font-weight: bold;
     transform: scale(1.05);
 }
 
+/* span: hover link styling */
 span:hover {
     font-weight: bold;
     text-decoration: solid;
@@ -170,6 +187,10 @@ span:hover {
     color: rgba(0, 195, 112, 1); /* Change text color on hover */
 }
 
+/*
+    main popup container
+    also the sign up popup
+*/
 .popup {
     position: fixed; /* Fixed position to cover the entire viewport */
     top: 50%; /* Center vertically */
@@ -215,10 +236,15 @@ span:hover {
     height: 30px;;
 }
 
+.popup-content input::placeholder {
+    color: #999; /* Placeholder text color */
+    font-style: italic; /* Placeholder text style */
+}
+
 .popup-content .button-container {
     display: flex;
     justify-content: center; /* Center horizontally */
-    margin-top: 10px; /* Adjust top margin */
+    margin-top: 10px;
 }
 
 .popup-content button {
@@ -237,10 +263,146 @@ span:hover {
 .popup-content button:hover {
     background-color: rgba(217,202,179,255);
     color: rgba(33,33,33,255);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .popup-link-align-right {
     text-align: right;
     margin-bottom: -40px;
 }
+
+.popup-signup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    width: 55%;
+    border-radius: 10px;
+}
+
+.popup-content-signup {
+    margin: 5%;
+    text-align: left;
+}
+
+.popup-content-signup form {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.popup-content-signup label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.popup-content-signup input::placeholder {
+    color: #999; /* Placeholder text color */
+    font-style: italic; /* Placeholder text style */
+}
+
+/*.popup-content-signup input {
+    width: 30%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}*/
+
+.popup-content-signup .ctr-register-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.popup-content-signup .ctr-register-info label {
+    text-align: left;
+    width: max-content;
+    width: 30%;
+    margin-bottom: 20px;
+}
+
+.popup-content-signup .ctr-register-info input {
+    text-align: left;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.popup-content-signup .role-container {
+    text-align: left;
+}
+
+.popup-content-signup .role-container label {
+    width: 10%;
+    float: left;
+}
+
+.popup-content-signup .role-container input {
+    width: 20%;
+    float: left;
+    margin-right: 10px;
+}
+
+.popup-content-signup .role-container .role-radio input[type='radio'] {
+    height: 20px;
+    width: 20px;
+    margin-top: 8px;
+}
+
+/* Color for radio button when selected */
+.popup-content-signup .role-container .role-radio input[type='radio']:checked + label {
+    /* Set the desired color for the label */
+    color: rgba(0, 195, 112, 1); /* Example color */
+}
+
+.popup-content-signup .button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin-top: 10px;
+}
+
+.popup-content-signup button {
+    background-color: rgba(33,33,33,255);
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 45%; /* Match the width of .btn-signup */
+    height: 40px; /* Match the height of .btn-signup */
+    border-radius: 20px; /* Match the border radius of .btn-signup */
+    color: rgba(217,202,179,255);
+    text-transform: uppercase;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.popup-content-signup button:hover {
+    background-color: rgba(217,202,179,255);
+    color: rgba(33,33,33,255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Adjustments for responsiveness */
+/*@media (max-width: 768px) {
+    .popup-signup {
+        width: 80%;
+    }
+
+    .popup-content-signup input {
+        width: 100%;
+    }
+
+    .popup-content-signup button {
+        width: 100%;
+    }
+}*/

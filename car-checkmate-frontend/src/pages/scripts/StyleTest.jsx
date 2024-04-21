@@ -6,8 +6,9 @@ import React, { useState } from 'react';
 
 export default function StyleTest() {
 
-    const [showPopup, setShowForgotPassPopup] = useState(false);
-    const [showSignUpPopup, setShowSignInPopup] = useState(false);
+    const [showForgotPassPopup, setShowForgotPassPopup] = useState(false);
+    const [showSignInPopup, setShowSignInPopup] = useState(false);
+    const [showSignUpPopup, setShowSignUpPopup] = useState(false);
 
     return (
         <div className='ctr-main'>
@@ -27,8 +28,8 @@ export default function StyleTest() {
                             <button className='btn-login'>Continue as a guest</button>
                             <button className='btn-login' onClick={() => setShowSignInPopup(true)}>Sign In</button>  
                     </div>
-                    <button className='btn-signup'>Create a new account</button>
-                    <p className='ctr-sub-right-font-p'>Benefits of signing up with us.</p>
+                    <button className='btn-signup' onClick={() => setShowSignUpPopup(true)}>Create a new account</button>
+                    <p className='ctr-sub-right-font-p'><span>Benefits of signing up with us.</span></p>
 
                     <h6 className='placeAtBottom-left'>
                         {/*<span>Forgot your login?</span>&nbsp;-&nbsp;*/}
@@ -38,7 +39,7 @@ export default function StyleTest() {
                 </div>
             </div>
 
-            {showPopup && (
+            {showForgotPassPopup && (
                 <>
                     <div className='overlay'></div>
                     <div className='popup'>
@@ -48,8 +49,8 @@ export default function StyleTest() {
                             <p>Please enter your email address below to reset your password.</p>
                             <br />
                             <form>
-                                <label htmlFor='email'>Email:</label>
-                                <input type='email' id='email' name='email' required />
+                                <label htmlFor='forgotEmail'>Email:</label>
+                                <input type='email' id='forgotEmail' name='forgotEmail' placeholder='Email' required />
                                 <div className='button-container'>
                                     <button type='submit'>Submit</button>
                                 </div>
@@ -59,7 +60,7 @@ export default function StyleTest() {
                 </>
             )}
 
-            {showSignUpPopup && (
+            {showSignInPopup && (
                 <>
                     <div className='overlay'></div>
                     <div className='popup'>
@@ -69,16 +70,70 @@ export default function StyleTest() {
                             <p>Enter email and password to sign in</p>
                             <br />
                             <form>
-                                <label htmlFor='email'>Email:</label>
-                                <input type='email' id='email' name='email' required />
-                                <label htmlFor='password'>Password:</label>
-                                <input type='password' id='password' name='password' required />
+                                <label htmlFor='loginEmail'>Email:</label>
+                                <input type='email' id='loginEmail' name='loginEmail' placeholder='Email' required />
+                                <label htmlFor='loginPassword'>Password:</label>
+                                <input type='password' id='loginPassword' name='loginPassword' placeholder='Password' required />
                                 <span><p className='popup-link-align-right'>Forgot Password?</p></span>
                                 <div className='button-container'>
                                     <button type='submit'>Log In</button>
                                 </div>
                             </form>
                             <p className='popup-link-align-right'>Don't have an accont yet? <span>Sign Up</span></p>
+                        </div>
+                    </div>
+                </>
+            )}
+
+            {showSignUpPopup && (
+                <>
+                    <div className='overlay'></div>
+                    <div className='popup-signup'>
+                        <div className='popup-content-signup'>
+                            <span className='close' onClick={() => setShowSignUpPopup(false)}>&times;</span>
+                            <h2>Create a New Account</h2>
+                            <p>Please fill in the following details:</p>
+                            <form>
+                                <div className='ctr-register-info'>
+                                    <label htmlFor='registerFirstname'>First Name:</label>
+                                    <input type='text' id='registerFirstname' name='registerFirstname' placeholder='First Name' required />
+                                    <label htmlFor='registerLastname'>Last Name:</label>
+                                    <input type='text' id='registerLastname' name='registerLastname' placeholder='Last Name' required />
+                                </div>
+                                <div className='ctr-register-info'>
+                                    <label htmlFor='registerEmail'>Email:</label>
+                                    <input type='email' id='registerEmail' name='registerEmail' placeholder='Email' required />
+                                    <label htmlFor='registerPhone'>Phone:</label>
+                                    <input type='tel' id='registerPhone' name='registerPhone' placeholder='Phone' required />
+                                </div>
+                                <div className='ctr-register-info'>
+                                    <label htmlFor='registerPassword'>Password:</label>
+                                    <input type='password' id='registerPassword' name='registerPassword' placeholder='Password' required />
+                                    <label htmlFor='registerConfirmPassword'>Confirm Password:</label>
+                                    <input type='password' id='registerConfirmPassword' name='registerConfirmPassword' placeholder='Confirm Password' required />
+                                </div>
+                                <div className='role-container'>
+                                    <fieldset>
+                                        <legend>Type:</legend>
+                                        <div className='role-radio'>
+                                            <input type='radio' id='radBuyer' name='userType' value='buyer' defaultChecked />
+                                            <label htmlFor='radBuyer'>Buyer</label>
+                                        </div>
+                                        <div className='role-radio'>
+                                            <input type='radio' id='redSeller' name='userType' value='seller' />
+                                            <label htmlFor='redSeller'>Seller</label>
+                                        </div>
+                                        <div className='role-radio'>
+                                            <input type='radio' id='radMechanic' name='userType' value='mechanic' />
+                                            <label htmlFor='radMechanic'>Mechanic</label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div className='button-container'>
+                                    <button type='submit'>Create Account</button>
+                                </div>
+                            </form>
+                            <p className='popup-link-align-right'>Already have an account? <span>Login</span></p>
                         </div>
                     </div>
                 </>
