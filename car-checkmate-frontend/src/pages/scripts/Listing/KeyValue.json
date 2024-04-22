@@ -1,0 +1,20 @@
+{
+    "make": "Toyota",
+    "model": "Corolla",
+    "suburb": "Footscray",
+    "color": "White",
+    "price": 20000,
+    "odometer": 80000,
+    "transmission": "Automatic",
+    "year": 2020,
+    "engineType": "V6",
+    "fuelType": "Petrol",
+    "bodyType": "Sedan",
+    "details": "This is a detailed description of the car.",
+    "features": ["Feature 1", "Feature 2", "Feature 3"],
+    "carPhotos": [
+      "/path/to/car-image-1.jpg",
+      "/path/to/car-image-2.jpg",
+      "/path/to/car-image-3.jpg"
+    ]
+  }

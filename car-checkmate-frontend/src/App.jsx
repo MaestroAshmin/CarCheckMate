@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/scripts/LandingPage';
-import CarInfoPage from './pages/scripts/CarInfoPage';
-import SignUpPage from './pages/scripts/SignUpPage'
-import SignInPage from './pages/scripts/SignInPage'
+import CarInfoPage from './pages/scripts/Listing/CarInfoPage';
+import SignUpPage from './pages/scripts/SignUpPage';
+import SignInPage from './pages/scripts/SignInPage';
 import ForgetPasswordPage from './pages/scripts/ForgetPasswordPage';
 
 // This is for testing the styling of the existing page. it can be removed when the implement phase is done

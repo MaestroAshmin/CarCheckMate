@@ -1,10 +1,11 @@
+//CarInfoPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/CarInfoPage.css';
-import Navbar from '../../components/scripts/navbar';
-import SearchBar from '../../components/scripts/searchbar';
-import Footer from '../../components/scripts/footer';
+// import Navbar from '../../components/scripts/navbar'; // Commented out to suppress the warning
+import SearchBar from '../../../components/scripts/searchbar';
+import Footer from '../../../components/scripts/footer';
 
 export default function CarInfoPage() {
   const { carId } = useParams();
@@ -16,7 +17,7 @@ export default function CarInfoPage() {
 
   const fetchCarData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/cars/6620e532a4156d3c6ab49966`);
+      const response = await axios.get(`http://localhost:3000/api/cars/${carId}`);
       setCarData(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -111,7 +112,7 @@ export default function CarInfoPage() {
                   <img
                     className="enlarged-image"
                     src={carImages[currentImageIndex]}
-                    alt={car.make}
+                    alt={`${car.make} ${car.model}`} // Modified to remove redundant text
                   />
                   <div className="image-controls">
                     <button onClick={handlePrevImage}>&#8249;</button>
