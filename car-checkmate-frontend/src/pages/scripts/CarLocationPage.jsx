@@ -106,7 +106,7 @@ export default function CarLocationPage({ formData, setFormData }) {
 
 
     return(
-        <div>
+        <div className='loc-container'>
                 <div className='loc'>      
                     <label className='labels'>Street</label>
                     <input
@@ -120,7 +120,7 @@ export default function CarLocationPage({ formData, setFormData }) {
                     />
                 </div>
                 <div className='loc'>
-                    <label className='labels'>Suburbs</label>
+                    <label className='labels'>Suburb</label>
                     <input
                         type="text"   
                         name="suburb"   
@@ -131,7 +131,7 @@ export default function CarLocationPage({ formData, setFormData }) {
                         }}       
                     />
                 </div>
-
+                <div className='post-state'>
                 <div className='loc'>           
                 <label className='labels'>Postcode</label>
                 <input
@@ -145,7 +145,7 @@ export default function CarLocationPage({ formData, setFormData }) {
                 />
                 </div>
 
-                <div className='selects'>
+                <div className='selects-loc'>
                     <label className='labels'>State</label>
                     <Select
                         className="basic-single"
@@ -168,7 +168,8 @@ export default function CarLocationPage({ formData, setFormData }) {
                         marginTop: '1em',
                         }}
                     ></div>
-        </div>
+                </div>
+            </div>
                 
         </div>
     )

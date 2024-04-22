@@ -1,5 +1,35 @@
+
 .loc{
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.loc-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.street-input, .suburb-input, .postcode-input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.post-state{
+    display: flex;
+    flex-direction: row;
+
+    gap:8px;
+}
+
+.selects-loc{
+    display: flex;
+    
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
 }
