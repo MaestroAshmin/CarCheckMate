@@ -98,11 +98,10 @@ export default function CarLocationPage({ formData, setFormData }) {
     ];
     
     
-
     const handleStateChange = (selectedOption) => {
-        setFormData({ ...formData, state: selectedOption });
+        setFormData({ ...formData, state: selectedOption ? selectedOption.value : null });
     };
-
+    
 
 
     return(

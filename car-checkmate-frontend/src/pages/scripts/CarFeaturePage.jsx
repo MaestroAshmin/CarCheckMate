@@ -65,29 +65,28 @@ export default function CarAdPage({ formData, setFormData }) {
     ];
     
     const handleColorChange = (selectedOption) => {
-        setFormData({ ...formData, color: selectedOption });
+        setFormData({ ...formData, color: selectedOption ? selectedOption.value : null });
     };
-
+    
     const handleOdometerChange = (selectedOption) => {
-        setFormData({ ...formData, odometer: selectedOption });
+        setFormData({ ...formData, odometer: selectedOption ? selectedOption.value : null });
     };
+    
     const handleTransmissionChange = (selectedOption) => {
-        setFormData({ ...formData, transmission: selectedOption });
+        setFormData({ ...formData, transmission: selectedOption ? selectedOption.value : null });
     };
-
+    
     const handleFuelTypeChange = (selectedOption) => {
-        setFormData({ ...formData, fuelType: selectedOption });
+        setFormData({ ...formData, fuelType: selectedOption ? selectedOption.value : null });
     };
-
+    
     const handleEngineTypeChange = (selectedOption) => {
-        setFormData({ ...formData, engineType: selectedOption });
+        setFormData({ ...formData, engineType: selectedOption ? selectedOption.value : null });
     };
-
+    
     const handleBodyTypeChange = (selectedOption) => {
-        setFormData({ ...formData, bodyType: selectedOption });
+        setFormData({ ...formData, bodyType: selectedOption ? selectedOption.value : null });
     };
-  
-
     return(
         <div className='feature-container'>
             

@@ -27,7 +27,7 @@ export default function CarAdPage() {
         bodyType:"",
         images:""
     });
-
+    console.log(formData)
     const FormPages = ["CarBuildPage","CarFeaturePage","CarLocationPage","CarPhotoPage","CarPricePage"];
 
     const PageDisplay = () => {

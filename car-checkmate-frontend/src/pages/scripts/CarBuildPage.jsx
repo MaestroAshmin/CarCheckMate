@@ -92,20 +92,22 @@ export default function CarBuildPage({ formData, setFormData }) {
         { value: "7 Series", label: "7 Series" }
       ];
     
-    const handleMakeChange = (selectedOption) => {
-        setFormData({ ...formData, make: selectedOption });
+      const handleMakeChange = (selectedOption) => {
+        setFormData({ ...formData, make: selectedOption ? selectedOption.value : null });
     };
+    
     const handleModelChange = (selectedOption) => {
-        setFormData({ ...formData, model: selectedOption });
+        setFormData({ ...formData, model: selectedOption ? selectedOption.value : null });
     };
-
+    
     const handleStateChange = (selectedOption) => {
-        setFormData({ ...formData, state: selectedOption });
+        setFormData({ ...formData, state: selectedOption ? selectedOption.value : null });
     };
-
+    
     const handleYearChange = (selectedOption) => {
-        setFormData({ ...formData, year: selectedOption });
+        setFormData({ ...formData, year: selectedOption ? selectedOption.value : null });
     };
+    
     return(
             <div className='build-box'>
                 <div className='reg-input-box'>
