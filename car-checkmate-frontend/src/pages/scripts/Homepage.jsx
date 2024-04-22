@@ -7,9 +7,8 @@ import Footer from '../../components/scripts/footer';
 import HeaderFilters from '../../components/scripts/HeaderFilters';
 import PhotosSlide from '../../components/scripts/PhotosSlide';
 import CarList from '../../components/scripts/CarList';
-import Information from '../../components/scripts/Information';
 
-export default function StyleTest() {
+export default function Homepage() {
    
     return (
         <div className='ctr-main'>
@@ -20,7 +19,6 @@ export default function StyleTest() {
                 <HeaderFilters />
                 <PhotosSlide />
                 <CarList noPerPage={6} />
-                <Information />
             </div>
             <Footer />
         </div>
