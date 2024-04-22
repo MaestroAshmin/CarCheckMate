@@ -63,7 +63,7 @@ export default function StyleTest() {
                 <div className='ctr-sub-right'>
                     <h1 className='ctr-sub-right-font'>Delighted to<br/> welcome you!</h1>
                     <div className='ctr-btn'>
-                        <Link to="/StyleTest">
+                        <Link to="/Homepage">
                             <button className='btn-login' >Continue as a guest</button>
                         </Link>
                         <button className='btn-login' onClick={openSignInPopup}>Sign In</button>  
