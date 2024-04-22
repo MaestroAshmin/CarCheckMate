@@ -1,23 +1,21 @@
-//CarInfoPage.jsx
+// src/pages/scripts/Listing/CarInfoPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/CarInfoPage.css';
-// import Navbar from '../../components/scripts/navbar'; // Commented out to suppress the warning
+import '../../styles/CarInfoPage.css'; 
 import SearchBar from '../../../components/scripts/searchbar';
 import Footer from '../../../components/scripts/footer';
 
 export default function CarInfoPage() {
   const { carId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [activeTab, setActiveTab] = useState('details');
   const [showImageOverlay, setShowImageOverlay] = useState(false);
   const [carData, setCarData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchCarData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/cars/${carId}`);
+      const response = await axios.get(`http://localhost:3000/api/cars/1`);
       setCarData(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -33,31 +31,6 @@ export default function CarInfoPage() {
 
   const carImages = carData.carPhotos ? carData.carPhotos.map((photo) => photo) : [];
 
-  const car = {
-    id: carData.id || '',
-    make: carData.make || '',
-    model: carData.model || '',
-    year: carData.year || '',
-    price: carData.price || 0,
-    details: carData.details || '',
-    features: carData.features || [],
-    specs: {
-      kilometres: carData.odometer || '',
-      'Seller type': 'Dealer: Used',
-      Price: `$${carData.price || 0}`,
-      Transmission: carData.transmission || '',
-      'Body type': carData.bodyType || '',
-      'Drive type': 'Front Wheel Drive', // Assuming this value is not provided by the API
-      Engine: carData.engineType || '',
-      'Fuel type': carData.fuelType || '',
-      'Fuel consumption': '5.50 L / 100 km', // Assuming this value is not provided by the API
-      'Colour ext / int': `${carData.color || ''} / -`,
-      Registration: 'YIQ841', // Assuming this value is not provided by the API
-      'Rego expiry': '03 Jun 2024', // Assuming this value is not provided by the API
-      VIN: 'MA3GFC31S003S9708', // Assuming this value is not provided by the API
-    },
-  };
-
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? carImages.length - 1 : prevIndex - 1
@@ -68,10 +41,6 @@ export default function CarInfoPage() {
     setCurrentImageIndex((prevIndex) =>
       (prevIndex + 1) % carImages.length
     );
-  };
-
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
   };
 
   const handleImageClick = () => {
@@ -104,7 +73,7 @@ export default function CarInfoPage() {
               <img
                 className="main-image"
                 src={carImages[currentImageIndex]}
-                alt={car.make}
+                alt={`${carData.make} ${carData.model}`}
                 onClick={handleImageClick}
               />
               {showImageOverlay && (
@@ -112,7 +81,7 @@ export default function CarInfoPage() {
                   <img
                     className="enlarged-image"
                     src={carImages[currentImageIndex]}
-                    alt={`${car.make} ${car.model}`} // Modified to remove redundant text
+                    alt={`${carData.make} ${carData.model}`}
                   />
                   <div className="image-controls">
                     <button onClick={handlePrevImage}>&#8249;</button>
@@ -143,7 +112,7 @@ export default function CarInfoPage() {
             <div className="details-container">
               <div className="price-container">
                 <p>Price</p>
-                <p>${car.price}</p>
+                <p>${carData.price}</p>
               </div>
               <div className="action-buttons">
                 <button>BUY THIS</button>
@@ -153,55 +122,31 @@ export default function CarInfoPage() {
             </div>
           </div>
           <div className="details-section">
-            <div className="tabs">
-              <button
-                className={activeTab === 'details' ? 'active' : ''}
-                onClick={() => handleTabClick('details')}
-              >
-                Details
-              </button>
-              <button
-                className={activeTab === 'features' ? 'active' : ''}
-                onClick={() => handleTabClick('features')}
-              >
-                Features
-              </button>
-              <button
-                className={activeTab === 'specs' ? 'active' : ''}
-                onClick={() => handleTabClick('specs')}
-              >
-                Specs
-              </button>
-            </div>
             <div className="tab-content">
-              {activeTab === 'details' && (
-                <div className="details">
-                  <h2>Details</h2>
-                  <p>{car.details}</p>
-                </div>
-              )}
-              {activeTab === 'features' && (
-                <div className="features">
-                  <h2>Features</h2>
-                  <ul>
-                    {car.features.map((feature, index) => (
-                      <li key={index}>{feature}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {activeTab === 'specs' && (
-                <div className="specs">
-                  <h2>Specifications</h2>
-                  <ul>
-                    {Object.entries(car.specs).map(([key, value]) => (
-                      <li key={key}>
-                        {key}: {value}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <div className="car-details">
+                <h2>Car Details</h2>
+                <p>{carData.details}</p>
+                <h3>Features</h3>
+                <ul>
+                  {carData.features && carData.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+                <h3>Specifications</h3>
+                <ul>
+                  <li>Make: {carData.make}</li>
+                  <li>Model: {carData.model}</li>
+                  <li>Suburb: {carData.suburb}</li>
+                  <li>Color: {carData.color}</li>
+                  <li>Price: ${carData.price}</li>
+                  <li>Odometer: {carData.odometer}</li>
+                  <li>Transmission: {carData.transmission}</li>
+                  <li>Year: {carData.year}</li>
+                  <li>Engine Type: {carData.engineType}</li>
+                  <li>Fuel Type: {carData.fuelType}</li>
+                  <li>Body Type: {carData.bodyType}</li>
+                </ul>
+              </div>
             </div>
           </div>
           <Footer />
