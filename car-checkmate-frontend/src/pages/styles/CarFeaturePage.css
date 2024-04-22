@@ -1,0 +1,19 @@
+.feature-container{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+}
+
+.odo{
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+}
+
+.odometer-input{
+    width: 110%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
