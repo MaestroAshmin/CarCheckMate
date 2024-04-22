@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/CarInfoPage/:carId" element={<CarInfoPage />} />
+          <Route path="/CarInfoPage" element={<CarInfoPage />} />
           <Route path="/SignUpPage" element={<SignUpPage />} />
           <Route path="/SignInPage" element={<SignInPage />} />
           <Route path="/ForgetPasswordPage" element={<ForgetPasswordPage />} />

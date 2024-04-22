@@ -1,10 +1,10 @@
-//server.js
 const express = require('express');
 const app = express();
 const path = require('path');
 
 // Sample car data
 const carData = {
+  "carID": "1001",
   "make": "Toyota",
   "model": "Corolla",
   "suburb": "Footscray",
@@ -29,20 +29,20 @@ const carData = {
   ]
 };
 
-// Serve static files from the React app's build directory
-app.use(express.static(path.join(__dirname, 'build')));
-
-// Serve the index.html file for all other routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 // Serve the car data at the specified endpoint
 app.get('/api/cars/:carId', (req, res) => {
   const carId = req.params.carId;
   // You can add logic here to fetch the car data based on the carId
   // For now, we're just returning the sample car data
   res.json(carData);
+});
+
+// Serve static files from the React app's build directory
+app.use(express.static(path.join(__dirname, 'build')));
+
+// Serve the index.html file for all other routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // Start the server
