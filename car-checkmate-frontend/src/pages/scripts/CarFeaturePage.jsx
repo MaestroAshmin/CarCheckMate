@@ -1,6 +1,6 @@
 import React , {useState}from 'react';
 import Select from 'react-select';
-
+import '../styles/CarFeaturePage.css';
 export default function CarAdPage({ formData, setFormData }) {
     const [isClearable, setIsClearable] = useState(true);
     const [isSearchable, setIsSearchable] = useState(true);
@@ -89,60 +89,73 @@ export default function CarAdPage({ formData, setFormData }) {
   
 
     return(
-        <div>
-            <label>Colors</label>
-            <Select
-                className="basic-single"
-                classNamePrefix="select"
-                isDisabled={isDisabled}
-                isLoading={isLoading}
-                isClearable={isClearable}
-                isRtl={isRtl}
-                isSearchable={isSearchable}
-                name="color"
-                options={colors}
-                onChange={handleColorChange}
-            />
+        <div className='feature-container'>
             
-            <label>Odometer</label>
-            <input
-                type="text"   
-                name="odometer"   
-                className='odometer-input'  
-                value={formData.odometer}
-                onChange={(e) => {
-                    setFormData({ ...formData, odometer: e.target.value });
-                    }}       
-            />
 
-            <label>Transmission</label>
-            <Select
-                className="basic-single"
-                classNamePrefix="select"
-                isDisabled={isDisabled}
-                isLoading={isLoading}
-                isClearable={isClearable}
-                isRtl={isRtl}
-                isSearchable={isSearchable}
-                name="color"
-                options={transmission}
-                onChange={handleTransmissionChange}
-            />
-            <label>Fuel Type</label>
-            <Select
-                className="basic-single"
-                classNamePrefix="select"
-                isDisabled={isDisabled}
-                isLoading={isLoading}
-                isClearable={isClearable}
-                isRtl={isRtl}
-                isSearchable={isSearchable}
-                name="color"
-                options={fuelType}
-                onChange={handleFuelTypeChange}
-            />
-
-            <label>engine type</label>
+            <div className='select-two-by-two'>
+                <div className='selects'>
+                <label className='labels'>Color</label>
+                <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    isDisabled={isDisabled}
+                    isLoading={isLoading}
+                    isClearable={isClearable}
+                    isRtl={isRtl}
+                    isSearchable={isSearchable}
+                    name="color"
+                    options={colors}
+                    onChange={handleColorChange}
+                />
+                </div>
+                <div className='odo'>
+                <label className='labels'>Odometer</label>
+                <input
+                    type="text"   
+                    name="odometer"   
+                    className='odometer-input'  
+                    value={formData.odometer}
+                    onChange={(e) => {
+                        setFormData({ ...formData, odometer: e.target.value });
+                        }}       
+                />
+                </div>
+            </div>
+            <div className='select-two-by-two'>
+                <div className='selects'>
+                    <label className='labels'>Transmission</label>
+                    <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        isDisabled={isDisabled}
+                        isLoading={isLoading}
+                        isClearable={isClearable}
+                        isRtl={isRtl}
+                        isSearchable={isSearchable}
+                        name="color"
+                        options={transmission}
+                        onChange={handleTransmissionChange}
+                    />
+                </div>
+                <div className='selects'>
+                <label className='labels'>Fuel Type</label>
+                <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    isDisabled={isDisabled}
+                    isLoading={isLoading}
+                    isClearable={isClearable}
+                    isRtl={isRtl}
+                    isSearchable={isSearchable}
+                    name="color"
+                    options={fuelType}
+                    onChange={handleFuelTypeChange}
+                />
+                </div>
+            </div>
+            <div className='select-two-by-two'>
+            <div className='selects'>
+            <label className='labels'>Engine Type</label>
             <Select
                 className="basic-single"
                 classNamePrefix="select"
@@ -155,7 +168,9 @@ export default function CarAdPage({ formData, setFormData }) {
                 options={engineType}
                 onChange={handleEngineTypeChange}
             />
-            <label>body type</label>
+            </div>
+            <div className='selects'>
+            <label className='labels'>Body Type</label>
             <Select
                 className="basic-single"
                 classNamePrefix="select"
@@ -168,7 +183,8 @@ export default function CarAdPage({ formData, setFormData }) {
                 options={bodyType}
                 onChange={handleEngineTypeChange}
             />
-
+            </div>
+            </div>
         </div>
     )
 }

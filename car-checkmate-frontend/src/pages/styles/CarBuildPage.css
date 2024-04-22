@@ -2,28 +2,44 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
+    gap: 5px;
 }
 
 .basic-single{
     width: 200px;
 }
 
-.selects .reg-input-box{
+.selects{
     display: flex;
     flex-direction: column;
+    
+    justify-content: center;
+    gap: 3px;
+    text-align: left;
 }
 
 .select-two-by-two{
     display: flex;
-    gap:10px;
+    gap:5px;
 }
 
-.reg-input{
-   width:280px
-}
+
+
 
 .reg-input-box{
     display: flex;
-    gap: 10px;
+   gap: 6px;
+   align-items: center;
 }
+
+.reg-input {
+    width: 75%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+
+  .labels{
+    font-size: 13px;
+  }

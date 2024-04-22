@@ -109,7 +109,7 @@ export default function CarBuildPage({ formData, setFormData }) {
     return(
             <div className='build-box'>
                 <div className='reg-input-box'>
-                <label>Registration No.</label>
+                <label className='labels'>Registration No.</label>
                     <input
                         type="text"   
                         name="registration"   
@@ -123,7 +123,7 @@ export default function CarBuildPage({ formData, setFormData }) {
 
             <div className='select-two-by-two'>
                 <div className='selects'>
-                    <label>Make</label>
+                    <label className='labels'>Make</label>
                     <Select
                             className="basic-single"
                             classNamePrefix="select"
@@ -147,7 +147,7 @@ export default function CarBuildPage({ formData, setFormData }) {
                         ></div>
                 </div>
                 <div className='selects'>
-                    <label>Model</label>
+                    <label className='labels'>Model</label>
                     <Select
                             className="basic-single"
                             classNamePrefix="select"
@@ -174,7 +174,7 @@ export default function CarBuildPage({ formData, setFormData }) {
 
             <div className='select-two-by-two'>
                 <div className='selects'>
-                        <label>State</label>
+                        <label className='labels'>State</label>
                         <Select
                             className="basic-single"
                             classNamePrefix="select"
@@ -198,7 +198,7 @@ export default function CarBuildPage({ formData, setFormData }) {
                         ></div>
                     </div>
                 <div className='selects'>
-                    <label>Year</label>
+                    <label className='labels'>Year</label>
                     <Select
                             className="basic-single"
                             classNamePrefix="select"

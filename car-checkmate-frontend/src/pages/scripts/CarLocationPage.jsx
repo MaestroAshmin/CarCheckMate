@@ -107,32 +107,33 @@ export default function CarLocationPage({ formData, setFormData }) {
 
     return(
         <div>
-                        
-                        <label>Street</label>
-                        <input
-                            type="text"   
-                            name="street"   
-                            className='street-input'  
-                            value={formData.street}
-                            onChange={(e) => {
-                                setFormData({ ...formData, street: e.target.value });
-                                }}       
-                        />
+                <div className='loc'>      
+                    <label className='labels'>Street</label>
+                    <input
+                        type="text"   
+                        name="street"   
+                        className='street-input'  
+                        value={formData.street}
+                        onChange={(e) => {
+                            setFormData({ ...formData, street: e.target.value });
+                            }}       
+                    />
+                </div>
+                <div className='loc'>
+                    <label className='labels'>Suburbs</label>
+                    <input
+                        type="text"   
+                        name="suburb"   
+                        className='suburb-input'  
+                        value={formData.suburb}
+                        onChange={(e) => {
+                            setFormData({ ...formData, suburb: e.target.value });
+                        }}       
+                    />
+                </div>
 
-                
-                <label>Suburbs</label>
-                <input
-                    type="text"   
-                    name="suburb"   
-                    className='suburb-input'  
-                    value={formData.suburb}
-                    onChange={(e) => {
-                        setFormData({ ...formData, suburb: e.target.value });
-                    }}       
-                />
-
- 
-                <label>Postcode</label>
+                <div className='loc'>           
+                <label className='labels'>Postcode</label>
                 <input
                     type="text"   
                     name="postcode"   
@@ -142,30 +143,32 @@ export default function CarLocationPage({ formData, setFormData }) {
                         setFormData({ ...formData, postcode: e.target.value });
                     }}       
                 />
-                        <div className='selects'>
-                        <label>State</label>
-                        <Select
-                            className="basic-single"
-                            classNamePrefix="select"
-                            isDisabled={isDisabled}
-                            isLoading={isLoading}
-                            isClearable={isClearable}
-                            isRtl={isRtl}
-                            isSearchable={isSearchable}
-                            name="state"
-                            options={states}
-                            onChange={handleStateChange}
-                        />
-                        <div
-                            style={{
-                            color: 'hsl(0, 0%, 40%)',
-                            display: 'inline-block',
-                            fontSize: 12,
-                            fontStyle: 'italic',
-                            marginTop: '1em',
-                            }}
-                        ></div>
                 </div>
+
+                <div className='selects'>
+                    <label className='labels'>State</label>
+                    <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        isDisabled={isDisabled}
+                        isLoading={isLoading}
+                        isClearable={isClearable}
+                        isRtl={isRtl}
+                        isSearchable={isSearchable}
+                        name="state"
+                        options={states}
+                        onChange={handleStateChange}
+                    />
+                    <div
+                        style={{
+                        color: 'hsl(0, 0%, 40%)',
+                        display: 'inline-block',
+                        fontSize: 12,
+                        fontStyle: 'italic',
+                        marginTop: '1em',
+                        }}
+                    ></div>
+        </div>
                 
         </div>
     )
