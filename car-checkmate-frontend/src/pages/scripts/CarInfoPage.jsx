@@ -1,4 +1,3 @@
-//CarInfoPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -17,7 +16,7 @@ export default function CarInfoPage() {
 
   const fetchCarData = async () => {
     try {
-      const response = await axios.get(`/api/cars/${carId}`);
+      const response = await axios.get(`http://localhost:3000/cars/6620e532a4156d3c6ab49966`);
       setCarData(response.data);
       setIsLoading(false);
     } catch (error) {
