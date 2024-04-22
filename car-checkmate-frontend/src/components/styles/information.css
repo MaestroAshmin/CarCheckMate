@@ -1,0 +1,23 @@
+.ctr-main-information {
+    background-color: aqua;
+    margin: 50px;
+    padding: 20px;
+}
+
+/* Search for mechanic */
+
+.ctr-main-info {
+    width: 30.33%;
+    height: 400px;
+    background-color: red;
+}
+
+.ctr-main-info .ctr-main-info-header {
+    height: 50px;
+    background-color: blue;
+    color: green;
+}
+
+.ctr-main-info img {
+    width: 100%;
+}
