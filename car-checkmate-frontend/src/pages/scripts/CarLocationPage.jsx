@@ -132,6 +132,7 @@ export default function CarLocationPage({ formData, setFormData }) {
                     />
                 </div>
                 <div className='post-state'>
+                    
                 <div className='loc'>           
                 <label className='labels'>Postcode</label>
                 <input

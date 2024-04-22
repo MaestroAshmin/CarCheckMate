@@ -11,7 +11,7 @@
 
 .card p{
     font-weight: bold;
-    color: rgb(28, 87, 225);
+    color: #0d0d0e;
 }
 
 .card button{
@@ -23,14 +23,14 @@
     font-weight: 400;
     padding: 8px 13px;
     width: 100%;
-    background: rgb(28, 87, 225);
+    background: #0d0d0e;
 }
 
 .card .drag-area{
     height: 150px;
     border-radius: 5px;
-    border: 2px dashed #0086fe;
-    color: #0086fe;
+    border: 2px dashed #6c6c72;
+    color: #0d0d0e;
     background: #fff;
     display: flex;
     justify-content: center;
@@ -45,7 +45,7 @@
 }
 
 .card .select{
-    color: #5256ad;
+    color: #0d0d0e;
     margin-left: 5px;
     cursor: pointer;
     transition: 0.4s;
@@ -97,5 +97,5 @@
 
 .delete{
     z-index: 999;
-    color: #0086fe;
+    color: #0d0d0e;
 }

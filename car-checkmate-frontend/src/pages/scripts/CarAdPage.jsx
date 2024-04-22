@@ -44,31 +44,47 @@ export default function CarAdPage() {
         }
     };
 
+    const progress = ((page + 1) / FormPages.length) * 100; 
     return (
-        
+        <div className='car-ad-container'>
             <div className="form">
 
-                <div className="progressbar">
-                   <h1> progressbar </h1>
+                <div>
+                    <img src="logo.png"/>
                 </div>
-
                 <div className="form-container">
                     {PageDisplay()}
                 </div>
 
                 <div className='footer--button'>
-                    <button
-                        disabled={page === 0}
-                        onClick={() => setPage((currPage) => currPage - 1)}
-                    >Prev</button>
-                    <button
-                        disabled={page === FormPages.length - 1}
-                        onClick={() => setPage((currPage) => currPage + 1)}
-                    >Next</button>
+                    {page === 0 ? (
+                        <button class="button-31" role="button"
+                            disabled={page === FormPages.length - 1}
+                            onClick={() => setPage((currPage) => currPage + 1)}
+                        >Next</button>
+                    ) : (
+                        <>
+                            <button class="button-6" role="button"
+                                onClick={() => setPage((currPage) => currPage - 1)}
+                            >Prev</button>
+                            <button class="button-31" role="button"
+                                onClick={() => {
+                                if (page === FormPages.length - 1) {
+                                    alert("FORM SUBMITTED");
+                                    console.log(formData);
+                                } else {
+                                    setPage((currPage) => currPage + 1);
+                                }
+                                }}
+                            >
+                                {page === FormPages.length - 1 ? "Submit" : "Next"}
+                            </button>
+                        </>
+                    )}
                 </div>
 
             </div>
-
+        </div>
         
       
     );
