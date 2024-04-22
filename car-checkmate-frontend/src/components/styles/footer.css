@@ -12,7 +12,6 @@
 }*/
 
 .ctr-footer {
-    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -20,7 +19,6 @@
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     text-align: left;
-    font: bold 16px sans-serif;
     padding: 25px 180px;
 }
 
