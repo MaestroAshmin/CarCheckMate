@@ -5,11 +5,9 @@ const userRoutes = require('./routes/userRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const sellerRoutes = require('./routes/sellerVerificationRoutes');
 const adminRoutes = require('./routes/adminRoutes');
-// const gridFSMiddleware = require('./middlewares/gridFSMiddleware');
-// const multerMiddleware = require('./middlewares/multerMiddleware');
-
-// const uploadRoutes = require('./routes/uploadRoutes');
-
+const carRoutes = require('./routes/carRoutes');
+const inspectionRoutes = require('./routes/inspectionRoutes');
+// const { sellerUploadFieldsConfig } = require('./config/multer-config');
 require('dotenv').config();
 
 const secretKey = require('crypto').randomBytes(20).toString('hex');
@@ -17,7 +15,7 @@ const secretKey = require('crypto').randomBytes(20).toString('hex');
 const express = require('express');
 const session = require('express-session');
 const app = express();
-
+const cors = require('cors');
 // Configure session middleware
 app.use(session({
     secret: secretKey,
@@ -25,39 +23,32 @@ app.use(session({
     saveUninitialized: true
 }));
 const upload = multer();
-app.use(upload.fields([{ name: 'frontImage', maxCount: 1 }, { name: 'backImage', maxCount: 1 }]));
-// const { upload } = multerMiddleware;
-// console.log(upload);
-// Multer middleware for file uploads
-// const upload = multer({ dest: 'uploads/' });
-// console.log(upload);
-// Multer middleware for file uploads should be used before any routes that handle file uploads
+// app.use(upload.fields([{ name: 'frontImage', maxCount: 1 }, { name: 'backImage', maxCount: 1 }]));
 
-// app.use('/uploads', upload.single('file'), multerMiddleware.uploadFiles); // Use single() if uploading a single file
-// app.post('/uploads', upload.fields([{ name: 'frontImage', maxCount: 1 }, { name: 'backImage', maxCount: 1 }]), (req,res)=> {
-//     console.log(req.body);
-//     console.log(req.files);
-// });
+// app.use(sellerUploadFieldsConfig);
+// app.use(upload.array());
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(cors({
+    // origin: 'http://localhost:3001' // Frontend origin for my device
+    origin: '*' // For all
+  }));
 // Database connection
 const mongoURI = 'mongodb://localhost:27017/car_check_mate';
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to MongoDB');
-        // const db = mongoose.connection;
-
-        // Initialize GridFSBucket
-        // multerMiddleware.initializeGridFSBucket(db);
 
         // Routes
 
-        app.use('/user', userRoutes);
+        app.use('/user', upload.none(), userRoutes);
         app.use('/payment', paymentRoutes);
         app.use('/verification', sellerRoutes);
         app.use('/admin', adminRoutes);
+        app.use('/cars', carRoutes);
+        app.use('/inspections',upload.none(), inspectionRoutes);
 
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);

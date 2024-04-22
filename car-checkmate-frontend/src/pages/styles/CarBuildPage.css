@@ -1,0 +1,46 @@
+.build-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.basic-single{
+    width: 200px;
+}
+
+.selects{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    gap: 3px;
+    text-align: left;
+}
+
+.select-two-by-two{
+    display: flex;
+    gap:5px;
+}
+
+
+
+
+.reg-input-box{
+    display: flex;
+    flex-direction: column;
+   gap: 6px;
+   
+}
+
+.reg-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+
+  .labels{
+    font-size: 13px;
+  }
