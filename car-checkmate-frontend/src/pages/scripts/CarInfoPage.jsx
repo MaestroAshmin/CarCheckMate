@@ -1,3 +1,4 @@
+//CarInfoPage.jsx
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import '../styles/CarInfoPage.css';
