@@ -1,8 +1,8 @@
 // src/pages/scripts/Listing/CarInfoPage.jsx
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import '../../styles/CarInfoPage.css'; 
+import '../../styles/CarInfoPage.css';
 import SearchBar from '../../../components/scripts/searchbar';
 import Footer from '../../../components/scripts/footer';
 
@@ -10,22 +10,18 @@ export default function CarInfoPage() {
   const { carId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageOverlay, setShowImageOverlay] = useState(false);
-  const [carData, setCarData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
-
-  const fetchCarData = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3000/api/cars/1`);
-      setCarData(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error fetching car data:', error);
-      setIsLoading(false);
-    }
-  };
+  const [carData, setCarData] = useState(null);
 
   useEffect(() => {
-    setIsLoading(true);
+    const fetchCarData = async () => {
+      try {
+        const response = await axios.get(`/api/cars/${carId}`);
+        setCarData(response.data);
+      } catch (error) {
+        console.error('Error fetching car data:', error);
+      }
+    };
+
     fetchCarData();
   }, [carId]);
 
