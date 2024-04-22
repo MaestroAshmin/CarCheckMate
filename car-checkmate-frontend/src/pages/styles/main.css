@@ -1,0 +1,246 @@
+/*
+    File: main.css
+    Description: This file contains main styles for the CarCheckMate project.
+*/
+
+/* Landing Page css */
+body {
+    font-family: "Arial", "Verdana", "Tahoma", "Trebuchet MS", sans-serif;
+}
+
+/*.ctr-main {
+    
+}*/
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 999; /* Ensure it's above other elements */
+}
+
+.ctr-sub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: aqua;
+    width: 70%;
+    height: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex; /* Use flexbox */
+}
+
+.ctr-sub-left {
+    width: 50%;
+    height: 100%;
+    background-image: url('../../../public/images/landingpage-bg-5.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    float: left;
+    position: relative;
+    text-align: right;
+    padding-top: 10%;
+    padding-right: 5%;
+}
+
+.ctr-sub-left::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Transparent white */
+}
+
+.ctr-sub-right {
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    float: right;
+    padding: 5%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ctr-sub-left-font {
+    color: #FFFFFF;
+    position: relative; /* Add position relative */
+    z-index: 1; /* Set a higher z-index */
+}
+
+.ctr-sub-right-font {
+    color: rgba(217,202,179,255);
+    margin-top: -50px;
+}
+
+.ctr-sub-right-font-p {
+    color: rgba(217,202,179,255);
+    margin: 2%;
+    font-weight: bold;
+}
+
+hr {
+    color: #828282;
+    position: relative;
+    z-index: 1;
+    width: 50%;
+    margin-left: 50%;
+}
+
+img {
+    position: relative;
+    z-index: 1;
+    width: 150px;
+}
+
+.placeAtBottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 5%; /* Use the same value as the padding-right of .ctr-sub-left */
+    color: #a8a8a8;
+}
+
+.placeAtBottom-left {
+    position: absolute;
+    bottom: 0;
+    left: 5%; /* Use the same value as the padding-right of .ctr-sub-left */
+    color: #a8a8a8;
+}
+
+.ctr-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.btn-login {
+    width: 65%;
+    height: 40px;
+    border-radius: 20px; /* Rounded corners */
+    border: 1px solid #ccc; /* Gray border */
+    background-color: #fff; /* White background */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Shadow */
+    transition: all 0.3s ease; /* Smooth transition */
+    font-weight: normal; /* Initial font weight */
+    text-align: left;
+    padding-left: 35px;
+    color: rgba(33,33,33,255);
+    text-transform: uppercase;
+}
+
+.btn-login:hover {
+    font-weight: bold;
+    transform: scale(1.05); /* Grow the button a bit on hover */
+}
+
+.btn-signup {
+    width: 45%;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: rgba(33,33,33,255);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    font-weight: normal;
+    text-align: left;
+    padding-left: 35px;
+    color: rgba(217,202,179,255);
+    text-transform: uppercase;
+}
+
+.btn-signup:hover {
+    font-weight: bold;
+    transform: scale(1.05);
+}
+
+span:hover {
+    font-weight: bold;
+    text-decoration: solid;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    color: rgba(0, 195, 112, 1); /* Change text color on hover */
+}
+
+.popup {
+    position: fixed; /* Fixed position to cover the entire viewport */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the popup */
+    background-color: white; /* White background */
+    padding: 40px; /* Padding inside the popup */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Shadow */
+    z-index: 999; /* Ensure it's above other content */
+    width: 20%;
+    border-radius: 10px; /* Rounded corners */
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.popup-content {
+    margin: 5%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-content form {
+    display: flex;
+    flex-direction: column;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+.popup-content label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.popup-content input {
+    width: 100%;
+    height: 30px;;
+}
+
+.popup-content .button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin-top: 10px; /* Adjust top margin */
+}
+
+.popup-content button {
+    background-color: rgba(33,33,33,255);
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 45%; /* Match the width of .btn-signup */
+    height: 40px; /* Match the height of .btn-signup */
+    border-radius: 20px; /* Match the border radius of .btn-signup */
+    color: rgba(217,202,179,255);
+    text-transform: uppercase;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.popup-content button:hover {
+    background-color: rgba(217,202,179,255);
+    color: rgba(33,33,33,255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow */
+}
+
+.popup-link-align-right {
+    text-align: right;
+    margin-bottom: -40px;
+}

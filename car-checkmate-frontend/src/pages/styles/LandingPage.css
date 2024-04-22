@@ -1,23 +1,47 @@
 /* 
 
-
+.container{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+}
 
 .heading{
     width: 100%;
-    background-color: rgba(245, 245, 242, 0.944);
+    background-color: rgba(74, 74, 71, 0.944);
     align-self: center;
     text-align: center;
-    color:rgb(7, 82, 34); 
-    margin-bottom: auto;  
+    color:antiquewhite;   
 }
 
+.welcome--container{
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;    
+    color: rgba(35, 159, 82, 0.81);
+}
 
+.welcome--text{
+    font-family:sans-serif;
+    font-family:  sans-serif;
+    font-size: 70px;
+}
+.button--container{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    
+}
 
 .bttn{        
-    width: 100%;
-        background-color: #fff;
-        color: rgba(35, 159, 82, 0.81);
+        background-color: rgba(35, 159, 82, 0.81);
+        color: #fff;
         border:rgb(243, 235, 225);
         border-radius:10px;
         padding: 10px;
@@ -26,38 +50,10 @@
 .sign--up{
     background-color: #090909;
     color:rgb(243, 235, 225);
-    border: rgba(35, 159, 82);
+    border: rgba(35, 159, 82, 0.81);
     border-radius:10px;
     padding: 10px;
     margin-top: 1px;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-image: url('../../../public/background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    min-height: 100vh;
-    background-color: rgba(9, 9, 9); 
-    color: #fff; /* Set text color 
-  }
-  
-  .button--container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 15px; 
-    border-radius: 10px;
-    margin-bottom: auto; 
-    background-color: antiquewhite;
 
-    padding: 50px;
-    border-radius: 15px;
-    box-shadow: #fff;
-  }
-   */
