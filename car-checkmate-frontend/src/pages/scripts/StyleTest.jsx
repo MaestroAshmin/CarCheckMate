@@ -9,6 +9,7 @@ import HeaderNav from '../../components/scripts/HeaderNav';
 import HeaderSearch from '../../components/scripts/HeaderSearch';
 import Footer from '../../components/scripts/Footer';
 import HeaderFilters from '../../components/scripts/HeaderFilters';
+import PhotosSlide from '../../components/scripts/PhotosSlide';
 
 export default function StyleTest() {
    
@@ -19,6 +20,11 @@ export default function StyleTest() {
                 <HeaderSearch />
                 <br />
                 <HeaderFilters />
+                <PhotosSlide />
+
+
+
+
             </div>
             <Footer />
         </div>
