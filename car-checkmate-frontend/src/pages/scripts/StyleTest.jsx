@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import '../styles/main.css';
 import '../styles/content.css';
-import ForgotPasswordPopup from '../../components/scripts/ForgotPasswordPopup';
-import SignInPopup from '../../components/scripts/SignInPopup';
-import SignUpPopup from '../../components/scripts/SignUpPopup';
-
 import HeaderNav from '../../components/scripts/HeaderNav';
 import HeaderSearch from '../../components/scripts/HeaderSearch';
 import Footer from '../../components/scripts/Footer';
 import HeaderFilters from '../../components/scripts/HeaderFilters';
 import PhotosSlide from '../../components/scripts/PhotosSlide';
+import CarList from '../../components/scripts/CarList';
 
 export default function StyleTest() {
    
@@ -21,10 +18,7 @@ export default function StyleTest() {
                 <br />
                 <HeaderFilters />
                 <PhotosSlide />
-
-
-
-
+                <CarList noPerPage={6} />
             </div>
             <Footer />
         </div>
