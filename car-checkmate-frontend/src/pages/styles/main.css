@@ -116,6 +116,18 @@ img {
     color: #a8a8a8;
 }
 
+.placeAtBottom-right a {
+    color: #a8a8a8;
+    text-decoration: none;
+}
+
+.placeAtBottom-right a:hover {
+    font-weight: bold;
+    text-decoration: solid;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    color: rgba(0, 195, 112, 1); /* Change text color on hover */
+}
+
 /* ctr-sub-right: to place content at the bottom left */
 .placeAtBottom-left {
     position: absolute;

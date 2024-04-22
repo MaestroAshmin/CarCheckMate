@@ -58,7 +58,7 @@ export default function StyleTest() {
                     <br />
                     <hr />
                     <h4 className='ctr-sub-left-font'>Selling your car in Victoria is easy with our simple process</h4>
-                    <h6 className='placeAtBottom-right'>carcheckmate@mail.com</h6>
+                    <h6 className='placeAtBottom-right'><a href='mailto:carcheckmate@mail.com'>carcheckmate@mail.com</a></h6>
                 </div>
                 <div className='ctr-sub-right'>
                     <h1 className='ctr-sub-right-font'>Delighted to<br/> welcome you!</h1>
