@@ -3,7 +3,7 @@ import '../styles/main.css';
 import '../styles/content.css';
 import HeaderNav from '../../components/scripts/HeaderNav';
 import HeaderSearch from '../../components/scripts/HeaderSearch';
-import Footer from '../../components/scripts/Footer';
+import Footer from '../../components/scripts/footer';
 import HeaderFilters from '../../components/scripts/HeaderFilters';
 import PhotosSlide from '../../components/scripts/PhotosSlide';
 import CarList from '../../components/scripts/CarList';
