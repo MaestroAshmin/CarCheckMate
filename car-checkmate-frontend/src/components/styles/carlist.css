@@ -103,13 +103,13 @@
     font-weight: 600;
 }
   
-  .year-price {
+.year-price {
     display: flex;
     justify-content: space-between;
     margin-top: 8px;
     font-size: 14px;
-  }
+}
   
-  .year-price p {
+.year-price p {
     color: rgba(0, 195, 112, 1);
-  }
+}
