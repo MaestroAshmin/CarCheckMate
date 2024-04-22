@@ -1,8 +1,64 @@
 .ctr-photosslide {
     margin: 50px;
+    position: relative;
 }
 
 .ctr-photosslide img {
-    width: 300px;
-    height: 200px;
+    width: 98%;
+    height: 225px;
+}
+
+.slide-item {
+    padding: 0 5px !important; /* Add gap between images */
+}
+
+.slick-prev,
+.slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px; /* Adjust arrow width */
+    height: 45px; /* Adjust arrow height */
+    cursor: pointer;
+    z-index: 1;
+    background: #ecb159;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slick-prev {
+    left: -35px; /* Position the left arrow */
+}
+
+.slick-next {
+    right: -35px; /* Position the right arrow */
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    background: rgba(0, 195, 112, 1); /* Change background color on hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.slick-prev img,
+.slick-next img {
+    width: 20px; /* Adjust icon width */
+    height: 20px; /* Adjust icon height */
+}
+
+.slick-prev:hover img,
+.slick-next:hover img {
+    opacity: 0.8; /* Reduce opacity on hover */
 }
