@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/scripts/LandingPage';
-import CarInfoPage from './pages/scripts/CarInfoPage';
 import CarAdPage from './pages/scripts/CarAdPage';
 import CarBuildPage from './pages/scripts/CarBuildPage';
 import CarFeaturePage from './pages/scripts/CarFeaturePage';
