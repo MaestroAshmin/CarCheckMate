@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import '../styles/main.css';
 import '../styles/content.css';
 import HeaderNav from '../../components/scripts/HeaderNav';
-import HeaderSearch from '../../components/scripts/HeaderSearch';
 import Footer from '../../components/scripts/footer';
-import HeaderFilters from '../../components/scripts/HeaderFilters';
-import PhotosSlide from '../../components/scripts/PhotosSlide';
-import CarList from '../../components/scripts/CarList';
-import Information from '../../components/scripts/Information';
+import UserNav from '../../components/scripts/UserNav';
+
 
 export default function StyleTest() {
    
@@ -15,12 +12,12 @@ export default function StyleTest() {
         <div className='ctr-main'>
             <div className='ctr-sub-content'>
                 <HeaderNav />
-                <HeaderSearch />
-                <br />
-                <HeaderFilters />
-                <PhotosSlide />
-                <CarList noPerPage={6} />
-                <Information />
+                <div className='ctr-content-session'>
+                    <UserNav />
+                    <div className='ctr-user-content'>
+                        
+                    </div>
+                </div>
             </div>
             <Footer />
         </div>
