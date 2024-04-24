@@ -1,4 +1,5 @@
-/* page css */
+/* Container */
+
 .ctr-sub-content {
     margin: 0 12% 0 12%;
 }
@@ -6,6 +7,8 @@
 .ctr-content-session {
 
 }
+
+/* User Type */
 
 .ctr-user-type {
     height: 50px;
@@ -20,16 +23,11 @@
     text-shadow: 0 -2px 0 black;
     cursor: pointer;
     box-shadow: 1px 2px 4px rgb(20, 20, 20), 0 4px 12px rgb(10, 10, 10);
-}
-
-.ctr-user-content {
-    height: 300px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;;
 }
 
 .nav-item {
     display: flex;
-    /* flex-direction: row-reverse; */ /* Remove this line */
     font-size: 1rem;
     line-height: 1rem;
     align-items: center;
@@ -97,4 +95,180 @@
 
 .nav-item .icon > svg {
     max-width: 16px;
+}
+
+/* User Content */
+
+.ctr-user-content {
+    padding-top: 30px;
+    margin-bottom: 50px;
+    /*border-top: 2px solid #493930;
+    border-left: 2px solid #493930;*/
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    display: flex;
+}
+
+.ctr-user-content h3 {
+    margin-left: 30px;
+}
+
+.ctr-user-content-left {
+    width: max-content;
+}
+
+.ctr-user-content-right {
+
+    width: 100%;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.ctr-user-content-right-report {
+    margin-left: 50px;
+    margin-bottom: 15px;;
+    color: #d9cab3;
+}
+
+.ctr-user-content-right-report a {
+    color: #ecb159;
+    text-decoration: none;;
+    font-weight: 525;
+}
+
+.ctr-user-content-right-report a:hover {
+    color: rgba(0, 195, 112, 1);
+    text-decoration: none;;
+    font-weight: 525;
+}
+
+.ctr-user-content-right-report icon {
+
+}
+
+.ctr-user-content .ctr-user-button {
+    width: 300px;
+    height: 30px;
+    float: right;
+    margin-right: 50px;
+    margin-bottom: 30px;;
+    border-radius: 10px;
+    border: 1px solid #ecb159; 
+    background-color: #ecb159;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease; /* Smooth transition */
+    text-align: center;
+    color: rgba(33,33,33,255);   
+}
+
+.ctr-user-content .ctr-user-button:hover {
+    font-weight: bold;
+    transform: scale(1.00); /* Grow the button a bit on hover */
+    color: #FFFFFF;
+    cursor: pointer;
+    background-color: rgba(0, 195, 112, 1);
+}
+
+
+/* User Content Mechanic */
+
+.ctr-schedule {
+    width: 600px;
+    margin: 0px 50px 30px 50px;
+    padding: 15px;
+    overflow: hidden; /* Clear floats */
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+    transition: all 0.3s ease; /* Smooth transition */
+    color: rgba(33,33,33,255);   
+}
+
+.ctr-schedule-buyer-detail {
+    width: 60%;
+    height: 180px;
+    float: left;
+    position: relative;
+}
+
+.ctr-schedule-option {
+    width: 40%;
+    height: 180px;
+    float: left; /* Float next to .ctr-schedule-buyer-detail */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center items vertically */
+}
+
+.ctr-schedule p {
+    margin-left: 50px;
+    font-weight: bold;
+}
+
+.ctr-schedule span,
+.ctr-user-details span,
+.ctr-user-content-right span {
+    font-weight: normal;
+    color: #493930;
+}
+
+.ctr-schedule span:hover,
+.ctr-user-details span:hover,
+.ctr-user-content-right span:hover {
+    color: #493930;
+    cursor: default;
+}
+
+.ctr-schedule-option button {
+    width: 200px;
+    height: 30px;
+    align-self: center;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc; 
+    background-color: #fff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    text-align: center;
+    color: rgba(33,33,33,255);   
+}
+
+.ctr-schedule-option button:hover {
+    font-weight: bold;
+    transform: scale(1.00);
+    color: rgba(0, 195, 112, 1);
+    cursor: pointer;
+}
+
+.ctr-user-details {
+    margin: 0px 0px 0px 50px;
+    overflow: hidden; /* Clear floats */
+    transition: all 0.3s ease; /* Smooth transition */
+    color: rgba(33,33,33,255);   
+}
+
+.ctr-user-details h3 {
+    margin-left: 0;
+}
+
+.ctr-user-details button {
+    width: 50px;
+    height: 25px;
+    float: right;
+    margin-right: 50px;
+    margin-bottom: 30px;;
+    border-radius: 10px;
+    border: 1px solid #ecb159; 
+    background-color: #ecb159;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease; /* Smooth transition */
+    text-align: center;
+    color: rgba(33,33,33,255);   
+}
+
+.ctr-user-details button:hover {
+    font-weight: bold;
+    transform: scale(1.00); /* Grow the button a bit on hover */
+    color: #FFFFFF;
+    cursor: pointer;
+    background-color: rgba(0, 195, 112, 1);
 }
