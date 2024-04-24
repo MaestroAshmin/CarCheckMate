@@ -7,6 +7,7 @@ import CarPhotoPage from './pages/scripts/CarPhotoPage';
 import CarLocationPage from './pages/scripts/CarLocationPage'
 import CarPricePage from './pages/scripts/CarPricePage';
 import CarInfoPage from './pages/scripts/Listing/CarInfoPage';
+import SellerMechanicsListingPage from './pages/scripts/SellerMechanicsListingPage';
 import MechanicsListingPage from './pages/scripts/MechanicsListingPage';
 import MechanicPage from './pages/scripts/MechanicPage';
 import StyleTest from './pages/scripts/StyleTest';
@@ -24,6 +25,7 @@ function App() {
           <Route path="/CarPhotoPage" element={<CarPhotoPage/>}/>
           <Route path="/CarFeaturePage" element={<CarFeaturePage/>}/>
           <Route path="/CarPricePage" element={<CarPricePage/>}/>
+          <Route path="/SellerMechanicsListingPage" element={<SellerMechanicsListingPage/>}/> 
           <Route path="/MechanicsListingPage" element={<MechanicsListingPage/>}/> 
           <Route path="/MechanicPage/:itemId" element={<MechanicPage/>}/> 
           <Route path="/StyleTest" element={<StyleTest />} />

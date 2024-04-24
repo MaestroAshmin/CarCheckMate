@@ -24,12 +24,19 @@ export default function MechanicsListingPage() {
         }));
     };
 
-    /* Remove the handleDeny function */
+    const handleDeny = (itemId) => {
+        setData(data.map(item => {
+            if (item.id === itemId) {
+                return { ...item, status: 'denied' };
+            }
+            return item;
+        }));
+    };
 
     const renderData = () => {
       return currentPosts.map(item => (
           <li key={item.id}>
-              <div className='mechanic-2'>
+              <div className='mechanic'>
                   <div className='mechanic-i'>
                       <div className='mms'>
                           <p className='ps'><strong>{item.make}</strong>,</p>
@@ -44,7 +51,7 @@ export default function MechanicsListingPage() {
                       {  item.status === 'pending' && (
                           <>
                               <button className="button-13" onClick={() => handleAccept(item.id)}>Accept</button>
-                              {/* Remove the Deny button */}
+                              <button className="button-13" onClick={() => handleDeny(item.id)}>Deny</button>
                           </>
                       )}
                       {item.status !== 'pending' && (
@@ -55,6 +62,8 @@ export default function MechanicsListingPage() {
           </li>
       ));
   };
+  
+  
 
     const lastPostIndex = currentPage * postPerPage;
     const firstPostIndex = lastPostIndex - postPerPage;
@@ -79,7 +88,7 @@ export default function MechanicsListingPage() {
         <div className='mechanic-list-container'>
             <Navbar />
             <div className='mechanic--data'>
-                <h2 className='hs'>Requested Inspections</h2>
+                <h2 className='hs'>Booked Inspections</h2>
                 <ul className='mechanics-list'>
                     {renderData()}
                 </ul>

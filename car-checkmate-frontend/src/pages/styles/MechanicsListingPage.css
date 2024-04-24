@@ -58,13 +58,20 @@
 .ps{
     margin: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    
+    font-size: 12px;
 }
 
 .hs{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
+.mms{
+    display: flex;
+    gap:2px;
+}
+.sss{
+    display: flex;
+    gap:2px;
+}
 .mechanic-list-container{
     display: flex;
     flex-direction: column;
@@ -112,7 +119,7 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: middle;
-  width: 170px;
+  width: 80px;
 }
 
 .button-13:hover {
@@ -130,3 +137,34 @@
 .carId{
     align-self: flex-start;
 }
+
+/* Styles for accepted status */
+.accepted-status {
+    color: green;
+  }
+  
+  /* Styles for denied status */
+  .denied-status {
+    color: red;
+  }
+
+
+  .accept-deny-container{
+    display: flex;
+    gap:10px;
+  }
+
+  .mechanic-2{
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    gap:10px;
+    border-radius: 14px;
+    border: 1px solid #a7a0a0;
+    
+    margin: 10px;
+    padding: 20px;
+
+  }

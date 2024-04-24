@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import mechanicsData from './mechanicsData.json';
+import mechanicsData from './Mechanics.json';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/MechanicPage.css';
 import Navbar from '../../components/scripts/navbar';
 import Footer from '../../components/scripts/footer';
+
 export default function MechanicPage() {
     const [mechanic, setMechanic] = useState(null);
     const { itemId } = useParams();
     const [selectedDate, setselectedDate] = useState(null);
-    const [comment,setComment] = useState("")
+    const [comment,setComment] = useState("");
+
     const handleDateChange = (date) => {
       setselectedDate(date);
     };
 
-    const  handleCOnfirmBooking = () => {
+    const  handleConfirmBooking = () => {
          console.log(
             mechanic.id, 
             mechanic.name,
@@ -24,14 +26,8 @@ export default function MechanicPage() {
             mechanic.PhoneNumber,
             selectedDate,
             comment
-
         )
       };
-
-
-    // const handleTimeChange = (time) => {
-    //     setSelectedTime(time);
-    // };
 
     useEffect(() => {
         const selectedMechanic = mechanicsData.find(mechanic => mechanic.id === parseInt(itemId));
@@ -82,11 +78,9 @@ export default function MechanicPage() {
                 onChange={(e) => {
                     setComment(e.target.value );
                 }} 
-            /> {/* Add closing tag here */}
+            />
             </div>
-            <button className="button-81" role="button" onClick={() => handleCOnfirmBooking()}>Confirm Booking</button>
-
-
+            <button className="button-81" role="button" onClick={() => handleConfirmBooking()}>Confirm Booking</button>
             <Footer/>
         </div>
     );
