@@ -7,6 +7,7 @@ const sellerRoutes = require('./routes/sellerVerificationRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const carRoutes = require('./routes/carRoutes');
 const inspectionRoutes = require('./routes/inspectionRoutes');
+const inspectionStatusRoutes = require('./routes/inspectionStatusRoutes');
 // const { sellerUploadFieldsConfig } = require('./config/multer-config');
 require('dotenv').config();
 
@@ -49,6 +50,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
         app.use('/admin', adminRoutes);
         app.use('/cars', carRoutes);
         app.use('/inspections',upload.none(), inspectionRoutes);
+        app.use('/inspection-status', inspectionStatusRoutes);
 
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);

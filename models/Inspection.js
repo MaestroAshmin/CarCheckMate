@@ -34,12 +34,8 @@ const inspectionSchema = new mongoose.Schema({
         default: null
     },
     rwcChecks: {
-        type: [
-            {
-                type: String,
-            }
-        ],
-        default: []
+        type: String,
+        default: ''
     },
     inspectionStatus: {
         type: Boolean,

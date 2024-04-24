@@ -28,12 +28,12 @@ router.get('/upcoming-seller', authMiddleware.requireLogin, checkSellerPermissio
 router.get('/past-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getPastInspectionsSeller);
 
 // Route to allow mechanics to view upcoming unclaimed inspections
-router.get('/upcoming-unclaimed-mechanic', checkMechanicPermission, inspectionController.getUpcomingUnclaimedInspectionsForMechanic);
+router.get('/upcoming-unclaimed-mechanic',authMiddleware.requireLogin, checkMechanicPermission, inspectionController.getUpcomingUnclaimedInspectionsForMechanic);
 
 // Route to allow mechanics to accept an inspection
-router.post('/accept-inspection-mechanic/:inspectionId', checkMechanicPermission, inspectionController.acceptInspectionMechanic);
+router.post('/accept-inspection-mechanic/:inspectionId',authMiddleware.requireLogin, checkMechanicPermission, inspectionController.acceptInspectionMechanic);
 
 // Route to allow mechanics to view sorted inspections
-router.get('/inspections-accepted-mechanic', checkMechanicPermission, inspectionController.getAcceptedInspectionsMechanic);
+router.get('/inspections-accepted-mechanic',authMiddleware.requireLogin, checkMechanicPermission, inspectionController.getAcceptedInspectionsMechanic);
 
 module.exports = router;
