@@ -41,15 +41,15 @@
 }
 
 .mechanic{
-    width: 500px;
+    width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
     
-    gap:18px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    gap:10px;
+    border-radius: 14px;
+    border: 1px solid #a7a0a0;
+    
     margin: 10px;
     padding: 20px;
 
@@ -57,7 +57,12 @@
 
 .ps{
     margin: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     
+}
+
+.hs{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .mechanic-list-container{
@@ -78,9 +83,11 @@
 
 .mechanic-i{
     display: flex;
-    
+    height: 70px;
     flex-direction: column;
     gap:2px;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -105,7 +112,7 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: middle;
-  width: 150px;
+  width: 170px;
 }
 
 .button-13:hover {
@@ -117,4 +124,9 @@
   border-color: #008296;
   box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
   outline: 0;
+}
+
+
+.carId{
+    align-self: flex-start;
 }

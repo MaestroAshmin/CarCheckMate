@@ -8,6 +8,7 @@ import CarLocationPage from './pages/scripts/CarLocationPage'
 import CarPricePage from './pages/scripts/CarPricePage';
 import CarInfoPage from './pages/scripts/Listing/CarInfoPage';
 import MechanicsListingPage from './pages/scripts/MechanicsListingPage';
+import MechanicPage from './pages/scripts/MechanicPage';
 import StyleTest from './pages/scripts/StyleTest';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/CarFeaturePage" element={<CarFeaturePage/>}/>
           <Route path="/CarPricePage" element={<CarPricePage/>}/>
           <Route path="/MechanicsListingPage" element={<MechanicsListingPage/>}/> 
+          <Route path="/MechanicPage/:itemId" element={<MechanicPage/>}/> 
           <Route path="/StyleTest" element={<StyleTest />} />
         </Routes>
       </Router>
