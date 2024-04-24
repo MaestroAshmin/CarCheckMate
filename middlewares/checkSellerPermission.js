@@ -1,6 +1,5 @@
 const checkSellerPermission = (req, res, next) => {
-    // Assuming the user role is stored in the session
-    const isSeller = req.session.user.seller; // Adjust this based on your session structure
+    const isSeller = req.session.user.seller; 
 
     if (isSeller) {
         next(); // Seller is allowed, proceed to the next middleware/route handler

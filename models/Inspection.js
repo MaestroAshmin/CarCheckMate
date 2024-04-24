@@ -11,31 +11,39 @@ const inspectionSchema = new mongoose.Schema({
     },
     seller_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Assuming there's a User model
+        ref: 'User',
         required: true
     },
     buyer_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Assuming there's a User model
+        ref: 'User', 
         required: true
     },
     mechanic_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Assuming there's a User model
+        ref: 'User', 
         default: null
     },
     car_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Car', // Assuming there's a Car model
+        ref: 'Car',
         required: true
     },
     sellerAcceptedInspectionRequest: {
         type: Boolean,
         default: null
     },
+    rwcChecks: {
+        type: [
+            {
+                type: String,
+            }
+        ],
+        default: []
+    },
     inspectionStatus: {
         type: Boolean,
-        default: false
+        default: null
     }
 });
 

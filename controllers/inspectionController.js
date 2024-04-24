@@ -11,7 +11,7 @@ async function createInspection (req,res) {
 
         // Check if all required fields are provided
         if (!inspectionDate || !inspectionTime) {
-            return res.status(400).json({ message: 'Please provide all required fields.' });
+            return res.status(400).json({ error: 'Please provide all required fields.' });
         }
 
         // Get the carId from the parameters
@@ -22,7 +22,7 @@ async function createInspection (req,res) {
 
         // Check if the car exists
         if (!car) {
-            return res.status(404).json({ message: 'Car not found.' });
+            return res.status(404).json({ error: 'Car not found.' });
         }
 
         // Extract the seller ID from the car document
@@ -43,7 +43,7 @@ async function createInspection (req,res) {
         res.status(201).json({ message: 'Inspection record created successfully.', inspection });
     } catch (error) {
         console.error('Error creating inspection:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
 
@@ -96,7 +96,7 @@ async function acceptInspection(req, res) {
         res.status(200).json({ message: 'Inspection request accepted successfully.' });
     } catch (error) {
         console.error('Error accepting inspection request:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
 
@@ -111,7 +111,7 @@ async function denyInspection (req, res) {
         res.status(200).json({ message: 'Inspection request denied successfully.' });
     } catch (error) {
         console.error('Error denying inspection request:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
 
@@ -132,7 +132,7 @@ async function getUpcomingInspectionsBuyer(req, res) {
         // res.status(200).json({ upcomingInspections });
     } catch (error) {
         console.error('Error fetching upcoming inspections:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
 
@@ -153,7 +153,7 @@ async function getPastInspectionsBuyer (req, res) {
         // res.status(200).json({ pastInspections });
     } catch (error) {
         console.error('Error fetching past inspections:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
 
@@ -172,7 +172,7 @@ async function getUpcomingInspectionsSeller(req, res) {
         res.status(200).json({ inspectionsWithCarDetails });
     } catch (error) {
         console.error('Error fetching upcoming inspections:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
 
@@ -192,7 +192,84 @@ async function getPastInspectionsSeller (req, res) {
 
     } catch (error) {
         console.error('Error fetching past inspections:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
-module.exports = { createInspection, getPendingInspectionsForSeller, acceptInspection, denyInspection, getUpcomingInspectionsBuyer, getPastInspectionsBuyer, getPastInspectionsSeller, getUpcomingInspectionsSeller }
+
+// Controller function to get upcoming unclaimed inspections for mechanic
+async function getUpcomingUnclaimedInspectionsForMechanic (req, res) {
+    try {
+        const mechanicId = req.session.user._id; 
+        // Get upcoming inspections that have not been selected by other mechanics yet
+        const upcomingInspections = await Inspection.find({ mechanic_id: null, inspectionDate: { $gte: new Date() } });
+        // Fetch car details for each inspection
+        const inspectionsWithCarDetails = await Promise.all(upcomingInspections.map(async (inspection) => {
+            let carDetails = await Car.findById(inspection.car_id);
+            carDetails = carDetails.toObject();
+            delete carDetails.__v; // Remove __v field
+            return { ...inspection.toObject(), car: carDetails };
+        }));
+
+        res.status(200).json({ inspectionsWithCarDetails });
+    } catch (error) {
+        console.error('Error fetching upcoming inspections for mechanic:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+// Controller function to accept an inspection for Mechanic
+async function acceptInspectionMechanic (req, res) {
+    try {
+        const { inspectionId } = req.params;
+        const mechanicId = req.session.user._id;
+
+         // Get the inspection details
+         const inspection = await Inspection.findById(inspectionId);
+
+        // Check if the mechanic has more than one inspection at the same time and date
+        const existingInspections = await Inspection.find({
+            mechanic_id: mechanicId,
+            inspectionDate: inspection.inspectionDate, // Match inspection date
+            inspectionTime: inspection.inspectionTime // Match inspection time
+        });
+
+        if (existingInspections.length > 0) {
+            // Mechanic has another inspection at the same time and date, cannot accept this one
+            return res.status(400).json({ error: 'Cannot accept inspection. Scheduling conflict.' });
+        }
+
+        // Update the inspection record to mark it as accepted by the mechanic
+        await Inspection.findByIdAndUpdate(inspectionId, { mechanic_id: mechanicId });
+
+        res.status(200).json({ message: 'Inspection accepted successfully.' });
+    } catch (error) {
+        console.error('Error accepting inspection:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+// Controller function to get sorted inspections for a mechanic
+async function getAcceptedInspectionsMechanic (req, res) {
+    try {
+        const mechanicId = req.session.user._id;
+        // Get current date
+        const currentDate = new Date();
+        // Get inspections accepted by the mechanic and sort them by date and time
+        const sortedInspections = await Inspection.find({ mechanic_id: mechanicId, inspectionDate: { $gte: currentDate } })
+            .sort({ inspectionDate: 1, inspectionTime: 1 })
+            .populate('car_id') // Populate car details
+            .exec();
+
+        // Map the inspections with car details
+        const inspectionsWithCarDetails = sortedInspections.map(inspection => {
+            const carDetails = inspection.car_id.toObject();
+            delete carDetails.__v; // Remove __v field
+            return { ...inspection.toObject(), car: carDetails };
+        });
+        res.status(200).json({ inspectionsWithCarDetails });
+    } catch (error) {
+        console.error('Error fetching sorted inspections:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+module.exports = { createInspection, getPendingInspectionsForSeller, acceptInspection, denyInspection, getUpcomingInspectionsBuyer, getPastInspectionsBuyer, getPastInspectionsSeller, getUpcomingInspectionsSeller, getUpcomingUnclaimedInspectionsForMechanic, acceptInspectionMechanic, getAcceptedInspectionsMechanic }
