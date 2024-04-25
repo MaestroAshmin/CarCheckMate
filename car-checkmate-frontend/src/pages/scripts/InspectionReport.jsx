@@ -6,7 +6,7 @@ import Footer from '../../components/scripts/footer';
 import UserNav from '../../components/scripts/UserNav';
 import MechanicReport from '../../components/scripts/MechanicReport';
 
-export default function StyleTest() {
+export default function InspectionReport() {
    
     return (
         <div className='ctr-main'>
