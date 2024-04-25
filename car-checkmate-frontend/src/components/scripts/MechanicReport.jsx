@@ -50,6 +50,7 @@ function MechanicReport() {
         drivelineComponents: '',
         fluidLeaks: '',
         hornOperation: '',
+        roadworthy: '',
         additionalComments: '',
         eRWCSubmitted: false,
         informationTruthChecked: false,
@@ -932,7 +933,31 @@ function MechanicReport() {
                     {/* Topic 10: Lights and Electrical Components */}
                     <div className='ctr-report'>
                         <fieldset>
-                            <legend>Lights and Electrical Components</legend>
+                            <legend>Is The Vehicle Roadworthy?</legend>
+                            <div>
+                                <div className='role-container'>
+                                    <div className='role-radio'>
+                                        <input
+                                            type="radio"
+                                            name="roadworthy"
+                                            value="yes"
+                                            checked={formState.roadworthy === 'yes'}
+                                            onChange={handleChange}
+                                        />
+                                        <label>Yes, it is.</label>
+                                    </div>
+                                    <div className='role-radio'>
+                                        <input
+                                            type="radio"
+                                            name="roadworthy"
+                                            value="no"
+                                            checked={formState.roadworthy === 'no'}
+                                            onChange={handleChange}
+                                        />
+                                        <label>No, it is not.</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div className='input-box'>
                                 <p className='sub-topic-report'>Additional Comments or Observations:</p>
                                 <textarea
