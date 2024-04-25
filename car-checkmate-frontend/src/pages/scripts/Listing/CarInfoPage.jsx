@@ -16,6 +16,7 @@ export default function CarInfoPage() {
   const fetchCarData = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/cars/single-car-details/${carId}`);
+      console.log('Car data:', response.data);
       setCarData(response.data); // Assuming response.data is the correct format
       setIsLoading(false);
     } catch (error) {

@@ -11,6 +11,7 @@ import CarPhotoPage from './pages/scripts/CarPhotoPage';
 import CarLocationPage from './pages/scripts/CarLocationPage'
 import CarPricePage from './pages/scripts/CarPricePage';
 import CarInfoPage from './pages/scripts/Listing/CarInfoPage';
+import CarPostPage from './pages/scripts/Listing/CarPostPage';
 import Mechanic from './pages/scripts/Mechanic';
 import InspectionReport from './pages/scripts/InspectionReport';
 
@@ -24,12 +25,13 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/Homepage" element={<Homepage />} />
-          <Route path="/CarInfoPage" element={<CarInfoPage />} />
-          {/* <Route path="/SignUpPage" element= {<SignUpPage/>} />
+                    {/* <Route path="/SignUpPage" element= {<SignUpPage/>} />
           <Route path="/SignInPage" element= {<SignInPage/>} />
           <Route path="/ForgetPasswordPage" element= {<ForgetPasswordPage/>} /> */}
 
           {/** Car lising */}
+          <Route path="/carinfo/:carId" element={<CarInfoPage />} />
+          <Route path="/carpost" element={<CarPostPage />} />
           <Route path="/CarAdPage" element={<CarAdPage/>} />
           <Route path="/CarBuildPage" element={<CarBuildPage />}/>
           <Route path="/CarLocationPage" element={<CarLocationPage />}/>
