@@ -1,11 +1,16 @@
+// car-checkmate-frontend/server.js
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const path = require('path');
-const multer = require('multer');
 const mongoose = require('mongoose');
+const multer = require('multer');
 
 // MongoDB connection string
 const mongoURI = 'mongodb://localhost:27017/carCheckMate';
+
+// Enable CORS
+app.use(cors());
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, {
@@ -23,24 +28,24 @@ mongoose.connection.on('error', (err) => {
   console.error('MongoDB connection error:', err);
 });
 
-// Sample car data
-const carData = {
-  carID: '1001',
-  make: 'Toyota',
-  model: 'Corolla',
-  suburb: 'Footscray',
-  color: 'White',
-  price: 20000,
-  odometer: 80000,
-  transmission: 'Automatic',
-  year: 2020,
-  engineType: 'V6',
-  fuelType: 'Petrol',
-  bodyType: 'Sedan',
-  details: 'This is a detailed description of the car.',
-  features: ['Feature 1', 'Feature 2', 'Feature 3'],
-  carPhotos: ['/path/to/car-image-1.jpg', '/path/to/car-image-2.jpg', '/path/to/car-image-3.jpg'],
-};
+// Define a Mongoose schema for cars
+const carSchema = new mongoose.Schema({
+  carID: String,
+  make: String,
+  model: String,
+  suburb: String,
+  color: String,
+  price: Number,
+  odometer: Number,
+  transmission: String,
+  year: Number,
+  engineType: String,
+  fuelType: String,
+  bodyType: String,
+  carPhotos: [String],
+});
+
+const Car = mongoose.model('Car', carSchema);
 
 // Set up multer for handling file uploads
 const storage = multer.diskStorage({
@@ -51,21 +56,21 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now()}-${file.originalname}`); // Generate a unique filename
   },
 });
+
 const upload = multer({ storage: storage });
 
 // Serve the car data at the specified endpoint for CarInfoPage
-app.get('/api/cars/:carId', (req, res) => {
+app.get('/api/cars/:carId', async (req, res) => {
   const carId = req.params.carId;
-  const pageType = req.query.pageType;
-
-  // Check if the request is coming from the CarInfoPage
-  if (pageType === 'carInfoPage') {
-    // Find the car data based on the carId
-    // For now, we'll just send the sample carData
-    res.json(carData);
-  } else {
-    // Handle other cases or send an error response
-    res.status(404).json({ error: 'Invalid request' });
+  try {
+    const car = await Car.findById(carId);
+    if (!car) {
+      return res.status(404).json({ error: 'Car not found' });
+    }
+    res.json(car);
+  } catch (error) {
+    console.error('Error fetching car data:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
@@ -74,11 +79,9 @@ app.post('/cars/upload-car-details', upload.single('carPhotos'), (req, res) => {
   // Access the form data and the uploaded file
   const formData = req.body;
   const carPhotos = req.file;
-
   // Process the form data and save it to the database or perform other operations
   console.log('Form data:', formData);
   console.log('Car photos:', carPhotos);
-
   // Send a response
   res.json({ message: 'Car data uploaded successfully' });
 });

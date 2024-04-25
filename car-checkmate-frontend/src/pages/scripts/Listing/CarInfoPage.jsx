@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/CarInfoPage.css';
-import '../../styles/main.css';
-import '../../styles/content.css';
 import HeaderNav from '../../../components/scripts/HeaderNav';
 import HeaderSearch from '../../../components/scripts/HeaderSearch';
 import HeaderFilters from '../../../components/scripts/HeaderFilters';
@@ -31,7 +29,7 @@ export default function CarInfoPage() {
 
   const fetchCarData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/cars/${carId}?pageType=carInfoPage`);
+      const response = await axios.get(`http://localhost:3000/api/cars/${carId}`);
       setCarData(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -39,7 +37,7 @@ export default function CarInfoPage() {
       setIsLoading(false);
     }
   };
-
+  
   useEffect(() => {
     setIsLoading(true);
     fetchCarData();
@@ -118,7 +116,7 @@ export default function CarInfoPage() {
             </div>
             <div className="details-container">
               <div className="price-container">
-                <p>Price${carData.price}</p>
+                <p>Price ${carData.price}</p>
               </div>
               <div className="action-buttons">
                 <button>BUY THIS !</button>
