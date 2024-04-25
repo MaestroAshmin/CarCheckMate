@@ -1,20 +1,27 @@
-// src/components/FetchCarDetails/FetchCarDetails.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
+// Create the Axios instance with the base URL
+const axios = axios.create({
+  baseURL: 'http://localhost:3000/api',
+});
 
 const FetchCarDetails = () => {
   const [carID, setCarID] = useState('');
   const [carDetails, setCarDetails] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setCarID(e.target.value);
   };
 
   const fetchCarDetails = async () => {
+    setError(null); // Clear previous errors
     try {
-      const response = await axios.get(`http://localhost:3000/api/cars/${carID}`);
+      const response = await axios.get(`/cars/${carID}`);
       setCarDetails(response.data);
     } catch (error) {
+      setError('Error fetching car details');
       console.error('Error fetching car details:', error);
     }
   };
@@ -27,6 +34,7 @@ const FetchCarDetails = () => {
 
   return (
     <div>
+      {error && <p>{error}</p>}
       <input
         type="text"
         value={carID}

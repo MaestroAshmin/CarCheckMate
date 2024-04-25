@@ -2,6 +2,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+// Create the Axios instance with the base URL
+const axios = axios.create({
+  baseURL: 'http://localhost:3000/api',
+});
+
 const UploadCarDetails = () => {
   const [formData, setFormData] = useState({
     carID: '',
@@ -20,33 +25,43 @@ const UploadCarDetails = () => {
     bodyType: '',
     carPhotos: null,
   });
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: files ? files[0] : value,
+      [name]: files ? files : value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null); // Clear previous errors
+
     try {
       const formDataToSend = new FormData();
       for (const key in formData) {
-        formDataToSend.append(key, formData[key]);
+        if (key === 'carPhotos') {
+          // Append each file individually
+          for (const file of formData[key]) {
+            formDataToSend.append('carPhotos', file);
+          }
+        } else {
+          formDataToSend.append(key, formData[key]);
+        }
       }
-      await axios.post('http://localhost:3000/api/cars/upload-car-details', formDataToSend);
-      // Handle success
+      await axios.post('/cars/upload-car-details', formDataToSend);
       console.log('Car details uploaded successfully');
     } catch (error) {
-      // Handle error
+      setError('Error uploading car details');
       console.error('Error uploading car details:', error);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      {error && <p>{error}</p>}
       <input
         type="text"
         name="carID"
@@ -129,7 +144,7 @@ const UploadCarDetails = () => {
         name="engineType"
         value={formData.engineType}
         onChange={handleChange}
-        placeholder="CngineType"
+        placeholder="EngineType"
       />
       <input
         type="text"
