@@ -1,4 +1,3 @@
-// src/pages/scripts/Listing/CarInfoPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -10,27 +9,12 @@ export default function CarInfoPage() {
   const { carId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageOverlay, setShowImageOverlay] = useState(false);
-  const [carData, setCarData] = useState(null);
+  const [carData, setCarData] = useState({ carPhotos: [] });
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchCarData = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/cars/single-car-details', {
-        carID: 1,
-        make: 'Toyota',
-        model: 'Corolla',
-        suburb: 'Hawthorn',
-        postcode: 3011,
-        state: 'VIC',
-        color: 'Black',
-        price: 60000,
-        odometer: 120000,
-        transmission: 'Automatic',
-        year: 2010,
-        engineType: 'V6',
-        fuelType: 'Petrol',
-        bodyType: 'Sedan'
-      });
+      const response = await axios.get(`http://localhost:3000/cars/single-car-details/${carId}`);
       setCarData(response.data); // Assuming response.data is the correct format
       setIsLoading(false);
     } catch (error) {
@@ -44,17 +28,15 @@ export default function CarInfoPage() {
     fetchCarData();
   }, [carId]);
 
-  const carImages = carData?.carPhotos || [];
-
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? carImages.length - 1 : prevIndex - 1
+      prevIndex === 0 ? carData.carPhotos.length - 1 : prevIndex - 1
     );
   };
 
   const handleNextImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      (prevIndex + 1) % carImages.length
+      (prevIndex + 1) % carData.carPhotos.length
     );
   };
 
@@ -87,7 +69,7 @@ export default function CarInfoPage() {
             <div className="main-image-container">
               <img
                 className="main-image"
-                src={carImages[currentImageIndex]}
+                src={carData.carPhotos[currentImageIndex]}
                 alt={`${carData.make} ${carData.model}`}
                 onClick={handleImageClick}
               />
@@ -95,7 +77,7 @@ export default function CarInfoPage() {
                 <div className="image-overlay show" onClick={handleNextImage}>
                   <img
                     className="enlarged-image"
-                    src={carImages[currentImageIndex]}
+                    src={carData.carPhotos[currentImageIndex]}
                     alt={`${carData.make} ${carData.model}`}
                   />
                   <div className="image-controls">
@@ -110,7 +92,7 @@ export default function CarInfoPage() {
             </div>
             <div className="additional-images-container">
               <div className="photo-frame">
-                {carImages.map((image, index) => (
+                {carData.carPhotos.map((image, index) => (
                   <div
                     key={index}
                     className={`thumbnail ${
@@ -121,7 +103,7 @@ export default function CarInfoPage() {
                     <img src={image} alt={`Car Image ${index + 1}`} />
                   </div>
                 ))}
-                <div className="image-count">+{carImages.length - 1}</div>
+                <div className="image-count">+{carData.carPhotos.length - 1}</div>
               </div>
             </div>
             <div className="details-container">
@@ -130,43 +112,4 @@ export default function CarInfoPage() {
                 <p>${carData.price}</p>
               </div>
               <div className="action-buttons">
-                <button>BUY THIS</button>
-                <button>BOOK INSPECTION</button>
-                <button>BOOK MECHANIC</button>
-              </div>
-            </div>
-          </div>
-          <div className="details-section">
-            <div className="tab-content">
-              <div className="car-details">
-                <h2>Car Details</h2>
-                <p>{carData.details}</p>
-                <h3>Features</h3>
-                <ul>
-                  {carData.features && carData.features.map((feature, index) => (
-                    <li key={index}>{feature}</li>
-                  ))}
-                </ul>
-                <h3>Specifications</h3>
-                <ul>
-                  <li>Make: {carData.make}</li>
-                  <li>Model: {carData.model}</li>
-                  <li>Suburb: {carData.suburb}</li>
-                  <li>Color: {carData.color}</li>
-                  <li>Price: ${carData.price}</li>
-                  <li>Odometer: {carData.odometer}</li>
-                  <li>Transmission: {carData.transmission}</li>
-                  <li>Year: {carData.year}</li>
-                  <li>Engine Type: {carData.engineType}</li>
-                  <li>Fuel Type: {carData.fuelType}</li>
-                  <li>Body Type: {carData.bodyType}</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <Footer />
-        </>
-      )}
-    </div>
-  );
-}
+                <button>BUY
