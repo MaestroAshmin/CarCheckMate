@@ -1,3 +1,4 @@
+// src/pages/scripts/Listing/Listing.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Listing.css';

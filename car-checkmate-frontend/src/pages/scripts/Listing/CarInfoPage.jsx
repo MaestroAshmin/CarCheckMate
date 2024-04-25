@@ -10,12 +10,12 @@ export default function CarInfoPage() {
   const { carId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageOverlay, setShowImageOverlay] = useState(false);
-  const [carData, setCarData] = useState({});
+  const [carData, setCarData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchCarData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/cars/1`);
+      const response = await axios.get(`http://localhost:3000/api/cars/${carId}`);
       setCarData(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -29,7 +29,7 @@ export default function CarInfoPage() {
     fetchCarData();
   }, [carId]);
 
-  const carImages = carData.carPhotos ? carData.carPhotos.map((photo) => photo) : [];
+  const carImages = carData?.carPhotos || [];
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
