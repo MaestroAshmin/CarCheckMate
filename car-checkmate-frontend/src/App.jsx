@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/Homepage" element={<Homepage />} />
           {/* Car listing */}
-          <Route path="/carinfo/:carId" element={<CarInfoPage />} />
+          <Route path="/car/:carId" element={<CarInfoPage />} />
           <Route path="/carpost" element={<CarPostPage />} />
           <Route path="/CarAdPage" element={<CarAdPage />} />
           <Route path="/CarBuildPage" element={<CarBuildPage />} />
