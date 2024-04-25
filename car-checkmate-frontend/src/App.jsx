@@ -12,6 +12,7 @@ import CarLocationPage from './pages/scripts/CarLocationPage'
 import CarPricePage from './pages/scripts/CarPricePage';
 import CarInfoPage from './pages/scripts/Listing/CarInfoPage';
 import Mechanic from './pages/scripts/Mechanic';
+import InspectionReport from './pages/scripts/InspectionReport';
 
 import StyleTest from './pages/scripts/StyleTest';
 
@@ -38,6 +39,7 @@ function App() {
 
           {/** Login Page for each user */}
           <Route path="/Mechanic" element= {<Mechanic />} />
+          <Route path="/InspectionReport" element= {<InspectionReport />} />
 
           {/** This is for testing the styling of the existing page */}
           <Route path="/StyleTest" element= {<StyleTest />} />
