@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/scripts/LandingPage';
 import Homepage from './pages/scripts/Homepage';
