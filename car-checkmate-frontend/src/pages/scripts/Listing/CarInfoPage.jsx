@@ -134,7 +134,7 @@ export default function CarInfoPage() {
           <div className="details-section">
             <div className="tab-content">
               <div className="car-details">
-                <h2> Make{carData.make} Model{carData.model} Color{carData.year}</h2>
+                <h2> {carData.make} {carData.model} {carData.year}</h2>
                 {/* <p>{carData.details}</p>
                 <h3>Features</h3>
                 <ul>
@@ -144,12 +144,12 @@ export default function CarInfoPage() {
                 </ul>
                 <h3>Specifications</h3> */}
                 <ul>
-                  <li>Suburb {carData.suburb}</li>
-                  <li>Odometer {carData.odometer}</li>
-                  <li>Transmission {carData.transmission}</li>
-                  <li>Engine Type {carData.engineType}</li>
-                  <li>Fuel Type {carData.fuelType}</li>
-                  <li>Body Type {carData.bodyType}</li>
+                  <li>Suburb: {carData.suburb}</li>
+                  <li>Odometer: {carData.odometer}</li>
+                  <li>Transmission: {carData.transmission}</li>
+                  <li>Engine Type: {carData.engineType}</li>
+                  <li>Fuel Type: {carData.fuelType}</li>
+                  <li>Body Type: {carData.bodyType}</li>
                 </ul>
               </div>
             </div>
