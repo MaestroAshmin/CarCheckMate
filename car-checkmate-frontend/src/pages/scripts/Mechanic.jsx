@@ -4,9 +4,9 @@ import '../styles/content.css';
 import HeaderNav from '../../components/scripts/HeaderNav';
 import Footer from '../../components/scripts/footer';
 import UserNav from '../../components/scripts/UserNav';
-import MechanicReport from '../../components/scripts/MechanicReport';
+import MechanicContent from '../../components/scripts/MechanicContent';
 
-export default function StyleTest() {
+export default function Mechanic() {
    
     return (
         <div className='ctr-main'>
@@ -14,7 +14,7 @@ export default function StyleTest() {
                 <HeaderNav />
                 <div className='ctr-content-session'>
                     <UserNav />
-                    <MechanicReport />
+                    <MechanicContent />
                 </div>
             </div>
             <Footer />

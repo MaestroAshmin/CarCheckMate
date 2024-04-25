@@ -11,7 +11,6 @@ body {
     
 }*/
 
-
 /* Blur the below popup */
 .overlay {
     position: fixed;
@@ -414,11 +413,9 @@ span:hover {
     .popup-signup {
         width: 80%;
     }
-
     .popup-content-signup input {
         width: 100%;
     }
-
     .popup-content-signup button {
         width: 100%;
     }
