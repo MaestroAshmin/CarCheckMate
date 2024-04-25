@@ -2,6 +2,26 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const multer = require('multer');
+const mongoose = require('mongoose');
+
+// MongoDB connection string
+const mongoURI = 'mongodb://localhost:27017/carCheckMate';
+
+// Connect to MongoDB
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+// Check if the connection is successful
+mongoose.connection.on('connected', () => {
+  console.log('Connected to MongoDB');
+});
+
+// Check for connection errors
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
 
 // Sample car data
 const carData = {
