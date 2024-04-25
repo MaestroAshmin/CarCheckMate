@@ -1,9 +1,12 @@
-// car-checkmate-frontend/src/pages/scripts/Listing/CarInfoPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/CarInfoPage.css';
-import SearchBar from '../../../components/scripts/searchbar';
+import '../../styles/main.css';
+import '../../styles/content.css';
+import HeaderNav from '../../../components/scripts/HeaderNav';
+import HeaderSearch from '../../../components/scripts/HeaderSearch';
+import HeaderFilters from '../../../components/scripts/HeaderFilters';
 import Footer from '../../../components/scripts/footer';
 
 export default function CarInfoPage() {
@@ -64,21 +67,14 @@ export default function CarInfoPage() {
 
   return (
     <div className="container">
+      <HeaderNav />
+      <HeaderSearch />
+      <br />
+      <HeaderFilters />
       {isLoading ? (
         <div>Loading...</div>
       ) : (
         <>
-          <div className="nav-container">
-            <img className="logo" src="logo.png" alt="Logo" />
-            <div className="nav-links">
-              <Link to="/">Home</Link>
-              <Link to="/listing">Listing</Link>
-              <Link to="/carinfo">About</Link>
-            </div>
-          </div>
-          <div className="search-bar-container">
-            <SearchBar />
-          </div>
           <div className="inner-container">
             <div className="main-image-container">
               <img
@@ -135,14 +131,6 @@ export default function CarInfoPage() {
             <div className="tab-content">
               <div className="car-details">
                 <h2> {carData.make} {carData.model} {carData.year}</h2>
-                {/* <p>{carData.details}</p>
-                <h3>Features</h3>
-                <ul>
-                  {carData.features && carData.features.map((feature, index) => (
-                    <li key={index}>{feature}</li>
-                  ))}
-                </ul>
-                <h3>Specifications</h3> */}
                 <ul>
                   <li>Suburb: {carData.suburb}</li>
                   <li>Odometer: {carData.odometer}</li>

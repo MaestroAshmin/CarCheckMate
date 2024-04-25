@@ -22,7 +22,7 @@ function App() {
           <Route path="/Homepage" element={<Homepage />} />
           {/* Car listing */}
           <Route path="/car/:carId" element={<CarInfoPage />} />
-          <Route path="/carpost" element={<CarPostPage />} />
+          <Route path="/listing" element={<CarPostPage />} />
           <Route path="/CarAdPage" element={<CarAdPage />} />
           <Route path="/CarBuildPage" element={<CarBuildPage />} />
           <Route path="/CarLocationPage" element={<CarLocationPage />} />

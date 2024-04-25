@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../../styles/main.css';
+import '../../styles/content.css';
+import HeaderNav from '../../../components/scripts/HeaderNav';
+import HeaderSearch from '../../../components/scripts/HeaderSearch';
+import HeaderFilters from '../../../components/scripts/HeaderFilters';
+import Footer from '../../../components/scripts/footer';
 
 export default function CarPostPage() {
   const [formData, setFormData] = useState({
@@ -50,6 +56,11 @@ export default function CarPostPage() {
 
   return (
     <div>
+      <HeaderNav />
+      <HeaderSearch />
+      <br />
+      <HeaderFilters />
+      <div>
       <h2>List a Car for Sale</h2>
       {/* Add form fields for each property */}
       <input
@@ -66,6 +77,9 @@ export default function CarPostPage() {
         onChange={handleChange}
       />
       <button onClick={handlePostCarData}>List Car</button>
+      </div>
+      <br />
+      <Footer />
     </div>
   );
 }
