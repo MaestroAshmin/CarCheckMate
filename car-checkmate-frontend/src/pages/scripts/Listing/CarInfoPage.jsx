@@ -10,14 +10,26 @@ export default function CarInfoPage() {
   const { carId } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageOverlay, setShowImageOverlay] = useState(false);
-  const [carData, setCarData] = useState({ carPhotos: [] });
+  const [carData, setCarData] = useState({
+    carPhotos: [],
+    make: '',
+    model: '',
+    year: '',
+    suburb: '',
+    color: '',
+    price: '',
+    odometer: '',
+    transmission: '',
+    engineType: '',
+    fuelType: '',
+    bodyType: '',
+  });
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchCarData = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/api/cars/${carId}?pageType=carInfoPage`);
-      console.log('Car data:', response.data);
-      setCarData(response.data); // Assuming response.data is the correct format
+      setCarData(response.data);
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching car data:', error);

@@ -1,25 +1,46 @@
-// car-checkmate-frontend/src/pages/scripts/Listing/CarPostPage.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 export default function CarPostPage() {
+  const [formData, setFormData] = useState({
+    carID: '',
+    make: '',
+    model: '',
+    suburb: '',
+    postcode: '',
+    state: '',
+    color: '',
+    price: '',
+    odometer: '',
+    transmission: '',
+    year: '',
+    engineType: '',
+    fuelType: '',
+    bodyType: '',
+    carPhotos: null,
+  });
+
+  const handleChange = (e) => {
+    if (e.target.name === 'carPhotos') {
+      setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+  };
+
   const handlePostCarData = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/cars/upload-car-details', {
-        carID: 1,
-        make: 'Toyota',
-        model: 'Corolla',
-        suburb: 'Hawthorn',
-        postcode: 3011,
-        state: 'VIC',
-        color: 'Black',
-        price: 60000,
-        odometer: 120000,
-        transmission: 'Automatic',
-        year: 2010,
-        engineType: 'V6',
-        fuelType: 'Petrol',
-        bodyType: 'Sedan'
+      const formDataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value !== null) {
+          formDataToSend.append(key, value);
+        }
+      });
+
+      const response = await axios.post('http://localhost:3000/cars/upload-car-details', formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
       console.log('Car data posted:', response.data);
     } catch (error) {
@@ -30,6 +51,20 @@ export default function CarPostPage() {
   return (
     <div>
       <h2>List a Car for Sale</h2>
+      {/* Add form fields for each property */}
+      <input
+        type="text"
+        name="carID"
+        placeholder="Car ID"
+        value={formData.carID}
+        onChange={handleChange}
+      />
+      {/* Add more input fields for other properties */}
+      <input
+        type="file"
+        name="carPhotos"
+        onChange={handleChange}
+      />
       <button onClick={handlePostCarData}>List Car</button>
     </div>
   );
