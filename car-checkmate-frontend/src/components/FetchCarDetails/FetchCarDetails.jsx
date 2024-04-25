@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Create the Axios instance with the base URL
 const axios = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://localhost:10533/api',
 });
 
 const FetchCarDetails = () => {
@@ -18,7 +18,7 @@ const FetchCarDetails = () => {
   const fetchCarDetails = async () => {
     setError(null); // Clear previous errors
     try {
-      const response = await axios.get(`/cars/${carID}`);
+      const response = await axios.get(`/cars/single-car-details`);
       setCarDetails(response.data);
     } catch (error) {
       setError('Error fetching car details');

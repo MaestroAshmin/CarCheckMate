@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // Create the Axios instance with the base URL
 const axios = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://localhost:10533/api',
 });
 
 const UploadCarDetails = () => {

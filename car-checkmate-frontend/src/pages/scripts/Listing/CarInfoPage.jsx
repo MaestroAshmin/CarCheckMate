@@ -15,8 +15,23 @@ export default function CarInfoPage() {
 
   const fetchCarData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/cars/${carId}`);
-      setCarData(response.data);
+      const response = await axios.post('http://localhost:3000/cars/single-car-details', {
+        carID: 1,
+        make: 'Toyota',
+        model: 'Corolla',
+        suburb: 'Hawthorn',
+        postcode: 3011,
+        state: 'VIC',
+        color: 'Black',
+        price: 60000,
+        odometer: 120000,
+        transmission: 'Automatic',
+        year: 2010,
+        engineType: 'V6',
+        fuelType: 'Petrol',
+        bodyType: 'Sedan'
+      });
+      setCarData(response.data); // Assuming response.data is the correct format
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching car data:', error);
