@@ -92,3 +92,13 @@ margin-top: 25px;
     border-radius: 4px;
     
 }
+
+.mec-info{
+  display: flex;
+  flex-direction: column;
+}
+
+.div2{
+  display: flex;
+  gap: 10px;
+}
