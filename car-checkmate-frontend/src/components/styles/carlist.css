@@ -1,6 +1,4 @@
-/*
-    CarList.jsx styling
-*/
+/* CarList.jsx styling */
 
 .ctr-listing-page {
     margin: 50px;
@@ -54,9 +52,7 @@
     }
 }
 
-/*
-    Car Ad for each styling
-*/
+/* Car Ad for each styling */
 
 .ctr-car-ad {
     display: flex;

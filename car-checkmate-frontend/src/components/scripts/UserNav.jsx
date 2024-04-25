@@ -21,7 +21,7 @@ function UserNav() {
                 {activeItem !== 'mechanic' && <span className="lock-icon">🔒</span>}
                 <a href="#">Mechanic</a>
                 <span className="icon">
-                    <span className="subicon">13</span>
+                    <span className="subicon">3</span>
                 </span>
             </span>
        </div>

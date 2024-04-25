@@ -337,12 +337,14 @@ span:hover {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
 .popup-content-signup .ctr-register-info label {
     text-align: left;
     width: max-content;
     width: 30%;
     margin-bottom: 20px;
 }
+
 .popup-content-signup .ctr-register-info input {
     text-align: left;
     width: 100%;
@@ -353,33 +355,40 @@ span:hover {
     margin-top: 5px;
     margin-right: 10px;
 }
+
 .popup-content-signup .role-container {
     text-align: left;
 }
+
 .popup-content-signup .role-container label {
     width: 10%;
     float: left;
 }
+
 .popup-content-signup .role-container input {
     width: 20%;
     float: left;
     margin-right: 10px;
 }
+
 .popup-content-signup .role-container .role-radio input[type='radio'] {
     height: 20px;
     width: 20px;
     margin-top: 8px;
 }
+
 /* Color for radio button when selected */
 .popup-content-signup .role-container .role-radio input[type='radio']:checked + label {
     /* Set the desired color for the label */
     color: rgba(0, 195, 112, 1); /* Example color */
 }
+
 .popup-content-signup .button-container {
     display: flex;
     justify-content: center; /* Center horizontally */
     margin-top: 10px;
 }
+
 .popup-content-signup button {
     background-color: rgba(33,33,33,255);
     border: 1px solid #ccc;
@@ -392,11 +401,13 @@ span:hover {
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
 .popup-content-signup button:hover {
     background-color: rgba(217,202,179,255);
     color: rgba(33,33,33,255);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+
 /* Adjustments for responsiveness */
 /*@media (max-width: 768px) {
     .popup-signup {
