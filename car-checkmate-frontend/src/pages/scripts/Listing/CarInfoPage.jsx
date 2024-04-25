@@ -8,7 +8,7 @@ import HeaderFilters from '../../../components/scripts/HeaderFilters';
 import Footer from '../../../components/scripts/footer';
 
 export default function CarInfoPage() {
-  const { carId } = useParams();
+  const { _id } = useParams(); // Use _id instead of carId
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageOverlay, setShowImageOverlay] = useState(false);
   const [carData, setCarData] = useState({
@@ -29,7 +29,7 @@ export default function CarInfoPage() {
 
   const fetchCarData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/cars/${carId}`);
+      const response = await axios.get(`http://localhost:3000/api/cars/${_id}`); // Use _id instead of carId
       setCarData(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -37,11 +37,11 @@ export default function CarInfoPage() {
       setIsLoading(false);
     }
   };
-  
+
   useEffect(() => {
     setIsLoading(true);
     fetchCarData();
-  }, [carId]);
+  }, [_id]); // Use _id instead of carId
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
