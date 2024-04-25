@@ -1,3 +1,4 @@
+// CarInfoPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -112,4 +113,43 @@ export default function CarInfoPage() {
                 <p>${carData.price}</p>
               </div>
               <div className="action-buttons">
-                <button>BUY
+                <button>BUY THIS</button>
+                <button>BOOK INSPECTION</button>
+                <button>BOOK MECHANIC</button>
+              </div>
+            </div>
+          </div>
+          <div className="details-section">
+            <div className="tab-content">
+              <div className="car-details">
+                <h2>Car Details</h2>
+                <p>{carData.details}</p>
+                <h3>Features</h3>
+                <ul>
+                  {carData.features && carData.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+                <h3>Specifications</h3>
+                <ul>
+                  <li>Make: {carData.make}</li>
+                  <li>Model: {carData.model}</li>
+                  <li>Suburb: {carData.suburb}</li>
+                  <li>Color: {carData.color}</li>
+                  <li>Price: ${carData.price}</li>
+                  <li>Odometer: {carData.odometer}</li>
+                  <li>Transmission: {carData.transmission}</li>
+                  <li>Year: {carData.year}</li>
+                  <li>Engine Type: {carData.engineType}</li>
+                  <li>Fuel Type: {carData.fuelType}</li>
+                  <li>Body Type: {carData.bodyType}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <Footer />
+        </>
+      )}
+    </div>
+  );
+}
