@@ -163,7 +163,6 @@
     background-color: rgba(0, 195, 112, 1);
 }
 
-
 /* User Content Mechanic */
 
 .ctr-schedule {
@@ -234,6 +233,19 @@
     color: rgba(0, 195, 112, 1);
     cursor: pointer;
 }
+
+.ctr-schedule-option button a {
+    text-decoration: none;
+    color: rgba(33,33,33,255);   
+}
+
+.ctr-schedule-option button a:hover {
+    font-weight: bold;
+    transform: scale(1.00);
+    color: rgba(0, 195, 112, 1);
+    cursor: pointer;
+}
+
 
 .ctr-user-details {
     margin: 0px 0px 0px 50px;

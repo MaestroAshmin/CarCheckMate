@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Schedule() {
     // Example array of schedule data
@@ -39,7 +40,7 @@ function Schedule() {
                     </div>
                     <div className='ctr-schedule-option'>
                         <button>Email Buyer</button>
-                        <button>Create A Report</button>
+                        <button><Link to='/InspectionReport'>Create A Report</Link></button>
                         <button>Cancel booking</button>
                     </div>
                 </div>
