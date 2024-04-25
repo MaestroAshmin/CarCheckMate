@@ -14,7 +14,7 @@ import MechanicPage from './pages/scripts/MechanicPage';
 import Mechanic from './pages/scripts/Mechanic';
 import InspectionReport from './pages/scripts/InspectionReport';
 import StyleTest from './pages/scripts/StyleTest';
-
+import Homepage from './pages/scripts/Homepage';
 
 function App() {
   return (

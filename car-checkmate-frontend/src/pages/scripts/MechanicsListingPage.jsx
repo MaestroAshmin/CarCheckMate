@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/MechanicsListingPage.css';
 import Navbar from '../../components/scripts/navbar';
-import Footer from '../../components/scripts/footer';
 import CarData from './CarData.json';
 import { useNavigate } from 'react-router-dom';
-
+import Footer from '../../components/scripts/footer';
+import HeaderNav from '../../components/scripts/HeaderNav'
 export default function MechanicsListingPage() {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -77,7 +77,7 @@ export default function MechanicsListingPage() {
 
     return (
         <div className='mechanic-list-container'>
-            <Navbar />
+            <HeaderNav/>
             <div className='mechanic--data'>
                 <h2 className='hs'>Requested Inspections</h2>
                 <ul className='mechanics-list'>
