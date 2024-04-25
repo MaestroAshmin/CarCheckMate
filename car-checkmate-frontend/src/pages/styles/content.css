@@ -140,16 +140,12 @@
     font-weight: 525;
 }
 
-.ctr-user-content-right-report icon {
-
-}
-
 .ctr-user-content .ctr-user-button {
     width: 300px;
     height: 30px;
     float: right;
     margin-right: 50px;
-    margin-bottom: 30px;;
+    margin-bottom: 30px;
     border-radius: 10px;
     border: 1px solid #ecb159; 
     background-color: #ecb159;
@@ -266,6 +262,238 @@
 }
 
 .ctr-user-details button:hover {
+    font-weight: bold;
+    transform: scale(1.00); /* Grow the button a bit on hover */
+    color: #FFFFFF;
+    cursor: pointer;
+    background-color: rgba(0, 195, 112, 1);
+}
+
+/* User Content Mechanic Report */
+.ctr-user-content h4 {
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.ctr-user-content label {
+    display: inline-block; 
+    margin-right: 20px; 
+}
+
+/*.ctr-user-content input[type="text"],
+.ctr-user-content input[type="radio"],
+.ctr-user-content textarea {
+    display: block;
+    margin-top: 10px;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.ctr-user-content h4 {
+    display: flex;
+    margin-right: 50px;
+    padding: 0;
+}*/
+
+.ctr-user-content form {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.ctr-user-content label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ctr-report {
+    display: flex; 
+    margin-left: 70px;
+    margin-bottom: 30px;;
+}
+
+fieldset {
+    padding: 20px;
+    width: 900px;
+}
+
+legend {
+    font-weight: bold;
+    font-size: large;
+}
+
+.ctr-user-content input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.ctr-user-content .ctr-report .input-box {
+    display: flex;
+}
+
+.ctr-user-content .ctr-report .input-box input {
+    width: 200px;
+    margin-top: 5px;
+    height: 20px;
+}
+
+.sub-topic-report {
+    float: left;
+    margin-right: 50px;
+    margin-top: 10px;
+    clear: both;
+}
+
+.ctr-user-content .role-container {
+    margin-top: 7px;
+    display: flex;
+}
+
+.ctr-user-content .role-container label {
+    width: max-content;
+}
+
+.ctr-user-content .role-container input {
+    width: 20%;
+    float: left;
+    margin-right: 10px;
+}
+
+.ctr-user-content .role-container .role-radio input[type='radio'] {
+    height: 20px;
+    width: 20px;
+    margin-top: 8px;
+}
+
+/* Color for radio button when selected */
+.ctr-user-content .role-container .role-radio input[type='radio']:checked + label {
+    /* Set the desired color for the label */
+    color: rgba(0, 195, 112, 1); /* Example color */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ctr-user-content textarea {
+    width: 700px;
+    height: 200px;
+    margin-top: 10px;
+}
+
+.btn-mechanic-submit-report {
+    width: 150px;
+    height: 30px;
+    margin: 0 auto 30px auto; /* Center horizontally and add bottom margin */
+    border-radius: 10px;
+    border: 1px solid #ecb159;
+    background-color: #ecb159;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease; /* Smooth transition */
+    text-align: center;
+    color: rgba(33, 33, 33, 255);
+    display: block; /* Ensure the button is displayed as a block element */
+}
+
+.btn-mechanic-submit-report:hover {
     font-weight: bold;
     transform: scale(1.00); /* Grow the button a bit on hover */
     color: #FFFFFF;
