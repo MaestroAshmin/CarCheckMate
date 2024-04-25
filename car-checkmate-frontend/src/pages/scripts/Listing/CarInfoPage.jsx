@@ -29,7 +29,7 @@ export default function CarInfoPage() {
 
   const fetchCarData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/cars/${_id}`); // Use _id instead of carId
+      const response = await axios.get(`http://localhost:3000/api/cars/${_id.toString()}`);
       setCarData(response.data);
       setIsLoading(false);
     } catch (error) {
