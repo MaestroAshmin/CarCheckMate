@@ -1,4 +1,4 @@
-// CarInfoPage.jsx
+// car-checkmate-frontend/src/pages/scripts/Listing/CarInfoPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -15,7 +15,7 @@ export default function CarInfoPage() {
 
   const fetchCarData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/cars/single-car-details/${carId}`);
+      const response = await axios.get(`http://localhost:3000/api/cars/${carId}?pageType=carInfoPage`);
       console.log('Car data:', response.data);
       setCarData(response.data); // Assuming response.data is the correct format
       setIsLoading(false);

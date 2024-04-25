@@ -1,3 +1,4 @@
+// car-checkmate-frontend/server.js
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -29,11 +30,11 @@ const carData = {
   ]
 };
 
-// Serve the car data at the specified endpoint
+// Serve the car data at the specified endpoint for CarInfoPage
 app.get('/api/cars/:carId', (req, res) => {
   const carId = req.params.carId;
-  // You can add logic here to fetch the car data based on the carId
-  // For now, we're just returning the sample car data
+  // Fetch the car data from the database based on the carId
+  // For now, we'll just send the sample carData
   res.json(carData);
 });
 
