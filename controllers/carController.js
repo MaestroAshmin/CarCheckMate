@@ -1,4 +1,4 @@
-// const multer = require('multer');
+const multer = require('multer'); // Import multer
 const path = require("path");
 const fs = require("fs");
 const Car = require("../models/Car");
@@ -16,6 +16,12 @@ const ensureDirectoryExists = (directory) => {
     fs.mkdirSync(directoryPath, { recursive: true }); // recursive option creates parent directories if they don't exist
   }
 };
+
+// Helper function to convert comma-separated string to array
+const convertCarPhotosStringToArray = (carPhotosString) => {
+  return carPhotosString.split(',').filter((photo) => photo.trim() !== '');
+};
+
 // Controller method to upload car data
 const uploadCarData = async (req, res) => {
   try {
@@ -35,7 +41,6 @@ const uploadCarData = async (req, res) => {
     // Retrieve the array of car photos from req.files
     const uploadedPhotos = req.files.carPhotos;
 
-    // const uploadedPhotos = req.files || [];
     if (uploadedPhotos.length < 8 || uploadedPhotos.length > 20) {
       return res
         .status(400)
@@ -57,34 +62,34 @@ const uploadCarData = async (req, res) => {
       return filePath; // Return the file path or any other necessary data
     });
 
-        // Convert carPhotos array to a comma-separated string
-        const carPhotosString = carPhotos.join(',');
-        // Extract other car data from the request body
-        const { make, model, streetName, suburb, postcode, state, color, price, odometer, transmission, year, engineType, fuelType, bodyType } = req.body;
+    // Convert carPhotos array to a comma-separated string
+    const carPhotosString = carPhotos.join(',');
+    // Extract other car data from the request body
+    const { make, model, streetName, suburb, postcode, state, color, price, odometer, transmission, year, engineType, fuelType, bodyType } = req.body;
 
     // Create title based on make, model, and year
     const title = `${year} ${make} ${model}`;
 
-        // Create a new car instance
-        const newCar = new Car({
-            seller_id: userId,
-            title,
-            make,
-            model,
-            streetName,
-            suburb,
-            postcode,
-            state,
-            color,
-            price,
-            odometer,
-            transmission,
-            year,
-            engineType,
-            fuelType,
-            bodyType,
-            carPhotos: carPhotosString, // Save file path as a comma separated string
-        });
+    // Create a new car instance
+    const newCar = new Car({
+      seller_id: userId,
+      title,
+      make,
+      model,
+      streetName,
+      suburb,
+      postcode,
+      state,
+      color,
+      price,
+      odometer,
+      transmission,
+      year,
+      engineType,
+      fuelType,
+      bodyType,
+      carPhotos: carPhotosString, // Save file path as a comma separated string
+    });
 
     // Save the car to the database
     await newCar.save();
@@ -115,20 +120,21 @@ const getUnsoldCars = async (req, res) => {
 
 const getCarById = async (req, res) => {
   try {
-    const carId = req.params.carId;
-    // Retrieve the car details from the database based on the carId
-    const car = await Car.findById(carId);
+    const id = req.params.id; // Update parameter name to match the route
+    const car = await Car.findById(id);
 
-    // Check if the car exists
     if (!car) {
       return res.status(404).json({ error: "Car not found" });
     }
 
-    // If the car exists, send its details in the response
+    // Convert carPhotos string to an array
+    car.carPhotos = convertCarPhotosStringToArray(car.carPhotos);
+
     res.status(200).json(car);
   } catch (error) {
     console.error("Error fetching car details:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 module.exports = { uploadCarData, getUnsoldCars, getCarById };
