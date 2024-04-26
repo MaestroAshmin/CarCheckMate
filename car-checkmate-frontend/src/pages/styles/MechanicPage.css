@@ -1,0 +1,272 @@
+.para{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 12px;
+    text-align: center;
+    color: #3c4043;
+}
+.hpara{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: #3c4043;
+  text-align: center;
+}
+
+.Mec-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+}
+
+.mec-details{
+   
+    padding: 20px;
+    border-top: 1px solid #a7a0a0; /* Border only on the top */
+    border-bottom: 1px solid #a7a0a0; /* Border only on the bottom */
+    border-radius: 15px;
+}
+
+.datepicker{
+    width: 110%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 14px;
+    color: #333;
+}
+
+.date-container{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+
+
+
+/* CSS */
+.button-81 {
+margin-top: 25px;
+margin-bottom: 50px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-81:hover {
+  background-color: #fff;
+  color: #06a077;
+}
+
+@media (min-width: 768px) {
+  .button-81 {
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+  }
+}
+
+.comment-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    gap: 5px;
+}
+
+.comment-input{
+    width: 250px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+}
+
+.mec-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.div2{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.images--car{
+  width: 100%;
+  height: 100%;
+}
+
+.side-picks{
+  width: 100px;
+  height: 70px;
+  border-radius: 5px;
+}
+
+.main-pick{
+  width: 500px;
+  height: 300px;
+  border-radius: 15px;
+}
+
+.pic-container{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidepic-container{
+  display: flex;
+  flex-direction: column;
+  gap:5px;
+  
+}
+
+
+
+/* CSS */
+.button-17 {
+  align-items: center;
+  appearance: none;
+  background-color: #fff;
+
+  border-style: none;
+  border-right: 2px solid #e7e7e7;
+  box-sizing: border-box;
+  color: #3c4043;
+  cursor: pointer;
+  display: inline-flex;
+  fill: currentcolor;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: .25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  padding: 2px 24px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  will-change: transform,opacity;
+  z-index: 0;
+}
+
+.button-17:hover {
+  color: #145035;
+}
+
+.button-17:active {
+  
+  outline: none;
+}
+
+.button-17:focus {
+  outline: none;
+}
+
+.button-17x {
+  align-items: center;
+  appearance: none;
+  background-color: #fff;
+
+  border-style: none;
+
+  box-sizing: border-box;
+  color: #3c4043;
+  cursor: pointer;
+  display: inline-flex;
+  fill: currentcolor;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: .25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  padding: 2px 24px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  will-change: transform,opacity;
+  z-index: 0;
+}
+
+.button-17x:hover {
+  color: #145035;
+}
+
+.button-17x:active {
+  
+  outline: none;
+}
+
+.button-17x:focus {
+  outline: none;
+}
+
+
+.car-detailz{
+  display:flex ;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.renderDetails{
+  width: 400px;
+  height: 150px;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+}
+
+
+.bMechanic-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

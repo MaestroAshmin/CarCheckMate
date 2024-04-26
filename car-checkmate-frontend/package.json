@@ -15,6 +15,8 @@
     "express": "^4.19.2",
     "mongoose": "^8.3.2",
     "react": "^18.2.0",
+    "react-clock": "^4.6.0",
+    "react-datepicker": "^6.9.0",
     "react-dom": "^18.2.0",
     "react-drag-drop-files": "^2.3.10",
     "react-dropzone": "^14.2.3",
@@ -23,6 +25,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
     "react-slick": "^0.30.2",
+    "react-time-picker": "^6.6.0",
     "slick-carousel": "^1.8.1",
     "stylis": "^4.3.2",
     "web-vitals": "^2.1.4"
