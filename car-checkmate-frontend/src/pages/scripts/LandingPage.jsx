@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/main.css';
 import ForgotPasswordPopup from '../../components/scripts/ForgotPasswordPopup';
 import SignInPopup from '../../components/scripts/SignInPopup';
 import SignUpPopup from '../../components/scripts/SignUpPopup';
 
 export default function StyleTest() {
-
+    
+    const navigate = useNavigate(); // Access navigate hook
+    
     const [showForgotPassPopup, setShowForgotPassPopup] = useState(false);
     const [showSignInPopup, setShowSignInPopup] = useState(false);
     const [showSignUpPopup, setShowSignUpPopup] = useState(false);
+    
+    useEffect(() => {
+        // Check if user is already logged in using localStorage
+        const userData = localStorage.getItem('user');
+
+        if (userData) {
+            navigate('/Homepage'); // Redirect to homepage if user is already logged in
+        }
+    }, [navigate]); // Ensure useEffect runs when history prop changes
 
     const openForgotPassPopup = () => {
         setShowSignInPopup(false); // Close sign in popup

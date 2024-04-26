@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const carSchema = new mongoose.Schema({
     seller_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Reference to the User schema
     title: { type: String, required: true },
+    registrationNo: { type: String, required: true},
     make: { type: String, required: true },
     model: { type: String, required: true },
     streetName: { type: String, required: true },

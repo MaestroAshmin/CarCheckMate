@@ -180,7 +180,7 @@ export default function CarAdPage({ formData, setFormData }) {
                 isSearchable={isSearchable}
                 name="color"
                 options={bodyType}
-                onChange={handleEngineTypeChange}
+                onChange={handleBodyTypeChange}
             />
             </div>
             </div>

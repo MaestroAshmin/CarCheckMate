@@ -1,4 +1,5 @@
 function requireLogin(req, res, next) {
+    console.log(req.session);
     if (req.session.user && req.session.user._id) {
         // User is logged in
         next();

@@ -8,6 +8,8 @@ import SignUpPopup from '../../components/scripts/SignUpPopup';
 
 export default function HeaderNav() {
 
+    // Check if user data exists in localStorage
+    const userData = localStorage.getItem('user');
     const [showForgotPassPopup, setShowForgotPassPopup] = useState(false);
     const [showSignInPopup, setShowSignInPopup] = useState(false);
     const [showSignUpPopup, setShowSignUpPopup] = useState(false);
@@ -30,6 +32,30 @@ export default function HeaderNav() {
         setShowSignUpPopup(true); // Open sign up popup
     };
 
+    const handleLogout = async () => {
+        try {
+            // Call the logout API
+            const response = await fetch('http://localhost:3000/user/logout', {
+                method: 'POST',
+                credentials: 'include', // Include cookies in the request
+            });
+    
+            // Check if the request was successful
+            console.log(response);
+            if (response.ok) {
+                // Clear user data from localStorage
+                localStorage.removeItem('user');
+                // Reload the page
+                window.location.reload();
+            } else {
+                // Handle error response
+                console.error('Logout failed:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors
+            console.error('Network error:', error.message);
+        }
+    };
     return (
         <div className='ctr-main-header'>
 
@@ -59,11 +85,18 @@ export default function HeaderNav() {
             </div>
             <div className='ctr-main-header-nav'>
                 <NavLink to="/ListingPage" activeClassName="active">Buy</NavLink>
-                <NavLink to="/listing" activeClassName="active">Sell</NavLink>
+                <NavLink to="/CarAdPage" activeClassName="active">Sell</NavLink>
                 <NavLink to="/carinfo" activeClassName="active">About Us</NavLink>
             </div>
             <div className='ctr-main-header-login'>
-                <button onClick={openSignInPopup}>Login</button>
+            {userData ? (
+                    <button onClick={handleLogout}>Logout</button>
+                ) : (
+                    <div>
+                        <button onClick={openSignInPopup}>Login</button>
+                        <button onClick={openSignUpPopup}>Register</button>
+                    </div>
+                )}
             </div>
         </div>
     );

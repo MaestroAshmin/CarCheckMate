@@ -3,6 +3,7 @@ import Select from 'react-select';
 import '../styles/CarPricePage.css'
 
 export default function CarPricePage({ formData, setFormData }) {
+
     return(
         <div>
                 <div className='price-input-box'>
@@ -15,7 +16,7 @@ export default function CarPricePage({ formData, setFormData }) {
                         value={formData.price}
                         onChange={(e) => {
                             setFormData({ ...formData, price: e.target.value });
-                          }}       
+                        }}
                     />
                 </div>
  
