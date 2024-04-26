@@ -143,15 +143,12 @@ export default function MechanicPage() {
     };
 
     const handleConfirmBooking = () => {
-        // console.log(
-        //     car.id,
-        //     car.name,
-        //     car.DriversLicenseNumber,
-        //     car.DateofCommencement,
-        //     car.PhoneNumber,
-        //     selectedDate,
-        //     comment
-        // );
+        console.log(
+            car.id,
+            car.make,
+            car.model,
+            selectedDate
+        );
     };
 
     return (
