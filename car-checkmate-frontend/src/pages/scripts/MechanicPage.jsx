@@ -7,6 +7,7 @@ import '../styles/MechanicPage.css';
 import Navbar from '../../components/scripts/navbar';
 import Footer from '../../components/scripts/footer';
 import HeaderNav from '../../components/scripts/HeaderNav'
+
 export default function MechanicPage() {
     const [data, setData] = useState([]);
     const { itemId } = useParams();
