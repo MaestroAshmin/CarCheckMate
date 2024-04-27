@@ -59,8 +59,8 @@ export default function HeaderNav() {
             </div>
             <div className='ctr-main-header-nav'>
                 <NavLink to="/ListingPage" activeClassName="active">Buy</NavLink>
-                <NavLink to="/listing" activeClassName="active">Sell</NavLink>
-                <NavLink to="/carinfo" activeClassName="active">About Us</NavLink>
+                <NavLink to="/Selling" activeClassName="active">Sell</NavLink>
+                <NavLink to="/AboutUs" activeClassName="active">About Us</NavLink>
             </div>
             <div className='ctr-main-header-login'>
                 <button onClick={openSignInPopup}>Login</button>
