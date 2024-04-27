@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import Schedule from './Schedule';
-import UserDetails from './UserDetails';
+import MechanicSchedule from './MechanicSchedule';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import AvailableRequestsPopup from './AvailableRequestsPopup';
 
 function UserContentMechanic() {
     const [reports, setReports] = useState([
@@ -30,12 +30,24 @@ function UserContentMechanic() {
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+    const [showAvailableRequestsPopup, setShowAvailableRequestsPopup] = useState(false);
+
+    const openAvailableRequestsPopup = () => {
+        setShowAvailableRequestsPopup(true);
+    };
+
     return (
         <div className='ctr-user-content'>
+
+            <AvailableRequestsPopup
+                showAvailableRequestsPopup={showAvailableRequestsPopup}
+                setShowAvailableRequestsPopup={setShowAvailableRequestsPopup}
+            />
+
             <div className='ctr-user-content-left'>
                 <h3>Upcoming Schedule</h3>
-                <button className='ctr-user-button'>View Available Inspection Requests</button>
-                <Schedule />
+                <button className='ctr-user-button' onClick={openAvailableRequestsPopup}>View Available Inspection Requests</button>
+                <MechanicSchedule />
             </div>
             <div className='ctr-user-content-right'>
                 <h3>View Reports History</h3>

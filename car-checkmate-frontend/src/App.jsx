@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/scripts/LandingPage';
 import Homepage from './pages/scripts/Homepage';
+import AboutUs from './pages/scripts/AboutUs';
 import CarAdPage from './pages/scripts/CarAdPage';
 import CarBuildPage from './pages/scripts/CarBuildPage';
 import CarFeaturePage from './pages/scripts/CarFeaturePage';
@@ -16,6 +17,10 @@ import MechanicsListingPage from './pages/scripts/MechanicsListingPage';
 import MechanicPage from './pages/scripts/MechanicPage';
 import Mechanic from './pages/scripts/Mechanic';
 import InspectionReport from './pages/scripts/InspectionReport';
+import Seller from './pages/scripts/Seller';
+import Selling from './pages/scripts/Selling';
+import Buyer from './pages/scripts/Buyer';
+import UserProfile from './pages/scripts/UserProfile';
 import StyleTest from './pages/scripts/StyleTest';
 
 function App() {
@@ -25,16 +30,19 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/Homepage" element={<Homepage />} />
+          <Route path="/AboutUs" element={<AboutUs />} />
+          <Route path="/Selling" element={<Selling />} />
 
-          {/* Car listing */}
+
+          {/* Car listing */}   
           <Route path="/car/:_id" element={<CarInfoPage />} />
           {/* <Route path="/listing" element={<CarPostPage />} /> */}
-          //<Route path="/CarAdPage" element={<CarAdPage />} />
+          {/*}<Route path="/CarAdPage" element={<CarAdPage />} />
           //<Route path="/CarBuildPage" element={<CarBuildPage />} />
           //<Route path="/CarLocationPage" element={<CarLocationPage />} />
           //<Route path="/CarPhotoPage" element={<CarPhotoPage />} />
           //<Route path="/CarFeaturePage" element={<CarFeaturePage />} />
-          //<Route path="/CarPricePage" element={<CarPricePage />} />
+          //<Route path="/CarPricePage" element={<CarPricePage />} />*/}
 
           <Route path="/CarInfoPage" element={<CarInfoPage />} />
           {/* <Route path="/SignUpPage" element= {<SignUpPage/>} />
@@ -51,16 +59,16 @@ function App() {
           <Route path="/SellerMechanicsListingPage" element={<SellerMechanicsListingPage/>}/> 
           <Route path="/MechanicsListingPage" element={<MechanicsListingPage/>}/> 
           <Route path="/MechanicPage/:itemId" element={<MechanicPage/>}/> 
-          //<Route path="/CarBuildPage" element={<CarBuildPage />}/>
-          //<Route path="/CarLocationPage" element={<CarLocationPage />}/>
-          //<Route path="/CarPhotoPage" element={<CarPhotoPage />}/>
-          //<Route path="/CarFeaturePage" element={<CarFeaturePage />}/>
-          //<Route path="/CarPricePage" element={<CarPricePage />}/>
             
           {/** Login Page for each user */}
           <Route path="/Mechanic" element= {<Mechanic />} />
           <Route path="/InspectionReport" element= {<InspectionReport />} />
+          <Route path="/Seller" element= {<Seller />} />
+          <Route path="/Buyer" element= {<Buyer />} />
+          <Route path="/UserProfile" element= {<UserProfile />} />
+
           {/** This is for testing the styling of the existing page */}
+          <Route path="/StyleTest" element= {<StyleTest />} />
         </Routes>
       </Router>
     </div>

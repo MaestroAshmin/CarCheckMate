@@ -282,6 +282,18 @@ span:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.new-line-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .popup-link-align-right {
     text-align: right;
     margin-bottom: -40px;
@@ -360,6 +372,10 @@ span:hover {
     text-align: left;
 }
 
+.popup-content-signup .role-container fieldset {
+    width: 755px;
+}
+
 .popup-content-signup .role-container label {
     width: 10%;
     float: left;
@@ -406,6 +422,54 @@ span:hover {
     background-color: rgba(217,202,179,255);
     color: rgba(33,33,33,255);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup-request-inspection {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    width: 785px;
+    border-radius: 10px;
+}
+
+.popup-content-inspection {
+    margin: 0px;
+    text-align: left;
+}
+
+.popup-content-inspection button {
+    background-color: rgba(33,33,33,255);
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 45%; /* Match the width of .btn-signup */
+    height: 40px; /* Match the height of .btn-signup */
+    border-radius: 20px; /* Match the border radius of .btn-signup */
+    color: rgba(217,202,179,255);
+    text-transform: uppercase;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.popup-content-inspection button:hover {
+    background-color: #FFFFFF;
+    color: rgba(33,33,33,255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup-content-inspection .ctr-schedule {
+    height: 120px;
+}
+
+.popup-content-inspection .ctr-schedule .ctr-schedule-request {
+    width: 60%;
+    float: left;
+    position: relative;
 }
 
 /* Adjustments for responsiveness */
