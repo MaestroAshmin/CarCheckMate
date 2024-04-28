@@ -6,8 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/MechanicPage.css';
 import Navbar from '../../components/scripts/navbar';
 import Footer from '../../components/scripts/footer';
-
-
+import HeaderNav from '../../components/scripts/HeaderNav'
 
 export default function MechanicPage() {
     const [data, setData] = useState([]);
@@ -17,6 +16,119 @@ export default function MechanicPage() {
     const [car, setCar] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
     const [comment, setComment] = useState("");
+
+
+    const images = ['/dumy1.jpg','/dumy2.png','/dumy3.png','/dumy4.png','/dumy5.png']
+
+    const carImages= () => {
+        return(
+            <div className='pic-container'>
+                <div>
+                    <img src={images[0]} className='main-pick'/>
+                </div>
+                <div className='sidepic-container'>
+                    <img src={images[1]} className='side-picks'/>
+                    <img src={images[2]} className='side-picks'/>
+                    <img src={images[3]} className='side-picks'/>
+                    <img src={images[4]} className='side-picks'/>
+                    
+                </div>
+            </div>
+        )
+    }
+
+    const [selectedOption, setSelectedOption] = useState("build");
+
+    const handleBuild = () => {
+        setSelectedOption("build");
+    };
+
+    const handleAddress = () => {
+        setSelectedOption("address");
+    };
+
+    const handleFeature = () => {
+        setSelectedOption("features");
+    };
+
+    const handlePrice = () => {
+        setSelectedOption("price");
+    };
+    const renderDetails = () => {
+        if (selectedOption === "build") {
+            return (
+                <div className='mec-info'>
+                    <p className='para'><strong>Car ID: </strong>{car.id}</p>
+                    <p className='para'><strong>Make: </strong>{car.make}</p>
+                    <p className='para'><strong>Model:</strong> {car.model}</p>
+                    <p className='para'><strong>Year:</strong> {car.year}</p>
+                </div>
+            );
+        } else if (selectedOption === "address") {
+            return (
+                <div className='mec-info'>
+
+                        <p className='para'><strong>Street:</strong> {car.street}</p>
+                        <p className='para'><strong>Suburb:</strong> {car.suburb}</p>
+
+                        <p className='para'><strong>Postcode:</strong> {car.postcode}</p>
+                        <p className='para'><strong>State:</strong> {car.state}</p>
+
+                </div>
+            );
+        } else if (selectedOption === "features") {
+            return (
+                <div className='mec-info'>
+      
+                    <div className='div2'>
+                        <p className='para'><strong>Color:</strong> {car.color}</p>
+                        <p className='para'><strong>Odometer:</strong> {car.odometer}</p>
+                    </div>
+                    <div className='div2'>
+                        <p className='para'><strong>Transmission:</strong> {car.transmission}</p>
+                        <p className='para'><strong>Body type:</strong> {car.body_type}</p>
+                    </div>
+                    <div className='div2'>
+                        <p className='para'><strong>Engine type:</strong> {car.engine_type}</p>
+                        <p className='para'><strong>Fuel type:</strong> {car.fuel_type}</p>
+                    </div>
+  
+                </div>
+            );
+        }
+
+        else if (selectedOption === "price") {
+            return(
+                <div className='div2'>
+              
+                <p className='para'><strong>Price:</strong> {car.price}</p>
+            </div>
+            )
+        }
+    };
+
+    const carDetails = () => {
+        return (
+            <div className='car-detailz'>
+                {car ? (
+                    <div>
+                    <div>
+                        <button onClick={handleBuild}  class="button-17" role="button">Build</button>
+                        <button onClick={handleAddress }class="button-17" role="button">Address</button>
+                        <button onClick={handleFeature}class="button-17" role="button">Features</button>
+                        <button onClick={handlePrice}class="button-17x" role="button">Price</button>
+                    </div>
+                    <div className='renderDetails'>
+                    {renderDetails()}
+                    </div>
+                    </div>
+                ) : (
+                    <p>No car found with the specified ID.</p>
+                )}
+            </div>
+        );
+    };
+    
 
     useEffect(() => {
         setData(CarData); // Add status field to each item
@@ -32,63 +144,23 @@ export default function MechanicPage() {
     };
 
     const handleConfirmBooking = () => {
-        // console.log(
-        //     car.id,
-        //     car.name,
-        //     car.DriversLicenseNumber,
-        //     car.DateofCommencement,
-        //     car.PhoneNumber,
-        //     selectedDate,
-        //     comment
-        // );
+        console.log(
+            car.id,
+            car.make,
+            car.model,
+            selectedDate
+        );
     };
 
     return (
-        <div className='Mec-container'>
-            <Navbar />
-            <h2>Car Details</h2>
-            <div className="mec-details">
-                {car ? (
-                    <div className='mec-info'>
-                        <p className='para'><strong>Car ID: </strong>{car.id}</p>
-
-                        <div className='div2'>
-                            <p className='para'><strong>Make: </strong>{car.make}</p>
-                            <p className='para'><strong>Model:</strong> {car.model}</p>
-                        </div>
-                        <h4>Address: </h4>
-                        <div className='div2'>
-                            <p className='para'><strong>Street:</strong> {car.street}</p>
-                            <p className='para'><strong>Suburb:</strong> {car.suburb}</p>
-                        </div>
-                        <div className='div2'>
-                            <p className='para'><strong>Postcode:</strong> {car.postcode}</p>
-                            <p className='para'><strong>State:</strong> {car.state}</p>
-                        </div>
-                        <h4>Features: </h4>
-                        <div className='div2'>
-                            <p className='para'><strong>Color:</strong> {car.color}</p>
-                            <p className='para'><strong>Odometer:</strong> {car.odometer}</p>
-                        </div>
-                        <div className='div2'>
-                            <p className='para'><strong>Transmission:</strong> {car.transmission}</p>
-                            <p className='para'><strong>Year:</strong> {car.year}</p>
-                        </div>
-                        <div className='div2'>
-                            <p className='para'><strong>Engine type:</strong> {car.engine_type}</p>
-                            <p className='para'><strong>Fuel type:</strong> {car.fuel_type}</p>
-                        </div>
-                        <div className='div2'>
-                            <p className='para'><strong>Body type:</strong> {car.body_type}</p>
-                            <p className='para'><strong>Price:</strong> {car.price}</p>
-                        </div>
-                    </div>
-                ) : (
-                    <p>No car found with the specified ID.</p>
-                )}
-            </div>
+        <div className='bMechanic-container'>
+            <HeaderNav/>
+          
+            {carImages()}
+            <h2 className='hpara'>Car Details</h2>
+            {carDetails()}
             <div className='date-container'>
-                <h3>Select Date and Time</h3>
+                <h3 className='hpara'>Select Date and Time For Inspection</h3>
                 <DatePicker
                     selected={selectedDate}
                     onChange={handleDateChange}

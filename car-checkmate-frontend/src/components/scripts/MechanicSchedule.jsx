@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import EmailBuyerPopup from './EmailBuyerPopup';
+import CancelPopup from './CancelPopup';
 
-function Schedule() {
-    // Example array of schedule data
+function MechanicSchedule() {
     const schedules = [
         {
             carId: 'C1254',
@@ -25,11 +26,31 @@ function Schedule() {
             time: '10:30 am',
             location: '1 John St, Hawthorn'
         },
-        // Add more schedule objects as needed
     ];
+
+    const [showEmailBuyerPopup, setShowEmailBuyerPopup] = useState(false);
+    const [showCancelPopup, setShowCancelPopup] = useState(false);
+
+    const openEmailBuyerPopup = () => {
+        setShowEmailBuyerPopup(true);
+    };
+
+    const openCancelPopup = () => {
+        setShowCancelPopup(true);
+    };
 
     return (
         <div>
+            <EmailBuyerPopup
+                showEmailBuyerPopup={showEmailBuyerPopup}
+                setShowEmailBuyerPopup={setShowEmailBuyerPopup}
+            />
+
+            <CancelPopup
+                showCancelPopup={showCancelPopup}
+                setShowCancelPopup={setShowCancelPopup}
+            />
+
             {schedules.map((schedule, index) => (
                 <div key={index} className='ctr-schedule'>
                     <div className='ctr-schedule-buyer-detail'>
@@ -39,9 +60,9 @@ function Schedule() {
                         <p>Location: <span>{schedule.location}</span></p>
                     </div>
                     <div className='ctr-schedule-option'>
-                        <button>Email Buyer</button>
+                        <button onClick={openEmailBuyerPopup}>Email Buyer</button>
                         <button><Link to='/InspectionReport'>Create A Report</Link></button>
-                        <button>Cancel booking</button>
+                        <button onClick={openCancelPopup}>Cancel booking</button>
                     </div>
                 </div>
             ))}
@@ -49,4 +70,4 @@ function Schedule() {
     );
 }
 
-export default Schedule;
+export default MechanicSchedule;

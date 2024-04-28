@@ -1,4 +1,4 @@
-// const multer = require('multer');
+const multer = require('multer'); // Import multer
 const path = require("path");
 const fs = require("fs");
 const Car = require("../models/Car");
@@ -113,94 +113,7 @@ const uploadCarData = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-// const uploadCarData = async (req, res) => {
-//   console.log(req);
-//   try {
-//     // Check if carPhotos are uploaded
-//     // if (!req.body || Object.keys(req.body).length === 0) {
-//     //   return res
-//     //     .status(400)
-//     //     .json({ error: "No car photos uploaded or invalid format" });
-//     // }
-    
-//     // Get the binary data of car photos from the request body
-//     const carPhotos = [];
-//     // Assuming req.body.carPhoto is the array received in your backend
-//   const carPhoto = req.body.carPhoto;
 
-//   // Filter out empty items and convert 'null' strings to actual null values
-//   const filteredCarPhotos = carPhoto.filter(photo => photo !== undefined && photo !== '');
-
-//   // Convert 'null' strings to null values
-//   const finalCarPhotos = filteredCarPhotos.map(photo => photo === 'null' ? null : photo);
-
-//   // Now finalCarPhotos contains an array without empty items and with actual null values
-//   console.log(finalCarPhotos);
-//     for (let i = 0; i < Object.keys(req.body).length; i++) {
-//       if (req.body[`carPhoto[${i}]`]) {
-//         carPhotos.push(req.body[`carPhoto[${i}]`]);
-//       }
-//     }
-//     // Ensure directory exists for saving car photos
-//     const uploadDirectory = path.join(__dirname, "..", "uploads", "car_photos");
-//     ensureDirectoryExists(uploadDirectory);
-
-//     // Save car photos to a separate folder and store their paths
-//     const carPhotoPaths = [];
-//     for (let i = 0; i < carPhotos.length; i++) {
-//       const photoData = carPhotos[i];
-//       const fileExtension = getFileExtension(photoData); // Function to get file extension
-//       const fileName = `carPhoto_${i}.${fileExtension}`;
-//       const filePath = path.join(uploadDirectory, fileName);
-//       fs.writeFileSync(filePath, Buffer.from(photoData, "base64")); // Write binary data to file
-//       carPhotoPaths.push(filePath);
-//     }
-
-//     // Extract other car data from the request body
-//     const { seller_id, make, model, streetName, suburb, postcode, state, color, price, odometer, transmission, year, engineType, fuelType, bodyType, registrationNo } = req.body;
-
-//     // Create title based on make, model, and year
-//     const title = `${year} ${make} ${model}`;
-
-//     // Create a new car instance
-//     const newCar = new Car({
-//       seller_id: seller_id,
-//       title,
-//       registrationNo,
-//       make,
-//       model,
-//       streetName,
-//       suburb,
-//       postcode,
-//       state,
-//       color,
-//       price,
-//       odometer,
-//       transmission,
-//       year,
-//       engineType,
-//       fuelType,
-//       bodyType,
-//       carPhotos: carPhotoPaths.join(","), // Save file paths as a comma-separated string
-//     });
-
-//     // Save the car to the database
-//     await newCar.save();
-
-//     // Return success response
-//     res
-//       .status(200)
-//       .json({ success: true, message: "Car data uploaded successfully" });
-//   } catch (error) {
-//     console.error("Error uploading car data:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// };
-// Function to get file extension from MIME type
-const getFileExtension = (data) => {
-  const mimeType = data.split(";")[0];
-  return mimeType.split("/")[1];
-};
 // Controller function to get all unsold cars
 const getUnsoldCars = async (req, res) => {
   try {
@@ -217,20 +130,21 @@ const getUnsoldCars = async (req, res) => {
 
 const getCarById = async (req, res) => {
   try {
-    const carId = req.params.carId;
-    // Retrieve the car details from the database based on the carId
-    const car = await Car.findById(carId);
+    const id = req.params.id; // Update parameter name to match the route
+    const car = await Car.findById(id);
 
-    // Check if the car exists
     if (!car) {
       return res.status(404).json({ error: "Car not found" });
     }
 
-    // If the car exists, send its details in the response
+    // Convert carPhotos string to an array
+    car.carPhotos = convertCarPhotosStringToArray(car.carPhotos);
+
     res.status(200).json(car);
   } catch (error) {
     console.error("Error fetching car details:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 module.exports = { uploadCarData, getUnsoldCars, getCarById };

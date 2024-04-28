@@ -4,9 +4,9 @@
     margin: 0 12% 0 12%;
 }
 
-.ctr-content-session {
+/*.ctr-content-session {
 
-}
+}*/
 
 /* User Type */
 
@@ -113,12 +113,11 @@
 }
 
 .ctr-user-content-left {
-    width: max-content;
+    width: 700px;
 }
 
 .ctr-user-content-right {
-
-    width: 100%;
+    width: 400px;
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
@@ -140,6 +139,69 @@
     font-weight: 525;
 }
 
+.ctr-user-content-right .ctr-unlock-profile {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 50px;
+}
+
+.ctr-user-content-right .ctr-unlock-profile button {
+    width: 150px;
+    height: 30px;
+    margin: 0 auto 30px auto; /* Center horizontally and add bottom margin */
+    border-radius: 10px;
+    border: 1px solid #ecb159;
+    background-color: #ecb159;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease; /* Smooth transition */
+    text-align: center;
+    color: rgba(33, 33, 33, 255);
+    display: block; 
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.ctr-user-content-right .ctr-unlock-profile button:hover {
+    font-weight: bold;
+    transform: scale(1.00); /* Grow the button a bit on hover */
+    color: #FFFFFF;
+    cursor: pointer;
+    background-color: rgba(0, 195, 112, 1);
+}
+
+.ctr-user-content-right .ctr-unlock-profile input {
+    margin-bottom: 10px;
+    width: 100%;
+    height: 30px;
+    padding: 10px;
+    font-family: "Arial", "Verdana", "Tahoma", "Trebuchet MS", sans-serif;
+}
+
+.file-upload input[type="file"] {
+    display: none;
+}
+
+.file-upload .file-upload-btn {
+    background-color: #FFFFFF;
+    color: #493930;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #493930; 
+}
+
+.file-upload .file-upload-btn:hover {
+    background-color: #FFFFFF;
+    color: rgba(0, 195, 112, 1);
+    cursor: pointer;
+}
+
+.file-upload .file-name {
+    margin-left: 0px;
+
+}
+
 .ctr-user-content .ctr-user-button {
     width: 300px;
     height: 30px;
@@ -152,7 +214,8 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease; /* Smooth transition */
     text-align: center;
-    color: rgba(33,33,33,255);   
+    color: rgba(33,33,33,255);
+    font-weight: bold;
 }
 
 .ctr-user-content .ctr-user-button:hover {
@@ -246,7 +309,6 @@
     cursor: pointer;
 }
 
-
 .ctr-user-details {
     margin: 0px 0px 0px 50px;
     overflow: hidden; /* Clear floats */
@@ -270,7 +332,7 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease; /* Smooth transition */
     text-align: center;
-    color: rgba(33,33,33,255);   
+    color: rgba(33,33,33,255);
 }
 
 .ctr-user-details button:hover {
@@ -282,6 +344,7 @@
 }
 
 /* User Content Mechanic Report */
+
 .ctr-user-content h4 {
     margin-left: 50px;
     margin-top: 20px;
@@ -291,57 +354,6 @@
     display: inline-block; 
     margin-right: 20px; 
 }
-
-/*.ctr-user-content input[type="text"],
-.ctr-user-content input[type="radio"],
-.ctr-user-content textarea {
-    display: block;
-    margin-top: 10px;
-}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*.ctr-user-content h4 {
-    display: flex;
-    margin-right: 50px;
-    padding: 0;
-}*/
 
 .ctr-user-content form {
     display: flex;
@@ -414,76 +426,10 @@ legend {
     margin-top: 8px;
 }
 
-/* Color for radio button when selected */
 .ctr-user-content .role-container .role-radio input[type='radio']:checked + label {
-    /* Set the desired color for the label */
+    /* Color for radio button when selected */
     color: rgba(0, 195, 112, 1); /* Example color */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .ctr-user-content textarea {
     width: 700px;
@@ -511,4 +457,80 @@ legend {
     color: #FFFFFF;
     cursor: pointer;
     background-color: rgba(0, 195, 112, 1);
+}
+
+/* User Content: Seller Request Inspections option buttons */
+
+/*.ctr-schedule-book {
+    margin: 0px 40px 30px 40px;
+    padding: 15px;
+    overflow: hidden; 
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+    transition: all 0.3s ease;
+    color: rgba(33,33,33,255);   
+}*/
+
+.ctr-schedule-book {
+    margin: 0px 40px 0px 40px;
+    padding: 0px 15px 15px 15px;
+    overflow: hidden; /* Clear floats */
+    border-bottom: 1px solid #ccc; /* Only border at the bottom */
+    background-color: #fff; 
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3); /* Shadow at the bottom only */
+    transition: all 0.3s ease; /* Smooth transition */
+    color: rgba(33,33,33,255);   
+}
+
+.ctr-schedule-seller h3 {
+    margin-left: 0px;
+    font-weight: bold;
+}
+
+.ctr-schedule-option-seller-request button {
+    width: 70px;
+    height: 30px;
+    align-self: center;
+    margin-top: 0px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc; 
+    background-color: #fff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    text-align: center;
+    color: rgba(33,33,33,255);   
+}
+
+.ctr-schedule-option-seller-request button:hover {
+    font-weight: bold;
+    transform: scale(1.00);
+    color: rgba(0, 195, 112, 1);
+    cursor: pointer;
+}
+
+.ctr-schedule-option-seller-request button a {
+    text-decoration: none;
+    color: rgba(33,33,33,255);   
+}
+
+.ctr-schedule-option-seller-request button a:hover {
+    font-weight: bold;
+    transform: scale(1.00);
+    color: rgba(0, 195, 112, 1);
+    cursor: pointer;
+}
+
+/* User Profile */
+
+.ctr-user-details-edit {
+    margin-right: 50px;
+}
+
+.ctr-user-details .ctr-user-details-edit input {
+    margin-bottom: 15px;
+    height: 30px;
+    padding: 10px;
 }

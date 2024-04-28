@@ -86,7 +86,7 @@ export default function HeaderNav() {
             <div className='ctr-main-header-nav'>
                 <NavLink to="/ListingPage" activeClassName="active">Buy</NavLink>
                 <NavLink to="/CarAdPage" activeClassName="active">Sell</NavLink>
-                <NavLink to="/carinfo" activeClassName="active">About Us</NavLink>
+                <NavLink to="/AboutUs" activeClassName="active">About Us</NavLink>
             </div>
             <div className='ctr-main-header-login'>
             {userData ? (

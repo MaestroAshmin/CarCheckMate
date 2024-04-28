@@ -1,3 +1,4 @@
+// src/components/scripts/ListingPage.jsx
 import React, { useState, useEffect } from 'react';
 import Listing from './Listing';
 

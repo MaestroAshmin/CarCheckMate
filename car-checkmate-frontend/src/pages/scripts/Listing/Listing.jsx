@@ -1,6 +1,7 @@
+// src/pages/scripts/Listing/Listing.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Listing.css';
+import '../../styles/Listing.css';
 
 export default function Listing({ car }) {
   const navigate = useNavigate();
