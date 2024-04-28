@@ -4,7 +4,8 @@ import Listing from './Listing';
 import Navbar from '../../../components/scripts/navbar';
 import SearchBar from '../../../components/scripts/searchbar';
 import Footer from '../../../components/scripts/footer';
-import '../styles/ListingPage.css';
+import '../../styles/ListingPage.css';
+import axios from 'axios';
 
 export default function ListingPage() {
   const [cars, setCars] = useState([
@@ -106,6 +107,51 @@ export default function ListingPage() {
     },
     // Add more car objects as needed
   ]);
+  const [unSoldCar, setUnSoldCar] = useState([]);
+
+  useEffect(() => {
+      const fetchCars = async () => {
+          try {
+              const response = await axios.get('http://localhost:3000/cars/available-cars');
+              //console.log(response.data); // Check the structure of the data first
+              
+              // Format the data before setting it in the state
+              const unsoldCars = response.data.map(car => ({
+                  bodyType: car.bodyType,
+                  color: car.color,
+                  engineType: car.engineType,
+                  fuelType: car.fuelType,
+                  hasBeenSold: car.hasBeenSold,
+                  make: car.make,
+                  model: car.model,
+                  odometer: car.odometer,
+                  postcode: car.postcode,
+                  price: car.price,
+                  seller_id: car.seller_id,
+                  state: car.state,
+                  streetName: car.streetName,
+                  suburb: car.suburb,
+                  title: car.title,
+                  transmission: car.transmission,
+                  year: car.year,
+                  carPhotos: car.carPhotos.split(',') // Split the photo string into an array
+              }));
+  
+              // Set the formatted data in the state
+              setCars(unsoldCars);
+              
+          } catch (error) {
+              console.log('Error fetching cars:', error);
+          }
+      };
+  
+      fetchCars();
+  }, []);
+  
+  console.log(cars);
+  
+
+
   const [currentPage, setCurrentPage] = useState(1);
   const carsPerPage = 9;
 

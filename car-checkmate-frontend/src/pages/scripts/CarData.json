@@ -14,7 +14,8 @@
         "year": "2019",
         "engine_type": "V6",
         "fuel_type": "Gasoline",
-        "body_type": "Truck"
+        "body_type": "Truck",
+        "hasBeenSold":false
     },
     {
         "id": 2,
@@ -31,7 +32,8 @@
         "year": "2017",
         "engine_type": "Inline-4",
         "fuel_type": "Gasoline",
-        "body_type": "Sedan"
+        "body_type": "Sedan",
+        "hasBeenSold":false
     },
     {
         "id": 3,
@@ -48,7 +50,8 @@
         "year": "2016",
         "engine_type": "V8",
         "fuel_type": "Diesel",
-        "body_type": "Truck"
+        "body_type": "Truck",
+        "hasBeenSold":false
     },
     {
         "id": 4,
@@ -65,7 +68,8 @@
         "year": "2020",
         "engine_type": "Inline-4",
         "fuel_type": "Gasoline",
-        "body_type": "Sedan"
+        "body_type": "Sedan",
+        "hasBeenSold":false
     },
     {
         "id": 5,
@@ -82,7 +86,8 @@
         "year": "2018",
         "engine_type": "Inline-6",
         "fuel_type": "Gasoline",
-        "body_type": "Sedan"
+        "body_type": "Sedan",
+        "hasBeenSold":false
     },
     {
         "id": 6,
@@ -99,7 +104,8 @@
         "year": "2017",
         "engine_type": "Inline-4",
         "fuel_type": "Gasoline",
-        "body_type": "Sedan"
+        "body_type": "Sedan",
+        "hasBeenSold":false
     },
     {
         "id": 7,
@@ -116,7 +122,8 @@
         "year": "2015",
         "engine_type": "V6",
         "fuel_type": "Gasoline",
-        "body_type": "SUV"
+        "body_type": "SUV",
+        "hasBeenSold":false
     },
     {
         "id": 8,
@@ -133,7 +140,8 @@
         "year": "2019",
         "engine_type": "V8",
         "fuel_type": "Gasoline",
-        "body_type": "Sedan"
+        "body_type": "Sedan",
+        "hasBeenSold":false
     },
     {
         "id": 9,
@@ -150,7 +158,8 @@
         "year": "2018",
         "engine_type": "Flat-4",
         "fuel_type": "Gasoline",
-        "body_type": "Wagon"
+        "body_type": "Wagon",
+        "hasBeenSold":false
     },
     {
         "id": 10,
@@ -167,7 +176,8 @@
         "year": "2017",
         "engine_type": "Inline-4",
         "fuel_type": "Gasoline",
-        "body_type": "Sedan"
+        "body_type": "Sedan",
+        "hasBeenSold":false
     },
     {
         "id": 11,
@@ -184,7 +194,8 @@
         "year": "2019",
         "engine_type": "Inline-4",
         "fuel_type": "Gasoline",
-        "body_type": "Hatchback"
+        "body_type": "Hatchback",
+        "hasBeenSold":false
     },
     {
         "id": 12,
@@ -201,7 +212,8 @@
         "year": "2017",
         "engine_type": "Inline-4",
         "fuel_type": "Gasoline",
-        "body_type": "SUV"
+        "body_type": "SUV",
+        "hasBeenSold":false
     },
     {
         "id": 13,
@@ -218,7 +230,8 @@
         "year": "2018",
         "engine_type": "V6",
         "fuel_type": "Gasoline",
-        "body_type": "SUV"
+        "body_type": "SUV",
+        "hasBeenSold":false
     },
     {
         "id": 14,
@@ -235,7 +248,8 @@
         "year": "2020",
         "engine_type": "Electric",
         "fuel_type": "Electric",
-        "body_type": "Sedan"
+        "body_type": "Sedan",
+        "hasBeenSold":false
     },
     {
         "id": 15,
@@ -252,7 +266,8 @@
         "year": "2019",
         "engine_type": "V6",
         "fuel_type": "Gasoline",
-        "body_type": "SUV"
+        "body_type": "SUV",
+        "hasBeenSold":false
     },
     {
         "id": 16,
@@ -269,7 +284,8 @@
         "year": "2018",
         "engine_type": "Inline-4",
         "fuel_type": "Gasoline",
-        "body_type": "SUV"
+        "body_type": "SUV",
+        "hasBeenSold":false
     },
     {
         "id": 17,
@@ -286,7 +302,8 @@
         "year": "2019",
         "engine_type": "Inline-4",
         "fuel_type": "Gasoline",
-        "body_type": "SUV"
+        "body_type": "SUV",
+        "hasBeenSold":false
     },
     {
         "id": 18,
@@ -303,7 +320,8 @@
         "year": "2017",
         "engine_type": "V6",
         "fuel_type": "Gasoline",
-        "body_type": "Sedan"
+        "body_type": "Sedan",
+        "hasBeenSold":false
     },
     {
         "id": 19,
@@ -320,6 +338,7 @@
         "year": "2018",
         "engine_type": "V6",
         "fuel_type": "Gasoline",
-        "body_type": "Sedan"
+        "body_type": "Sedan",
+        "hasBeenSold":false
     }
 ]

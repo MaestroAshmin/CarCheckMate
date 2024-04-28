@@ -14,7 +14,8 @@ import MechanicPage from './pages/scripts/MechanicPage';
 import Mechanic from './pages/scripts/Mechanic';
 import InspectionReport from './pages/scripts/InspectionReport';
 import StyleTest from './pages/scripts/StyleTest';
-import Homepage from './pages/scripts/Homepage';
+import Listing from './pages/scripts/Listing/Listing';
+import ListingPage from './pages/scripts/Listing/ListingPage';
 
 function App() {
   return (
@@ -48,6 +49,8 @@ function App() {
           <Route path="/InspectionReport" element= {<InspectionReport />} />
           {/** This is for testing the styling of the existing page */}
           <Route path="/StyleTest" element= {<StyleTest />} />
+          <Route path="/ListingPage" element= {<ListingPage />} /> 
+          <Route path="/Listing" element= {<Listing />} />
         </Routes>
       </Router>
     </div>
