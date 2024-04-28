@@ -18,7 +18,7 @@ const carSchema = new mongoose.Schema({
     engineType: { type: String, required: true },
     fuelType: { type: String, required: true },
     bodyType: { type: String, required: true },
-    carPhotos: { type: String,required: true },
+    carPhotos: [{ type: String, required: true}],
     hasBeenSold: { type: Boolean, default: false }
 });
 

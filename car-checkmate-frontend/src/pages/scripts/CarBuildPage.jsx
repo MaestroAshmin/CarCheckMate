@@ -114,11 +114,11 @@ export default function CarBuildPage({ formData, setFormData }) {
                 <label className='labels'>Registration No.</label>
                     <input
                         type="text"   
-                        name="registration"   
+                        name="registrationNo"   
                         className='reg-input'  
-                        value={formData.registration}
+                        value={formData.registrationNo}
                         onChange={(e) => {
-                            setFormData({ ...formData, registration: e.target.value });
+                            setFormData({ ...formData, registrationNo: e.target.value });
                           }}       
                     />
                 </div>

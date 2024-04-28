@@ -8,15 +8,19 @@ import CarPricePage from './CarPricePage';
 
 export default function CarAdPage() {
     const [page, setPage] = useState(0);
-
+    const [isSeller, setIsSeller] = useState(false); // Flag to indicate if the user is a seller
+    const initialCarPhotos = {};
+    for (let i = 0; i < 20; i++) {
+        initialCarPhotos[`carPhoto[${i}]`] = null;
+    }
     const [formData, setFormData] = useState({
         seller_id: "",
-        registration: "abc",
+        registrationNo: "",
         make:"",
         model:"",
         state:"",
         year:"",
-        street:"",
+        streetName:"",
         suburb:"",
         postcode:"",
         price:"",
@@ -26,9 +30,8 @@ export default function CarAdPage() {
         fuelType:"",
         engineType:"",
         bodyType:"",
-        carPhotos:""
+        ...initialCarPhotos, // Add the initial carPhoto fields
     });
-    // console.log(formData);
     useEffect(() => {
         // Retrieve user data from local storage
         const userDataFromLocalStorage = localStorage.getItem('user');
@@ -42,6 +45,13 @@ export default function CarAdPage() {
                     ...prevFormData,
                     seller_id: userData._id
                 }));
+            }
+            // Check if user is not a seller and redirect to homepage
+            if (!userData.seller) {
+                window.location.href = '/'; // Redirect to homepage
+            }
+            else{
+                setIsSeller(true);
             }
         }
     }, []);
@@ -69,19 +79,24 @@ export default function CarAdPage() {
     const handleSubmit = () => {
         setIsLoading(true);
         setError(null);
-    
+        console.log(formData);
         // Create a FormData object
-        const formData = new FormData();
-        // Append each form field and its value to the FormData object
+        const formDataToSend = new FormData();
+        // Append all fields from formData to formDataToSend
         for (const key in formData) {
-            formData.append(key, formData[key]);
+            // If the field starts with "carPhoto" and is not null, append it
+            if (key.startsWith('carPhoto') && formData[key] !== null) {
+                formDataToSend.append(key, formData[key]);
+            } else {
+                // Append other fields normally
+                formDataToSend.append(key, formData[key]);
+            }
         }
-    
         // Make API call to send form data
         fetch('http://localhost:3000/cars/upload-car-details', {
             method: 'POST',
             credentials: 'include',
-            body: formData, // Use FormData object as the body
+            body: formDataToSend, // Use FormData object as the body
         })
         .then(response => {
             setIsLoading(false);
@@ -128,8 +143,6 @@ export default function CarAdPage() {
                                 onClick={() => {
                                 if (page === FormPages.length - 1) {
                                     handleSubmit();
-                                    // alert("FORM SUBMITTED");
-                                    console.log(formData);
                                 } else {
                                     setPage((currPage) => currPage + 1);
                                 }
