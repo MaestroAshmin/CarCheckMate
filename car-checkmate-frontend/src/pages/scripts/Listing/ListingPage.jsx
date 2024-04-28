@@ -20,6 +20,7 @@ export default function ListingPage() {
               
               // Format the data before setting it in the state
               const unsoldCars = response.data.map(car => ({
+                  car_id:car._id,
                   bodyType: car.bodyType,
                   color: car.color,
                   engineType: car.engineType,
@@ -51,7 +52,7 @@ export default function ListingPage() {
       fetchCars();
   }, []);
   
-  console.log(cars);
+  
   
 
 
