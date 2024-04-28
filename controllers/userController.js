@@ -8,6 +8,7 @@ const token = require('crypto').randomBytes(20).toString('hex');
 // Express route for user registration
 async function register(req, res) {
     try {
+            console.log(req);
             const { email, password, confirmPassword, firstName, lastName, mobileNumber, userType  } = req.body;
         
             // Check if the user already exists
