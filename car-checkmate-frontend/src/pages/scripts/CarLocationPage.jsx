@@ -110,11 +110,11 @@ export default function CarLocationPage({ formData, setFormData }) {
                     <label className='labels'>Street</label>
                     <input
                         type="text"   
-                        name="street"   
+                        name="streetName"   
                         className='street-input'  
                         value={formData.street}
                         onChange={(e) => {
-                            setFormData({ ...formData, street: e.target.value });
+                            setFormData({ ...formData, streetName: e.target.value });
                             }}       
                     />
                 </div>

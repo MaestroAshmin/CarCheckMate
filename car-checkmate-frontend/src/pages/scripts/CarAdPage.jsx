@@ -1,21 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/CarAdPage.css';
 import CarBuildPage from './CarBuildPage';
 import CarFeaturePage from './CarFeaturePage';
 import CarPhotoPage from './CarPhotoPage';
 import CarLocationPage from './CarLocationPage';
 import CarPricePage from './CarPricePage';
+import { useNavigate } from 'react-router-dom';
 
 export default function CarAdPage() {
     const [page, setPage] = useState(0);
-
+    const [isSeller, setIsSeller] = useState(false); // Flag to indicate if the user is a seller
+    const navigate = useNavigate();
+    const initialCarPhotos = {};
+    for (let i = 0; i < 20; i++) {
+        initialCarPhotos[`carPhoto[${i}]`] = null;
+    }
     const [formData, setFormData] = useState({
-        registration: "abc",
+        seller_id: "",
+        registrationNo: "",
         make:"",
         model:"",
         state:"",
         year:"",
-        street:"",
+        streetName:"",
         suburb:"",
         postcode:"",
         price:"",
@@ -25,9 +32,31 @@ export default function CarAdPage() {
         fuelType:"",
         engineType:"",
         bodyType:"",
-        images:""
+        ...initialCarPhotos, // Add the initial carPhoto fields
     });
-    console.log(formData)
+    useEffect(() => {
+        // Retrieve user data from local storage
+        const userDataFromLocalStorage = localStorage.getItem('user');
+        if (userDataFromLocalStorage) {
+            // Parse the user data to JSON
+            const userData = JSON.parse(userDataFromLocalStorage);
+            // Check if user data contains _id
+            if (userData._id) {
+                // Update the formData state with the retrieved _id
+                setFormData(prevFormData => ({
+                    ...prevFormData,
+                    seller_id: userData._id
+                }));
+            }
+            // Check if user is not a seller and redirect to homepage
+            if (!userData.seller) {
+                window.location.href = '/'; // Redirect to homepage
+            }
+            else{
+                setIsSeller(true);
+            }
+        }
+    }, []);
     const FormPages = ["CarBuildPage","CarFeaturePage","CarLocationPage","CarPhotoPage","CarPricePage"];
 
     const PageDisplay = () => {
@@ -44,7 +73,52 @@ export default function CarAdPage() {
         }
     };
 
-    const progress = ((page + 1) / FormPages.length) * 100; 
+    const progress = ((page + 1) / FormPages.length) * 100;
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const handleSubmit = () => {
+        setIsLoading(true);
+        setError(null);
+        console.log(formData);
+        // Create a FormData object
+        const formDataToSend = new FormData();
+        // Append all fields from formData to formDataToSend
+        for (const key in formData) {
+            // If the field starts with "carPhoto" and is not null, append it
+            if (key.startsWith('carPhoto') && formData[key] !== null) {
+                formDataToSend.append(key, formData[key]);
+            } else {
+                // Append other fields normally
+                formDataToSend.append(key, formData[key]);
+            }
+        }
+        // Make API call to send form data
+        fetch('http://localhost:3000/cars/upload-car-details', {
+            method: 'POST',
+            credentials: 'include',
+            body: formDataToSend, // Use FormData object as the body
+        })
+        .then(response => {
+            setIsLoading(false);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Data received from server:', data);
+            navigate('/UserProfile');
+        })
+        .catch(error => {
+            setIsLoading(false);
+            setError(error.message);
+            console.error('There was a problem with the fetch operation:', error);
+            // Handle errors
+        });
+    };
+
     return (
         <div className='car-ad-container'>
             <div className="form">
@@ -70,8 +144,7 @@ export default function CarAdPage() {
                             <button class="button-31" role="button"
                                 onClick={() => {
                                 if (page === FormPages.length - 1) {
-                                    alert("FORM SUBMITTED");
-                                    console.log(formData);
+                                    handleSubmit();
                                 } else {
                                     setPage((currPage) => currPage + 1);
                                 }

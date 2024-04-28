@@ -68,8 +68,9 @@ export default function CarAdPage({ formData, setFormData }) {
         setFormData({ ...formData, color: selectedOption ? selectedOption.value : null });
     };
     
-    const handleOdometerChange = (selectedOption) => {
-        setFormData({ ...formData, odometer: selectedOption ? selectedOption.value : null });
+    const handleOdometerChange = (e) => {
+        const { value } = e.target;
+        setFormData({ ...formData, odometer: value });
     };
     
     const handleTransmissionChange = (selectedOption) => {
@@ -114,9 +115,7 @@ export default function CarAdPage({ formData, setFormData }) {
                     name="odometer"   
                     className='odometer-input'  
                     value={formData.odometer}
-                    onChange={(e) => {
-                        setFormData({ ...formData, odometer: e.target.value });
-                        }}       
+                    onChange={handleOdometerChange}       
                 />
                 </div>
             </div>
@@ -180,7 +179,7 @@ export default function CarAdPage({ formData, setFormData }) {
                 isSearchable={isSearchable}
                 name="color"
                 options={bodyType}
-                onChange={handleEngineTypeChange}
+                onChange={handleBodyTypeChange}
             />
             </div>
             </div>

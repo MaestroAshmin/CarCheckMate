@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const User = require('../models/User');
 const token = require('crypto').randomBytes(20).toString('hex');
+// const session = require('express-session');
 // const jwt = require('jsonwebtoken');
 
 // Express route for user registration
@@ -147,6 +148,7 @@ async function login (req, res){
 
         // Ensure session data is saved
         req.session.save();
+        console.log(req.session);
         res.status(200).json({ status: true, message: 'Login Successful', user });
     } 
     catch (error) {
@@ -157,14 +159,16 @@ async function login (req, res){
 // Logout endpoint
 function logout(req, res) {
     try {
-        // Destroy session to logout
-        req.session.destroy((err) => {
-            if (err) {
-                console.error(err);
-                return res.status(500).json({ status: false, error: 'Unable to logout' });
-            }
-            res.status(200).json({ status: true, message: 'Logout successful' });
-        });
+        // Check if user is logged in
+        console.log(req.session.user);
+        if (!req.session) {
+            return res.status(401).json({ status: false, error: 'User not logged in' });
+        }
+
+        // Delete user property from session
+        delete req.session.user;
+
+        res.status(200).json({ status: true, message: 'Logout successful' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ status: false, error: 'Internal Server Error' });
