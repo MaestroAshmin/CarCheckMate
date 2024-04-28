@@ -5,10 +5,12 @@ import CarFeaturePage from './CarFeaturePage';
 import CarPhotoPage from './CarPhotoPage';
 import CarLocationPage from './CarLocationPage';
 import CarPricePage from './CarPricePage';
+import { useNavigate } from 'react-router-dom';
 
 export default function CarAdPage() {
     const [page, setPage] = useState(0);
     const [isSeller, setIsSeller] = useState(false); // Flag to indicate if the user is a seller
+    const navigate = useNavigate();
     const initialCarPhotos = {};
     for (let i = 0; i < 20; i++) {
         initialCarPhotos[`carPhoto[${i}]`] = null;
@@ -107,7 +109,7 @@ export default function CarAdPage() {
         })
         .then(data => {
             console.log('Data received from server:', data);
-            // Handle successful response if needed
+            navigate('/UserProfile');
         })
         .catch(error => {
             setIsLoading(false);
