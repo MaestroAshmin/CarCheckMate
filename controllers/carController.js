@@ -4,6 +4,9 @@ const fs = require("fs");
 const Car = require("../models/Car");
 const User = require('../models/User');
 
+// Specify your server URL
+const serverUrl = 'http://localhost:3000';
+
 module.exports.config = {
   api: {
     bodyParser: false,
@@ -47,8 +50,10 @@ const uploadCarData = async (req, res) => {
       return res.status(400).json({ error: "Number of car photos must be between 8 and 20" });
     }
     // Ensure directory exists for saving car photos
-    const uploadDirectory = path.join(__dirname, "..", "uploads", "car_photos");
-    ensureDirectoryExists(uploadDirectory);
+    // const uploadDirectory = path.join(__dirname, "..", "uploads", "car_photos");
+    // Specify the directory where you want to serve static files (assuming it's accessible to clients)
+    const publicDirectory = 'uploads/car_photos';
+    ensureDirectoryExists(publicDirectory);
 
     // Save car photos to the upload directory and store their paths
     const carPhotoPaths = [];
@@ -63,9 +68,11 @@ const uploadCarData = async (req, res) => {
                         const currentDate = new Date().toISOString().replace(/:/g, "-"); // Replace colons with hyphens to make it a valid file name
                         const fileName = `${currentDate}_${photoData.originalname}`;
                         // const fileName = `carPhoto_${key.slice(9)}_${i}.${photoData.mimetype.split('/')[1]}`;
-                        const filePath = path.join(uploadDirectory, fileName);
+                        const filePath = path.join(publicDirectory, fileName);
                         fs.writeFileSync(filePath, photoData.buffer); // Write binary data to file
-                        carPhotoPaths.push(filePath);
+                        // carPhotoPaths.push(filePath);
+                        // Store the URL with server prefix and forward slashes
+                      carPhotoPaths.push(`${serverUrl}/uploads/car_photos/${fileName}`);
                     }
                 }
             }
