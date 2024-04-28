@@ -6,10 +6,10 @@ import '../../styles/Listing.css';
 export default function Listing({ car }) {
   const navigate = useNavigate();
 
-  const trimmedFilePathsArray = [];
+
   const filePathsString = JSON.stringify(car.carPhotos);
-  //console.log(`Type of filePathsString: ${typeof filePathsString}, Value:`, filePathsString);
-  
+  console.log(`Type of filePathsString: ${typeof filePathsString}, Value:`, filePathsString);
+    const trimmedFilePathsArray = [];
   // Check if filePathsString is a string before splitting
   if (typeof filePathsString === 'string') {
       // Split the string into an array of file paths
@@ -33,7 +33,7 @@ export default function Listing({ car }) {
   }
   //console.log('Trimmed file paths:', trimmedFilePathsArray[0]);
 
-
+  console.log(trimmedFilePathsArray[0])
 
   const handleCarClick = () => {
     // Navigate to the CarInfoPage when a car is clicked
@@ -43,7 +43,7 @@ export default function Listing({ car }) {
   return (
     <div className="listing-container" onClick={handleCarClick}>
       <div className="image-container">
-      <img src="http://localhost:3001/uploads/car_photos/2024-04-28T03-34-27.647Z_1rzfjx99yhff68znrveifw2ka.jpg" alt={car.make} className="listing-image" />
+      <img src={`http://localhost:3000/uploads/car_photos/${trimmedFilePathsArray[0]}`} alt={car.make} className="listing-image" />
       </div>
       <div className="info-container">
         <div className="make-model">
