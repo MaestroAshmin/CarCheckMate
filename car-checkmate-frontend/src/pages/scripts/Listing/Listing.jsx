@@ -33,17 +33,17 @@ export default function Listing({ car }) {
   }
   //console.log('Trimmed file paths:', trimmedFilePathsArray[0]);
 
-  console.log(trimmedFilePathsArray[0])
+  console.log(car.car_id)
 
   const handleCarClick = () => {
     // Navigate to the CarInfoPage when a car is clicked
-    navigate(`/car/${car.id}`);
+    navigate(`/car/${car.car_id}`);
   };
 
   return (
     <div className="listing-container" onClick={handleCarClick}>
       <div className="image-container">
-      <img src={`http://localhost:3000/uploads/car_photos/${trimmedFilePathsArray[0]}`} alt={car.make} className="listing-image" />
+      <img src={`http://localhost:3000/uploads/car_photos/${trimmedFilePathsArray[2]}`} alt={car.make} className="listing-image" />
       </div>
       <div className="info-container">
         <div className="make-model">

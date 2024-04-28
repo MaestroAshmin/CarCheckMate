@@ -9,39 +9,95 @@ import Footer from '../../../components/scripts/footer';
 
 export default function CarInfoPage() {
   const { _id } = useParams(); // Use _id instead of carId
+
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showImageOverlay, setShowImageOverlay] = useState(false);
-  const [carData, setCarData] = useState({
-    carPhotos: [],
-    make: '',
-    model: '',
-    year: '',
-    suburb: '',
-    color: '',
-    price: '',
-    odometer: '',
-    transmission: '',
-    engineType: '',
-    fuelType: '',
-    bodyType: '',
-  });
+  const [carData, setCarData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [cars, setCars] = useState([]);
 
-  const fetchCarData = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3000/api/cars/${_id.toString()}`);
-      setCarData(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error fetching car data:', error);
-      setIsLoading(false);
-    }
-  };
+
+
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchCarData();
-  }, [_id]); // Use _id instead of carId
+    const fetchCars = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/cars/available-cars');
+            //console.log(response.data); // Check the structure of the data first
+            
+            // Format the data before setting it in the state
+            const unsoldCars = response.data.map(car => ({
+                car_id: car._id,
+                bodyType: car.bodyType,
+                color: car.color,
+                engineType: car.engineType,
+                fuelType: car.fuelType,
+                hasBeenSold: car.hasBeenSold,
+                make: car.make,
+                model: car.model,
+                odometer: car.odometer,
+                postcode: car.postcode,
+                price: car.price,
+                seller_id: car.seller_id,
+                state: car.state,
+                streetName: car.streetName,
+                suburb: car.suburb,
+                title: car.title,
+                transmission: car.transmission,
+                year: car.year,
+                carPhotos: car.carPhotos // Split the photo string into an array
+            }));
+
+            // Set the formatted data in the state
+            setCars(unsoldCars);
+            setIsLoading(false);
+            
+            // Check if a specific car is available and set its data
+            const unsoldCar = unsoldCars.find(car => car.car_id === _id);
+            if (unsoldCar) {
+                setCarData(unsoldCar);
+                console.log("Car found ");
+            } else {
+                console.log("Car not found or already sold.");
+            }
+        } catch (error) {
+            console.log('Error fetching cars:', error);
+        }
+    };
+
+    fetchCars();
+}, []); // Dependency array is empty, effect runs once when component mounts
+
+
+
+
+
+
+  const filePathsString = JSON.stringify(carData.carPhotos);
+
+  const trimmedFilePathsArray = [];
+  //Check if filePathsString is a string before splitting
+  if (typeof filePathsString === 'string') {
+  //     Split the string into an array of file paths
+       const filePathsArray = filePathsString.split(',');
+    
+      // Trim each file path to remove leading and trailing whitespace
+      
+      filePathsArray.forEach(filePath => {
+          const trimmedFilePath = filePath.trim();
+          const parts = trimmedFilePath.split('\\');
+          const filename = parts[parts.length - 1];
+
+          trimmedFilePathsArray.push(filename); // Store the trimmed file path in the array
+      });
+  
+      
+      // Log the resulting array of trimmed file paths
+      
+    
+  } else {
+  }
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -77,7 +133,7 @@ export default function CarInfoPage() {
             <div className="main-image-container">
               <img
                 className="main-image"
-                src={carData.carPhotos[currentImageIndex]}
+                src={`http://localhost:3000/uploads/car_photos/${trimmedFilePathsArray[currentImageIndex]}`}
                 alt={`${carData.make} ${carData.model}`}
                 onClick={handleImageClick}
               />
@@ -85,7 +141,7 @@ export default function CarInfoPage() {
                 <div className="image-overlay show" onClick={handleNextImage}>
                   <img
                     className="enlarged-image"
-                    src={carData.carPhotos[currentImageIndex]}
+                    src={`http://localhost:3000/uploads/car_photos/${trimmedFilePathsArray[currentImageIndex]}`}
                     alt={`${carData.make} ${carData.model}`}
                   />
                   <div className="image-controls">
@@ -100,7 +156,7 @@ export default function CarInfoPage() {
             </div>
             <div className="additional-images-container">
               <div className="photo-frame">
-                {carData.carPhotos.map((image, index) => (
+                {trimmedFilePathsArray.map((image, index) => (
                   <div
                     key={index}
                     className={`thumbnail ${
@@ -108,10 +164,10 @@ export default function CarInfoPage() {
                     }`}
                     onClick={() => setCurrentImageIndex(index)}
                   >
-                    <img src={image} alt={`Car Image ${index + 1}`} />
+                    <img src={`http://localhost:3000/uploads/car_photos/${trimmedFilePathsArray[index]}`} alt={`Car Image ${index + 1}`} />
                   </div>
                 ))}
-                <div className="image-count">+{carData.carPhotos.length - 1}</div>
+                <div className="image-count">+{trimmedFilePathsArray.length - 1}</div>
               </div>
             </div>
             <div className="details-container">
