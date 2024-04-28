@@ -23,6 +23,11 @@ import Buyer from './pages/scripts/Buyer';
 import UserProfile from './pages/scripts/UserProfile';
 import StyleTest from './pages/scripts/StyleTest';
 
+import Listing from './pages/scripts/Listing/Listing';
+import ListingPage from './pages/scripts/Listing/ListingPage';
+
+
+
 function App() {
   return (
     <div className="App">
@@ -69,6 +74,8 @@ function App() {
 
           {/** This is for testing the styling of the existing page */}
           <Route path="/StyleTest" element= {<StyleTest />} />
+          <Route path="/ListingPage" element= {<ListingPage />} /> 
+          <Route path="/Listing" element= {<Listing />} />
         </Routes>
       </Router>
     </div>
