@@ -1,11 +1,9 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  animation: fadeIn 0.5s ease-in-out;
+.ctr-car-detail {
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
-.nav-container {
+/*.nav-container {
   background-color: #1e2023;
   padding: 1rem 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -42,10 +40,11 @@
   justify-content: center;
   margin-top: 30px;
 }
+*/
 
 .inner-container {
   display: flex;
-  gap: 30px;
+  gap: 20px;
 }
 
 .main-image-container {
@@ -56,11 +55,13 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
+  width: 800px;
+  height: 450px;
 }
 
 .main-image {
   width: 100%;
-  height: 500px;
+  height: 100%;
   object-fit: cover;
   background-color: #f4f4f4;
   animation: zoomIn 0.5s ease-in-out;
@@ -185,12 +186,14 @@
 }
 
 .price-container {
-  background-color: #f4f4f4;
+  background-color: #ecb159;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   animation: fadeIn 0.7s ease-in-out;
+  font-size: xx-large;
+  font-weight: bold;
 }
 
 .action-buttons {
@@ -208,16 +211,18 @@
   padding: 12px 20px;
   cursor: pointer;
   font-size: 16px;
-  color: #1e2023;
+  color: rgba(33,33,33,255);  
   transition: background-color 0.3s ease-in-out;
+  font-weight: bold;
 }
 
 .action-buttons button:hover {
-  background-color: #00b8d4;
-  color: #1e2023;
+  background-color: rgba(0, 195, 112, 1);
+  color: #ffffff;
 }
 
 .details-section {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -251,7 +256,7 @@
   background-color: #f4f4f4;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: 30px;
+  padding: 10px;
 }
 
 .tab-content h2 {
@@ -262,6 +267,41 @@
   list-style-type: none;
   padding: 0;
 }
+
+.car-details {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.car-details ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.car-details li {
+  margin-bottom: 5px;
+}
+
+.car-details li strong {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @keyframes fadeIn {
   0% {

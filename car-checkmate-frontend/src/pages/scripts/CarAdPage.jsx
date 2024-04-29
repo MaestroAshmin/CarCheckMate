@@ -8,11 +8,9 @@ import CarPhotoPage from './CarPhotoPage';
 import CarLocationPage from './CarLocationPage';
 import CarPricePage from './CarPricePage';
 import { useNavigate } from 'react-router-dom';
-
 import HeaderNav from '../../components/scripts/HeaderNav';
 import Footer from '../../components/scripts/footer';
 import UserNav from '../../components/scripts/UserNav';
-import SellerContent from '../../components/scripts/SellerContent';
 
 export default function CarAdPage() {
     const [page, setPage] = useState(0);
@@ -172,6 +170,5 @@ export default function CarAdPage() {
                 </div>
             <Footer />
         </div>
-
     );
 }

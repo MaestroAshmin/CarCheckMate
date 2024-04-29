@@ -10,13 +10,13 @@ const Footer = () => {
     return (
         <footer className='ctr-footer'>
             <div className='footer-left'>
-                <h3><img src="images/logo-cut.png" alt="Logo" /> Car<span>Check</span>Mate</h3>
+                <h3><img src="/images/logo-cut.png" alt="Logo" /> Car<span>Check</span>Mate</h3>
                 <p className='footer-links'>
-                    <Link to='/ListingPage'>Home</Link>
-                    <Link to=''>Listing</Link>
-                    <Link to=''>Sell</Link>
-                    <Link to=''>About Us</Link>
-                    <Link to=''>Faq</Link>
+                    <Link to='/Homepage'>Home</Link>
+                    <Link to='/ListingPage'>Listing</Link>
+                    <Link to='/Selling'>Sell</Link>
+                    <Link to='/AboutUs'>About Us</Link>
+                    <Link to='/Faq'>Faq</Link>
                 </p>
                 <p className='footer-company-name'>© 2024 AC3 Swinburne Project</p>
             </div>

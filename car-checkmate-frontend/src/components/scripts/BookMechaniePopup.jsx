@@ -10,7 +10,7 @@ export default function BookMechanicPopup({ showBookMechanicPopup, setShowBookMe
                     <div className='popup'>
                         <div className='popup-content'>
                             <span className='close' onClick={() => setShowBookMechanicPopup(false)}>&times;</span>
-                            <h2>Book An Inspection</h2>
+                            <h2>Book A Mechanic</h2>
                                 <p>Car ID: <span>CT1234</span></p>
                                 <p>Enter a preferred date and time.</p>
                                 <br />
