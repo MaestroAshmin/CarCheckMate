@@ -7,18 +7,18 @@ import { Link } from 'react-router-dom';
 
 function SellerContect() {
     const [cars, setCars] = useState([
-        { id: 'C1254', link: '/car/C1254', date: '24/04/2024' },
-        { id: 'C1254', link: '/car/C1254', date: '26/04/2024' },
-        { id: 'C1254', link: '/car/C1254', date: '20/04/2024' },
-        { id: 'C1254', link: '/car/C1254', date: '13/04/2024' },
-        { id: 'C1254', link: '/car/C1254', date: '11/04/2024' },
-        { id: 'C1254', link: '/car/C1254', date: '24/04/2024' },
-        { id: 'C1254', link: '/car/C1254', date: '24/04/2024' },
-        { id: 'C1254', link: '/car/C1254', date: '26/04/2024' },
-        { id: 'C1254', link: '/car/C1254', date: '20/04/2024' },
-        { id: 'C1254', link: '/car/C1254', date: '13/04/2024' },
-        { id: 'C1254', link: '/car/C1254', date: '11/04/2024' },
-        { id: 'C1254', link: '/car/C1254', date: '24/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '24/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '26/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '20/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '13/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '11/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '24/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '24/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '26/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '20/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '13/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '11/04/2024' },
+        { id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '24/04/2024' },
     ]);
     const [currentPage, setCurrentPage] = useState(1);
     const carsPerPage = 10;
