@@ -85,7 +85,7 @@ export default function ListingPage() {
             <Listing
               key={car.id}
               car={car}
-              handleCarClick={handleCarClick}
+              handleCarClick={handleCarClick}q
             />
           ))} 
         </div>

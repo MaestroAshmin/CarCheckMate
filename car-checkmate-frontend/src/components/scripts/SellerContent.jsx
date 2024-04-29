@@ -41,7 +41,7 @@ function SellerContect() {
                 <br />
 
                 <h3>View Your Car Listing</h3>
-                <button className='ctr-user-button'>Add a new list</button>
+                <Link to ='/CarAdPage'><button className='ctr-user-button'>Add a new list</button></Link>
                 {currentCars.map((car, index) => (
                     <div key={index} className='ctr-user-content-right-report'>
                         <FontAwesomeIcon icon={faFileAlt} />&nbsp;&nbsp;
