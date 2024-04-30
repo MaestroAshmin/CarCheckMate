@@ -32,11 +32,11 @@ function SellerContect() {
     return (
         <div className='ctr-user-content'>
             <div className='ctr-user-content-left'>
-                <h3>Upcoming Schedule</h3>
+                <h3>Your Inspection Schedules</h3>
                 <SellerSchedule />
             </div>
             <div className='ctr-user-content-right'>
-                <h3>New Booked Inspection Requests</h3>
+                <h3>Inspection Requests</h3>
                 <SellerRequest />
                 <br />
 

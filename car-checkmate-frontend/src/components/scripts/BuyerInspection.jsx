@@ -11,19 +11,7 @@ function BuyerInspection() {
             date: '24/04/2024',
             time: '10:30 am',
             mechanicStatus: 'Booked',
-        },
-        {
-            carId: 'C1254',
-            date: '24/04/2024',
-            time: '10:30 am',
-            mechanicStatus: 'Awaiting Acceptance',
-        },
-        {
-            carId: 'C1254',
-            date: '24/04/2024',
-            time: '10:30 am',
-            mechanicStatus: 'Not Require',
-        },
+        }
     ];
 
     const [showEmailSellerPopup, setShowEmailSellerPopup] = useState(false);
@@ -63,9 +51,10 @@ function BuyerInspection() {
             {schedules.map((schedule, index) => (
                 <div key={index} className='ctr-schedule'>
                     <div className='ctr-schedule-buyer-detail'>
-                        <h3>Car ID: <span>{schedule.carId}</span></h3>
-                        <p>Date: <span>{schedule.date}</span> Time: <span>{schedule.time}</span></p>
-                        <p>Mechanic Status: <span>{schedule.mechanicStatus}</span></p>
+                        <h3>Product ID: <span>{schedule.carId}</span></h3>
+                        <p>Date: <span>{schedule.date}</span> </p>
+                        <p>Time: <span>{schedule.time}</span></p>
+                        <p>Mechanic Booking: <span>{schedule.mechanicStatus}</span></p>
                     </div>
                     <div className='ctr-schedule-option'>
                         <button onClick={openEmailSellerPopup}>Email Seller</button>

@@ -9,21 +9,9 @@ function SellerSchedule() {
         {
             carId: 'C1254',
             name: 'John Smith',
-            date: '24/04/2024',
-            time: '10:30 am',
-        },
-        {
-            carId: 'C1254',
-            name: 'John Smith',
-            date: '24/04/2024',
-            time: '10:30 am',
-        },
-        {
-            carId: 'C1254',
-            name: 'John Smith',
-            date: '24/04/2024',
-            time: '10:30 am',
-        },
+            date: '24/04/2024',            
+            time: '10:30 am'
+        }
     ];
 
     const [showEmailBuyerPopup, setShowEmailBuyerPopup] = useState(false);
@@ -64,7 +52,8 @@ function SellerSchedule() {
                     <div className='ctr-schedule-buyer-detail'>
                         <h3>Car ID: <span>{schedule.carId}</span></h3>
                         <p>Name: <span>{schedule.name}</span></p>
-                        <p>Date: <span>{schedule.date}</span> Time: <span>{schedule.time}</span></p>
+                        <p>Date: <span>{schedule.date}</span></p>
+                        <p>Time: <span>{schedule.time}</span></p>
                     </div>
                     <div className='ctr-schedule-option'>
                         <button onClick={openEmailBuyerPopup}>Email Buyer</button>
