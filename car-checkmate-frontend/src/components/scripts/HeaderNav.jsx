@@ -79,7 +79,7 @@ export default function HeaderNav() {
 
             <div className='ctr-main-header-logo'>
                 <NavLink to="/Homepage">
-                    <img src="images/logo_darkBrown_cut.png" alt="Logo" />
+                    <img src="/images/logo_darkBrown_cut.png" alt="Logo" />
                 </NavLink>
                 <h2>CarCheckMate</h2>
             </div>

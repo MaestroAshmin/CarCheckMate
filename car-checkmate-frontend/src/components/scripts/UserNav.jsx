@@ -10,6 +10,9 @@ function UserNav() {
 
     return (
         <div className='ctr-user-type'>
+            <span className={`nav-item ${activeItem === 'userProfile' ? 'active' : ''}`} onClick={() => handleItemClick('userProfile')}>
+                <Link to='/UserProfile'>User Profile</Link>
+            </span>
             <span className={`nav-item ${activeItem === 'buyer' ? 'active' : ''}`} onClick={() => handleItemClick('buyer')}>
                 {activeItem !== 'buyer' && <span className="lock-icon">🔒</span>}
                 <Link to='/Buyer'>Buyer</Link>
