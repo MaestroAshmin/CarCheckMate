@@ -282,6 +282,13 @@ span:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+.popup-content .button-container textarea {
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    margin-bottom: -20px;
+}
+
 .clearfix::after {
     content: "";
     display: table;

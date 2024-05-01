@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import CancelPopup from './CancelPopup';
 
 function SellerRequest() {
     const requests = [
@@ -40,6 +41,12 @@ function SellerRequest() {
         },
     ];
 
+    const [showCancelPopup, setShowCancelPopup] = useState(false);
+
+    const openCancelPopup = () => {
+        setShowCancelPopup(true);
+    };
+
     const [currentPage, setCurrentPage] = useState(1);
     const requestsPerPage = 3;
 
@@ -51,6 +58,12 @@ function SellerRequest() {
 
     return (
         <div>
+
+            <CancelPopup
+                showCancelPopup={showCancelPopup}
+                setShowCancelPopup={setShowCancelPopup}
+            />
+
             {currentRequests.map((request, index) => (
                 <div key={index} className='ctr-schedule-book'>
                     <div className='ctr-schedule-seller'>
@@ -58,7 +71,7 @@ function SellerRequest() {
                     </div>
                     <div className='ctr-schedule-option-seller-request'>
                         <button>Accept</button>
-                        <button>Deny</button>
+                        <button onClick={openCancelPopup}>Deny</button>
                     </div>
                 </div>
             ))}

@@ -7,18 +7,18 @@ import AvailableRequestsPopup from './AvailableRequestsPopup';
 
 function UserContentMechanic() {
     const [reports, setReports] = useState([
-        { id: 'RP22232', link: '/report/RP22232', date: '24/04/2024' },
-        { id: 'RP34567', link: '/report/RP34567', date: '26/04/2024' },
-        { id: 'RP22232', link: '/report/RP22232', date: '20/04/2024' },
-        { id: 'RP34567', link: '/report/RP34567', date: '13/04/2024' },
-        { id: 'RP22232', link: '/report/RP22232', date: '11/04/2024' },
-        { id: 'RP34567', link: '/report/RP34567', date: '24/04/2024' },
-        { id: 'RP22232', link: '/report/RP22232', date: '24/04/2024' },
-        { id: 'RP34567', link: '/report/RP34567', date: '26/04/2024' },
-        { id: 'RP22232', link: '/report/RP22232', date: '20/04/2024' },
-        { id: 'RP34567', link: '/report/RP34567', date: '13/04/2024' },
-        { id: 'RP22232', link: '/report/RP22232', date: '11/04/2024' },
-        { id: 'RP34567', link: '/report/RP34567', date: '24/04/2024' },
+        { img: 'images/car-01.jpg', id: 'RP22232', link: '/report/RP22232', date: '24/04/2024' },
+        { img: 'images/car-02.jpg', id: 'RP34567', link: '/report/RP34567', date: '26/04/2024' },
+        { img: 'images/car-03.jpg', id: 'RP22232', link: '/report/RP22232', date: '20/04/2024' },
+        { img: 'images/car-04.jpg', id: 'RP34567', link: '/report/RP34567', date: '13/04/2024' },
+        { img: 'images/car-05.jpg', id: 'RP22232', link: '/report/RP22232', date: '11/04/2024' },
+        { img: 'images/car-06.jpg', id: 'RP34567', link: '/report/RP34567', date: '24/04/2024' },
+        { img: 'images/car-07.jpg', id: 'RP22232', link: '/report/RP22232', date: '24/04/2024' },
+        { img: 'images/car-08.jpg', id: 'RP34567', link: '/report/RP34567', date: '26/04/2024' },
+        { img: 'images/car-09.jpg', id: 'RP22232', link: '/report/RP22232', date: '20/04/2024' },
+        { img: 'images/car-10.jpg', id: 'RP34567', link: '/report/RP34567', date: '13/04/2024' },
+        { img: 'images/car-11.jpg', id: 'RP22232', link: '/report/RP22232', date: '11/04/2024' },
+        { img: 'images/car-12.jpg', id: 'RP34567', link: '/report/RP34567', date: '24/04/2024' },
         // Add more reports as needed
     ]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -54,9 +54,10 @@ function UserContentMechanic() {
                 <br />
                 {currentReports.map((report, index) => (
                     <div key={index} className='ctr-user-content-right-report'>
-                        <FontAwesomeIcon icon={faFileAlt} />&nbsp;&nbsp;
+                        <Link to={report.link}><img src={report.img} /></Link>
                         <span>{report.id}</span>&nbsp;-&nbsp;
-                        <span>{report.date}</span>&nbsp;&nbsp;
+                        <span>{report.date}</span>
+                        <br />
                         <Link to={report.link}>View Details</Link>
                     </div>
                 ))}
