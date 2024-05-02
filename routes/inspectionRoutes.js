@@ -22,10 +22,11 @@ router.get('/upcoming-buyer/:id', inspectionController.getUpcomingInspectionsBuy
 router.get('/past-buyer/:id', inspectionController.getPastInspectionsBuyer);
 
 // Route to allow seller to view upcoming inspections
-router.get('/upcoming-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getUpcomingInspectionsSeller);
-
+//router.get('/upcoming-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getUpcomingInspectionsSeller);
+router.get('/upcoming-seller/:seller_id', inspectionController.getUpcomingInspectionsSeller);
 // Route to allow seller to view past inspections
-router.get('/past-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getPastInspectionsSeller);
+//router.get('/past-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getPastInspectionsSeller);
+router.get('/past-seller/:seller_id', inspectionController.getPastInspectionsSeller);
 
 // Route to allow mechanics to view upcoming unclaimed inspections
 router.get('/upcoming-unclaimed-mechanic',authMiddleware.requireLogin, checkMechanicPermission, inspectionController.getUpcomingUnclaimedInspectionsForMechanic);
