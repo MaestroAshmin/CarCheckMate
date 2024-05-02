@@ -91,7 +91,7 @@ function BuyerInspection() {
                                 </div>
                                 <div className='ctr-schedule-option'>
                                     <button onClick={openEmailSellerPopup}>Email Seller</button>
-                                    <button onClick={()=>openBookMechanicPopup(schedule.carId)}>Book A Mechanic</button>
+                                    {/* <button onClick={()=>openBookMechanicPopup(inspection.carId)}>Book A Mechanic</button> */}
                                     <button onClick={openCancelPopup}>Cancel booking</button>
                                 </div>
                             </div>
