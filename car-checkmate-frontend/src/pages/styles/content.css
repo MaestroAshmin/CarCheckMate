@@ -102,6 +102,7 @@
 .ctr-user-content {
     padding-top: 30px;
     margin-bottom: 50px;
+    width:100%;
     /*border-top: 2px solid #493930;
     border-left: 2px solid #493930;*/
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
@@ -113,11 +114,11 @@
 }
 
 .ctr-user-content-left {
-    width: 700px;
+    width: 50%;
 }
 
 .ctr-user-content-right {
-    width: 400px;
+    width: 50%;
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
@@ -253,6 +254,7 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
     transition: all 0.3s ease; /* Smooth transition */
     color: rgba(33,33,33,255);   
+    height:300px;
 }
 
 .ctr-schedule-buyer-detail {
