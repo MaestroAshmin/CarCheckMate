@@ -80,21 +80,23 @@ export default function CarInfoPage() {
 // }, []); // Dependency array is empty, effect runs once when component mounts
     useEffect(() => {
         const fetchCarData = async () => {
-        try {
-            const response = await axios.get(`http://localhost:3000/cars/${_id}`);
-            if (response.data) {
-            setCarData(response.data);
-            setIsLoading(false);
-            } else {
-            console.log("Car not found or already sold.");
+            try {
+                const response = await fetch(`http://localhost:3000/cars/car/${_id}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch car data');
+                }
+                const data = await response.json();
+                setCarData(data);
+                setIsLoading(false);
+            } catch (error) {
+                console.log('Error fetching car data:', error);
+                setIsLoading(false); // Stop loading state on error
             }
-        } catch (error) {
-            console.log('Error fetching car data:', error);
-        }
         };
 
         fetchCarData();
-    }, [_id]); // Fetch car data whenever _id changes
+    }, [_id]);
+    console.log(carData);
 //   const filePathsString = JSON.stringify(carData.carPhotos);
 
 //   const trimmedFilePathsArray = [];

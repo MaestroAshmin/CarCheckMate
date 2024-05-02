@@ -139,14 +139,10 @@ const getCarById = async (req, res) => {
   try {
     const id = req.params.id; // Update parameter name to match the route
     const car = await Car.findById(id);
-
+    console.log(car);
     if (!car) {
       return res.status(404).json({ error: "Car not found" });
     }
-
-    // Convert carPhotos string to an array
-    car.carPhotos = convertCarPhotosStringToArray(car.carPhotos);
-
     res.status(200).json(car);
   } catch (error) {
     console.error("Error fetching car details:", error);
