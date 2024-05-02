@@ -51,9 +51,8 @@ async function createInspection (req,res) {
 
 async function getPendingInspectionsForSeller (req, res){
     try {
-        // Get Seller id from user session
-        const seller_id = req.session.user._id;
-
+        const seller_id = req.params.id; // Get user ID from request parameters
+        console.log(seller_id);
         // Get the current date
         const currentDate = new Date();
 
@@ -71,6 +70,7 @@ async function getPendingInspectionsForSeller (req, res){
         })
         .sort({ inspectionDate: 1})
         .exec();
+        console.log(pendingInspections);
         // Fetch details of each car associated with the pending inspections
         const inspectionsWithCarDetails = await Promise.all(pendingInspections.map(async (inspection) => {
             let carDetails = await Car.findById(inspection.car_id);
@@ -130,6 +130,10 @@ async function getUpcomingInspectionsBuyer(req, res) {
  
          const inspectionsWithCarDetails = await Promise.all(upcomingInspections.map(async (inspection) => {
              let carDetails = await Car.findById(inspection.car_id);
+             if (!carDetails) {
+                // If car details are empty, return an object with a message
+                return { ...inspection.toObject()};
+            }
              carDetails = carDetails.toObject();
              delete carDetails.__v; // Remove __v field
              return { ...inspection.toObject(), car: carDetails };
@@ -151,6 +155,10 @@ async function getPastInspectionsBuyer (req, res) {
         const pastInspections = await Inspection.find({ buyer_id: buyerId, inspectionDate: { $lt: new Date() } }).sort({ inspectionDate: 1}).exec();
         const inspectionsWithCarDetails = await Promise.all(pastInspections.map(async (inspection) => {
             let carDetails = await Car.findById(inspection.car_id);
+            if (!carDetails) {
+                // If car details are empty, return an object with a message
+                return { ...inspection.toObject()};
+            }
             carDetails = carDetails.toObject();
             delete carDetails.__v; // Remove __v field
             return { ...inspection.toObject(), car: carDetails };
@@ -166,8 +174,8 @@ async function getPastInspectionsBuyer (req, res) {
 // Controller function to get upcoming inspections for a Seller
 async function getUpcomingInspectionsSeller(req, res) {
     try {
-        //const sellerId = req.session.user._id; 
-        const sellerId = req.params.seller_id;
+        const sellerId = req.params.id; // Get user ID from request parameter
+
         const upcomingInspections = await Inspection.find({ seller_id: sellerId, inspectionDate: { $gte: new Date() } }).sort({ inspectionDate: 1}).exec();
         const inspectionsWithCarDetails = await Promise.all(upcomingInspections.map(async (inspection) => {
             let carDetails = await Car.findById(inspection.car_id);
