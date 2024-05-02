@@ -25,7 +25,8 @@ router.get('/past-buyer/:id', inspectionController.getPastInspectionsBuyer);
 router.get('/upcoming-seller/:id', inspectionController.getUpcomingInspectionsSeller);
 
 // Route to allow seller to view past inspections
-router.get('/past-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getPastInspectionsSeller);
+//router.get('/past-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getPastInspectionsSeller);
+router.get('/past-seller/:seller_id', inspectionController.getPastInspectionsSeller);
 
 // Route to allow mechanics to view upcoming unclaimed inspections
 router.get('/upcoming-unclaimed-mechanic',authMiddleware.requireLogin, checkMechanicPermission, inspectionController.getUpcomingUnclaimedInspectionsForMechanic);
