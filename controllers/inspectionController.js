@@ -162,8 +162,8 @@ async function getPastInspectionsBuyer (req, res) {
 // Controller function to get upcoming inspections for a Seller
 async function getUpcomingInspectionsSeller(req, res) {
     try {
-        const sellerId = req.session.user._id; 
-
+        //const sellerId = req.session.user._id; 
+        const sellerId = req.params.seller_id;
         const upcomingInspections = await Inspection.find({ seller_id: sellerId, inspectionDate: { $gte: new Date() } }).sort({ inspectionDate: 1}).exec();
         const inspectionsWithCarDetails = await Promise.all(upcomingInspections.map(async (inspection) => {
             let carDetails = await Car.findById(inspection.car_id);
@@ -181,7 +181,7 @@ async function getUpcomingInspectionsSeller(req, res) {
 // Controller function to get past inspections for a Seller
 async function getPastInspectionsSeller (req, res) {
     try {
-        const sellerId = req.session.user._id;
+        const sellerId = req.params.seller_id;
 
         const pastInspections = await Inspection.find({ seller_id: sellerId, inspectionDate: { $lt: new Date() } }).sort({ inspectionDate: 1}).exec();
         const inspectionsWithCarDetails = await Promise.all(pastInspections.map(async (inspection) => {

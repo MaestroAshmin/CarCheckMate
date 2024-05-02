@@ -4,32 +4,35 @@ const path = require('path');
 
 async function verifySeller(req, res) {
     try {
+        
         // Check if all required fields are provided
-        const requiredFields = ['driverLicenseNumber', 'state', 'licenseExpiry', 'cardNumber'];
+        const requiredFields = ['driverLicenseNumber', 'state', 'licenseExpiry', 'cardNumber','frontImage','backImage'];
         for (const field of requiredFields) {
             if (!req.body[field]) {
                 return res.status(400).json({ error: `${field} is required` });
             }
         }
+       
         // get userId from session
-        const userId = req.session.user._id;
+        //const userId = req.session.user._id;
+        const userId = req.body.seller_id;
         // Check if front and back images are provided
-        if (!req.files || !req.files['frontImage'] || !req.files['backImage']) {
-            return res.status(400).json({ error: 'Front and back images are required' });
-        }
-
+        //if (!req.files || !req.files['frontImage'] || !req.files['backImage']) {
+          //  return res.status(400).json({ error: 'Front and back images are required' });
+        //}
+       
         const {driverLicenseNumber, state, licenseExpiry, cardNumber } = req.body;
         // Extract front and back images from req.files
-        const frontImage = req.files['frontImage'][0];
-        const backImage = req.files['backImage'][0];
+        const frontImage = req.body['frontImage'];
+        const backImage = req.body['backImage'];
         
         // Save images to the file system
-        const frontImagePath = path.join(__dirname, '../uploads/', frontImage.originalname);
-        const backImagePath = path.join(__dirname, '../uploads/', backImage.originalname);
+        //const frontImagePath = path.join(__dirname, '../uploads/', frontImage.originalname);
+        //const backImagePath = path.join(__dirname, '../uploads/', backImage.originalname);
 
         // Write image buffers to files
-        fs.writeFileSync(frontImagePath, frontImage.buffer);
-        fs.writeFileSync(backImagePath, backImage.buffer);
+        //fs.writeFileSync(frontImagePath, frontImage.buffer);
+        //fs.writeFileSync(backImagePath, backImage.buffer);
 
         // Check if the verification has already been done by admin
         const existingVerification = await SellerVerification.findOne({ user: userId });
@@ -43,8 +46,8 @@ async function verifySeller(req, res) {
             existingVerification.state = state;
             existingVerification.licenseExpiry = licenseExpiry;
             existingVerification.cardNumber = cardNumber;
-            existingVerification.frontImage = frontImagePath;
-            existingVerification.backImage = backImagePath;
+            existingVerification.frontImage = frontImage;
+            existingVerification.backImage = backImage;
             await existingVerification.save();
             return res.status(200).json({ status: true, message: 'Seller verification details updated successfully' });
         }
@@ -55,8 +58,8 @@ async function verifySeller(req, res) {
             state,
             licenseExpiry,
             cardNumber,
-            frontImage: frontImagePath, // Save file path to database
-            backImage: backImagePath // Save file path to database
+            frontImage: frontImage, // Save file path to database
+            backImage: backImage // Save file path to database
         });
         await verificationData.save();
 

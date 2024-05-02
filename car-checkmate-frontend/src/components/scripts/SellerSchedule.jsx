@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import EmailBuyerPopup from './EmailBuyerPopup';
 import AddRWCPopup from './AddRWCPopup';
@@ -41,6 +41,24 @@ function SellerSchedule() {
     const openCancelPopup = () => {
         setShowCancelPopup(true);
     };
+    useEffect(()=>{
+        async function fetchUpcomingInspections() {
+        try {
+            const userDataFromLocalStorage = localStorage.getItem('user');
+            const userData = JSON.parse(userDataFromLocalStorage);
+         const responseasupcomingseller = await fetch(`http://localhost:3000/inspections/upcoming-seller/${userData._id}`);
+         const responsegetpastinspections = await fetch(`http://localhost:3000/inspections/past-seller/${userData._id}`);
+        
+         const dataupcoming = await responseasupcomingseller.json();
+         const datagetpast = await responsegetpastinspections.json();
+         //console.log("data: ", data)
+
+        } catch (error) {
+           console.log("error while fetching upcoming inspections: ",error); 
+        }    
+        }
+        fetchUpcomingInspections()
+    },[])
 
     return (
         <div>
