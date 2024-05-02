@@ -74,14 +74,20 @@ function BuyerInspection() {
                         upcomingInspections.map((inspection, index) => (
                             <div key={index} className='ctr-schedule'>
                                 <div className='ctr-schedule-buyer-detail'>
-                                    <img src={inspection.car.carPhotos[0]} alt={`Car Image`} />
-                                    <p>Date: <span>{formatDateString(inspection.inspectionDate)}</span></p>
-                                    <p>Time: <span>{inspection.inspectionTime}</span></p>
-                                    {inspection.mechanic_id ? (
-                                        <p>Mechanic Status: <span>Your Inspection has been accepted by the mechanic</span></p>
-                                    ) : (
-                                        <p>No Mechanic has accepted the inspection</p>
-                                    )}
+                                {inspection.car ? (
+                                    <div className='ctr-schedule-buyer-detail'>
+                                        <img src={inspection.car.carPhotos[0]} alt={`Car Image`} />
+                                        <p>Date: <span>{formatDateString(inspection.inspectionDate)}</span></p>
+                                        <p>Time: <span>{inspection.inspectionTime}</span></p>
+                                        {inspection.mechanic_id ? (
+                                            <p>Mechanic Status: <span>Your Inspection has been accepted by the mechanic</span></p>
+                                        ) : (
+                                            <p>No Mechanic has accepted the inspection</p>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <p>No car details available</p>
+                                )}
                                 </div>
                                 <div className='ctr-schedule-option'>
                                     <button onClick={openEmailSellerPopup}>Email Seller</button>

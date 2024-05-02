@@ -150,4 +150,19 @@ const getCarById = async (req, res) => {
   }
 };
 
-module.exports = { uploadCarData, getUnsoldCars, getCarById };
+const listCarsBySeller = async (req, res) => {
+  try {
+      const sellerId = req.params.sellerId;
+
+      // Query the database for cars uploaded by the seller
+      const cars = await Car.find({ seller_id: sellerId });
+
+      res.json(cars);
+  } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+  }
+}
+
+
+module.exports = { uploadCarData, getUnsoldCars, getCarById, listCarsBySeller };

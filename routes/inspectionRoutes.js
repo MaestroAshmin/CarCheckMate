@@ -7,10 +7,10 @@ const checkMechanicPermission = require('../middlewares/checkMechanicPermission'
 const authMiddleware = require('../middlewares/authMiddleware');
 
 router.post('/inspection-form/:carId', inspectionController.createInspection);
-router.get('/pending-inspections', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getPendingInspectionsForSeller);
+router.get('/pending-inspections/:id',inspectionController.getPendingInspectionsForSeller);
 
 // Route to allow seller to accept an inspection request
-router.post('/accept/:inspectionId',authMiddleware.requireLogin, checkSellerPermission, inspectionController.acceptInspection);
+router.post('/accept/:inspectionId', inspectionController.acceptInspection);
 
 // Route to allow seller to deny an inspection request
 router.post('/deny/:inspectionId',authMiddleware.requireLogin, checkSellerPermission, inspectionController.denyInspection);
@@ -22,7 +22,7 @@ router.get('/upcoming-buyer/:id', inspectionController.getUpcomingInspectionsBuy
 router.get('/past-buyer/:id', inspectionController.getPastInspectionsBuyer);
 
 // Route to allow seller to view upcoming inspections
-router.get('/upcoming-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getUpcomingInspectionsSeller);
+router.get('/upcoming-seller/:id', inspectionController.getUpcomingInspectionsSeller);
 
 // Route to allow seller to view past inspections
 router.get('/past-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getPastInspectionsSeller);

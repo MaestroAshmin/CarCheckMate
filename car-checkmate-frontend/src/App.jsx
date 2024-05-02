@@ -9,6 +9,7 @@ import CarPhotoPage from './pages/scripts/CarPhotoPage';
 import CarLocationPage from './pages/scripts/CarLocationPage';
 import CarPricePage from './pages/scripts/CarPricePage';
 import CarInfoPage from './pages/scripts/Listing/CarInfoPage';
+import CarInfo from './pages/scripts/Listing/CarInfo';
 // import CarPostPage from './pages/scripts/Listing/CarPostPage';
 //import Mechanic from './pages/scripts/Mechanic';
 //import InspectionReport from './pages/scripts/InspectionReport';
@@ -41,6 +42,7 @@ function App() {
 
           {/* Car listing */}   
           <Route path="/car/:_id" element={<CarInfoPage />} />
+          <Route path="/seller-car/:_id" element={<CarInfo/>} />
           {/* <Route path="/listing" element={<CarPostPage />} /> */}
           {/*}<Route path="/CarAdPage" element={<CarAdPage />} />
           //<Route path="/CarBuildPage" element={<CarBuildPage />} />
@@ -76,6 +78,7 @@ function App() {
           <Route path="/StyleTest" element= {<StyleTest />} />
           <Route path="/ListingPage" element= {<ListingPage />} /> 
           <Route path="/Listing" element= {<Listing />} />
+          {/* <SellerSchedule carId={car.id} /> */}
         </Routes>
       </Router>
     </div>

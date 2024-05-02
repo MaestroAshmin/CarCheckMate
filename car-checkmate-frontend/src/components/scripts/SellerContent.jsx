@@ -1,34 +1,45 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SellerSchedule from './SellerSchedule';
 import SellerRequest from './SellerRequest';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import CarInfo from '../../pages/scripts/Listing/CarInfo';
 
-function SellerContect() {
-    const [cars, setCars] = useState([
-        { img: 'images/car-01.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '24/04/2024' },
-        { img: 'images/car-02.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '26/04/2024' },
-        { img: 'images/car-03.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '20/04/2024' },
-        { img: 'images/car-04.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '13/04/2024' },
-        { img: 'images/car-05.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '11/04/2024' },
-        { img: 'images/car-06.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '24/04/2024' },
-        { img: 'images/car-07.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '24/04/2024' },
-        { img: 'images/car-08.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '26/04/2024' },
-        { img: 'images/car-09.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '20/04/2024' },
-        { img: 'images/car-10.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '13/04/2024' },
-        { img: 'images/car-11.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '11/04/2024' },
-        { img: 'images/car-12.jpg', id: 'C1254', link: '/car/662dc1d0cecfcbf306bb9e22', date: '24/04/2024' },
-    ]);
+function SellerContent() {
+    const [cars, setCars] = useState([]);
+
+
     const [currentPage, setCurrentPage] = useState(1);
     const carsPerPage = 5;
 
+    useEffect(() => {
+        const fetchCars = async () => {
+            try {
+                // Retrieve user data from local storage
+                const userDataFromLocalStorage = localStorage.getItem('user');
+                const userData = JSON.parse(userDataFromLocalStorage);
+                const userId = userData._id;
+                // Fetch cars uploaded by the seller from the API
+                const response = await fetch(`http://localhost:3000/cars/seller-cars/${userId}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch cars');
+                }
+                const data = await response.json();
+                setCars(data); // Update state with fetched cars
+            } catch (error) {
+                console.error('Error fetching cars:', error);
+            }
+        };
+
+        fetchCars();
+    }, []);
     const indexOfLastCar = currentPage * carsPerPage;
     const indexOfFirstCar = indexOfLastCar - carsPerPage;
     const currentCars = cars.slice(indexOfFirstCar, indexOfLastCar);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+  
     return (
         <div className='ctr-user-content'>
             <div className='ctr-user-content-left'>
@@ -41,16 +52,17 @@ function SellerContect() {
                 <br />
 
                 <h3>View Your Car Listing</h3>
-                <Link to ='/CarAdPage'><button className='ctr-user-button'>Add a new list</button></Link>
+                <Link to='/CarAdPage'><button className='ctr-user-button'>Add a new list</button></Link>
                 {currentCars.map((car, index) => (
                     <div key={index} className='ctr-user-content-right-report'>
-                        <Link to={car.link}><img src={car.img} /></Link>
+                        <Link to={`/seller-car/${car._id}`}><img src={car.carPhotos[0]} /></Link>
                         <span>{car.id}</span>&nbsp;-&nbsp;
                         <span>{car.date}</span>
                         <br />
-                        <Link to={car.link}>View Details</Link>
+                        <Link to={`/car/${car._id}`}>View Details</Link>
                     </div>
                 ))}
+                <br />
                 <br />
                 <div className="pagination">
                     {Array.from({ length: Math.ceil(cars.length / carsPerPage) }, (_, index) => (
@@ -62,5 +74,5 @@ function SellerContect() {
     );
 }
 
-export default SellerContect;
+export default SellerContent;
 

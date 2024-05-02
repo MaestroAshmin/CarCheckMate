@@ -10,6 +10,6 @@ const { carPhotoUploadConfig } = require('../config/multer-config');
 // router.post('/upload-car-details', authMiddleware.requireLogin, checkSellerVerification, carPhotoUploadConfig, carController.uploadCarData);
 router.post('/upload-car-details',carPhotoUploadConfig, carController.uploadCarData);
 router.get('/available-cars', carController.getUnsoldCars);
-router.get('/car/:id', carController.getCarById); // Update this route
-
+router.get('/car/:id', carController.getCarById);
+router.get('/seller-cars/:sellerId', carController.listCarsBySeller);
 module.exports = router;
