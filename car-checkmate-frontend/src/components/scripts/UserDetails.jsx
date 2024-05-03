@@ -61,9 +61,23 @@ function UserDetails() {
         setIsProfileEditing(false);
     };
 
-    const handleAvailabilitySaveClick = () => {
-        // Implement save functionality here
-        setIsAvailabilityEditing(false);
+    const handleAvailabilitySaveClick = async () => {
+        // console.log("form-data ", formData)
+        // try{ await fetch("http://localhost:3000/",{
+        //     method:"POST", 
+        //     headers:{
+        //         "Content-Type" : "application/json",
+
+        //     },
+        //     body:JSON.stringify(formData)
+
+        // })
+            
+        // } catch (error) {
+        //     console.log("error while changing password : ", error)
+        // }
+        // // Implement save functionality here
+        // setIsAvailabilityEditing(false);
     };
 
     return (

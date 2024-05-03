@@ -1,31 +1,11 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import EmailBuyerPopup from './EmailBuyerPopup';
 import AddRWCPopup from './AddRWCPopup';
 import CancelPopup from './CancelPopup';
 
-function SellerSchedule() {
-    const schedules = [
-        {
-            carId: 'C1254',
-            name: 'John Smith',
-            date: '24/04/2024',
-            time: '10:30 am',
-        },
-        {
-            carId: 'C1254',
-            name: 'John Smith',
-            date: '24/04/2024',
-            time: '10:30 am',
-        },
-        {
-            carId: 'C1254',
-            name: 'John Smith',
-            date: '24/04/2024',
-            time: '10:30 am',
-        },
-    ];
 
+function SellerSchedule() {
+    const [schedules, setSchedules] = useState([]);
     const [showEmailBuyerPopup, setShowEmailBuyerPopup] = useState(false);
     const [showAddRWCPopup, setShowAddRWCPopup] = useState(false);
     const [showCancelPopup, setShowCancelPopup] = useState(false);
@@ -41,6 +21,35 @@ function SellerSchedule() {
     const openCancelPopup = () => {
         setShowCancelPopup(true);
     };
+
+    function formatDateString(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+    useEffect(() => {
+        const fetchSchedules = async () => {
+            try {
+                // Retrieve user data from local storage
+                const userDataFromLocalStorage = localStorage.getItem('user');
+                const userData = JSON.parse(userDataFromLocalStorage);
+                const userId = userData._id;
+                // Make a request to the API to fetch upcoming schedules for the seller
+                const response = await fetch(`http://localhost:3000/inspections/upcoming-seller/${userId}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch upcoming schedules');
+                }
+                const data = await response.json();
+                console.log(data);
+                // Update the component state with the fetched schedules data
+                setSchedules(data.inspectionsWithCarDetails || []);
+                console.log(schedules);
+            } catch (error) {
+                console.error('Error fetching upcoming schedules:', error);
+            }
+        };
+
+        fetchSchedules();
+    }, []);
 
     return (
         <div>
@@ -62,10 +71,21 @@ function SellerSchedule() {
             {schedules.map((schedule, index) => (
                 <div key={index} className='ctr-schedule'>
                     <div className='ctr-schedule-buyer-detail'>
-                        <h3>Car ID: <span>{schedule.carId}</span></h3>
-                        <p>Name: <span>{schedule.name}</span></p>
-                        <p>Date: <span>{schedule.date}</span> Time: <span>{schedule.time}</span></p>
-                    </div>
+                                {schedule.car ? (
+                                    <div className='ctr-schedule-buyer-detail'>
+                                        <img src={schedule.car.carPhotos[0]} alt={`Car Image`} />
+                                        <p>Date: <span>{formatDateString(schedule.inspectionDate)}</span></p>
+                                        <p>Time: <span>{schedule.inspectionTime}</span></p>
+                                        {schedule.mechanic_id ? (
+                                            <p>Mechanic Status: <span>Your Inspection has been accepted by the mechanic</span></p>
+                                        ) : (
+                                            <p>No Mechanic has accepted the inspection</p>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <p>No car details available</p>
+                                )}
+                                </div>
                     <div className='ctr-schedule-option'>
                         <button onClick={openEmailBuyerPopup}>Email Buyer</button>
                         <button onClick={openAddRWCPopup}>Add RWC</button>

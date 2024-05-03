@@ -5,34 +5,15 @@ import '../../styles/Listing.css';
 
 export default function Listing({ car }) {
   const navigate = useNavigate();
+// Ensure carPhotos is an array
+  const carPhotosArray = Array.isArray(car.carPhotos) ? car.carPhotos : [];
 
-
-  const filePathsString = JSON.stringify(car.carPhotos);
-  console.log(`Type of filePathsString: ${typeof filePathsString}, Value:`, filePathsString);
-    const trimmedFilePathsArray = [];
-  // Check if filePathsString is a string before splitting
-  if (typeof filePathsString === 'string') {
-      // Split the string into an array of file paths
-      const filePathsArray = filePathsString.split(',');
-    
-      // Trim each file path to remove leading and trailing whitespace
-      
-      filePathsArray.forEach(filePath => {
-          const trimmedFilePath = filePath.trim();
-          const parts = trimmedFilePath.split('\\');
-          const filename = parts[parts.length - 1];
-         // console.log('Filename:', filename);
-          trimmedFilePathsArray.push(filename); // Store the trimmed file path in the array
-      });
-  
-      // Log the resulting array of trimmed file paths
-      
-    
-  } else {
-      //console.log(`filePathsString is not a string. It is of type: ${typeof filePathsString}`);
-  }
-  //console.log('Trimmed file paths:', trimmedFilePathsArray[0]);
-
+  // Trim each file path to remove leading and trailing whitespace
+  const trimmedFilePathsArray = carPhotosArray.map(filePath => {
+    const trimmedFilePath = filePath.trim();
+    const parts = trimmedFilePath.split('\\');
+    return parts[parts.length - 1];
+  });
   console.log(car.car_id)
 
   const handleCarClick = () => {
@@ -43,7 +24,7 @@ export default function Listing({ car }) {
   return (
     <div className="listing-container" onClick={handleCarClick}>
       <div className="image-container">
-      <img src={`http://localhost:3000/uploads/car_photos/${trimmedFilePathsArray[2]}`} alt={car.make} className="listing-image" />
+      <img src={trimmedFilePathsArray[2]} alt={car.make} className="listing-image" />
       </div>
       <div className="info-container">
         <div className="make-model">

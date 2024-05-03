@@ -30,54 +30,6 @@ export default function CarInfoPage() {
     setShowBookMechanicPopup(true);
   };
 
-//   useEffect(() => {
-//     const fetchCars = async () => {
-//         try {
-//             const response = await axios.get('http://localhost:3000/cars/available-cars');
-//             //console.log(response.data); // Check the structure of the data first
-            
-//             // Format the data before setting it in the state
-//             const unsoldCars = response.data.map(car => ({
-//                 car_id: car._id,
-//                 bodyType: car.bodyType,
-//                 color: car.color,
-//                 engineType: car.engineType,
-//                 fuelType: car.fuelType,
-//                 hasBeenSold: car.hasBeenSold,
-//                 make: car.make,
-//                 model: car.model,
-//                 odometer: car.odometer,
-//                 postcode: car.postcode,
-//                 price: car.price,
-//                 seller_id: car.seller_id,
-//                 state: car.state,
-//                 streetName: car.streetName,
-//                 suburb: car.suburb,
-//                 title: car.title,
-//                 transmission: car.transmission,
-//                 year: car.year,
-//                 carPhotos: car.carPhotos // Split the photo string into an array
-//             }));
-
-//             // Set the formatted data in the state
-//             setCars(unsoldCars);
-//             setIsLoading(false);
-            
-//             // Check if a specific car is available and set its data
-//             const unsoldCar = unsoldCars.find(car => car.car_id === _id);
-//             if (unsoldCar) {
-//                 setCarData(unsoldCar);
-//                 console.log("Car found ");
-//             } else {
-//                 console.log("Car not found or already sold.");
-//             }
-//         } catch (error) {
-//             console.log('Error fetching cars:', error);
-//         }
-//     };
-
-//     fetchCars();
-// }, []); // Dependency array is empty, effect runs once when component mounts
     useEffect(() => {
         const fetchCarData = async () => {
             try {
@@ -213,11 +165,6 @@ export default function CarInfoPage() {
                                 <div className="details-container">
                                     <div className="price-container">
                                         <p>${carData.price}</p>
-                                    </div>
-                                    <div className="action-buttons">
-                                        <button>BUY THIS !</button>
-                                        <button onClick={openBookSellerPopup}>BOOK AN INSPECTION</button>
-                                        <button onClick={openBookMechanicPopup}>BOOK A MECHANIC</button>
                                     </div>
                                 </div>
                             </div>

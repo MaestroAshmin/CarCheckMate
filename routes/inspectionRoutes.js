@@ -6,26 +6,27 @@ const checkSellerPermission = require('../middlewares/checkSellerPermission');
 const checkMechanicPermission = require('../middlewares/checkMechanicPermission')
 const authMiddleware = require('../middlewares/authMiddleware');
 
-router.post('/inspection-form/:carId',authMiddleware.requireLogin, checkBuyerPermission, inspectionController.createInspection);
-router.get('/pending-inspections', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getPendingInspectionsForSeller);
+router.post('/inspection-form/:carId', inspectionController.createInspection);
+router.get('/pending-inspections/:id',inspectionController.getPendingInspectionsForSeller);
 
 // Route to allow seller to accept an inspection request
-router.post('/accept/:inspectionId',authMiddleware.requireLogin, checkSellerPermission, inspectionController.acceptInspection);
+router.post('/accept/:inspectionId', inspectionController.acceptInspection);
 
 // Route to allow seller to deny an inspection request
 router.post('/deny/:inspectionId',authMiddleware.requireLogin, checkSellerPermission, inspectionController.denyInspection);
 
 // Route to allow buyer to view upcoming inspections
-router.get('/upcoming-buyer', authMiddleware.requireLogin, checkBuyerPermission, inspectionController.getUpcomingInspectionsBuyer);
+router.get('/upcoming-buyer/:id', inspectionController.getUpcomingInspectionsBuyer);
 
 // Route to allow buyer to view past inspections
-router.get('/past-buyer', authMiddleware.requireLogin, checkBuyerPermission, inspectionController.getPastInspectionsBuyer);
+router.get('/past-buyer/:id', inspectionController.getPastInspectionsBuyer);
 
 // Route to allow seller to view upcoming inspections
-router.get('/upcoming-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getUpcomingInspectionsSeller);
+router.get('/upcoming-seller/:id', inspectionController.getUpcomingInspectionsSeller);
 
 // Route to allow seller to view past inspections
-router.get('/past-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getPastInspectionsSeller);
+//router.get('/past-seller', authMiddleware.requireLogin, checkSellerPermission, inspectionController.getPastInspectionsSeller);
+router.get('/past-seller/:seller_id', inspectionController.getPastInspectionsSeller);
 
 // Route to allow mechanics to view upcoming unclaimed inspections
 router.get('/upcoming-unclaimed-mechanic',authMiddleware.requireLogin, checkMechanicPermission, inspectionController.getUpcomingUnclaimedInspectionsForMechanic);
