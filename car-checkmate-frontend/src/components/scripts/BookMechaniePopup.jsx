@@ -32,7 +32,34 @@ const handleBookInspection = async() =>{
 }
 
 
-    return (
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSuccessMessage(null);
+    setError(null);
+
+    try {
+      const response = await axios.post(`http://localhost:3000/inspections/inspection-form/${_id}`, {
+        inspectionDate,
+        inspectionTime,
+      });
+
+      if (response.status === 200) {
+        console.log("Inspection booked successfully");
+        setSuccessMessage("Inspection booked successfully");
+        setShowBookMechanicPopup(false);
+      } else {
+        console.error("Error booking inspection");
+        setError(response.data.error);
+      }
+    } catch (error) {
+      console.error("Error booking inspection:", error);
+      setError("An unexpected error occurred. Please try again later.");
+    }
+  };
+
+  return (
+    <>
+      {showBookMechanicPopup && (
         <>
             {showBookMechanicPopup && (
                 <>
@@ -61,5 +88,7 @@ const handleBookInspection = async() =>{
                 </>
             )}
         </>
-    );
+      )}
+    </>
+  );
 }
