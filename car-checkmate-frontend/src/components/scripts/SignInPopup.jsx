@@ -74,7 +74,7 @@ export default function SignInPopup({ showSignInPopup, setShowSignInPopup, openF
                                 <br />
                                 <span className='link-forgot-pass' onClick={openForgotPassPopup}>Forgot Password?</span>
                                 <div className='button-container'>
-                                    <button type='submit'>Log In</button>
+                                    <button type='submit' onClick={loginUserApiCall}>Log In</button>
                                 </div>
                             </form>
                             <p className='popup-link-align-right'>Don't have an account yet? <span onClick={openSignUpPopup}>Sign Up</span></p>
