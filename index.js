@@ -39,7 +39,7 @@ app.use(cors({
   }));
 // Configure session middleware
 app.use(session({
-    secret: secretKey,
+    secret: "cY1r5blzH6Q4tzNe5pGTGq4ddkfyQuOH",
     resave: true,
     saveUninitialized: true,
     cookie: {

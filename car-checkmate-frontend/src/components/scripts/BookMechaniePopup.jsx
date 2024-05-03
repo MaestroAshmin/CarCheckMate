@@ -1,11 +1,36 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React,{useState} from "react"; 
+export default function BookMechanicPopup({ showBookMechanicPopup, setShowBookMechanicPopup }) {
+const [bookData,setBookData ]= useState({Date: "", Time: ""})
 
-export default function BookMechanicPopup({ showBookMechanicPopup, setShowBookMechanicPopup, _id }) {
-  const [inspectionDate, setInspectionDate] = useState("");
-  const [inspectionTime, setInspectionTime] = useState("");
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
+
+const handleDate=(e) => { 
+    console.log("date ",e.target.value)
+}
+const handleTime=(e) => { 
+    console.log("time ",e.target.value)
+}
+
+const handleBookInspection = async() =>{
+    try{ await fetch(`http://localhost:3000/inspections/inspection-form/${showBookMechanicPopup}`,{
+            method:"POST", 
+            headers:{
+                "Content-Type" : "application/json",
+
+            },
+
+            body:JSON.stringify({
+                inspectionDate: bookData.Date,
+                inspectionTime: bookData.Time
+
+            })
+
+        })
+            
+        } catch (error) {
+            console.log("error while booking inspection : ", error)
+        }
+}
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,46 +61,32 @@ export default function BookMechanicPopup({ showBookMechanicPopup, setShowBookMe
     <>
       {showBookMechanicPopup && (
         <>
-          <div className="overlay"></div>
-          <div className="popup">
-            <div className="popup-content">
-              <span className="close" onClick={() => setShowBookMechanicPopup(false)}>
-                &times;
-              </span>
-              <h2>Book An Inspection</h2>
-              <p>
-                Car ID: <span>{_id}</span>
-              </p>
-              <p>Enter a preferred date and time.</p>
-              <br />
-              <div className="ctr-unlock-profile">
-                <form onSubmit={handleSubmit}>
-                  {error && <p style={{ color: "red", fontWeight: "bold" }}>{error}</p>}
-                  {successMessage && <p style={{ color: "green", fontWeight: "bold" }}>{successMessage}</p>}
-                  <label htmlFor="requestDate">Date:</label>
-                  <input
-                    type="date"
-                    name="requestDate"
-                    required
-                    value={inspectionDate}
-                    onChange={(e) => setInspectionDate(e.target.value)}
-                  />
-                  <label htmlFor="requestTime">Time:</label>
-                  <input
-                    type="time"
-                    name="requestTime"
-                    required
-                    value={inspectionTime}
-                    onChange={(e) => setInspectionTime(e.target.value)}
-                  />
-                  <br />
-                  <div className="button-container">
-                    <button type="submit">Book</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+            {showBookMechanicPopup && (
+                <>
+                    <div className='overlay'></div>
+                    <div className='popup'>
+                        <div className='popup-content'>
+                            <span className='close' onClick={() => setShowBookMechanicPopup(false)}>&times;</span>
+                            <h2>Book An Inspection</h2>
+                                <p>Car ID: <span>{showBookMechanicPopup}</span></p>
+                                <p>Enter a preferred date and time.</p>
+                                <br />
+                                <div className='ctr-unlock-profile'>
+                                    <form>
+                                        <label htmlFor='requestDate'>Date:</label>
+                                        <input type="date" name="requestDate" required  onChange={handleDate}/>
+                                        <label htmlFor='requestTime'>Time:</label>
+                                        <input type="time" name="requestDate" required onChange={handleTime} /> 
+                                        <br />
+                                        <div className='button-container'>
+                                            <button type='submit' onClick={handleBookInspection}>Book</button>
+                                        </div>
+                                    </form>
+                                </div>
+                        </div>
+                    </div>
+                </>
+            )}
         </>
       )}
     </>

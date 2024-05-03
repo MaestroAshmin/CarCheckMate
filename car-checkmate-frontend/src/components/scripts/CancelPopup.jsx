@@ -14,6 +14,9 @@ export default function CancelPopup({ showCancelPopup, setShowCancelPopup }) {
                             <p>Please confirm your cancelled inspection.</p>
                             <p>Car ID: <span>CR1234</span></p>
                             <form>
+                                <div className="button-container">
+                                    <textarea placeholder="Please enter the reason why you are going to cancel this requested inspection."></textarea>
+                                </div>
                                 <div className='button-container'>
                                     <button type='submit'>Cancel</button>
                                 </div>

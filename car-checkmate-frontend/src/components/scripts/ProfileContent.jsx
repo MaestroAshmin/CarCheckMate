@@ -5,35 +5,28 @@ import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
 
 function ProfileContent() {
     const [isVerifyingDL, setIsVerifyingDL] = useState(false);
-    const [isVerifyingLVT, setIsVerifyingLVT] = useState(false);
     const [licenseData, setLicenseData] = useState({
-        licenseDLNumber: 'DL65432',
-        expiryDateDL: '2024-05-13',
-        licenseLVTNumber: '',
-        expiryDateLVT: ''
+        driverLicenseNumber: 'DL65432',
+        state: '',
+        licenseExpiry: '2024-05-13',
+        cardNumber: '',
+        frontImage: null,
+        backImage: null
     });
     const [daysDLLeft, setDaysDLLeft] = useState(null);
-    const [daysLVTLeft, setDaysLVTLeft] = useState(null);
 
     useEffect(() => {
         if (licenseData.licenseDLNumber && licenseData.expiryDateDL) {
-            calculateDaysLeft('DL');
+            calculateDaysLeft();
         }
-        if (licenseData.licenseLVTNumber && licenseData.expiryDateLVT) {
-            calculateDaysLeft('LVT');
-        }
-    }, []);
+    }, [licenseData.licenseDLNumber, licenseData.expiryDateDL]);
 
-    const calculateDaysLeft = (type) => {
-        const expiryDate = new Date(licenseData[`expiryDate${type}`]);
+    const calculateDaysLeft = () => {
+        const expiryDate = new Date(licenseData.expiryDateDL);
         const today = new Date();
         const diffTime = expiryDate - today;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        if (type === 'DL') {
-            setDaysDLLeft(diffDays);
-        } else if (type === 'LVT') {
-            setDaysLVTLeft(diffDays);
-        }
+        setDaysDLLeft(diffDays);
     };
 
     const handleVerifyDLClick = () => {
@@ -41,38 +34,23 @@ function ProfileContent() {
     };
 
     const handleSaveDLClick = () => {
+        handleSellerFeatures();
         // Implement save functionality here
         setIsVerifyingDL(false);
-        calculateDaysLeft('DL');
+        calculateDaysLeft();
         // You can save the license data to state or send it to the server
     };
 
-    const handleDLFileChange = (e) => {
+    const handleDLFileChange = async(e, type) => {
         const file = e.target.files[0];
+        const base64 = await ConvertTobase64(file)
+        console.log(type, base64)
+
         setLicenseData({
             ...licenseData,
-            fileUploadDL: file
+            [type]: base64
         });
     };
-
-    const handleLVTFileChange = (e) => {
-        const file = e.target.files[0];
-        setLicenseData({
-            ...licenseData,
-            fileUploadLVT: file
-        });
-    };
-    
-    const handleVerifyLVTClick = () => {
-        setIsVerifyingLVT(true);
-    };
-
-    const handleSaveLVTClick = () => {
-        // Implement save functionality here
-        setIsVerifyingLVT(false);
-        calculateDaysLeft('LVT');
-        // You can save the license data to state or send it to the server
-    };    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -81,6 +59,40 @@ function ProfileContent() {
             [name]: value
         });
     };
+
+    async function handleSellerFeatures() {
+        console.log("licenseData: ",licenseData)
+        try{
+            const userDataFromLocalStorage = localStorage.getItem('user');
+            const userData = JSON.parse(userDataFromLocalStorage);
+
+            await fetch("http://localhost:3000/verification/seller-verification",{
+                method:"POST", 
+                credentials:"include",
+                headers:{
+                    "Content-Type" : "application/json",
+
+                },
+                body:JSON.stringify({...licenseData,seller_id:userData._id})
+    
+            })
+        } catch(error){console.log("error while submitting form", error)} 
+        //const result = await fetch()
+        
+    }
+
+    const ConvertTobase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const filereader = new FileReader();
+          filereader.readAsDataURL(file);
+          filereader.onload = () => {
+            resolve(filereader.result);
+          };
+          filereader.onerror = (error) => {
+            reject(error);
+          };
+        });
+      };
 
     return (
         <div className='ctr-user-content'>
@@ -97,14 +109,37 @@ function ProfileContent() {
                                 <br />
                                 <input type="text" name="licenseDLNumber" placeholder="Driver's License Number" value={licenseData.licenseDLNumber} onChange={handleChange} />
                                 <br />
+                                <label name='state'>State:</label>
+                                <select name="state" value={licenseData.state} onChange={handleChange}>
+                                    <option value="">Select State</option>
+                                    <option value="ACT">Australian Capital Territory</option>
+                                    <option value="NSW">New South Wales</option>
+                                    <option value="NT">Northern Territory</option>
+                                    <option value="QLD">Queensland</option>
+                                    <option value="SA">South Australia</option>
+                                    <option value="TAS">Tasmania</option>
+                                    <option value="VIC">Victoria</option>
+                                    <option value="WA">Western Australia</option>
+                                </select>
+                                <br />
                                 <label name='expiryDateDL'>Expiry Date:</label>
                                 <input type="date" name="expiryDateDL" value={licenseData.expiryDateDL} onChange={handleChange} />
                                 <br />
-                                <label htmlFor='fileUploadDL'>Upload Driver License Document:</label>
+                                <label name='cardNumber'>Card Number:</label>
+                                <input type="text" name="cardNumber" placeholder="Card Number" value={licenseData.cardNumber} onChange={handleChange} />
+                                <br />
+                                <label htmlFor='fileUploadFront'>Upload Front Image:</label>
                                 <div className='file-upload'>
-                                    <label className='file-upload-btn' htmlFor='fileUploadDL'>Choose File</label>
-                                    <span className='file-name'>{licenseData.fileUploadDL ? licenseData.fileUploadDL.name : 'No file selected'}</span>
-                                    <input type='file' id='fileUploadDL' name='fileUploadDL' accept='image/*,.pdf' onChange={handleDLFileChange} />
+                                    <label className='file-upload-btn' htmlFor='fileUploadFront'>Choose File</label>
+                                    <span className='file-name'>{licenseData.frontImage ? licenseData.frontImage.name : 'No file selected'}</span>
+                                    <input type='file' id='fileUploadFront' name='fileUploadFront' accept='image/*' onChange={(e) => handleDLFileChange(e, 'frontImage')} />
+                                </div>
+                                <br />
+                                <label htmlFor='fileUploadBack'>Upload Back Image:</label>
+                                <div className='file-upload'>
+                                    <label className='file-upload-btn' htmlFor='fileUploadBack'>Choose File</label>
+                                    <span className='file-name'>{licenseData.backImage ? licenseData.backImage.name : 'No file selected'}</span>
+                                    <input type='file' id='fileUploadBack' name='fileUploadBack' accept='image/*' onChange={(e) => handleDLFileChange(e, 'backImage')} />
                                 </div>
                                 <br />
                                 <button onClick={handleSaveDLClick}>Save</button>
@@ -118,39 +153,6 @@ function ProfileContent() {
                                 <p>License ID: {licenseData.licenseDLNumber}</p>
                                 <p>Expiry Date: {licenseData.expiryDateDL}</p>
                                 <p>Days Left Until Expiry: {daysDLLeft}</p>
-                            </>
-                        )}
-                    </div>
-
-                <h3>Unlock Mechanic Features</h3>
-                    <div className='ctr-unlock-profile'>
-                        {isVerifyingLVT ? (
-                            <>
-                                <label name='licenseLVTNumber'>Licensed Vehicle Testers (LVT) Number:</label>
-                                <br />
-                                <input type="text" name="licenseLVTNumber" placeholder="Licensed Vehicle Testers (LVT) Number" value={licenseData.licenseLVTNumber} onChange={handleChange} />
-                                <br />
-                                <label name='expiryDateLVT'>Expiry Date:</label>
-                                <input type="date" name="expiryDateLVT" value={licenseData.expiryDateLVT} onChange={handleChange} />
-                                <br />
-                                <label name='fileUploadLVT'>Upload LVT License Document:</label>
-                                <div className='file-upload'>
-                                    <label className='file-upload-btn' htmlFor='fileUploadLVT'>Choose File</label>
-                                    <span className='file-name'>{licenseData.fileUploadLVT ? licenseData.fileUploadLVT.name : 'No file selected'}</span>
-                                    <input type='file' id='fileUploadLVT' name='fileUploadLVT' accept='image/*,.pdf' onChange={handleLVTFileChange} />
-                                </div>
-                                <br />
-                                <button onClick={handleSaveLVTClick}>Save</button>
-                            </>
-                        ) : (
-                            <button onClick={handleVerifyLVTClick}>Verify ID</button>
-                        )}
-
-                        {daysLVTLeft !== null && (
-                            <>
-                                <p>License ID: {licenseData.licenseLVTNumber}</p>
-                                <p>Expiry Date: {licenseData.expiryDateLVT}</p>
-                                <p>Days Left Until Expiry: {daysLVTLeft}</p>
                             </>
                         )}
                     </div>

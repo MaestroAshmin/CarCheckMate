@@ -139,14 +139,10 @@ const getCarById = async (req, res) => {
   try {
     const id = req.params.id; // Update parameter name to match the route
     const car = await Car.findById(id);
-
+    console.log(car);
     if (!car) {
       return res.status(404).json({ error: "Car not found" });
     }
-
-    // Convert carPhotos string to an array
-    car.carPhotos = convertCarPhotosStringToArray(car.carPhotos);
-
     res.status(200).json(car);
   } catch (error) {
     console.error("Error fetching car details:", error);
@@ -154,4 +150,19 @@ const getCarById = async (req, res) => {
   }
 };
 
-module.exports = { uploadCarData, getUnsoldCars, getCarById };
+const listCarsBySeller = async (req, res) => {
+  try {
+      const sellerId = req.params.sellerId;
+
+      // Query the database for cars uploaded by the seller
+      const cars = await Car.find({ seller_id: sellerId });
+
+      res.json(cars);
+  } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+  }
+}
+
+
+module.exports = { uploadCarData, getUnsoldCars, getCarById, listCarsBySeller };

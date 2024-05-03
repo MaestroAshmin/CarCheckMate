@@ -1,74 +1,98 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import CancelPopup from './CancelPopup';
 
 function SellerRequest() {
-    const requests = [
-        {
-            carId: 'C1254',
-            name: 'John Smith',
-            date: '24/04/2024',
-            time: '10:30 am',
-        },
-        {
-            carId: 'C1254',
-            name: 'John Smith',
-            date: '24/04/2024',
-            time: '10:30 am',
-        },
-        {
-            carId: 'C1254',
-            name: 'John Smith',
-            date: '24/04/2024',
-            time: '10:30 am',
-        },
-        {
-            carId: 'C1254',
-            name: 'John Smith',
-            date: '25/04/2024',
-            time: '10:30 am',
-        },
-        {
-            carId: 'C1254',
-            name: 'John Smith',
-            date: '27/04/2024',
-            time: '10:30 am',
-        },
-        {
-            carId: 'C1254',
-            name: 'John Smith',
-            date: '2204/2024',
-            time: '10:30 am',
-        },
-    ];
+    
+    const [pendingInspections, setPendingInspections] = useState([]);
+    const [showCancelPopup, setShowCancelPopup] = useState(false);
+    const [showAcceptedMessage, setShowAcceptedMessage] = useState(false);
+    const openCancelPopup = () => {
+        setShowCancelPopup(true);
+    };
 
     const [currentPage, setCurrentPage] = useState(1);
-    const requestsPerPage = 3;
+    const inspectionsPerPage = 3;
 
-    const indexOfLastRequest = currentPage * requestsPerPage;
-    const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
-    const currentRequests = requests.slice(indexOfFirstRequest, indexOfLastRequest);
+    const indexOfLastInspection = currentPage * inspectionsPerPage;
+    const indexOfFirstInspection = indexOfLastInspection - inspectionsPerPage;
+    const currentInspections = pendingInspections.slice(indexOfFirstInspection, indexOfLastInspection);
+
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+    useEffect(() => {
+        const fetchPendingInspections = async () => {
+            try {
+                // Retrieve user data from local storage
+                const userDataFromLocalStorage = localStorage.getItem('user');
+                const userData = JSON.parse(userDataFromLocalStorage);
+                const userId = userData._id;
+                const response = await fetch(`http://localhost:3000/inspections/pending-inspections/${userId}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch pending inspections');
+                }
+                const data = await response.json();
+                setPendingInspections(data.inspectionsWithCarDetails || []);
+            } catch (error) {
+                console.error('Error fetching pending inspections:', error);
+            }
+        };
+
+        fetchPendingInspections();
+    },[]);
+    const handleAccept = async (inspectionId) => {
+        try {
+            // Retrieve user data from local storage
+            const userDataFromLocalStorage = localStorage.getItem('user');
+            const userData = JSON.parse(userDataFromLocalStorage);
+            const userId = userData._id;
+            const response = await fetch(`http://localhost:3000/inspections/accept/${inspectionId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed to accept inspection');
+            }
+            setShowAcceptedMessage(true);
+            const updatedResponse = await fetch(`http://localhost:3000/inspections/pending-inspections/${userId}`);
+            if (!updatedResponse.ok) {
+                throw new Error('Failed to fetch updated pending inspections');
+            }
+            const updatedData = await updatedResponse.json();
+            setPendingInspections(updatedData.inspectionsWithCarDetails || []);
+        } catch (error) {
+            console.error('Error accepting inspection:', error);
+        }
+    };
     return (
         <div>
-            {currentRequests.map((request, index) => (
-                <div key={index} className='ctr-schedule-book'>
-                    <div className='ctr-schedule-seller'>
-                        <p><b>Car ID</b>: <span>{request.carId}</span> - <span>{request.date}</span>, <span>{request.time}</span></p>
-                    </div>
-                    <div className='ctr-schedule-option-seller-request'>
-                        <button>Accept</button>
-                        <button>Deny</button>
-                    </div>
+        <CancelPopup
+            showCancelPopup={showCancelPopup}
+            setShowCancelPopup={setShowCancelPopup}
+        />
+        {showAcceptedMessage && <p>Inspection Accepted!</p>}
+        {currentInspections.map((inspection, index) => (
+            <div key={index} className='ctr-schedule-book'>
+                
+                <div className='ctr-schedule-seller'>
+                <img src={inspection.car.carPhotos[0]} alt="Car" />
+                    <p><span>{new Date(inspection.inspectionDate).toLocaleDateString()}</span>, <span>{inspection.inspectionTime}</span></p>
                 </div>
-            ))}
-
-            <div className="pagination">
-                {Array.from({ length: Math.ceil(requests.length / requestsPerPage) }, (_, index) => (
-                    <button key={index} onClick={() => paginate(index + 1)}>{index + 1}</button>
-                ))}
+                <div className='ctr-schedule-option-seller-request'>
+                    <button onClick={() => handleAccept(inspection._id)}>Accept</button>
+                    <button onClick={openCancelPopup}>Deny</button>
+                </div>
             </div>
+        ))}
+
+        <div className="pagination">
+            {Array.from({ length: Math.ceil(pendingInspections.length / inspectionsPerPage) }, (_, index) => (
+                <button key={index} onClick={() => paginate(index + 1)}>{index + 1}</button>
+            ))}
         </div>
+    </div>
     );
 }
 
