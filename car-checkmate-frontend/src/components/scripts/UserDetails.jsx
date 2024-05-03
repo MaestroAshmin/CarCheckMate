@@ -102,6 +102,7 @@ function UserDetails() {
                     <p><i>Inspection time is between 9:00 to 16:00</i></p>
                     {isAvailabilityEditing ? (
                         <form>
+                            <p><i>* Please select unavailable days for inspection</i></p>
                             <div className='ctr-user-details-chk-availability'>
                                 {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, index) => (
                                     <label key={index}>

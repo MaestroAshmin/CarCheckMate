@@ -479,6 +479,42 @@ span:hover {
     position: relative;
 }
 
+/* Date Picker */
+
+.popup-content .custom-datepicker input {
+    width: 280px;
+    height: 30px;;
+}
+
+.popup-content .custom-datepicker input::placeholder {
+    color: #999; /* Placeholder text color */
+    font-style: italic; /* Placeholder text style */
+}
+
+.popup-content .custom-datepicker button {
+    background-color: rgba(33,33,33,255);
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 10%; /* Match the width of .btn-signup */
+    height: 25px; /* Match the height of .btn-signup */
+    border-radius: 20px; /* Match the border radius of .btn-signup */
+    color: rgba(217,202,179,255);
+    text-transform: uppercase;
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+
+.popup-content .custom-datepicker button:hover {
+    background-color: rgba(217,202,179,255);
+    color: rgba(33,33,33,255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup-content .custom-select {
+    width: 280px;
+    height: 30px;;
+}
+
 /* Adjustments for responsiveness */
 /*@media (max-width: 768px) {
     .popup-signup {
