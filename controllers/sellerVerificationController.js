@@ -1,12 +1,22 @@
 const SellerVerification = require('../models/SellerVerification');
 const fs = require('fs');
 const path = require('path');
+const serverUrl = 'http://localhost:3000';
+
+// Function to ensure directory exists, create it if it doesn't
+const ensureDirectoryExists = (directory) => {
+    const directoryPath = path.resolve(directory);
+    if (!fs.existsSync(directoryPath)) {
+        fs.mkdirSync(directoryPath, { recursive: true }); // recursive option creates parent directories if they don't exist
+    }
+};
 
 async function verifySeller(req, res) {
     try {
         
         // Check if all required fields are provided
-        const requiredFields = ['driverLicenseNumber', 'state', 'licenseExpiry', 'cardNumber','frontImage','backImage'];
+        console.log(req);
+        const requiredFields = ['driverLicenseNumber', 'state', 'licenseExpiry', 'cardNumber'];
         for (const field of requiredFields) {
             if (!req.body[field]) {
                 return res.status(400).json({ error: `${field} is required` });
@@ -17,29 +27,55 @@ async function verifySeller(req, res) {
         //const userId = req.session.user._id;
         const userId = req.body.seller_id;
         // Check if front and back images are provided
-        //if (!req.files || !req.files['frontImage'] || !req.files['backImage']) {
-          //  return res.status(400).json({ error: 'Front and back images are required' });
-        //}
-       
+        console.log(req.files);
+        if (!req.files || !req.files['frontImage'] || !req.files['backImage']) {
+           return res.status(400).json({ error: 'Front and back images are required' });
+        }
+  
         const {driverLicenseNumber, state, licenseExpiry, cardNumber } = req.body;
-        // Extract front and back images from req.files
-        const frontImage = req.body['frontImage'];
-        const backImage = req.body['backImage'];
         
-        // Save images to the file system
-        //const frontImagePath = path.join(__dirname, '../uploads/', frontImage.originalname);
-        //const backImagePath = path.join(__dirname, '../uploads/', backImage.originalname);
-
-        // Write image buffers to files
-        //fs.writeFileSync(frontImagePath, frontImage.buffer);
-        //fs.writeFileSync(backImagePath, backImage.buffer);
-
         // Check if the verification has already been done by admin
         const existingVerification = await SellerVerification.findOne({ user: userId });
         if (existingVerification && existingVerification.verifiedByAdmin) {
             // If verification has been approved by admin, disallow updating
             return res.status(400).json({ error: 'Verification already approved by admin, update not allowed' });
         }
+
+        // Extract front and back images from req.files
+        const frontImage = req.files['frontImage'][0];
+        const backImage = req.files['backImage'][0];
+        let frontImagePath = '';
+        let backImagePath = '';
+
+        const publicDirectory = 'uploads/car_photos';
+        ensureDirectoryExists(publicDirectory);
+
+        // Processing front image
+        if (req.files['frontImage'] && req.files['frontImage'][0] && typeof req.files['frontImage'][0] === 'object') {
+            const frontImageData = req.files['frontImage'][0];
+            const currentDate = new Date().toISOString().replace(/:/g, "-");
+            const fileName = `${currentDate}_front_${frontImageData.originalname}`;
+            const filePath = path.join(publicDirectory, fileName);
+            fs.writeFileSync(filePath, frontImageData.buffer);
+            frontImagePath = `${serverUrl}/uploads/${fileName}`;
+        }
+
+        // Processing back image
+        if (req.files['backImage'] && req.files['backImage'][0] && typeof req.files['backImage'][0] === 'object') {
+            const backImageData = req.files['backImage'][0];
+            const currentDate = new Date().toISOString().replace(/:/g, "-");
+            const fileName = `${currentDate}_back_${backImageData.originalname}`;
+            const filePath = path.join(publicDirectory, fileName);
+            fs.writeFileSync(filePath, backImageData.buffer);
+            backImagePath = `${serverUrl}/uploads/${fileName}`;
+        }
+        console.log(frontImagePath, backImagePath);
+        // Removing the prefix from the file paths
+        // const relativeFrontImagePath = frontImagePath.replace('D:\\CarCheckMate\\', '');
+        // const relativeBackImagePath = backImagePath.replace('D:\\CarCheckMate\\', '');
+        // // Write image buffers to files
+        // fs.writeFileSync(relativeFrontImagePath, frontImage.buffer);
+        // fs.writeFileSync(relativeBackImagePath, backImage.buffer);
         if (existingVerification) {
             // Update the existing verification record
             existingVerification.driverLicenseNumber = driverLicenseNumber;
@@ -58,8 +94,8 @@ async function verifySeller(req, res) {
             state,
             licenseExpiry,
             cardNumber,
-            frontImage: frontImage, // Save file path to database
-            backImage: backImage // Save file path to database
+            frontImage: frontImagePath, // Save file path to database
+            backImage: backImagePath // Save file path to database
         });
         await verificationData.save();
 

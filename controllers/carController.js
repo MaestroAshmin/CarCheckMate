@@ -4,7 +4,7 @@ const fs = require("fs");
 const Car = require("../models/Car");
 const User = require('../models/User');
 
-// Specify your server URL
+// Server URL
 const serverUrl = 'http://localhost:3000';
 
 module.exports.config = {

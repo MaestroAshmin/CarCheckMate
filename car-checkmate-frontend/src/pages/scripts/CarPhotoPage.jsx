@@ -10,28 +10,6 @@ export default function CarPhotoPage({ formData, setFormData }) {
         fileInputRef.current.click();
     }
 
-    // function onFileSelect(event) {
-    //     const files = event.target.files;
-    //     if (files.length === 0) return;
-    //     for (let i = 0; i < files.length; i++) {
-    //         if (files[i].type.split('/')[0] !== 'image') continue;
-    //         if (!carPhotos.some((e) => e.name === files[i].name)) {
-    //             setCarPhotos((prevImages) => [
-    //                 ...prevImages,
-    //                 {
-    //                     name: files[i].name,
-    //                     url: URL.createObjectURL(files[i]),
-    //                 },
-    //             ]);
-    //         }
-    //     }
-    // }
-
-    // function deleteImage(index) {
-    //     setCarPhotos((prevImages) =>
-    //         prevImages.filter((_, i) => i !== index)
-    //     );
-    // }
     function onFileSelect(event) {
         const files = event.target.files;
         if (files.length === 0) return;
