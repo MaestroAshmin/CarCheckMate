@@ -1,13 +1,13 @@
 // src/pages/scripts/Listing/ListingPage.jsx
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Listing from './Listing';
-import Navbar from '../../../components/scripts/navbar';
-import SearchBar from '../../../components/scripts/searchbar';
 import Footer from '../../../components/scripts/footer';
-import '../../styles/ListingPage.css';
-
+import '../../styles/main.css';
+import '../../styles/content.css';
+import HeaderNav from '../../../components/scripts/HeaderNav';
+import HeaderSearch from '../../../components/scripts/HeaderSearch';
+import HeaderFilters from '../../../components/scripts/HeaderFilters';
+import CarList from '../../../components/scripts/CarList';
 
 export default function ListingPage() {
   const [cars, setCars] = useState([]);
@@ -51,52 +51,15 @@ export default function ListingPage() {
   
       fetchCars();
   }, []);
-  
-  
-  
-
-
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const carsPerPage = 9;
-  const navigate = useNavigate();
-
-
-
-  const handleCarClick = (carId) => {
-    navigate(`/car/${carId}`);
-  };
-
-  const indexOfLastCar = currentPage * carsPerPage;
-  const indexOfFirstCar = indexOfLastCar - carsPerPage;
-  const currentCars = cars.slice(indexOfFirstCar, indexOfLastCar);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
-      <Navbar />
-      <div className="search-bar-container">
-        <SearchBar />
-      </div>
-      <div className="listing-page-container">
-        <div className="listings-container">
-           {currentCars.map((car) => (
-            <Listing
-              key={car.id}
-              car={car}
-              handleCarClick={handleCarClick}
-            />
-          ))} 
+    <div className='ctr-main'>
+        <div className='ctr-sub-content'>
+            <HeaderNav />
+            <HeaderSearch />
+            <HeaderFilters />
+            <CarList noPerPage={21} />
         </div>
-        <div className="pagination">
-          {[...Array(Math.ceil(cars.length / carsPerPage)).keys()].map((pageNumber) => (
-            <button key={pageNumber + 1} onClick={() => paginate(pageNumber + 1)}>
-              {pageNumber + 1}
-            </button>
-          ))}
-        </div>
-      </div>
       <Footer />
     </div>
   );

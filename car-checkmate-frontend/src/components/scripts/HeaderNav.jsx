@@ -79,13 +79,13 @@ export default function HeaderNav() {
 
             <div className='ctr-main-header-logo'>
                 <NavLink to="/Homepage">
-                    <img src="images/logo_darkBrown_cut.png" alt="Logo" />
+                    <img src="/images/logo_darkBrown_cut.png" alt="Logo" />
                 </NavLink>
                 <h2>CarCheckMate</h2>
             </div>
             <div className='ctr-main-header-nav'>
                 <NavLink to="/ListingPage" activeClassName="active">Buy</NavLink>
-                <NavLink to="/CarAdPage" activeClassName="active">Sell</NavLink>
+                <NavLink to="/Selling" activeClassName="active">Sell</NavLink>
                 <NavLink to="/AboutUs" activeClassName="active">About Us</NavLink>
             </div>
             <div className='ctr-main-header-login'>
@@ -93,8 +93,7 @@ export default function HeaderNav() {
                     <button onClick={handleLogout}>Logout</button>
                 ) : (
                     <div>
-                        <button onClick={openSignInPopup}>Login</button>
-                        <button onClick={openSignUpPopup}>Register</button>
+                        <button onClick={openSignInPopup}><b>Log in</b> | <b>Register</b></button>
                     </div>
                 )}
             </div>

@@ -20,6 +20,8 @@ const FilterBar = () => {
     const [year, setYear] = useState('');
     const [make, setMake] = useState('');
     const [model, setModel] = useState('');
+    const [color, setColor] = useState('');
+    const [verified, setVerified] = useState('');
     const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
   
     // Sample data, replace with your actual data
@@ -27,6 +29,8 @@ const FilterBar = () => {
     const yearOptions = ['Year', 'Any', '2022', '2021', '2020', '2019'];
     const makeOptions = ['Make', 'Any', 'Toyota', 'Honda', 'Ford', 'Chevrolet'];
     const modelOptions = ['Model', 'Any', 'Camry', 'Civic', 'F-150', 'Silverado'];
+    const colorOptions = ['Color', 'Any', 'Black', 'White'];
+    const verifiedOptions = ['Verified', 'Any', 'Verified'];
 
     const toggleAdvancedFilters = () => {
         setShowAdvancedFilters(!showAdvancedFilters);
@@ -43,6 +47,8 @@ const FilterBar = () => {
                 <FilterDropdown options={yearOptions} value={year} onChange={(e) => setYear(e.target.value)} />
                 <FilterDropdown options={makeOptions} value={make} onChange={(e) => setMake(e.target.value)} />
                 <FilterDropdown options={modelOptions} value={model} onChange={(e) => setModel(e.target.value)} />
+                <FilterDropdown options={colorOptions} value={color} onChange={(e) => setMake(e.target.value)} />
+                <FilterDropdown options={verifiedOptions} value={verified} onChange={(e) => setModel(e.target.value)} />
             </div>
             <div className="filter-advanced">
                 <button className="btn-advanced-filter" onClick={toggleAdvancedFilters}>

@@ -13,7 +13,7 @@ export default function SignInPopup({ showSignInPopup, setShowSignInPopup, openF
             const formData = new FormData();
             formData.append('email', email);
             formData.append('password', password);
-
+            console.log(formData)
             const response = await fetch('http://localhost:3000/user/login', {
                 method: 'POST',
                 body: formData,
@@ -21,6 +21,7 @@ export default function SignInPopup({ showSignInPopup, setShowSignInPopup, openF
             });
 
             if (response.ok) {
+                console.log("logged in successfully")
                 // Handle successful login
                 setShowSignInPopup(false);
                 // Optionally, redirect or update app state
