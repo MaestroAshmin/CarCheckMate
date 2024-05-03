@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import UserDetails from './UserDetails';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import { faFileAlt, faCheckCircle  } from '@fortawesome/free-solid-svg-icons';
 
 function ProfileContent() {
+    const [sellerVerificationData, setSellerVerificationData] = useState(null);
     const [isVerifyingDL, setIsVerifyingDL] = useState(false);
     const [licenseData, setLicenseData] = useState({
         driverLicenseNumber: "",
@@ -16,6 +17,29 @@ function ProfileContent() {
     const [daysDLLeft, setDaysDLLeft] = useState(null);
     const [isSeller, setIsSeller] = useState(false); // State to store whether the user is a seller
     const [sellerProfileUnlocked, setSellerProfileUnlocked] = useState(false);
+
+    // Function to fetch seller verification details
+    const fetchSellerVerificationDetails = async () => {
+        try {
+            // Fetch user data from local storage
+            const userDataFromLocalStorage = localStorage.getItem('user');
+            const userData = JSON.parse(userDataFromLocalStorage);
+            const seller_id = userData._id;
+            // Fetch seller verification details using seller ID
+            const response = await fetch(`http://localhost:3000/verification/get-verification-data/${seller_id}`);
+            if (response.ok) {
+                const verificationDetails = await response.json();
+                setSellerVerificationData(verificationDetails);
+                setSellerProfileUnlocked(true);
+                console.log(sellerVerificationData);
+            } else {
+                console.error('Failed to fetch seller verification details:', response.status);
+            }
+        } catch (error) {
+            console.error('Error fetching seller verification details:', error);
+        }
+    };
+
     //Check if seller is verified or not
     useEffect(() => {
         // Fetch user data from local storage
@@ -25,9 +49,10 @@ function ProfileContent() {
         // Check if the user is a seller
         if (userData && userData.seller) {
             setIsSeller(true); // Set isSeller state to true if the user is a seller
-            if (userData.sellerVerified) {
-                setSellerProfileUnlocked(true); // Set sellerProfileUnlocked state to true if the seller profile has been unlocked
-            }
+            fetchSellerVerificationDetails();
+            // if (userData.sellerVerified) {
+            //     setSellerProfileUnlocked(true); // Set sellerProfileUnlocked state to true if the seller profile has been unlocked
+            // }
             // Set seller_id as part of the licenseData state
             setLicenseData(prevLicenseData => ({
                 ...prevLicenseData,
@@ -102,14 +127,8 @@ function ProfileContent() {
             console.log(formData);
             // Append data to the formData object
             Object.entries(licenseData).forEach(([key, value]) => {
-                console.log(key,value);
                 formData.append(key, value);
-                console.log(formData);
             });
-            for (var key of formData.entries()) {
-                console.log(key[0] + ', ' + key[1]);
-            }
-            console.log("formData:", formData);
     
             await fetch("http://localhost:3000/verification/seller-verification", {
                 method: "POST",
@@ -201,7 +220,42 @@ function ProfileContent() {
                     </div>
                  )}
                  {sellerProfileUnlocked && ( // Render a message if the seller profile is already unlocked
-                    <p>Seller profile has already been unlocked.</p>
+                 
+                    <div className="seller-verification-container">
+                    <h3>Your license data</h3>
+                    <div className="seller-verification-details">
+                        <div className="detail">
+                            <span className="label">Driver's License Number:</span>
+                            <span className="value">{sellerVerificationData.driverLicenseNumber}</span>
+                        </div>
+                        <div className="detail">
+                            <span className="label">State:</span>
+                            <span className="value">{sellerVerificationData.state}</span>
+                        </div>
+                        <div className="detail">
+                            <span className="label">License Expiry:</span>
+                            <span className="value">{sellerVerificationData.licenseExpiry}</span>
+                        </div>
+                        <div className="detail">
+                            <span className="label">Card Number:</span>
+                            <span className="value">{sellerVerificationData.cardNumber}</span>
+                        </div>
+                        <div className="detail">
+                            <span className="label">Front Image:</span>
+                            <img className="image" src={sellerVerificationData.frontImage} alt="Front Image" />
+                        </div>
+                        <div className="detail">
+                            <span className="label">Back Image:</span>
+                            <img className="image" src={sellerVerificationData.backImage} alt="Back Image" />
+                        </div>
+                        Verification Status: {sellerVerificationData.verifiedByAdmin ? (
+                            <FontAwesomeIcon icon={faCheckCircle} color="green" />
+                        ) : (
+                            <span>Not Verified</span>
+                        )}
+                    </div>
+                </div>
+    
                 )}
             </div>
        </div>

@@ -47,7 +47,7 @@ async function verifySeller(req, res) {
         let frontImagePath = '';
         let backImagePath = '';
 
-        const publicDirectory = 'uploads/car_photos';
+        const publicDirectory = 'uploads/license_photos';
         ensureDirectoryExists(publicDirectory);
 
         // Processing front image
@@ -57,7 +57,7 @@ async function verifySeller(req, res) {
             const fileName = `${currentDate}_front_${frontImageData.originalname}`;
             const filePath = path.join(publicDirectory, fileName);
             fs.writeFileSync(filePath, frontImageData.buffer);
-            frontImagePath = `${serverUrl}/uploads/${fileName}`;
+            frontImagePath = `${serverUrl}/uploads/license_photos/${fileName}`;
         }
 
         // Processing back image
@@ -67,7 +67,7 @@ async function verifySeller(req, res) {
             const fileName = `${currentDate}_back_${backImageData.originalname}`;
             const filePath = path.join(publicDirectory, fileName);
             fs.writeFileSync(filePath, backImageData.buffer);
-            backImagePath = `${serverUrl}/uploads/${fileName}`;
+            backImagePath = `${serverUrl}/uploads/license_photos/${fileName}`;
         }
         console.log(frontImagePath, backImagePath);
         // Removing the prefix from the file paths
@@ -106,6 +106,23 @@ async function verifySeller(req, res) {
     }
 }
 
+async function getSellerVerificationData (req, res){
+    try {
+        const sellerId = req.params.id;
+        console.log(sellerId);
+        // Query the database for seller verification details by seller ID
+        const verificationDetails = await SellerVerification.findOne({ user: sellerId });
+
+        if (!verificationDetails) {
+            return res.status(404).json({ error: 'Seller verification details not found' });
+        }
+
+        res.json(verificationDetails);
+    } catch (error) {
+        console.error('Error fetching seller verification details:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 // Handle file upload
 async function handleLicenseUpload(req, res, next) {
     // Check if files are uploaded
@@ -115,4 +132,4 @@ async function handleLicenseUpload(req, res, next) {
     // Continue to the next middleware
     next();
 }
-module.exports = { verifySeller, handleLicenseUpload};
+module.exports = { verifySeller, getSellerVerificationData, handleLicenseUpload};

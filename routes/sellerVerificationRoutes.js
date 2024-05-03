@@ -6,5 +6,5 @@ const { sellerUploadFieldsConfig } = require('../config/multer-config');
 
 //router.post('/seller-verification', authMiddleware.requireLogin, sellerUploadFieldsConfig, sellerVerificationController.verifySeller);
 router.post('/seller-verification',  sellerUploadFieldsConfig, sellerVerificationController.verifySeller);
-
+router.get('/get-verification-data/:id', sellerVerificationController.getSellerVerificationData);
 module.exports = router;
