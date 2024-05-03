@@ -30,6 +30,9 @@ function UserNav() {
 
     return (
         <div className='ctr-user-type'>
+            <span className={`nav-item ${isUserInRole('user') ? 'active' : ''}`}>
+                <Link to='/UserProfile'>User Profile</Link>
+            </span>
             <span className={`nav-item ${isUserInRole('buyer') ? 'active' : ''}`}>
                 {isUserInRole('buyer') ? (
                     <Link to='/Buyer'>Buyer</Link>
