@@ -37,7 +37,7 @@ export default function BookSellerPopup({ showBookSellerPopup, setShowBookSeller
                                     </div>
                                     <label htmlFor='requestTime'>Time:</label>
                                     <select className="custom-select" value={selectedHour} onChange={(e) => setSelectedHour(e.target.value)} required>
-                                        {Array.from({ length: 8 }, (_, i) => i + 9).map(hour => (
+                                        {Array.from({ length: 13 }, (_, i) => i + 8).map(hour => (
                                             <option key={hour} value={hour.toString().padStart(2, '0') + ':00'}>
                                                 {hour.toString().padStart(2, '0') + ':00'}
                                             </option>
