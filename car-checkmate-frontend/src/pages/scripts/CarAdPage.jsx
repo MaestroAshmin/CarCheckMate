@@ -39,7 +39,7 @@ export default function CarAdPage() {
         bodyType:"",
         ...initialCarPhotos, // Add the initial carPhoto fields
     });
-
+    console.log(formData)
     useEffect(() => {
         // Retrieve user data from local storage
         const userDataFromLocalStorage = localStorage.getItem('user');

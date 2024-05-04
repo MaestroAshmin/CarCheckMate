@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import EmailSellerPopup from './EmailSellerPopup';
 import BookMechanicPopup from './BookMechaniePopup';
 import CancelPopup from './CancelPopup';
@@ -22,6 +21,46 @@ function BuyerInspection() {
         setShowCancelPopup(true);
     };
 
+    const fetchInspections = async (endpoint, setStateFunction) => {
+        try {
+            // Retrieve user data from local storage
+            const userDataFromLocalStorage = localStorage.getItem('user');
+            const userData = JSON.parse(userDataFromLocalStorage);
+            const userId = userData._id;
+            // Make a request to the API with the user ID as a parameter
+            const response = await fetch(`http://localhost:3000/inspections/${endpoint}/${userId}`);
+            const data = await response.json();
+
+            // Update the component state with the fetched inspections data
+            setStateFunction(data.inspectionsWithCarDetails || []);
+        } catch (error) {
+            console.error(`Error fetching ${endpoint} inspections:`, error);
+        }
+    };
+
+    const bookInspection = async (carId, inspectionDate, inspectionTime) => {
+        try {
+            // Retrieve user data from local storage
+            const userDataFromLocalStorage = localStorage.getItem('user');
+            const userData = JSON.parse(userDataFromLocalStorage);
+            const buyerId = userData._id;
+
+            // Make a POST request to the API to book an inspection
+            await fetch('http://localhost:3000/inspections/inspection-form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ buyer_id: buyerId, car_id: carId, inspectionDate: inspectionDate, inspectionTime: inspectionTime }),
+            });
+
+            // Refresh the list of upcoming inspections after booking
+            fetchInspections('upcoming-buyer', setUpcomingInspections);
+        } catch (error) {
+            console.error('Error booking inspection:', error);
+        }
+    };
+
     function formatDateString(dateString) {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -29,23 +68,6 @@ function BuyerInspection() {
 
     useEffect(() => {
         // Fetch upcoming inspections for the buyer
-        const fetchInspections = async (endpoint, setStateFunction) => {
-            try {
-                // Retrieve user data from local storage
-                const userDataFromLocalStorage = localStorage.getItem('user');
-                const userData = JSON.parse(userDataFromLocalStorage);
-                const userId = userData._id;
-                // Make a request to the API with the user ID as a parameter
-                const response = await fetch(`http://localhost:3000/inspections/${endpoint}/${userId}`);
-                const data = await response.json();
-
-                // Update the component state with the fetched inspections data
-                setStateFunction(data.inspectionsWithCarDetails || []);
-            } catch (error) {
-                console.error(`Error fetching ${endpoint} inspections:`, error);
-            }
-        };
-
         fetchInspections('upcoming-buyer', setUpcomingInspections);
     }, []);
 
@@ -91,7 +113,7 @@ function BuyerInspection() {
                                 </div>
                                 <div className='ctr-schedule-option'>
                                     <button onClick={openEmailSellerPopup}>Email Seller</button>
-                                    {/* <button onClick={()=>openBookMechanicPopup(inspection.carId)}>Book A Mechanic</button> */}
+                                    <button onClick={()=>openBookMechanicPopup(inspection.carId)}>Book A Mechanic</button>
                                     <button onClick={openCancelPopup}>Cancel booking</button>
                                 </div>
                             </div>
