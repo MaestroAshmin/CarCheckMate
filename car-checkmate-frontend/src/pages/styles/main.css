@@ -28,7 +28,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: aqua;
     width: 70%;
     height: 80%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -91,6 +90,39 @@ body {
     color: rgba(217,202,179,255);
     margin: 2%;
     font-weight: bold;
+}
+
+.ctr-sub-right input {
+    width: 60%;
+    height: 40px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    display: block;
+    border-radius: 20px; /* Rounded corners */
+    border: 1px solid #ccc; /* Gray border */
+    background-color: #fff; /* White background */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Shadow */
+    padding-left: 20px;
+}
+
+.ctr-sub-right .btn-forget-password {
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: rgba(33,33,33,255);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    font-weight: normal;
+    text-align: center;
+    color: rgba(217,202,179,255);
+    text-transform: uppercase;
+    margin-top: 30px;
+}
+
+.ctr-sub-right .btn-forget-password:hover {
+    font-weight: bold;
+    transform: scale(1.05);
 }
 
 hr {
