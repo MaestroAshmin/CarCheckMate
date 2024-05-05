@@ -29,10 +29,10 @@ router.get('/upcoming-seller/:id', inspectionController.getUpcomingInspectionsSe
 router.get('/past-seller/:seller_id', inspectionController.getPastInspectionsSeller);
 
 // Route to allow mechanics to view upcoming unclaimed inspections
-router.get('/upcoming-unclaimed-mechanic',authMiddleware.requireLogin, checkMechanicPermission, inspectionController.getUpcomingUnclaimedInspectionsForMechanic);
+router.get('/upcoming-unclaimed-mechanic', inspectionController.getUpcomingUnclaimedInspectionsForMechanic);
 
 // Route to allow mechanics to accept an inspection
-router.post('/accept-inspection-mechanic/:inspectionId',authMiddleware.requireLogin, checkMechanicPermission, inspectionController.acceptInspectionMechanic);
+router.post('/accept-inspection-mechanic/:inspectionId', inspectionController.acceptInspectionMechanic);
 
 // Route to allow mechanics to view sorted inspections
 router.get('/inspections-accepted-mechanic',authMiddleware.requireLogin, checkMechanicPermission, inspectionController.getAcceptedInspectionsMechanic);

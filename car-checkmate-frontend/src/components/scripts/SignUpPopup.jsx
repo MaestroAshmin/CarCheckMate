@@ -118,7 +118,7 @@ export default function SignUpPopup({ showSignUpPopup, setShowSignUpPopup, openS
                                     </fieldset>
                                 </div>
                                 <div className='button-container'>
-                                    <button onClick={registerUserApiCall} >Create Account</button>
+                                    <button type='submit' >Create Account</button>
                                 </div>
                             </form>
                             <p className='popup-link-align-right'>Already have an account? <span onClick={openSignInPopup}>Login</span></p>
