@@ -22,7 +22,7 @@ function UserContentMechanic() {
         // Add more reports as needed
     ]);
     const [currentPage, setCurrentPage] = useState(1);
-    const reportsPerPage = 10;
+    const reportsPerPage = 5;
 
     const indexOfLastReport = currentPage * reportsPerPage;
     const indexOfFirstReport = indexOfLastReport - reportsPerPage;
