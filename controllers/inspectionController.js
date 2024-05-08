@@ -273,7 +273,7 @@ async function acceptInspectionMechanic (req, res) {
 // Controller function to get sorted inspections for a mechanic
 async function getAcceptedInspectionsMechanic (req, res) {
     try {
-        const mechanicId = req.session.user._id;
+        const mechanicId = req.params.mechanicId;
         // Get current date
         const currentDate = new Date();
         // Get inspections accepted by the mechanic and sort them by date and time
