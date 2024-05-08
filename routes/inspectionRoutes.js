@@ -35,6 +35,6 @@ router.get('/upcoming-unclaimed-mechanic', inspectionController.getUpcomingUncla
 router.post('/accept-inspection-mechanic/:inspectionId', inspectionController.acceptInspectionMechanic);
 
 // Route to allow mechanics to view sorted inspections
-router.get('/inspections-accepted-mechanic',authMiddleware.requireLogin, checkMechanicPermission, inspectionController.getAcceptedInspectionsMechanic);
+router.get('/inspections-accepted-mechanic', inspectionController.getAcceptedInspectionsMechanic);
 
 module.exports = router;
