@@ -10,7 +10,7 @@ export default function AvailableRequestsPopup({ showAvailableRequestsPopup, set
 
     const [mechanic, setMechanic] = useState("")
 
-    console.log(data)
+    // console.log(data)
 
 
     
@@ -18,7 +18,7 @@ export default function AvailableRequestsPopup({ showAvailableRequestsPopup, set
             try {
                 const response = await axios.get('http://localhost:3000/inspections/upcoming-unclaimed-mechanic');
                 const {inspectionsWithCarDetails}=response.data
-                console.log(response.data)
+                // console.log(response.data)
                 const extractedData = inspectionsWithCarDetails.map(({ _id, car_id, inspectionDate, inspectionTime }) => ({
                     _id,
                     car_id,
@@ -72,7 +72,7 @@ export default function AvailableRequestsPopup({ showAvailableRequestsPopup, set
             });
     
             // Handle the response
-            console.log('Response:', response.data);
+            // console.log('Response:', response.data);
     
             // Optionally close the popup
             
