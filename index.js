@@ -71,6 +71,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
         app.use('/inspections',upload.none(), inspectionRoutes);
         app.use('/inspection-status', inspectionStatusRoutes);
         app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+        
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
         });

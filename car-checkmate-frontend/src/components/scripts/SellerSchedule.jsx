@@ -3,7 +3,6 @@ import EmailBuyerPopup from './EmailBuyerPopup';
 import AddRWCPopup from './AddRWCPopup';
 import CancelPopup from './CancelPopup';
 
-
 function SellerSchedule() {
     const [schedules, setSchedules] = useState([]);
     const [showEmailBuyerPopup, setShowEmailBuyerPopup] = useState(false);

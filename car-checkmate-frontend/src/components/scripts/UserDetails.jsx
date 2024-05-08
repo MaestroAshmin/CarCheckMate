@@ -113,7 +113,7 @@ function UserDetails() {
             <div className='ctr-user-details'>
                 <div className='ctr-user-details-edit'>
                     <p><b>Set up Availabilities for a car inspection</b></p>
-                    <p><i>Inspection time is between 9:00 to 16:00</i></p>
+                    <p><i>Inspection time is between 8:00 to 20:00</i></p>
                     {isAvailabilityEditing ? (
                         <form>
                             <p><i>* Please select unavailable days for inspection</i></p>

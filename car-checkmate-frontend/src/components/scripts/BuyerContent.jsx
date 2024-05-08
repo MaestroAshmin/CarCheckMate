@@ -15,7 +15,7 @@ function BuyerContent() {
                 <BuyerInspection />
             </div>
             <div className='ctr-user-content-right'>
-            <h3>Past Inspections</h3>
+                <h3>Past Inspections</h3>
                 <BuyerInspectionPast/>
             </div>
        </div>

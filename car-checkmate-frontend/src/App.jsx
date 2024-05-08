@@ -22,6 +22,7 @@ import Seller from './pages/scripts/Seller';
 import Selling from './pages/scripts/Selling';
 import Buyer from './pages/scripts/Buyer';
 import UserProfile from './pages/scripts/UserProfile';
+import ForgotPassword from './pages/scripts/ForgotPassword';
 import StyleTest from './pages/scripts/StyleTest';
 
 import Listing from './pages/scripts/Listing/Listing';
@@ -73,6 +74,8 @@ function App() {
           <Route path="/Seller" element= {<Seller />} />
           <Route path="/Buyer" element= {<Buyer />} />
           <Route path="/UserProfile" element= {<UserProfile />} />
+          <Route path="/ForgotPassword" element= {<ForgotPassword />} />
+
 
           {/** This is for testing the styling of the existing page */}
           <Route path="/StyleTest" element= {<StyleTest />} />

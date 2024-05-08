@@ -234,7 +234,8 @@ async function getUpcomingUnclaimedInspectionsForMechanic (req, res) {
 async function acceptInspectionMechanic (req, res) {
     try {
         const { inspectionId } = req.params;
-        const mechanicId = req.session.user._id;
+        const { mechanicId } = req.body;
+        // const mechanicId = req.session.user._id;
 
          // Get the inspection details
          const inspection = await Inspection.findById(inspectionId);
