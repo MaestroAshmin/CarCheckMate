@@ -13,7 +13,7 @@ router.get('/pending-inspections/:id',inspectionController.getPendingInspections
 router.post('/accept/:inspectionId', inspectionController.acceptInspection);
 
 // Route to allow seller to deny an inspection request
-router.post('/deny/:inspectionId',authMiddleware.requireLogin, checkSellerPermission, inspectionController.denyInspection);
+router.post('/deny/:inspectionId', inspectionController.denyInspection);
 
 // Route to allow buyer to view upcoming inspections
 router.get('/upcoming-buyer/:id', inspectionController.getUpcomingInspectionsBuyer);
