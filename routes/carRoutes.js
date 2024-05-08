@@ -12,4 +12,16 @@ router.post('/upload-car-details',carPhotoUploadConfig, carController.uploadCarD
 router.get('/available-cars', carController.getUnsoldCars);
 router.get('/car/:id', carController.getCarById);
 router.get('/seller-cars/:sellerId', carController.listCarsBySeller);
+
+// Route to get distinct makes
+router.get('/makes', carController.getMakes);
+
+// Route to get distinct models
+router.get('/models', carController.getModels);
+
+// Route to get distinct years
+router.get('/years', carController.getYears);
+
+// Route to get distinct colors
+router.get('/colors', carController.getColors);
 module.exports = router;
