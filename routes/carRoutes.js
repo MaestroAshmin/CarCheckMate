@@ -24,4 +24,5 @@ router.get('/years', carController.getYears);
 
 // Route to get distinct colors
 router.get('/colors', carController.getColors);
+
 module.exports = router;

@@ -8,6 +8,8 @@ const sellerRoutes = require('./routes/sellerVerificationRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const carRoutes = require('./routes/carRoutes');
 const inspectionRoutes = require('./routes/inspectionRoutes');
+const searchRoutes= require('./routes/searchRoutes');
+
 const inspectionStatusRoutes = require('./routes/inspectionStatusRoutes');
 const path = require('path');
 // const { sellerUploadFieldsConfig } = require('./config/multer-config');
@@ -69,6 +71,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
         app.use('/admin', adminRoutes);
         app.use('/cars', carRoutes);
         app.use('/inspections',upload.none(), inspectionRoutes);
+        app.use('/search',upload.none(), searchRoutes);
         app.use('/inspection-status', inspectionStatusRoutes);
         app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
         
