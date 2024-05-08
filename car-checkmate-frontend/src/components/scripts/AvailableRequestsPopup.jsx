@@ -4,17 +4,12 @@ export default function AvailableRequestsPopup({ showAvailableRequestsPopup, set
     const [currentPage, setCurrentPage] = useState(1); // Current page
     const [requestsPerPage] = useState(3); // Number of requests per page
     const [data, setData]=useState([
-        { car_id: '', inspectionDate: '', inspectionTime: '' }
+        { _id:'', car_id: '', inspectionDate: '', inspectionTime: '' }
     ]);
-    // Sample data for available requests (replace with your actual data)
-    // const availableRequests = [
-    //     { carId: 'CR1234', date: '24/06/2024', time: '10:30 am' },
-    //     { carId: 'CR5678', date: '25/06/2024', time: '11:00 am' },
-    //     { carId: 'CR91011', date: '26/06/2024', time: '09:00 am' },
-    //     { carId: 'CR1234', date: '21/06/2024', time: '10:30 am' },
-    //     { carId: 'CR5678', date: '11/06/2024', time: '11:00 am' },
-    //     { carId: 'CR91011', date: '08/06/2024', time: '09:00 am' },
-    // ];
+
+
+    const [mechanic, setMechanic] = useState("")
+
     console.log(data)
 
 
@@ -23,7 +18,9 @@ export default function AvailableRequestsPopup({ showAvailableRequestsPopup, set
             try {
                 const response = await axios.get('http://localhost:3000/inspections/upcoming-unclaimed-mechanic');
                 const {inspectionsWithCarDetails}=response.data
-                const extractedData = inspectionsWithCarDetails.map(({ car_id, inspectionDate, inspectionTime }) => ({
+                console.log(response.data)
+                const extractedData = inspectionsWithCarDetails.map(({ _id, car_id, inspectionDate, inspectionTime }) => ({
+                    _id,
                     car_id,
                     inspectionDate: inspectionDate.slice(0, 10), // Extracting only the date part
                     inspectionTime
@@ -33,9 +30,24 @@ export default function AvailableRequestsPopup({ showAvailableRequestsPopup, set
                 console.log('Error fetching car data:', error);
             }
         };
-    
+        // console.log(mechanic)
+        useEffect(() => {
+            // Retrieve user data from local storage
+            const userDataFromLocalStorage = localStorage.getItem('user');
+            if (userDataFromLocalStorage) {
+                // Parse the user data to JSON
+                const userData = JSON.parse(userDataFromLocalStorage);
+                // Check if user data contains _id
+                if (userData._id) {
+                    // Update the formData state with the retrieved _id
+                    setMechanic(userData._id)
+                }
+ 
+            }
+        }, []);
 
-    
+
+
     useEffect(() => {
         fetchCarData();
 
@@ -51,6 +63,24 @@ export default function AvailableRequestsPopup({ showAvailableRequestsPopup, set
     // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+
+    const handleSubmit = async (requestId) => {
+        try {
+            // Make a POST request to your endpoint with requestId and mechanicId
+            const response = await axios.post(`http://localhost:3000/inspections/accept-inspection-mechanic/${requestId}`, {
+                mechanicId: mechanic, // Include the mechanicId in the request body
+            });
+    
+            // Handle the response
+            console.log('Response:', response.data);
+    
+            // Optionally close the popup
+            
+        } catch (error) {
+            // Handle errors
+            console.error('Error:', error);
+        }
+    };
     return (
         <>
             {showAvailableRequestsPopup && (
@@ -67,7 +97,10 @@ export default function AvailableRequestsPopup({ showAvailableRequestsPopup, set
                                         <p>Date: <span>{request.inspectionDate}</span> Time: <span>{request.inspectionTime}</span></p>
                                     </div>
                                     <div className='ctr-schedule-option'>
-                                        <button>Accept</button>
+                                    <form onSubmit={() => handleSubmit(request._id)}> 
+                                        <input type="hidden" name="mechanicId" value={mechanic}/>
+                                        <button type="submit">Accept</button>
+                                    </form>
                                     </div>
                                 </div>
                             ))}
