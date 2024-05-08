@@ -32,7 +32,7 @@ router.get('/past-seller/:seller_id', inspectionController.getPastInspectionsSel
 router.get('/upcoming-unclaimed-mechanic', inspectionController.getUpcomingUnclaimedInspectionsForMechanic);
 
 // Route to allow mechanics to accept an inspection
-router.post('/accept-inspection-mechanic/:inspectionId', inspectionController.acceptInspectionMechanic);
+router.post('/accept-inspection-mechanic/:inspectionId', inspectionController.acceptInspectionMechanic);//git
 
 // Route to allow mechanics to view sorted inspections
 router.get('/inspections-accepted-mechanic', inspectionController.getAcceptedInspectionsMechanic);
