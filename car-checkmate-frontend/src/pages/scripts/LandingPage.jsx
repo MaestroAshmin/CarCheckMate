@@ -62,31 +62,33 @@ export default function StyleTest() {
             />
 
             <div className='ctr-sub'>
-                <div className='ctr-sub-left'>
-                    <img src='images/logo-cut.png' alt='Logo'/>
-                    <h1 className='ctr-sub-left-font'>CarCheckMate</h1>
-                    <br />
-                    <br />
-                    <hr />
-                    <h4 className='ctr-sub-left-font'>Selling your car in Victoria is easy with our simple process</h4>
-                    <h6 className='placeAtBottom-right'><a href='mailto:carcheckmate@mail.com'>carcheckmate@mail.com</a></h6>
-                </div>
-                <div className='ctr-sub-right'>
-                    <h1 className='ctr-sub-right-font'>Delighted to<br/> welcome you!</h1>
-                    <div className='ctr-btn'>
-                        <Link to="/Homepage">
-                            <button className='btn-login' >Continue as a guest</button>
-                        </Link>
-                        <button className='btn-login' onClick={openSignInPopup}>Sign In</button>  
+                <div className='ctr-sub-content-lock'>
+                    <div className='ctr-sub-left'>
+                        <img src='images/logo-cut.png' alt='Logo'/>
+                        <h1 className='ctr-sub-left-font'>CarCheckMate</h1>
+                        <br />
+                        <br />
+                        <hr />
+                        <h4 className='ctr-sub-left-font'>Selling your car in Victoria is easy with our simple process</h4>
+                        <h6 className='placeAtBottom-right'><a href='mailto:carcheckmate@mail.com'>carcheckmate@mail.com</a></h6>
                     </div>
-                    <button className='btn-signup' onClick={openSignUpPopup}>Create a new account</button>
-                    <p className='ctr-sub-right-font-p'><span>Benefits of signing up with us.</span></p>
+                    <div className='ctr-sub-right'>
+                        <h1 className='ctr-sub-right-font'>Delighted to<br/> welcome you!</h1>
+                        <div className='ctr-btn'>
+                            <Link to="/Homepage">
+                                <button className='btn-login' >Continue as a guest</button>
+                            </Link>
+                            <button className='btn-login' onClick={openSignInPopup}>Sign In</button>  
+                        </div>
+                        <button className='btn-signup' onClick={openSignUpPopup}>Create a new account</button>
+                        <p className='ctr-sub-right-font-p'><span>Benefits of signing up with us.</span></p>
 
-                    <h6 className='placeAtBottom-left'>
-                        {/*<span>Forgot your login?</span>&nbsp;-&nbsp;*/}
-                        <span onClick={openForgotPassPopup}>Forgot your login?</span>&nbsp;-&nbsp;
-                        <span>Privacy Policy</span>
-                    </h6>
+                        <h6 className='placeAtBottom-left'>
+                            {/*<span>Forgot your login?</span>&nbsp;-&nbsp;*/}
+                            <span onClick={openForgotPassPopup}>Forgot your login?</span>&nbsp;-&nbsp;
+                            <span>Privacy Policy</span>
+                        </h6>
+                    </div>
                 </div>
             </div>
         </div>
