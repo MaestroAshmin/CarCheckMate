@@ -5,6 +5,8 @@ import '../styles/header.css';
 import ForgotPasswordPopup from '../../components/scripts/ForgotPasswordPopup';
 import SignInPopup from '../../components/scripts/SignInPopup';
 import SignUpPopup from '../../components/scripts/SignUpPopup';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function HeaderNav() {
 
@@ -55,6 +57,7 @@ export default function HeaderNav() {
                 localStorage.removeItem('user');
                 // Reload the page
                 window.location.reload();
+                window.location.href = '/Homepage';
             } else {
                 // Handle error response
                 console.error('Logout failed:', response.statusText);
@@ -133,7 +136,11 @@ export default function HeaderNav() {
                     {/* Login section */}
                     <div className='ctr-main-header-login'>
                         {userData ? (
-                            <button onClick={handleLogout}>Logout</button>
+                            <div className='ctr-main-header-logout'>
+                                <button onClick={handleLogout}>Logout</button>
+                                <NavLink to='/UserProfile'><FontAwesomeIcon icon={faUser} className='user-profile-icon' /></NavLink>
+                            </div>
+                            
                         ) : (
                             <div>
                                 <button onClick={openSignInPopup}><b>Log in</b> | <b>Register</b></button>

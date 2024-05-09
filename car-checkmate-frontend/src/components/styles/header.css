@@ -261,6 +261,25 @@
     display: none;
 }
 
+.ctr-main-header-logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ctr-main-header-login a {
+    margin-left: 20px;
+}
+
+.ctr-main-header-login .user-profile-icon {
+    height: 30px;
+    color: #949494;
+}
+
+.ctr-main-header-login .user-profile-icon:hover {
+    color: rgba(0, 195, 112, 1);
+}
+
 /* Adjustments for responsiveness tablet*/
 @media (max-width: 1024px) {
     .ctr-main-header-logo {
