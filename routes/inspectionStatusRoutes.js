@@ -5,6 +5,6 @@ const checkMechanicPermission = require('../middlewares/checkMechanicPermission'
 const authMiddleware = require('../middlewares/authMiddleware');
 const { rwcUploadConfig } = require('../config/multer-config');
 
-router.post('/:inspectionId',authMiddleware.requireLogin, checkMechanicPermission, rwcUploadConfig, inspectionController.changeInspectionStatus);
+router.post('/:inspectionId', inspectionController.changeInspectionStatus);
 
 module.exports = router;
