@@ -55,6 +55,20 @@ export default function AdminPage() {
         return (
           <div className="dashboard">
             <h2>Dashboard</h2>
+            <div className="stats-container">
+              <a href="#" onClick={() => handleComponentChange('users')} className="stat-card blue">
+                <h3>Users</h3>
+                <p>{users}</p>
+              </a>
+              <a href="#" onClick={() => handleComponentChange('listings')} className="stat-card green">
+                <h3>Listings</h3>
+                <p>{listings}</p>
+              </a>
+              <a href="#" onClick={() => handleComponentChange('inspections')} className="stat-card red">
+                <h3>Inspections</h3>
+                <p>{inspections}</p>
+              </a>
+            </div>
           </div>
         );
     }
@@ -90,21 +104,10 @@ export default function AdminPage() {
             </ul>
           </div>
           <div className="content">
-            <div className="stats-container">
-              <a href="#" onClick={() => handleComponentChange('users')} className="stat-card blue">
-                <h3>Users</h3>
-                <p>{users}</p>
-              </a>
-              <a href="#" onClick={() => handleComponentChange('listings')} className="stat-card green">
-                <h3>Listings</h3>
-                <p>{listings}</p>
-              </a>
-              <a href="#" onClick={() => handleComponentChange('inspections')} className="stat-card red">
-                <h3>Inspections</h3>
-                <p>{inspections}</p>
-              </a>
-            </div>
+            <div>
             {renderComponent()}
+            </div>
+            
           </div>
         </div>
       </div>

@@ -1,14 +1,21 @@
-/* styles/admin.css */
+/* admin.css */
 .admin-page {
     display: flex;
-    height: calc(100vh - 60px); /* Adjust the height as needed */
+    height: calc(100vh - 60px);
+    background-color: #f5f5f5;
   }
   
   .sidebar {
-    width: 200px;
+    width: 250px;
     background-color: #343a40;
     padding: 20px;
     color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar:hover {
+    width: 300px;
   }
   
   .sidebar ul {
@@ -51,11 +58,13 @@
     padding: 20px;
     border-radius: 5px;
     text-align: center;
-    transition: transform 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .stat-card:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   }
   
   .blue {
