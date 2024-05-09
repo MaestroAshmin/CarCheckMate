@@ -52,6 +52,22 @@ useEffect(() => {
     setShowCancelPopup(true);
   };
 
+  const handleimages = (photos) => {
+    
+    const carPhotosArray = Array.isArray(photos) ? photos : [];
+
+    // Trim each file path to remove leading and trailing whitespace
+    carPhotosArray.map(filePath => {
+        const trimmedFilePath = filePath.trim();
+        const parts = trimmedFilePath.split('\\');
+       
+        console.log(parts[parts.length - 1])  
+        return parts[parts.length - 1];
+      
+    });
+};
+
+
   return (
     <div>
       
@@ -59,10 +75,15 @@ useEffect(() => {
       <CancelPopup showCancelPopup={showCancelPopup} setShowCancelPopup={setShowCancelPopup} />
       {schedules.map((schedule, index) => (
         <div key={index} className='ctr-schedule'>
+          <img src={schedule.car.carPhotos[0]} alt="Car" />
           <div className='ctr-schedule-buyer-detail'>
-            <h3>Car ID: <span>{schedule.car.car_id}</span></h3>
+          
+          
+            <h3>Car: <span>{schedule.car.make}</span> <span>{schedule.car.model}</span></h3>
             {/* <p>Name: <span>{schedule.name}</span></p> */}
-            <p>Date: <span>{schedule.inspectionDate}</span><br/> <br/>  Time: <span>{schedule.inspectionTime}</span></p>
+            
+            
+            <p>Date: <span>{schedule.inspectionDate.slice(0, 10)}</span><br/> <br/>  Time: <span>{schedule.inspectionTime}</span></p>
             <p>Location:<span>{schedule.car.streetName}</span> <span>{schedule.car.suburb} </span> <span>{schedule.car.state} </span><span>{schedule.car.postcode} </span></p>
           </div>
           <div className='ctr-schedule-option'>
