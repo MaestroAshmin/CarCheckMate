@@ -416,7 +416,7 @@ span:hover {
 }
 
 .popup-content-signup .role-container fieldset {
-    width: 755px;
+    width: 100%;
 }
 
 .popup-content-signup .role-container label {
@@ -642,6 +642,14 @@ span:hover {
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
         padding-left: 20px;
     }
+
+    .popup-signup {
+        width: 70%;
+    }
+    
+    .popup-content-signup .role-container fieldset {
+        width: 100%;
+    }
 }
 
 /* Adjustments for responsiveness mobile*/
@@ -775,5 +783,51 @@ span:hover {
     .btn-signup {
         text-align: center;
         padding-left: 0px;
+    }
+
+    .popup-signup {
+        width: 90%;
+    }
+    
+    .popup-content-signup label {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    
+    .popup-content-signup .ctr-register-info {
+        display: block;
+        justify-content: space-between;
+        margin-top: 5px;
+        margin-bottom: 0px;
+    }
+    
+    .popup-content-signup .ctr-register-info label {
+        text-align: left;
+        width: max-content;
+        width: 30%;
+        margin-bottom: 10px;
+    }
+
+    .popup-content-signup .ctr-register-info input {
+        margin-bottom: 5px;
+    }
+    
+    .popup-content-signup .role-container label {
+        width: 10%;
+        float: left;
+        margin-right: 20px;
+    }
+    
+    .popup-content-signup .role-container input {
+        margin-right: 5px;
+    }
+    
+    .popup-content-signup .role-container .role-radio input[type='radio'] {
+        margin-top: 4px;
+    }
+    
+    .popup-content-signup button {
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 }
