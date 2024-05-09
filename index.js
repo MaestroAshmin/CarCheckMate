@@ -69,7 +69,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
         app.use('/admin', adminRoutes);
         app.use('/cars', carRoutes);
         app.use('/inspections',upload.none(), inspectionRoutes);
-        app.use('/inspection-status', inspectionStatusRoutes);
+        app.use('/inspection-status', upload.none(), inspectionStatusRoutes);
         app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
         
         app.listen(PORT, () => {
