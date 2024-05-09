@@ -3,7 +3,8 @@ import '../styles/main.css';
 import '../styles/content.css';
 import HeaderNav from '../../components/scripts/HeaderNav';
 import Footer from '../../components/scripts/footer';
-import Information from '../../components/scripts/Information';
+import HeaderFilters from '../../components/scripts/HeaderFilters';
+import CarList from '../../components/scripts/CarList';
 
 export default function AdminPage() {
    
@@ -11,8 +12,10 @@ export default function AdminPage() {
         <div className='ctr-main'>
             <div className='ctr-sub-content'>
                 <HeaderNav />
+                <HeaderFilters />
                 <br />
-                <Information />
+                <h2>Car Listings</h2>
+                <CarList noPerPage={6} />
             </div>
             <Footer />
         </div>
