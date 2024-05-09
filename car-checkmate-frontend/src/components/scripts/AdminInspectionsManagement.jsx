@@ -8,7 +8,7 @@ const AdminInspectionsManagement = ({ currentPage, setCurrentPage }) => {
   useEffect(() => {
     const fetchInspections = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/inspections?page=${currentPage}&limit=6`);
+        const response = await axios.get(`http://localhost:3000/inspections?page=${currentPage}&limit=12`);
         const inspectionsData = response.data.map(inspection => ({
           // Map inspection data to your desired format
           inspection_id: inspection._id,
@@ -46,7 +46,7 @@ const AdminInspectionsManagement = ({ currentPage, setCurrentPage }) => {
             ))}
           </div>
           <div className="pagination">
-            {[...Array(Math.ceil(inspections.length / 6)).keys()].map((pageNumber) => (
+            {[...Array(Math.ceil(inspections.length / 12)).keys()].map((pageNumber) => (
               <button key={pageNumber + 1} onClick={() => paginate(pageNumber + 1)}>
                 {pageNumber + 1}
               </button>
