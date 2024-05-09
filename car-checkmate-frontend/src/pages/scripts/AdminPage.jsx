@@ -107,7 +107,6 @@ export default function AdminPage() {
             <div>
             {renderComponent()}
             </div>
-            
           </div>
         </div>
       </div>
