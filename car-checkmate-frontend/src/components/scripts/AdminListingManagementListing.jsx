@@ -53,7 +53,7 @@ const Listing = ({ car }) => {
             <p>Transmission: {car.transmission}</p>
             <p>Year: {car.year}</p>
             <p>Car Photos: {car.carPhotos}</p>
-            <button onClick={handleDetailsClick}>View Details</button>
+            <button onClick={handleDetailsClick}>View Listing</button>
           </div>
         )}
       </div>

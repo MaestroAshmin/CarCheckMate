@@ -11,9 +11,8 @@ const AdminListingManagement = ({ currentPage, setCurrentPage }) => {
       try {
         const response = await axios.get(`http://localhost:3000/cars/available-cars?page=${currentPage}&limit=6`);
         const unsoldCars = response.data.map(car => ({
-            car_id:car._id,
-            seller_id:seller_id,
-            registrationNo:registrationNo,
+            car_id: car._id,
+            registrationNo: car.registrationNo,
             bodyType: car.bodyType,
             color: car.color,
             engineType: car.engineType,
@@ -62,7 +61,7 @@ const AdminListingManagement = ({ currentPage, setCurrentPage }) => {
             ))}
           </div>
           <div className="pagination">
-            {[...Array(Math.ceil(listings.length / 12)).keys()].map((pageNumber) => (
+            {[...Array(Math.ceil(listings.length / 6)).keys()].map((pageNumber) => (
               <button key={pageNumber + 1} onClick={() => paginate(pageNumber + 1)}>
                 {pageNumber + 1}
               </button>
