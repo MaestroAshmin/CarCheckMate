@@ -5,7 +5,7 @@ import '../styles/admin.css';
 import HeaderNav from '../../components/scripts/HeaderNav';
 import AdminUserManagement from '../../components/scripts/AdminUserManagement';
 import AdminListingManagement from '../../components/scripts/AdminListingManagement';
-import AdminInspectionsManagement from '../../components/scripts/AdminInspectionsManagement';
+import AdminInspectionsManagement from '../../components/scripts/AdminInspectionManagement';
 
 export default function AdminPage() {
   const [users, setUsers] = useState(0);
