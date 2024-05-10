@@ -27,6 +27,7 @@ import StyleTest from './pages/scripts/StyleTest';
 
 import Listing from './pages/scripts/Listing/Listing';
 import ListingPage from './pages/scripts/Listing/ListingPage';
+import AdminPage from './pages/scripts/AdminPage';
 
 
 
@@ -78,6 +79,8 @@ function App() {
           <Route path="/UserProfile" element= {<UserProfile />} />
           <Route path="/ForgotPassword" element= {<ForgotPassword />} />
 
+          {/** Admin Pages */}
+          <Route path="/AdminPage" element={<AdminPage />} />
 
           {/** This is for testing the styling of the existing page */}
           <Route path="/StyleTest" element= {<StyleTest />} />

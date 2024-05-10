@@ -79,7 +79,7 @@ function BuyerInspection() {
                                                 <p>No Mechanic has accepted the inspection</p>
                                             )}
                                             {inspection.inspectionStatus ? (
-                                                <p>Inspection Status: <span>Inspection is complete</span></p>
+                                                <p>Inspection Status: <span>Inspection is completet</span></p>
                                             ) : (
                                                 <p>Inspection Status: <span>Inspection has not been completed yet</span></p>
                                             )}

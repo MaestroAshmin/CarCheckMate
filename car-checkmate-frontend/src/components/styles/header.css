@@ -142,9 +142,31 @@
     color: rgba(33,33,33,255);
     text-transform: uppercase;
     font-weight: normal;
+    color: #949494;
 }
 
 .ctr-main-header-login button:hover {
+    color: rgba(0, 195, 112, 1);
+    font-weight: bold;
+    transform: scale(1.00); /* Grow the button a bit on hover */
+}
+
+.btn-apply-filter {
+    width: 80px;
+    height: 40px;
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #ccc; /* Gray border */
+    background-color: #fff; /* White background */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Shadow */
+    transition: all 0.3s ease; /* Smooth transition */
+    text-align: center;
+    color: rgba(33,33,33,255);
+    text-transform: uppercase;
+    font-weight: normal;
+    color: #949494;
+}
+
+.btn-apply-filter:hover {
     color: rgba(0, 195, 112, 1);
     font-weight: bold;
     transform: scale(1.00); /* Grow the button a bit on hover */
@@ -181,6 +203,7 @@
 }
 
 .ctr-main-header-filter {
+    width: 100%;
     margin-top: 5px;
 }
 
@@ -197,16 +220,11 @@
     border-radius: 10px;
     background-color: #f9f9f9;
     outline: none;
-    width: 120px;
+    width: 118.5px;
 }
 
 .filter-bar select:hover {
-    border-color: #aaa;
-}
-
-.filter-bar select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    cursor: pointer;;
 }
 
 .filter-advanced {
@@ -223,6 +241,10 @@
     width: 220px;
 }
 
+.filter-advanced button:hover {
+    cursor: pointer;
+}
+
 .filter-advanced-gap {
     margin-left: 20px;
 }
@@ -233,4 +255,148 @@
     margin-top: 10px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.ctr-main-header-logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ctr-main-header-login a {
+    margin-left: 20px;
+}
+
+.ctr-main-header-login .user-profile-icon {
+    height: 30px;
+    color: #949494;
+}
+
+.ctr-main-header-login .user-profile-icon:hover {
+    color: rgba(0, 195, 112, 1);
+}
+
+/* Adjustments for responsiveness tablet*/
+@media (max-width: 1024px) {
+    .ctr-main-header-logo {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        color: #493930;
+    }
+    
+    .ctr-main-header-logo img {
+        width: 50px;
+    }
+    
+    .ctr-main-header-nav {
+        width: 300px;
+        font-size: 14px;
+    }
+    
+    .ctr-main-header-nav a {
+        width: 25%; 
+        padding: 10px 15px; 
+    }
+    
+    #indicator {
+        left: 10%; 
+        width: 20px; 
+    }
+       
+    .ctr-main-header-login button {
+        width: 150px; 
+        height: 35px; 
+        font-size: 12px; 
+    }
+
+    .ctr-main-header-filter {
+        flex-direction: column;
+    }
+
+    .filter-bar {
+        margin-bottom: 5px;
+    }
+}
+
+/* Adjustments for responsiveness mobile*/
+@media (max-width: 768px) {
+    .ctr-toggle {
+        display: none; /* Initially hide .ctr-toggle */
+        position: absolute;
+        top: 90px;
+        right: 0;
+        width: 100%;
+        height: 90px;
+        z-index: 1000;
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .ctr-main-header-nav {
+        top: 20px;
+        width: 300px;
+    }
+
+    .ctr-main-header-login button {
+        position: absolute;
+        bottom: 0; 
+        width: 96%;
+        height: 40px;
+        margin-bottom: 2%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    .ctr-toggle.show {
+        display: block; /* Show .ctr-toggle when it has the 'show' class */
+    }
+
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 40px;
+        right: -30px;
+        cursor: pointer;
+        z-index: 998; 
+        width: 50px;
+        height: 50px; 
+        font-size: 24px; 
+    }
+
+    .ctr-main-header-search,
+    .ctr-main-header-search input {
+        width: 100%;
+    }
+
+    .filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    .filter-bar select {
+        flex: 1 1 calc(33.33% - 10px); /* Calculate width to fit three selects per row */
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        outline: none;
+        min-width: 0; 
+        box-sizing: border-box; 
+    }
+
+    .btn-apply-filter {
+        width: 120px;
+    }
 }

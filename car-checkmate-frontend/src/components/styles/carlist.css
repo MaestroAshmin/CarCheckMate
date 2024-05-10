@@ -109,3 +109,31 @@
 .year-price p {
     color: rgba(0, 195, 112, 1);
 }
+
+/* Adjustments for responsiveness tablet*/
+@media (max-width: 1024px) {
+    .ctr-listing-page {
+        margin: 50px 0 50px 0;
+    }
+
+    .sub-ctr-listing-page {
+        margin: 20px;
+    }
+
+    .ctr-listing {
+        grid-gap: 20px;
+    }
+}
+  
+/* Adjustments for responsiveness mobile*/
+@media (max-width: 768px) {
+    .ctr-listing-page {
+        margin: 50px 0 50px 0;
+    }
+
+    .ctr-listing {
+        display: grid;
+        grid-template-columns: 1fr; /* Display one column */
+        grid-gap: 20px;
+    }
+}
