@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import InspectionListing from './AdminInspectionManagementListing';
 import '../styles/carlist.css';
 
 const AdminInspectionsManagement = ({ currentPage, setCurrentPage }) => {
@@ -10,12 +11,15 @@ const AdminInspectionsManagement = ({ currentPage, setCurrentPage }) => {
       try {
         const response = await axios.get(`http://localhost:3000/inspections?page=${currentPage}&limit=12`);
         const inspectionsData = response.data.map(inspection => ({
-          // Map inspection data to your desired format
           inspection_id: inspection._id,
-          // Add other fields as needed, for example:
-          // inspectionDate: inspection.inspectionDate,
-          // inspectionTime: inspection.inspectionTime,
-          // car_id: inspection.car_id,
+          inspectionDate: inspection.inspectionDate,
+          inspectionTime: inspection.inspectionTime,
+          car_id: inspection.car_id,
+          seller_id: inspection.seller.id,
+          buyer_id: inspection.buyer_id,
+          mechanic_id: inspection.mechanic_id,         
+          sellerAcceptedInspectionRequest: inspection.sellerAcceptedInspectionRequest,         
+          inspectionStatus: inspection.inspectionStatus
         }));
 
         setInspections(inspectionsData);
@@ -38,11 +42,10 @@ const AdminInspectionsManagement = ({ currentPage, setCurrentPage }) => {
         <div className="sub-ctr-listing-page">
           <div className="ctr-listing">
             {inspections.map(inspection => (
-              <div key={inspection.inspection_id} className="inspection-item">
-                {/* Render inspection details here */}
-                {/* For example: */}
-                {/* <p>Inspection ID: {inspection.inspection_id}</p> */}
-              </div>
+              <InspectionListing
+                key={inspection.inspection_id}
+                inspection={inspection}
+              />
             ))}
           </div>
           <div className="pagination">

@@ -1,5 +1,6 @@
 const Inspection = require('../models/Inspection'); 
 const Car = require('../models/Car'); 
+const FormModel = require('../models/InspectionForm');
 const fs = require('fs');
 const path = require('path');
 
@@ -352,4 +353,18 @@ async function changeInspectionStatus(req, res) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
-module.exports = { createInspection, getPendingInspectionsForSeller, acceptInspection, denyInspection, getUpcomingInspectionsBuyer, getPastInspectionsBuyer, getPastInspectionsSeller, getUpcomingInspectionsSeller, getUpcomingUnclaimedInspectionsForMechanic, acceptInspectionMechanic, getAcceptedInspectionsMechanic, changeInspectionStatus }
+
+async function saveForm(req, res) {
+    try {
+        const formData = req.body;
+        const newForm = new FormModel(formData);
+        const savedForm = await newForm.save();
+        res.status(200).json(savedForm);
+    } catch (error) {
+        console.error('Error saving form:', error);
+        res.status(500).json({ error: 'Error saving form' });
+    }
+}
+
+
+module.exports = { saveForm, createInspection, getPendingInspectionsForSeller, acceptInspection, denyInspection, getUpcomingInspectionsBuyer, getPastInspectionsBuyer, getPastInspectionsSeller, getUpcomingInspectionsSeller, getUpcomingUnclaimedInspectionsForMechanic, acceptInspectionMechanic, getAcceptedInspectionsMechanic, changeInspectionStatus }

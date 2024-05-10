@@ -37,4 +37,6 @@ router.post('/accept-inspection-mechanic/:inspectionId', inspectionController.ac
 // Route to allow mechanics to view sorted inspections
 router.get('/inspections-accepted-mechanic/:mechanicId', inspectionController.getAcceptedInspectionsMechanic);
 
+router.post('/submit-inspection-form', inspectionController.saveForm);
+
 module.exports = router;
