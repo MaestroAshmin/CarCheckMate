@@ -5,7 +5,7 @@ import '../styles/admin.css';
 import HeaderNav from '../../components/scripts/HeaderNav';
 import AdminUserManagement from '../../components/scripts/AdminUserManagement';
 import AdminListingManagement from '../../components/scripts/AdminListingManagement';
-import AdminInspectionsManagement from '../../components/scripts/AdminInspectionManagement';
+import AdminInspectionManagement from '../../components/scripts/AdminInspectionManagement';
 
 export default function AdminPage() {
   const [users, setUsers] = useState(0);
@@ -50,7 +50,7 @@ export default function AdminPage() {
       case 'listings':
         return <AdminListingManagement />;
       case 'inspections':
-        return <AdminInspectionsManagement />;
+        return <AdminInspectionManagement />;
       default:
         return (
           <div className="dashboard">
