@@ -107,6 +107,7 @@
     border-left: 2px solid #493930;*/
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
     display: flex;
+    background-color: red;
 }
 
 .ctr-user-content h3 {
@@ -114,12 +115,14 @@
 }
 
 .ctr-user-content-left {
-    width: 50%;
+    width: 60%;
+    background-color: green;
 }
 
 .ctr-user-content-right {
-    width: 50%;
+    width: 40%;
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    background-color: yellow;
 }
 
 .ctr-user-content-right-report {
@@ -244,7 +247,7 @@
 /* User Content Mechanic */
 
 .ctr-schedule {
-    width: 600px;
+    width: 85%;
     margin: 0px 50px 30px 50px;
     padding: 15px;
     overflow: hidden; /* Clear floats */
@@ -255,13 +258,15 @@
     transition: all 0.3s ease; /* Smooth transition */
     color: rgba(33,33,33,255);   
     height:300px;
+    background-color: pink;
 }
 
 .ctr-schedule-buyer-detail {
     width: 60%;
-    height: 180px;
+    height: 100%;
     float: left;
     position: relative;
+    background-color: orange;
 }
 
 .ctr-schedule-option {
