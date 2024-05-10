@@ -1,65 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../styles/main.css';
-import ForgotPasswordPopup from '../../components/scripts/ForgotPasswordPopup';
-import SignInPopup from '../../components/scripts/SignInPopup';
-import SignUpPopup from '../../components/scripts/SignUpPopup';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../styles/main.css";
+import ForgotPasswordPopup from "../../components/scripts/ForgotPasswordPopup";
+import SignInPopup from "../../components/scripts/SignInPopup";
+import SignUpPopup from "../../components/scripts/SignUpPopup";
 
 export default function StyleTest() {
-    
-    const navigate = useNavigate(); // Access navigate hook
-    
-    const [showForgotPassPopup, setShowForgotPassPopup] = useState(false);
-    const [showSignInPopup, setShowSignInPopup] = useState(false);
-    const [showSignUpPopup, setShowSignUpPopup] = useState(false);
-    
-    useEffect(() => {
-        // Check if user is already logged in using localStorage
-        const userData = localStorage.getItem('user');
+  const navigate = useNavigate(); // Access navigate hook
 
-        if (userData) {
-            navigate('/Homepage'); // Redirect to homepage if user is already logged in
-        }
-    }, [navigate]); // Ensure useEffect runs when history prop changes
+  const [showForgotPassPopup, setShowForgotPassPopup] = useState(false);
+  const [showSignInPopup, setShowSignInPopup] = useState(false);
+  const [showSignUpPopup, setShowSignUpPopup] = useState(false);
 
-    const openForgotPassPopup = () => {
-        setShowSignInPopup(false); // Close sign in popup
-        setShowSignUpPopup(false); // Close sign up popup
-        setShowForgotPassPopup(true); // Open forgot password popup
-    };
+  useEffect(() => {
+    // Check if user is already logged in using localStorage
+    const userData = localStorage.getItem("user");
 
-    const openSignInPopup = () => {
-        setShowForgotPassPopup(false); // Close forgot password popup
-        setShowSignUpPopup(false); // Close sign up popup
-        setShowSignInPopup(true); // Open sign in popup
-    };
+    if (userData) {
+      navigate("/Homepage"); // Redirect to homepage if user is already logged in
+    }
+  }, [navigate]); // Ensure useEffect runs when history prop changes
 
-    const openSignUpPopup = () => {
-        setShowForgotPassPopup(false); // Close forgot password popup
-        setShowSignInPopup(false); // Close sign in popup
-        setShowSignUpPopup(true); // Open sign up popup
-    };
-    
-    return (
-        <div className='ctr-main'>
+  const openForgotPassPopup = () => {
+    setShowSignInPopup(false); // Close sign in popup
+    setShowSignUpPopup(false); // Close sign up popup
+    setShowForgotPassPopup(true); // Open forgot password popup
+  };
 
-            <ForgotPasswordPopup
-                showForgotPassPopup={showForgotPassPopup} 
-                setShowForgotPassPopup={setShowForgotPassPopup}
-            />
-                
-            <SignInPopup 
-                showSignInPopup={showSignInPopup}
-                setShowSignInPopup={setShowSignInPopup}
-                openForgotPassPopup={openForgotPassPopup} 
-                openSignUpPopup={openSignUpPopup}
-            />
-                
-            <SignUpPopup
-                showSignUpPopup={showSignUpPopup}
-                setShowSignUpPopup={setShowSignUpPopup}
-                openSignInPopup={openSignInPopup}
-            />
+  const openSignInPopup = () => {
+    setShowForgotPassPopup(false); // Close forgot password popup
+    setShowSignUpPopup(false); // Close sign up popup
+    setShowSignInPopup(true); // Open sign in popup
+  };
+
+  const openSignUpPopup = () => {
+    setShowForgotPassPopup(false); // Close forgot password popup
+    setShowSignInPopup(false); // Close sign in popup
+    setShowSignUpPopup(true); // Open sign up popup
+  };
+
+  return (
+    <div className="ctr-main">
+      <ForgotPasswordPopup
+        showForgotPassPopup={showForgotPassPopup}
+        setShowForgotPassPopup={setShowForgotPassPopup}
+      />
+
+      <SignInPopup
+        showSignInPopup={showSignInPopup}
+        setShowSignInPopup={setShowSignInPopup}
+        openForgotPassPopup={openForgotPassPopup}
+        openSignUpPopup={openSignUpPopup}
+      />
+
+      <SignUpPopup
+        showSignUpPopup={showSignUpPopup}
+        setShowSignUpPopup={setShowSignUpPopup}
+        openSignInPopup={openSignInPopup}
+      />
 
             <div className='ctr-sub'>
                 <div className='ctr-sub-content-lock'>

@@ -175,4 +175,64 @@ function logout(req, res) {
         res.status(500).json({ status: false, error: 'Internal Server Error' });
     }
 }
-module.exports = { register, sendVerificationEmail, verifyEmail, login, logout };
+
+
+async function forgotPassword(req, res){
+    try {
+        const {email} = req.body;
+        console.log("email" , email)
+        const forgotPasswordURL= "http://localhost:3001/forgotpassword";
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'karkiashmin1996@gmail.com',
+                pass: 'tlwvzxqguvwqsbks'
+            }
+        });
+    
+        // Send email with verification link
+        const info = await transporter.sendMail({
+            from: '<no-reply@carcheckmate.com>',
+            to: email,
+            subject: 'Setting up a new password',
+            text: 'Click the following link to set up a new password: ' + forgotPasswordURL,
+        });
+    
+        console.log('Email sent: ', info);
+    } catch (error) {
+        res.status(500).json({ status: false, error: 'Internal Server Error' });
+    }
+}
+
+async function updateUserPassword(req, res){
+    try {
+        const {email,password} = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await User.findOne({ email });
+        // console.log(user);
+        // If user not found or password doesn't match, return error
+        if (!user ) {
+            return res.status(401).json({ status: false, error: 'Invalid email' });
+        }
+  
+        // If user is not verified, return error
+        if (!user.emailVerified) {
+            return res.status(401).json({ status: false, error: 'Email not verified' });
+        }
+
+        user.password = hashedPassword;
+        await user.save();
+        res.status(200).send("password updated");
+        
+
+
+    } catch (error) {
+        res.status(500).json({ status: false, error: 'Internal Server Error' });
+    }
+
+}
+
+
+
+
+module.exports = { register, sendVerificationEmail, verifyEmail, login, logout , forgotPassword, updateUserPassword};
