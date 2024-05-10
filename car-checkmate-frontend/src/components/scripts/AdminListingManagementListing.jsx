@@ -36,6 +36,8 @@ const Listing = ({ car }) => {
         {expanded && (
           <div className="details-container">
             <p>Car ID: {car.car_id}</p>
+            <p>Seller Id: {car.seller_id}</p>
+            <p>Registration Number: {car.registrationNo}</p>
             <p>Body Type: {car.bodyType}</p>
             <p>Color: {car.color}</p>
             <p>Engine Type: {car.engineType}</p>

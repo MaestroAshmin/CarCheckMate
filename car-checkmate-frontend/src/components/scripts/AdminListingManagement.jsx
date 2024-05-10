@@ -12,6 +12,8 @@ const AdminListingManagement = ({ currentPage, setCurrentPage }) => {
         const response = await axios.get(`http://localhost:3000/cars/available-cars?page=${currentPage}&limit=6`);
         const unsoldCars = response.data.map(car => ({
             car_id:car._id,
+            seller_id:seller_id,
+            registrationNo:registrationNo,
             bodyType: car.bodyType,
             color: car.color,
             engineType: car.engineType,
