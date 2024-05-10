@@ -1,0 +1,252 @@
+[33mcommit d6be3b3786187fbbd63b46b3812cd3c78e84531d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 74224f2 5f8de1d
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Thu May 2 19:07:01 2024 +1000
+
+    Merge branch 'ashmin'
+
+[33mcommit 5f8de1d79277e5319356c178632ca109d23b32d9[m
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Thu May 2 19:06:20 2024 +1000
+
+    Fix merge issues
+
+[33mcommit 74224f2da62d1bac6768dad7da4ce2971c1e476f[m
+Merge: 03318a0 ff051d9
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Thu May 2 18:49:45 2024 +1000
+
+    Merge branch 'ashmin'
+
+[33mcommit 03318a086f92d1b184b0bd72d1eea1aa11c1bb7e[m
+Merge: 921668d b61d1ea
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Thu May 2 18:49:22 2024 +1000
+
+    Merge branch 'main' of https://github.com/MaestroAshmin/CarCheckMate
+
+[33mcommit ff051d9b08f1d0a3d58f6405938bd397ec41b9cd[m
+Merge: 5b476fb b61d1ea
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Thu May 2 18:46:55 2024 +1000
+
+    Merge branch 'main' of https://github.com/MaestroAshmin/CarCheckMate into ashmin
+
+[33mcommit 5b476fbf80b8f1c87bc7dc4e7ae7c79490de5e56[m
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Thu May 2 18:39:16 2024 +1000
+
+    Seller side inspection except for deny inspection complete
+
+[33mcommit b61d1ea4a6c517b7d05b445aaa9d51fdf1b4c0d0[m
+Author: SuryaSravaniAkella <99386004+SuryaSravaniAkella@users.noreply.github.com>
+Date:   Thu May 2 16:02:15 2024 +1000
+
+    Integrated Verify Seller, Upcoming inspections for seller, past inspections for seller, made some chnages in the booking inspections but incomplete
+
+[33mcommit 921668d97ba945135a5b99783ed052b4ac546b63[m
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Thu May 2 13:54:16 2024 +1000
+
+    Fix fetching single car details
+
+[33mcommit 231617565e9ec065bfbc6ca4bdd59d7474240c10[m
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Thu May 2 13:32:19 2024 +1000
+
+    Upcoming and Past inspections for buyer
+
+[33mcommit 4ddd7cff8cf0ba98becae48d93b7cc0dc26e6e3b[m
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Thu May 2 12:04:33 2024 +1000
+
+    Fix Raihan's Car listing API Integration
+
+[33mcommit cfcde7faefa52effae4736da0e2c6c49b49d3f4f[m
+Merge: 192e274 c9f8c46
+Author: jayspm <62362003+jayspm@users.noreply.github.com>
+Date:   Thu May 2 00:24:58 2024 +1000
+
+    Merge pull request #27 from MaestroAshmin/jay
+    
+    added features to the frontend according to client feedback
+
+[33mcommit c9f8c4622a7351b4bad5dffdbb78c0682b5c8d42[m
+Author: jayspm <jayispm@gmail.com>
+Date:   Thu May 2 00:21:48 2024 +1000
+
+    added features according to the client's feedback
+    
+    - color and verified filter
+    - photo for a view car listing for seller
+    - input box for entering reason on cancelling booking
+    - set up availabilities for inspection
+
+[33mcommit 156e81f5e9d3e84356b63534e873bcebe4fa5949[m
+Author: jayspm <jayispm@gmail.com>
+Date:   Mon Apr 29 23:20:33 2024 +1000
+
+    tested link to car info page
+
+[33mcommit 541f25b0a9e3bd407a6f3cb2f6f6772cc302c969[m
+Merge: c2e6edf 192e274
+Author: jayspm <jayispm@gmail.com>
+Date:   Mon Apr 29 23:11:04 2024 +1000
+
+    merge main
+
+[33mcommit c2e6edfffbd578fb9bf9e7402e899ed8ed98e43c[m
+Author: jayspm <jayispm@gmail.com>
+Date:   Mon Apr 29 23:10:23 2024 +1000
+
+    updated css for carinfopage, listing page, linked btn on carinfopage to popup
+
+[33mcommit 192e2745c20fcb4f70519fbc9f1b690eba42dd89[m
+Merge: 46ec3db fc27a14
+Author: jayspm <62362003+jayspm@users.noreply.github.com>
+Date:   Mon Apr 29 11:20:15 2024 +1000
+
+    Merge pull request #26 from MaestroAshmin/jay
+    
+    updated the car listing page styling
+
+[33mcommit fc27a149f46a7a4ce3c679f2caec493269036224[m[33m ([m[1;31morigin/jay[m[33m)[m
+Merge: 777b70c 46ec3db
+Author: jayspm <jayispm@gmail.com>
+Date:   Mon Apr 29 03:10:55 2024 +1000
+
+    merge main to jay
+
+[33mcommit 777b70cb4e4ab0dc4de3a336d9654bedb4a4147e[m
+Author: jayspm <jayispm@gmail.com>
+Date:   Mon Apr 29 01:46:06 2024 +1000
+
+    car ad page updated styling
+
+[33mcommit 46ec3db42ee2b83d0f1e19cf74e92ab554326a8b[m
+Merge: 067bfe6 2a388a9
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Sun Apr 28 22:18:16 2024 +1000
+
+    Merge branch 'ashmin'
+
+[33mcommit 2a388a9bbc4dc0cd1841cadd491348dc9a5f5174[m[33m ([m[1;31morigin/ashmin[m[33m)[m
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Sun Apr 28 22:16:35 2024 +1000
+
+    Registration API complete
+
+[33mcommit 067bfe6b962bf779d0afb137ae7f4bc50fe20750[m
+Merge: 4e2fb3d d07499b
+Author: Raihan Momtaz <63046447+Raihan-Momtaz@users.noreply.github.com>
+Date:   Sun Apr 28 22:00:34 2024 +1000
+
+    Merge pull request #25 from MaestroAshmin/raihan--works
+    
+    Carinfo page connected to the server and database
+
+[33mcommit d07499b6900837c1fc1a627a1647dfb01bc07d0e[m[33m ([m[1;31morigin/raihan--works[m[33m)[m
+Author: Raihan Momtaz <63046447+Raihan-Momtaz@users.noreply.github.com>
+Date:   Sun Apr 28 21:51:59 2024 +1000
+
+    Carinfo page connected to the server and database
+
+[33mcommit 4e2fb3d79d887899bf867c4f934bb0aa70d28955[m[33m ([m[1;31morigin/Inwoo[m[33m)[m
+Merge: 8dcb8e9 cac27eb
+Author: Raihan Momtaz <63046447+Raihan-Momtaz@users.noreply.github.com>
+Date:   Sun Apr 28 19:40:35 2024 +1000
+
+    Merge pull request #24 from MaestroAshmin/raihan--works
+    
+    Car Listing page photo uploaded works
+
+[33mcommit cac27ebfd9d0d7dfa2cbfb4b0e64782e23a76907[m
+Author: Raihan Momtaz <63046447+Raihan-Momtaz@users.noreply.github.com>
+Date:   Sun Apr 28 19:39:57 2024 +1000
+
+    CarListing page photo uploaded works
+
+[33mcommit 8dcb8e99c83854ebb05be1f7e074c49dd53b8892[m
+Merge: 3de53b8 3abf1cd
+Author: Raihan Momtaz <63046447+Raihan-Momtaz@users.noreply.github.com>
+Date:   Sun Apr 28 18:38:01 2024 +1000
+
+    Merge pull request #23 from MaestroAshmin/raihan--works
+    
+    Connected Listing page to server and database
+
+[33mcommit 3abf1cd922aa7fc17af2910b5c032a5fcfc9354b[m
+Merge: 9c572ec 3de53b8
+Author: Raihan Momtaz <63046447+Raihan-Momtaz@users.noreply.github.com>
+Date:   Sun Apr 28 18:37:50 2024 +1000
+
+    Merge branch 'main' into raihan--works
+
+[33mcommit 9c572ecdb832095900b7c8f3386f200466f6de24[m
+Author: Raihan Momtaz <63046447+Raihan-Momtaz@users.noreply.github.com>
+Date:   Sun Apr 28 18:35:33 2024 +1000
+
+    Connected Listing page to server and database
+
+[33mcommit 3de53b8f5863e54fb7566ff40f2453d9e1c15f81[m
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Sun Apr 28 16:48:59 2024 +1000
+
+    Fix image url in database
+
+[33mcommit 09cf813244a2313acf2efea43293e36509f57687[m
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Sun Apr 28 15:27:43 2024 +1000
+
+    Redirect to user page after successully adding car
+
+[33mcommit f90661114165f8e4fa48eb9df9967f72419b8a18[m
+Merge: 6f37e8e e6bd2f4
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Sun Apr 28 15:19:14 2024 +1000
+
+    Merge branch 'main' of https://github.com/MaestroAshmin/CarCheckMate into ashmin
+
+[33mcommit 6f37e8eb2734762f7d3d566a0e7581c3b08b04cd[m
+Author: Ashmin <ashmin.karki1996@gmail.com>
+Date:   Sun Apr 28 15:13:42 2024 +1000
+
+    API for adding cars complete
+
+[33mcommit e6bd2f472c67ef83b958eb2f7b304a96bfe8dd79[m
+Merge: 53096b5 3c03d2b
+Author: jayspm <62362003+jayspm@users.noreply.github.com>
+Date:   Sun Apr 28 02:29:28 2024 +1000
+
+    Merge pull request #22 from MaestroAshmin/jay
+    
+    added user content and profile pages
+
+[33mcommit 3c03d2b288364d238d10897a4f9e0e797a8a6cba[m
+Author: jayspm <jayispm@gmail.com>
+Date:   Sun Apr 28 02:27:45 2024 +1000
+
+    added user content and profile pages
+    
+    - buyer
+    - seller
+    - mechanic
+    - user profile
+
+[33mcommit 53096b59e838a400063afdd854fd804a9e1da7cf[m
+Merge: e8c280e 013e82f
+Author: jayspm <62362003+jayspm@users.noreply.github.com>
+Date:   Fri Apr 26 18:00:41 2024 +1000
+
+    Merge pull request #21 from MaestroAshmin/Inwoo
+    
+    CarInfoPage integration with DB
+
+[33mcommit 013e82fddc868e751c4a40e0c95ede270e679db9[m
+Merge: 15e410c e8c280e
+Author: jayspm <62362003+jayspm@users.noreply.github.com>
+Date:   Fri Apr 26 18:00:31 2024 +1000
+
+    Merge branch 'main' into Inwoo
+
+[33mcommit e8c280e5
