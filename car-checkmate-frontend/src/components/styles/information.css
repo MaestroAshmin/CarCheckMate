@@ -37,3 +37,36 @@
         rgba(0, 195, 112, 0.09) 0px 16px 8px,
         rgba(0, 195, 112, 0.09) 0px 32px 16px;
 }
+
+/* Adjustments for responsiveness tablet*/
+@media (max-width: 1024px) {
+    .ctr-main-information {
+        width: 100%;
+        margin: 0 0 50px 0;
+    }
+
+    .ctr-main-info-header h2 {
+        font-size: 17px;
+    }
+}
+  
+/* Adjustments for responsiveness mobile*/
+@media (max-width: 768px) {
+    .ctr-main-information {
+        width: 100%;
+        margin: 0 5px;
+        display: grid;
+        grid-template-columns: 1fr; 
+        grid-gap: 20px;
+        margin-bottom: 50px;
+    }
+
+    .ctr-main-info-header h2 {
+        font-size: 16px;
+    }
+
+    .ctr-main-info {
+        width: 100%;
+        margin: 0 0 0 0;
+    }
+}

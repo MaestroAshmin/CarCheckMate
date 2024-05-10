@@ -12,7 +12,6 @@ export default function AboutUs() {
             <div className='ctr-sub-content'>
                 <HeaderNav />
                 <div className='ctr-content-session'>
-                    <UserNav />
 
                 </div>
             </div>

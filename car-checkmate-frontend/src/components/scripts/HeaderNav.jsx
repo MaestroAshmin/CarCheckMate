@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../../pages/styles/main.css';
 import '../styles/header.css';
 import ForgotPasswordPopup from '../../components/scripts/ForgotPasswordPopup';
 import SignInPopup from '../../components/scripts/SignInPopup';
 import SignUpPopup from '../../components/scripts/SignUpPopup';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function HeaderNav() {
 
@@ -13,23 +15,31 @@ export default function HeaderNav() {
     const [showForgotPassPopup, setShowForgotPassPopup] = useState(false);
     const [showSignInPopup, setShowSignInPopup] = useState(false);
     const [showSignUpPopup, setShowSignUpPopup] = useState(false);
+    const [isNavOpen, setIsNavOpen] = useState(false);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     const openForgotPassPopup = () => {
         setShowSignInPopup(false); // Close sign in popup
         setShowSignUpPopup(false); // Close sign up popup
         setShowForgotPassPopup(true); // Open forgot password popup
+        setIsPopupOpen(true); // Set popup open state
+        setIsNavOpen(false); // Close the navigation toggle
     };
 
     const openSignInPopup = () => {
         setShowForgotPassPopup(false); // Close forgot password popup
         setShowSignUpPopup(false); // Close sign up popup
         setShowSignInPopup(true); // Open sign in popup
+        setIsPopupOpen(true); // Set popup open state
+        setIsNavOpen(false); // Close the navigation toggle
     };
 
     const openSignUpPopup = () => {
         setShowForgotPassPopup(false); // Close forgot password popup
         setShowSignInPopup(false); // Close sign in popup
         setShowSignUpPopup(true); // Open sign up popup
+        setIsPopupOpen(true); // Set popup open state
+        setIsNavOpen(false); // Close the navigation toggle
     };
 
     const handleLogout = async () => {
@@ -47,6 +57,7 @@ export default function HeaderNav() {
                 localStorage.removeItem('user');
                 // Reload the page
                 window.location.reload();
+                window.location.href = '/Homepage';
             } else {
                 // Handle error response
                 console.error('Logout failed:', response.statusText);
@@ -56,6 +67,30 @@ export default function HeaderNav() {
             console.error('Network error:', error.message);
         }
     };
+
+    // Function to toggle navigation
+    const toggleNav = () => {
+        setIsNavOpen(!isNavOpen);
+        
+        if (isPopupOpen) {
+            setIsNavOpen(true);
+        }
+    };
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth > 768) {
+                setIsNavOpen(false); // Close the navigation if the screen size is larger than 768px
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []); // Empty dependency array to run this effect only once
+
     return (
         <div className='ctr-main-header'>
 
@@ -83,12 +118,38 @@ export default function HeaderNav() {
                 </NavLink>
                 <h2>CarCheckMate</h2>
             </div>
-            <div className='ctr-main-header-nav'>
+            {/*<div className='ctr-main-header-nav'>
                 <NavLink to="/ListingPage" activeClassName="active">Buy</NavLink>
                 <NavLink to="/Selling" activeClassName="active">Sell</NavLink>
                 <NavLink to="/AboutUs" activeClassName="active">About Us</NavLink>
-            </div>
-            <div className='ctr-main-header-login'>
+            </div>*/}
+
+
+                <div className={`ctr-toggle ${isNavOpen ? 'show' : ''}`}>
+                    {/* Main navigation */}
+                    <div className='ctr-main-header-nav'>
+                        <NavLink to="/ListingPage" activeClassName="active">Buy</NavLink>
+                        <NavLink to="/Selling" activeClassName="active">Sell</NavLink>
+                        <NavLink to="/AboutUs" activeClassName="active">About Us</NavLink>
+                    </div>
+                    
+                    {/* Login section */}
+                    <div className='ctr-main-header-login'>
+                        {userData ? (
+                            <div className='ctr-main-header-logout'>
+                                <button onClick={handleLogout}>Logout</button>
+                                <NavLink to='/UserProfile'><FontAwesomeIcon icon={faUser} className='user-profile-icon' /></NavLink>
+                            </div>
+                            
+                        ) : (
+                            <div>
+                                <button onClick={openSignInPopup}><b>Log in</b> | <b>Register</b></button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+            {/*<div className='ctr-main-header-login'>
             {userData ? (
                     <button onClick={handleLogout}>Logout</button>
                 ) : (
@@ -96,6 +157,11 @@ export default function HeaderNav() {
                         <button onClick={openSignInPopup}><b>Log in</b> | <b>Register</b></button>
                     </div>
                 )}
+            </div>*/}
+
+            {/* Menu toggle button */}
+            <div className='menu-toggle' onClick={toggleNav}>
+                &#9776;
             </div>
         </div>
     );
