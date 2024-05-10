@@ -55,7 +55,7 @@ function MechanicReport() {
         eRWCSubmitted: false,
         informationTruthChecked: false,
     });
-
+    console.log(formState)
     const [showPopup, setShowPopup] = useState(false);
     const [invalidField, setInvalidField] = useState('');
 

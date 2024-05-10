@@ -119,7 +119,7 @@ const FilterBar = ({ onSearch }) => {
                 <FilterDropdown options={makeOptions} value={make} onChange={(e) => setMake(e.target.value)} />
                 <FilterDropdown options={modelOptions} value={model} onChange={(e) => setModel(e.target.value)} />
                 <FilterDropdown options={colorOptions} value={color} onChange={(e) => setColor(e.target.value)} />
-                <button className="btn-advanced-filter" onClick={applyFilters}>Apply Filters</button>
+                <button className="btn-apply-filter" onClick={applyFilters}>Apply</button>
             </div>
             <div className="filter-advanced">
                 <button className="btn-advanced-filter" onClick={toggleAdvancedFilters}>
