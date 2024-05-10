@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../../styles/Listing.css';
 
 export default function Listing({ car }) {
+  console.log(car);
   const navigate = useNavigate();
 // Ensure carPhotos is an array
   const carPhotosArray = Array.isArray(car.carPhotos) ? car.carPhotos : [];
@@ -14,7 +15,6 @@ export default function Listing({ car }) {
     const parts = trimmedFilePath.split('\\');
     return parts[parts.length - 1];
   });
-  console.log(car.car_id)
 
   const handleCarClick = () => {
     // Navigate to the CarInfoPage when a car is clicked

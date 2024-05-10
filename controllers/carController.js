@@ -208,4 +208,4 @@ async function getColors(req, res) {
   }
 }
 
-module.exports = { uploadCarData, getUnsoldCars, getCarById, listCarsBySeller, getYears, getMakes, getModels, getColors  };
+module.exports = { uploadCarData, getUnsoldCars, getCarById, listCarsBySeller, getYears, getMakes, getModels, getColors};
