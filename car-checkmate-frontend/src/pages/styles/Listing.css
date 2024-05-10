@@ -53,3 +53,33 @@
 .year-price p {
   color: #00b8d4;
 }
+
+/* Adjustments for responsiveness tablet*/
+@media (max-width: 1024px) {
+  .listing-container {
+    width: 100%;
+  }
+
+  .listing-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+
+  .info-container {
+    padding: 16px;
+    background-color: #1e2023;
+    color: #f4f4f4;
+    height: 40%;
+  }
+}
+
+/* Adjustments for responsiveness mobile*/
+@media (max-width: 768px) {
+  .listing-container {
+
+  }
+}
