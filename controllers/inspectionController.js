@@ -61,10 +61,7 @@ async function getPendingInspectionsForSeller (req, res){
         const pendingInspections = await Inspection.find({ 
             $and: [
                 { seller_id: seller_id },
-                { $or: [
-                    { sellerAcceptedInspectionRequest: false },
-                    { sellerAcceptedInspectionRequest: null }
-                ]},
+                { sellerAcceptedInspectionRequest: null },
                 { inspectionDate: { $gte: currentDate } }
             ]
         })
@@ -104,14 +101,18 @@ async function acceptInspection(req, res) {
 async function denyInspection (req, res) {
     try {
         const { inspectionId } = req.params;
+        const { inspectionMessage } = req.body; // Extract inspectionMessage from request body
 
-        // Update the inspection record to mark it as denied by the seller
-        await Inspection.findByIdAndUpdate(inspectionId, { sellerAcceptedInspectionRequest: false });
+        // Update the inspection record to mark it as denied by the seller and include inspectionMessage
+        await Inspection.findByIdAndUpdate(inspectionId, { 
+            sellerAcceptedInspectionRequest: false,
+            inspectionMessage: inspectionMessage // Set inspectionMessage
+        });
 
         res.status(200).json({ message: 'Inspection request denied successfully.' });
     } catch (error) {
         console.error('Error denying inspection request:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -176,7 +177,13 @@ async function getUpcomingInspectionsSeller(req, res) {
     try {
         const sellerId = req.params.id; // Get user ID from request parameter
 
-        const upcomingInspections = await Inspection.find({ seller_id: sellerId, inspectionDate: { $gte: new Date() } }).sort({ inspectionDate: 1}).exec();
+        const upcomingInspections = await Inspection.find({
+            seller_id: sellerId,
+            inspectionDate: { $gte: new Date() },
+            $or: [
+                { sellerAcceptedInspectionRequest: true }
+            ]
+        }).sort({ inspectionDate: 1 }).exec();
         const inspectionsWithCarDetails = await Promise.all(upcomingInspections.map(async (inspection) => {
             let carDetails = await Car.findById(inspection.car_id);
             carDetails = carDetails.toObject();
@@ -216,13 +223,14 @@ async function getUpcomingUnclaimedInspectionsForMechanic (req, res) {
         // Get upcoming inspections that have not been selected by other mechanics yet
         const upcomingInspections = await Inspection.find({ mechanic_id: null, inspectionDate: { $gte: new Date() } });
         // Fetch car details for each inspection
+        
         const inspectionsWithCarDetails = await Promise.all(upcomingInspections.map(async (inspection) => {
             let carDetails = await Car.findById(inspection.car_id);
             carDetails = carDetails.toObject();
             delete carDetails.__v; // Remove __v field
             return { ...inspection.toObject(), car: carDetails };
         }));
-
+        console.log(inspectionsWithCarDetails);
         res.status(200).json({ inspectionsWithCarDetails });
     } catch (error) {
         console.error('Error fetching upcoming inspections for mechanic:', error);
@@ -234,7 +242,8 @@ async function getUpcomingUnclaimedInspectionsForMechanic (req, res) {
 async function acceptInspectionMechanic (req, res) {
     try {
         const { inspectionId } = req.params;
-        const mechanicId = req.session.user._id;
+        const { mechanicId } = req.body;
+        // const mechanicId = req.session.user._id;
 
          // Get the inspection details
          const inspection = await Inspection.findById(inspectionId);
@@ -264,7 +273,7 @@ async function acceptInspectionMechanic (req, res) {
 // Controller function to get sorted inspections for a mechanic
 async function getAcceptedInspectionsMechanic (req, res) {
     try {
-        const mechanicId = req.session.user._id;
+        const mechanicId = req.params.mechanicId;
         // Get current date
         const currentDate = new Date();
         // Get inspections accepted by the mechanic and sort them by date and time

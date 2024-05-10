@@ -5,9 +5,12 @@ function SellerRequest() {
     
     const [pendingInspections, setPendingInspections] = useState([]);
     const [showCancelPopup, setShowCancelPopup] = useState(false);
+    const [inspectionToCancel, setInspectionToCancel] = useState(null);
     const [showAcceptedMessage, setShowAcceptedMessage] = useState(false);
-    const openCancelPopup = () => {
+
+    const openCancelPopup = (inspectionId) => {
         setShowCancelPopup(true);
+        setInspectionToCancel(inspectionId);
     };
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -71,6 +74,7 @@ function SellerRequest() {
         <CancelPopup
             showCancelPopup={showCancelPopup}
             setShowCancelPopup={setShowCancelPopup}
+            inspectionId={inspectionToCancel} // Pass inspection id as prop
         />
         {showAcceptedMessage && <p>Inspection Accepted!</p>}
         {currentInspections.map((inspection, index) => (
@@ -82,7 +86,7 @@ function SellerRequest() {
                 </div>
                 <div className='ctr-schedule-option-seller-request'>
                     <button onClick={() => handleAccept(inspection._id)}>Accept</button>
-                    <button onClick={openCancelPopup}>Deny</button>
+                    <button onClick={() => openCancelPopup(inspection._id)}>Deny</button>
                 </div>
             </div>
         ))}

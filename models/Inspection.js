@@ -40,6 +40,11 @@ const inspectionSchema = new mongoose.Schema({
     inspectionStatus: {
         type: Boolean,
         default: null
+    },
+    inspectionMessage: {
+        type: String,
+        default: '',
+        required: false,
     }
 });
 

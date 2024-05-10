@@ -1,4 +1,5 @@
 // TAP/index.js
+
 const mongoose = require("mongoose");
 const multer = require("multer");
 const bodyParser = require("body-parser");
@@ -8,8 +9,11 @@ const sellerRoutes = require("./routes/sellerVerificationRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const carRoutes = require("./routes/carRoutes");
 const inspectionRoutes = require("./routes/inspectionRoutes");
+const searchRoutes = require("./routes/searchRoutes");
+
 const inspectionStatusRoutes = require("./routes/inspectionStatusRoutes");
 const path = require("path");
+
 // const { sellerUploadFieldsConfig } = require('./config/multer-config');
 require("dotenv").config();
 
@@ -67,14 +71,18 @@ mongoose
     console.log("Connected to MongoDB");
 
     // Routes
-
     app.use("/user", upload.none(), userRoutes);
     app.use("/payment", paymentRoutes);
     app.use("/verification", sellerRoutes);
     app.use("/admin", adminRoutes);
     app.use("/cars", carRoutes);
     app.use("/inspections", upload.none(), inspectionRoutes);
+
+    app.use("/inspection-status", upload.none(), inspectionStatusRoutes);
+
+    app.use("/search", upload.none(), searchRoutes);
     app.use("/inspection-status", inspectionStatusRoutes);
+
     app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
     app.listen(PORT, () => {

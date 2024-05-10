@@ -203,10 +203,58 @@ async function updateCarVisit(req, res) {
   }
 }
 
+// Controller function to fetch distinct years from database
+async function getYears(req, res) {
+  try {
+    const years = await Car.find().distinct("year");
+    res.json(years);
+  } catch (error) {
+    console.error("Error fetching years:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+// Controller function to fetch distinct makes from database
+async function getMakes(req, res) {
+  try {
+    const makes = await Car.find().distinct("make");
+    res.json(makes);
+  } catch (error) {
+    console.error("Error fetching makes:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+// Controller function to fetch distinct models from database
+async function getModels(req, res) {
+  try {
+    const models = await Car.find().distinct("model");
+    res.json(models);
+  } catch (error) {
+    console.error("Error fetching models:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+// Controller function to fetch distinct colors from database
+async function getColors(req, res) {
+  try {
+    const colors = await Car.find().distinct("color");
+    res.json(colors);
+  } catch (error) {
+    console.error("Error fetching colors:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 module.exports = {
   uploadCarData,
+  updateCarVisit,
   getUnsoldCars,
   getCarById,
   listCarsBySeller,
-  updateCarVisit,
+  getYears,
+  getMakes,
+  getModels,
+  getColors,
 };

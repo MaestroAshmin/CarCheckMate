@@ -13,7 +13,7 @@ router.get('/pending-inspections/:id',inspectionController.getPendingInspections
 router.post('/accept/:inspectionId', inspectionController.acceptInspection);
 
 // Route to allow seller to deny an inspection request
-router.post('/deny/:inspectionId',authMiddleware.requireLogin, checkSellerPermission, inspectionController.denyInspection);
+router.post('/deny/:inspectionId', inspectionController.denyInspection);
 
 // Route to allow buyer to view upcoming inspections
 router.get('/upcoming-buyer/:id', inspectionController.getUpcomingInspectionsBuyer);
@@ -32,9 +32,9 @@ router.get('/past-seller/:seller_id', inspectionController.getPastInspectionsSel
 router.get('/upcoming-unclaimed-mechanic', inspectionController.getUpcomingUnclaimedInspectionsForMechanic);
 
 // Route to allow mechanics to accept an inspection
-router.post('/accept-inspection-mechanic/:inspectionId', inspectionController.acceptInspectionMechanic);
+router.post('/accept-inspection-mechanic/:inspectionId', inspectionController.acceptInspectionMechanic);//git
 
 // Route to allow mechanics to view sorted inspections
-router.get('/inspections-accepted-mechanic',authMiddleware.requireLogin, checkMechanicPermission, inspectionController.getAcceptedInspectionsMechanic);
+router.get('/inspections-accepted-mechanic/:mechanicId', inspectionController.getAcceptedInspectionsMechanic);
 
 module.exports = router;

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/Listing.css";
 
 export default function Listing({ car }) {
+  console.log(car);
   const navigate = useNavigate();
   // Ensure carPhotos is an array
   const carPhotosArray = Array.isArray(car.carPhotos) ? car.carPhotos : [];
@@ -16,6 +17,13 @@ export default function Listing({ car }) {
   // });
   //console.log(car.car_id);
   // console.log("trimmed car photos", trimmedFilePathsArray);
+
+  const trimmedFilePathsArray = carPhotosArray.map((filePath) => {
+    const trimmedFilePath = filePath.trim();
+    const parts = trimmedFilePath.split("\\");
+    return parts[parts.length - 1];
+  });
+
   const handleCarClick = async () => {
     try {
       await fetch("http://localhost:3000/cars/carvisit", {
@@ -28,6 +36,7 @@ export default function Listing({ car }) {
     } catch (error) {
       console.log("error while updating car visits", error);
     }
+
     // Navigate to the CarInfoPage when a car is clicked
     navigate(`/car/${car.car_id}`);
   };
