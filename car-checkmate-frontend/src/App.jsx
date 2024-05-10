@@ -70,7 +70,9 @@ function App() {
             
           {/** Login Page for each user */}
           <Route path="/Mechanic" element= {<Mechanic />} />
-          <Route path="/InspectionReport" element= {<InspectionReport />} />
+          <Route path="/InspectionReport/:carId/:mechanicId/:sellerId/:buyerId/:inspectionId" element= {<InspectionReport />} />
+        
+
           <Route path="/Seller" element= {<Seller />} />
           <Route path="/Buyer" element= {<Buyer />} />
           <Route path="/UserProfile" element= {<UserProfile />} />
