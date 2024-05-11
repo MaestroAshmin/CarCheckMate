@@ -366,5 +366,16 @@ async function saveForm(req, res) {
     }
 }
 
+async function getAllForms(req, res) {
+    try {
+        const allForms = await FormModel.find().populate('carId');
+        res.status(200).json(allForms);
+    } catch (error) {
+        console.error('Error getting all forms:', error);
+        res.status(500).json({ error: 'Error getting all forms' });
+    }
+}
 
-module.exports = { saveForm, createInspection, getPendingInspectionsForSeller, acceptInspection, denyInspection, getUpcomingInspectionsBuyer, getPastInspectionsBuyer, getPastInspectionsSeller, getUpcomingInspectionsSeller, getUpcomingUnclaimedInspectionsForMechanic, acceptInspectionMechanic, getAcceptedInspectionsMechanic, changeInspectionStatus }
+
+
+module.exports = {getAllForms, saveForm, createInspection, getPendingInspectionsForSeller, acceptInspection, denyInspection, getUpcomingInspectionsBuyer, getPastInspectionsBuyer, getPastInspectionsSeller, getUpcomingInspectionsSeller, getUpcomingUnclaimedInspectionsForMechanic, acceptInspectionMechanic, getAcceptedInspectionsMechanic, changeInspectionStatus }

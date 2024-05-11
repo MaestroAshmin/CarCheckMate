@@ -27,7 +27,7 @@ import StyleTest from './pages/scripts/StyleTest';
 
 import Listing from './pages/scripts/Listing/Listing';
 import ListingPage from './pages/scripts/Listing/ListingPage';
-
+import InspectedReport from './pages/scripts/InspectedReport';
 
 
 function App() {
@@ -84,6 +84,7 @@ function App() {
           <Route path="/ListingPage" element= {<ListingPage />} /> 
           <Route path="/Listing" element= {<Listing />} />
           {/* <SellerSchedule carId={car.id} /> */}
+          <Route path="/InspectedReport/:id" element= {<InspectedReport/>} />
         </Routes>
       </Router>
     </div>
