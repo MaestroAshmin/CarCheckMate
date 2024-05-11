@@ -1,129 +1,163 @@
-import { useState, useEffect } from 'react';
-import EmailSellerPopup from './EmailSellerPopup';
-import BookMechanicPopup from './BookMechaniePopup';
-import CancelPopup from './CancelPopup';
+import { useState, useEffect } from "react";
+import EmailSellerPopup from "./EmailSellerPopup";
+import BookMechanicPopup from "./BookMechaniePopup";
+import CancelPopup from "./CancelPopup";
 
 function BuyerInspection() {
-    const [upcomingInspections, setUpcomingInspections] = useState([]);
-    const [showEmailSellerPopup, setShowEmailSellerPopup] = useState(false);
-    const [showBookMechanicPopup, setShowBookMechanicPopup] = useState(false);
-    const [showCancelPopup, setShowCancelPopup] = useState(false);
+  const [upcomingInspections, setUpcomingInspections] = useState([]);
+  const [showEmailSellerPopup, setShowEmailSellerPopup] = useState(false);
+  const [showBookMechanicPopup, setShowBookMechanicPopup] = useState(false);
+  const [showCancelPopup, setShowCancelPopup] = useState(false);
 
-    const openEmailSellerPopup = () => {
-        setShowEmailSellerPopup(true);
-    };
+  const openEmailSellerPopup = () => {
+    setShowEmailSellerPopup(true);
+  };
 
-    const openBookMechanicPopup = (carId) => {
-        setShowBookMechanicPopup(carId);
-    };
+  const openBookMechanicPopup = (carId) => {
+    setShowBookMechanicPopup(carId);
+  };
 
-    const openCancelPopup = () => {
-        setShowCancelPopup(true);
-    };
+  const openCancelPopup = (inspection) => {
+    setShowCancelPopup(inspection);
+  };
 
-    const fetchInspections = async (endpoint, setStateFunction) => {
-        try {
-            // Retrieve user data from local storage
-            const userDataFromLocalStorage = localStorage.getItem('user');
-            const userData = JSON.parse(userDataFromLocalStorage);
-            const userId = userData._id;
-            // Make a request to the API with the user ID as a parameter
-            const response = await fetch(`http://localhost:3000/inspections/${endpoint}/${userId}`);
-            const data = await response.json();
+  const fetchInspections = async (endpoint, setStateFunction) => {
+    try {
+      // Retrieve user data from local storage
+      const userDataFromLocalStorage = localStorage.getItem("user");
+      const userData = JSON.parse(userDataFromLocalStorage);
+      const userId = userData._id;
+      // Make a request to the API with the user ID as a parameter
+      const response = await fetch(
+        `http://localhost:3000/inspections/${endpoint}/${userId}`
+      );
+      const data = await response.json();
 
-            // Update the component state with the fetched inspections data
-            setStateFunction(data.inspectionsWithCarDetails || []);
-        } catch (error) {
-            console.error(`Error fetching ${endpoint} inspections:`, error);
-        }
-    };
-
-    const bookInspection = async (carId, inspectionDate, inspectionTime) => {
-        try {
-            // Retrieve user data from local storage
-            const userDataFromLocalStorage = localStorage.getItem('user');
-            const userData = JSON.parse(userDataFromLocalStorage);
-            const buyerId = userData._id;
-
-            // Make a POST request to the API to book an inspection
-            await fetch('http://localhost:3000/inspections/inspection-form', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ buyer_id: buyerId, car_id: carId, inspectionDate: inspectionDate, inspectionTime: inspectionTime }),
-            });
-
-            // Refresh the list of upcoming inspections after booking
-            fetchInspections('upcoming-buyer', setUpcomingInspections);
-        } catch (error) {
-            console.error('Error booking inspection:', error);
-        }
-    };
-
-    function formatDateString(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      // Update the component state with the fetched inspections data
+      setStateFunction(data.inspectionsWithCarDetails || []);
+    } catch (error) {
+      console.error(`Error fetching ${endpoint} inspections:`, error);
     }
+  };
 
-    useEffect(() => {
-        // Fetch upcoming inspections for the buyer
-        fetchInspections('upcoming-buyer', setUpcomingInspections);
-    }, []);
+  const bookInspection = async (carId, inspectionDate, inspectionTime) => {
+    try {
+      // Retrieve user data from local storage
+      const userDataFromLocalStorage = localStorage.getItem("user");
+      const userData = JSON.parse(userDataFromLocalStorage);
+      const buyerId = userData._id;
 
-    return (
-        <div>
-            <EmailSellerPopup
-                showEmailSellerPopup={showEmailSellerPopup}
-                setShowEmailSellerPopup={setShowEmailSellerPopup}
-            />
+      // Make a POST request to the API to book an inspection
+      await fetch("http://localhost:3000/inspections/inspection-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          buyer_id: buyerId,
+          car_id: carId,
+          inspectionDate: inspectionDate,
+          inspectionTime: inspectionTime,
+        }),
+      });
 
-            <BookMechanicPopup
-                showBookMechanicPopup={showBookMechanicPopup}
-                setShowBookMechanicPopup={setShowBookMechanicPopup}
-            />
+      // Refresh the list of upcoming inspections after booking
+      fetchInspections("upcoming-buyer", setUpcomingInspections);
+    } catch (error) {
+      console.error("Error booking inspection:", error);
+    }
+  };
 
-            <CancelPopup
-                showCancelPopup={showCancelPopup}
-                setShowCancelPopup={setShowCancelPopup}
-            />
+  function formatDateString(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  }
 
-            <div className="container">
-                <div className="upcoming-inspections">
-                    {upcomingInspections.length === 0 ? (
-                        <p>No upcoming inspections</p>
-                    ) : (
-                        upcomingInspections.map((inspection, index) => (
-                            <div key={index} className='ctr-schedule'>
-                                <div className='ctr-schedule-buyer-detail'>
-                                {inspection.car ? (
-                                    <div className='ctr-schedule-buyer-detail'>
-                                        <img src={inspection.car.carPhotos[0]} alt={`Car Image`} />
-                                        <p>Date: <span>{formatDateString(inspection.inspectionDate)}</span></p>
-                                        <p>Time: <span>{inspection.inspectionTime}</span></p>
-                                        {inspection.mechanic_id ? (
-                                            <p>Mechanic Status: <span>Your Inspection has been accepted by the mechanic</span></p>
-                                        ) : (
-                                            <p>No Mechanic has accepted the inspection</p>
-                                        )}
-                                    </div>
-                                ) : (
-                                    <p>No car details available</p>
-                                )}
-                                </div>
-                                <div className='ctr-schedule-option'>
-                                    <button onClick={openEmailSellerPopup}>Email Seller</button>
-                                    <button onClick={()=>openBookMechanicPopup(inspection.carId)}>Book A Mechanic</button>
-                                    <button onClick={openCancelPopup}>Cancel booking</button>
-                                </div>
-                            </div>
-                        ))
-                    )}
+  useEffect(() => {
+    // Fetch upcoming inspections for the buyer
+    fetchInspections("upcoming-buyer", setUpcomingInspections);
+  }, []);
+
+  return (
+    <div>
+      <EmailSellerPopup
+        showEmailSellerPopup={showEmailSellerPopup}
+        setShowEmailSellerPopup={setShowEmailSellerPopup}
+      />
+
+      <BookMechanicPopup
+        showBookMechanicPopup={showBookMechanicPopup}
+        setShowBookMechanicPopup={setShowBookMechanicPopup}
+      />
+
+      <CancelPopup
+        showCancelPopup={showCancelPopup}
+        setShowCancelPopup={setShowCancelPopup}
+      />
+
+      <div className="container">
+        <div className="upcoming-inspections">
+          {upcomingInspections.length === 0 ? (
+            <p>No upcoming inspections</p>
+          ) : (
+            upcomingInspections.map((inspection, index) => (
+              <div key={index} className="ctr-schedule">
+                <div className="ctr-schedule-buyer-detail">
+                  {inspection.car ? (
+                    <div className="ctr-schedule-buyer-detail">
+                      <img
+                        src={inspection.car.carPhotos[0]}
+                        alt={`Car Image`}
+                      />
+                      <p>
+                        Car ID: <span>{inspection.car_id}</span>
+                      </p>
+                      <p>
+                        Date:{" "}
+                        <span>
+                          {formatDateString(inspection.inspectionDate)}
+                        </span>
+                      </p>
+                      <p>
+                        Time: <span>{inspection.inspectionTime}</span>
+                      </p>
+                      {inspection.mechanic_id ? (
+                        <p>
+                          Mechanic Status:{" "}
+                          <span>
+                            Your Inspection has been accepted by the mechanic
+                          </span>
+                        </p>
+                      ) : (
+                        <p>No Mechanic has accepted the inspection</p>
+                      )}
+                    </div>
+                  ) : (
+                    <p>No car details available</p>
+                  )}
                 </div>
-
-            </div>
+                <div className="ctr-schedule-option">
+                  <button onClick={openEmailSellerPopup}>Email Seller</button>
+                  <button
+                    onClick={() => openBookMechanicPopup(inspection.carId)}
+                  >
+                    Book A Mechanic
+                  </button>
+                  <button onClick={() => openCancelPopup(inspection)}>
+                    Cancel booking
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default BuyerInspection;
