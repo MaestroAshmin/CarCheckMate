@@ -115,7 +115,7 @@ function UserDetails() {
         <div>
             <div className='ctr-user-details'>
                 <div className='ctr-user-details-edit'>
-                    {isProfileEditing ? (
+                    {/* {isProfileEditing ? (
                         <form>
                             <input type="text" name="firstName" value={userData.firstName} onChange={handleProfileChange} />
                             <input type="text" name="lastName" value={userData.lastName} onChange={handleProfileChange} />
@@ -129,17 +129,17 @@ function UserDetails() {
                             <input type="password" name="confirmNewPassword" placeholder="Confirm New Password" value={profileData.confirmNewPassword} onChange={handleProfileChange} />
                             <button type="button" onClick={handleProfileSaveClick}>Save</button>
                         </form>
-                    ) : (
+                    ) : ( */}
                         <>
                             <p><span>{userData.firstName}</span></p>
                             <p><span>{userData.lastName}</span></p>
                             <p><span>{userData.mobileNumber}</span></p>
                             <p><span>{userData.email}</span></p>
-                            <button onClick={handleProfileEditClick}>
+                            {/* <button onClick={handleProfileEditClick}>
                                 <FontAwesomeIcon icon={faEdit} />
-                            </button>
+                            </button> */}
                         </>
-                    )}
+                    {/* )} */}
                 </div>
             </div>
             <h3>Seller</h3>
