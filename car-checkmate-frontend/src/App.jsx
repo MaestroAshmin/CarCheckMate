@@ -78,6 +78,8 @@ function App() {
           <Route path="/UserProfile" element= {<UserProfile />} />
           <Route path="/ForgotPassword" element= {<ForgotPassword />} />
 
+          {/** Admin Pages */}
+          <Route path="/AdminPage" element={<AdminPage />} />
 
           {/** This is for testing the styling of the existing page */}
           <Route path="/StyleTest" element= {<StyleTest />} />

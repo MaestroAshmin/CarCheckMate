@@ -217,7 +217,7 @@ export default function CarInfoPage() {
                                     <div className="action-buttons">
                                         <button>BUY THIS !</button>
                                         <button onClick={openBookSellerPopup}>BOOK AN INSPECTION</button>
-                                        <button onClick={openBookMechanicPopup}>BOOK A MECHANIC</button>
+                                        {/*<button onClick={openBookMechanicPopup}>BOOK A MECHANIC</button>*/}
                                     </div>
                                 </div>
                             </div>
