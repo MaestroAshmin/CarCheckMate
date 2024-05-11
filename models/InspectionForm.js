@@ -1,7 +1,6 @@
-// models/formModel.js
 const mongoose = require('mongoose');
 
-const FormSchema = new mongoose.Schema({
+const formSchema = new mongoose.Schema({
     treadDepth: { type: String },
     tyreCondition: { type: String},
     wheelAlignment: { type: String},
@@ -31,15 +30,13 @@ const FormSchema = new mongoose.Schema({
     additionalComments: { type: String },
     eRWCSubmitted: { type: Boolean },
     informationTruthChecked: { type: Boolean },
-    carId : { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    carId : { type: mongoose.Schema.Types.ObjectId, ref: 'Car', required: true },
     mechanicId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     sellerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     buyerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     inspectionId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
-const FormModel = mongoose.model('Form', FormSchema);
+const FormModel = mongoose.model('Form', formSchema);
 
 module.exports = FormModel;
-
-
