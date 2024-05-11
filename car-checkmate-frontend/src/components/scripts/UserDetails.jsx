@@ -25,13 +25,14 @@ function UserDetails() {
             Sunday: false
         }
     });
+    const userDataFromLocalStorage = localStorage.getItem('user');
+    const userData = JSON.parse(userDataFromLocalStorage);
     useEffect(() => {
         // Fetch availability data for the current user
         const fetchAvailability = async () => {
             try {
                 // Fetch user data from local storage
-                const userDataFromLocalStorage = localStorage.getItem('user');
-                const userData = JSON.parse(userDataFromLocalStorage);
+                
                 const userId = userData._id;
 
                 const response = await fetch(`http://localhost:3000/user/get-availability/${userId}`);
@@ -116,9 +117,10 @@ function UserDetails() {
                 <div className='ctr-user-details-edit'>
                     {isProfileEditing ? (
                         <form>
-                            <input type="text" name="name" value={profileData.name} onChange={handleProfileChange} />
-                            <input type="text" name="phone" value={profileData.phone} onChange={handleProfileChange} />
-                            <input type="email" name="email" value={profileData.email} onChange={handleProfileChange} />
+                            <input type="text" name="firstName" value={userData.firstName} onChange={handleProfileChange} />
+                            <input type="text" name="lastName" value={userData.lastName} onChange={handleProfileChange} />
+                            <input type="text" name="mobileNumber" value={userData.mobileNumber} onChange={handleProfileChange} />
+                            <input type="email" name="email" value={userData.email} onChange={handleProfileChange} />
 
                             <p>Change Password:</p>
 
@@ -129,9 +131,10 @@ function UserDetails() {
                         </form>
                     ) : (
                         <>
-                            <p><span>{profileData.name}</span></p>
-                            <p><span>{profileData.phone}</span></p>
-                            <p><span>{profileData.email}</span></p>
+                            <p><span>{userData.firstName}</span></p>
+                            <p><span>{userData.lastName}</span></p>
+                            <p><span>{userData.mobileNumber}</span></p>
+                            <p><span>{userData.email}</span></p>
                             <button onClick={handleProfileEditClick}>
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
