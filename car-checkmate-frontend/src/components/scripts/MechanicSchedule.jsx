@@ -11,7 +11,7 @@ function MechanicSchedule() {
   const [showCancelPopup, setShowCancelPopup] = useState(false);
   const [mechanic, setMechanic] = useState("");
 
-  console.log(schedules); 
+  // console.log(schedules); 
 
   const fetchInspectionData = async () => {
     try {
