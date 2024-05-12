@@ -17,29 +17,24 @@ export default function BookSellerPopup({
     // Fetch user availability when the component mounts
     const fetchUserAvailability = async () => {
       try {
-        const user = localStorage.getItem("user");
-        if (user) {
-          const userData = JSON.parse(user);
-          const response = await fetch(`http://localhost:3000/user/get-availability/${userData._id}`);
-          if (response.ok) {
-            const availabilityData = await response.json();
-            // Extract available days from availabilityData and set state
-            const availableDays = Object.keys(availabilityData.availabilities).filter(day => availabilityData.availabilities[day]);
-            setUserAvailability(availableDays);
-            // console.log(userAvailability);
-          } else {
-            throw new Error('Failed to fetch user availability');
-          }
+        const response = await fetch(`http://localhost:3000/user/get-availability/${carData.seller_id}`);
+        if (response.ok) {
+          const availabilityData = await response.json();
+          // Extract available days from availabilityData and set state
+          const availableDays = Object.keys(availabilityData.availabilities).filter(day => availabilityData.availabilities[day]);
+          setUserAvailability(availableDays);
         } else {
-          throw new Error("User is not authorised");
+          throw new Error('Failed to fetch user availability');
         }
       } catch (error) {
         console.log("Error while fetching user availability:", error);
       }
     };
   
-    fetchUserAvailability();
-  }, []);
+    if (carData.seller_id) {
+      fetchUserAvailability();
+    }
+  }, [carData]);
 
   const isWeekday = (date, userAvailability) => {
     const day = date.toLocaleDateString('en-US', { weekday: 'long' });
