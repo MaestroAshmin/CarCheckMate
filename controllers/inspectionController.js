@@ -404,12 +404,9 @@ async function changeInspectionStatus(req, res) {
 
     await inspection.save();
 
-    res
-      .status(200)
-      .json({
-        message:
-          "RWC check uploaded and inspection status updated successfully.",
-      });
+    res.status(200).json({
+      message: "RWC check uploaded and inspection status updated successfully.",
+    });
   } catch (error) {
     console.error(
       "Error uploading RWC check and updating inspection status:",
@@ -431,7 +428,18 @@ async function saveForm(req, res) {
   }
 }
 
+async function getAllForms(req, res) {
+  try {
+    const allForms = await FormModel.find().populate("carId");
+    res.status(200).json(allForms);
+  } catch (error) {
+    console.error("Error getting all forms:", error);
+    res.status(500).json({ error: "Error getting all forms" });
+  }
+}
+
 module.exports = {
+  getAllForms,
   saveForm,
   createInspection,
   getPendingInspectionsForSeller,

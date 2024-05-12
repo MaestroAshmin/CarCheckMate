@@ -39,4 +39,5 @@ router.get('/inspections-accepted-mechanic/:mechanicId', inspectionController.ge
 
 router.post('/submit-inspection-form', inspectionController.saveForm);
 
+router.get('/inspected-form', inspectionController.getAllForms);
 module.exports = router;
