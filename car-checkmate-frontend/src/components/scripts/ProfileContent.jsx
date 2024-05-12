@@ -189,7 +189,7 @@ function ProfileContent() {
                 <UserDetails />
             </div>
             <div className='ctr-user-content-right'>
-                {/* verify seller*/}
+                {/* verify seller */}
                 { isSeller && !sellerProfileUnlocked && ( // Render the section only if the user is a seller
                     <div>
                     <h3>Unlock Seller Features</h3>
@@ -313,13 +313,13 @@ function ProfileContent() {
                             <button onClick={handleVerifyLVTClick}>Verify ID</button>
                         )}
 
-                        {daysLVTLeft !== null && (
+                        {/*{daysLVTLeft !== null && (
                             <>
                                 <p>License ID: {licenseData.licenseLVTNumber}</p>
                                 <p>Expiry Date: {licenseData.expiryDateLVT}</p>
                                 <p>Days Left Until Expiry: {daysLVTLeft}</p>
                             </>
-                        )}
+                        )}*/}
                     </div>
             </div>
        </div>
