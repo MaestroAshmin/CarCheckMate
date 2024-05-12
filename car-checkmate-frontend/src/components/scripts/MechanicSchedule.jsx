@@ -11,7 +11,7 @@ function MechanicSchedule() {
   const [showCancelPopup, setShowCancelPopup] = useState(false);
   const [mechanic, setMechanic] = useState("");
 
-  console.log(schedules); 
+  // console.log(schedules); 
 
   const fetchInspectionData = async () => {
     try {
@@ -61,7 +61,7 @@ useEffect(() => {
         const trimmedFilePath = filePath.trim();
         const parts = trimmedFilePath.split('\\');
        
-        console.log(parts[parts.length - 1])  
+     
         return parts[parts.length - 1];
       
     });
@@ -88,7 +88,7 @@ useEffect(() => {
           </div>
           <div className='ctr-schedule-option'>
             <button onClick={openEmailBuyerPopup}>Email Buyer</button>
-            <button><Link to='/InspectionReport'>Create A Report</Link></button>
+            <button><Link to={`/InspectionReport/${schedule.car_id}/${schedule.mechanic_id}/${schedule.seller_id}/${schedule.buyer_id}/${schedule._id}`}>Create A Report</Link></button>
             <button onClick={openCancelPopup}>Cancel booking</button>
           </div>
         </div>
