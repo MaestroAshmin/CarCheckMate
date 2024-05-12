@@ -67,17 +67,14 @@ useEffect(() => {
     });
 };
 
-
   return (
     <div>
-      
       <EmailBuyerPopup showEmailBuyerPopup={showEmailBuyerPopup} setShowEmailBuyerPopup={setShowEmailBuyerPopup} />
       <CancelPopup showCancelPopup={showCancelPopup} setShowCancelPopup={setShowCancelPopup} />
       {schedules.map((schedule, index) => (
         <div key={index} className='ctr-schedule'>
           <img src={schedule.car.carPhotos[0]} alt="Car" />
           <div className='ctr-schedule-buyer-detail'>
-          
             <h3>Car: <span>{schedule.car.make}</span> <span>{schedule.car.model}</span></h3>
             {/* <p>Name: <span>{schedule.name}</span></p> */}
             
@@ -88,8 +85,7 @@ useEffect(() => {
             </p>
             <p>Location:&nbsp;
               <span>{schedule.car.streetName}</span><br />
-              <span>{schedule.car.suburb}</span>, <span>{schedule.car.state}</span>
-              <span>{schedule.car.postcode} </span>
+              <span>{schedule.car.suburb}</span>, <span>{schedule.car.state}</span> <span>{schedule.car.postcode}</span>
             </p>
           </div>
           <div className='ctr-schedule-option'>

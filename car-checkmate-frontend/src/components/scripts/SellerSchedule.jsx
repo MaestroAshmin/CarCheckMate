@@ -69,10 +69,11 @@ function SellerSchedule() {
 
             {schedules.map((schedule, index) => (
                 <div key={index} className='ctr-schedule'>
+                    <img src={schedule.car.carPhotos[0]} alt={`Car Image`} />
                     <div className='ctr-schedule-buyer-detail'>
                                 {schedule.car ? (
-                                    <div className='ctr-schedule-buyer-detail'>
-                                        <img src={schedule.car.carPhotos[0]} alt={`Car Image`} />
+                                    <div>
+                                        <h3>Car: <span>{schedule.car.make}</span> <span>{schedule.car.model}</span></h3>
                                         <p>Date: <span>{formatDateString(schedule.inspectionDate)}</span></p>
                                         <p>Time: <span>{schedule.inspectionTime}</span></p>
                                         {schedule.mechanic_id ? (

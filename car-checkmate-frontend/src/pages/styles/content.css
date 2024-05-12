@@ -100,7 +100,7 @@
 /* User Content */
 
 .ctr-user-content {
-    padding-top: 30px;
+    padding-top: 10px;
     margin-bottom: 50px;
     width:100%;
     /*border-top: 2px solid #493930;
@@ -261,6 +261,11 @@
     background-color: pink;
 }
 
+.ctr-schedule img {
+    background-color: blue;
+    width: 38.5%;
+}
+
 .ctr-schedule-buyer-detail {
     width: 60%;
     height: 100%;
@@ -270,6 +275,7 @@
 }
 
 .ctr-schedule-option {
+    margin-top:-30px;
     width: 40%;
     height: 180px;
     float: left; /* Float next to .ctr-schedule-buyer-detail */

@@ -61,6 +61,7 @@ function UserContentMechanic() {
                         <Link to={report.link}>View Details</Link>
                     </div>
                 ))}
+                <br />
                 <div className="pagination">
                     {Array.from({ length: Math.ceil(reports.length / reportsPerPage) }, (_, index) => (
                         <button key={index} onClick={() => paginate(index + 1)}>{index + 1}</button>
