@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
@@ -25,7 +25,31 @@ function UserDetails() {
             Sunday: false
         }
     });
+    const userDataFromLocalStorage = localStorage.getItem('user');
+    const userData = JSON.parse(userDataFromLocalStorage);
+    useEffect(() => {
+        // Fetch availability data for the current user
+        const fetchAvailability = async () => {
+            try {
+                // Fetch user data from local storage
+                
+                const userId = userData._id;
 
+                const response = await fetch(`http://localhost:3000/user/get-availability/${userId}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch availability');
+                }
+
+                const availability = await response.json();
+                setAvailabilityData(availability);
+            } catch (error) {
+                console.error('Error while fetching availability:', error);
+                // Handle error (e.g., show error message to user)
+            }
+        };
+
+        fetchAvailability();
+    }, []);
     const handleProfileEditClick = () => {
         setIsProfileEditing(true);
     };
@@ -62,33 +86,41 @@ function UserDetails() {
     };
 
     const handleAvailabilitySaveClick = async () => {
-        // console.log("form-data ", formData)
-        // try{ await fetch("http://localhost:3000/",{
-        //     method:"POST", 
-        //     headers:{
-        //         "Content-Type" : "application/json",
-
-        //     },
-        //     body:JSON.stringify(formData)
-
-        // })
-            
-        // } catch (error) {
-        //     console.log("error while changing password : ", error)
-        // }
-        // // Implement save functionality here
-        // setIsAvailabilityEditing(false);
+        try {
+            // Fetch user data from local storage
+            const userDataFromLocalStorage = localStorage.getItem('user');
+            const userData = JSON.parse(userDataFromLocalStorage);
+            const userId = userData._id;
+            const response = await fetch(`http://localhost:3000/user/availability/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ availabilities: availabilityData.availabilities })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to save availability');
+            }
+    
+            // Reset the availability editing state
+            setIsAvailabilityEditing(false);
+        } catch (error) {
+            console.error('Error while saving availability:', error);
+            // Handle error (e.g., show error message to user)
+        }
     };
 
     return (
         <div>
             <div className='ctr-user-details'>
                 <div className='ctr-user-details-edit'>
-                    {isProfileEditing ? (
+                    {/* {isProfileEditing ? (
                         <form>
-                            <input type="text" name="name" value={profileData.name} onChange={handleProfileChange} />
-                            <input type="text" name="phone" value={profileData.phone} onChange={handleProfileChange} />
-                            <input type="email" name="email" value={profileData.email} onChange={handleProfileChange} />
+                            <input type="text" name="firstName" value={userData.firstName} onChange={handleProfileChange} />
+                            <input type="text" name="lastName" value={userData.lastName} onChange={handleProfileChange} />
+                            <input type="text" name="mobileNumber" value={userData.mobileNumber} onChange={handleProfileChange} />
+                            <input type="email" name="email" value={userData.email} onChange={handleProfileChange} />
 
                             <p>Change Password:</p>
 
@@ -97,16 +129,17 @@ function UserDetails() {
                             <input type="password" name="confirmNewPassword" placeholder="Confirm New Password" value={profileData.confirmNewPassword} onChange={handleProfileChange} />
                             <button type="button" onClick={handleProfileSaveClick}>Save</button>
                         </form>
-                    ) : (
+                    ) : ( */}
                         <>
-                            <p><span>{profileData.name}</span></p>
-                            <p><span>{profileData.phone}</span></p>
-                            <p><span>{profileData.email}</span></p>
-                            <button onClick={handleProfileEditClick}>
+                            <p><span>{userData.firstName}</span></p>
+                            <p><span>{userData.lastName}</span></p>
+                            <p><span>{userData.mobileNumber}</span></p>
+                            <p><span>{userData.email}</span></p>
+                            {/* <button onClick={handleProfileEditClick}>
                                 <FontAwesomeIcon icon={faEdit} />
-                            </button>
+                            </button> */}
                         </>
-                    )}
+                    {/* )} */}
                 </div>
             </div>
             <h3>Seller</h3>
@@ -116,7 +149,7 @@ function UserDetails() {
                     <p><i>Inspection time is between 8:00 to 20:00</i></p>
                     {isAvailabilityEditing ? (
                         <form>
-                            <p><i>* Please select unavailable days for inspection</i></p>
+                            <p><i>* Please select Available days for inspection</i></p>
                             <div className='ctr-user-details-chk-availability'>
                                 {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, index) => (
                                     <label key={index}>

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Import the default CSS
+import { useNavigate } from "react-router-dom";
 
 export default function BookSellerPopup({
   showBookSellerPopup,
@@ -9,10 +10,35 @@ export default function BookSellerPopup({
 }) {
   const [startDate, setStartDate] = useState(null);
   const [selectedHour, setSelectedHour] = useState("09:00");
+  const [userAvailability, setUserAvailability] = useState([]);
+  const navigate = useNavigate();
 
-  const isWeekday = (date) => {
-    const day = date.getDay();
-    return day !== 1 && day !== 4;
+  useEffect(() => {
+    // Fetch user availability when the component mounts
+    const fetchUserAvailability = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/user/get-availability/${carData.seller_id}`);
+        if (response.ok) {
+          const availabilityData = await response.json();
+          // Extract available days from availabilityData and set state
+          const availableDays = Object.keys(availabilityData.availabilities).filter(day => availabilityData.availabilities[day]);
+          setUserAvailability(availableDays);
+        } else {
+          throw new Error('Failed to fetch user availability');
+        }
+      } catch (error) {
+        console.log("Error while fetching user availability:", error);
+      }
+    };
+  
+    if (carData.seller_id) {
+      fetchUserAvailability();
+    }
+  }, [carData]);
+
+  const isWeekday = (date, userAvailability) => {
+    const day = date.toLocaleDateString('en-US', { weekday: 'long' });
+    return userAvailability?.includes(day);
   };
 
   async function handleBookInspection(data) {
@@ -35,7 +61,8 @@ export default function BookSellerPopup({
             }),
           }
         );
-        console.log("Inspection booked");
+        // If booking is successful, navigate to the user profile page
+        navigate("/UserProfile");
       } else {
         throw new Error("User is not authorised");
       }
@@ -58,9 +85,9 @@ export default function BookSellerPopup({
                 &times;
               </span>
               <h2>Book An Inspection</h2>
-              <p>
+              {/* <p>
                 Car ID: <span>CT1234</span>
-              </p>
+              </p> */}
               <p>Enter a preferred date and time.</p>
               <br />
               <div className="ctr-unlock-profile">
@@ -76,7 +103,7 @@ export default function BookSellerPopup({
                     <DatePicker
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
-                      filterDate={isWeekday}
+                      filterDate={(date) => isWeekday(date, userAvailability)}
                       placeholderText="Select a weekday"
                       required
                     />

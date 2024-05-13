@@ -30,54 +30,6 @@ export default function CarInfoPage() {
     setShowBookMechanicPopup(true);
   };
 
-  //   useEffect(() => {
-  //     const fetchCars = async () => {
-  //         try {
-  //             const response = await axios.get('http://localhost:3000/cars/available-cars');
-  //             //console.log(response.data); // Check the structure of the data first
-
-  //             // Format the data before setting it in the state
-  //             const unsoldCars = response.data.map(car => ({
-  //                 car_id: car._id,
-  //                 bodyType: car.bodyType,
-  //                 color: car.color,
-  //                 engineType: car.engineType,
-  //                 fuelType: car.fuelType,
-  //                 hasBeenSold: car.hasBeenSold,
-  //                 make: car.make,
-  //                 model: car.model,
-  //                 odometer: car.odometer,
-  //                 postcode: car.postcode,
-  //                 price: car.price,
-  //                 seller_id: car.seller_id,
-  //                 state: car.state,
-  //                 streetName: car.streetName,
-  //                 suburb: car.suburb,
-  //                 title: car.title,
-  //                 transmission: car.transmission,
-  //                 year: car.year,
-  //                 carPhotos: car.carPhotos // Split the photo string into an array
-  //             }));
-
-  //             // Set the formatted data in the state
-  //             setCars(unsoldCars);
-  //             setIsLoading(false);
-
-  //             // Check if a specific car is available and set its data
-  //             const unsoldCar = unsoldCars.find(car => car.car_id === _id);
-  //             if (unsoldCar) {
-  //                 setCarData(unsoldCar);
-  //                 console.log("Car found ");
-  //             } else {
-  //                 console.log("Car not found or already sold.");
-  //             }
-  //         } catch (error) {
-  //             console.log('Error fetching cars:', error);
-  //         }
-  //     };
-
-  //     fetchCars();
-  // }, []); // Dependency array is empty, effect runs once when component mounts
   useEffect(() => {
     const fetchCarData = async () => {
       try {
@@ -97,27 +49,6 @@ export default function CarInfoPage() {
     fetchCarData();
   }, [_id]);
   console.log(carData);
-  //   const filePathsString = JSON.stringify(carData.carPhotos);
-
-  //   const trimmedFilePathsArray = [];
-  //   //Check if filePathsString is a string before splitting
-  //   if (typeof filePathsString === 'string') {
-  //   //     Split the string into an array of file paths
-  //        const filePathsArray = filePathsString.split(',');
-
-  //       // Trim each file path to remove leading and trailing whitespace
-
-  //       filePathsArray.forEach(filePath => {
-  //           const trimmedFilePath = filePath.trim();
-  //           const parts = trimmedFilePath.split('\\');
-  //           const filename = parts[parts.length - 1];
-
-  //           trimmedFilePathsArray.push(filename); // Store the trimmed file path in the array
-  //       });
-
-  //       // Log the resulting array of trimmed file paths
-  //   } else {
-  //   }
   // Ensure carPhotos is an array
   const carPhotosArray = Array.isArray(carData.carPhotos)
     ? carData.carPhotos

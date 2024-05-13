@@ -62,6 +62,7 @@ export default function CarBuildPage({ formData, setFormData }) {
                             name="make"
                             options={makes}
                             onChange={handleMakeChange}
+                            required
                         />
                         <div
                             style={{
@@ -86,6 +87,7 @@ export default function CarBuildPage({ formData, setFormData }) {
                             name="model"
                             options={modelData}
                             onChange={handleModelChange}
+                            required
                         />
                         <div
                             style={{
@@ -113,6 +115,7 @@ export default function CarBuildPage({ formData, setFormData }) {
                             name="state"
                             options={states}
                             onChange={handleStateChange}
+                            required
                         />
                         <div
                             style={{
@@ -137,6 +140,7 @@ export default function CarBuildPage({ formData, setFormData }) {
                             name="year"
                             options={years}
                             onChange={handleYearChange}
+                            required
                         />
                         <div
                             style={{

@@ -39,7 +39,6 @@ export default function CarAdPage() {
         bodyType:"",
         ...initialCarPhotos, // Add the initial carPhoto fields
     });
-    console.log(formData)
     useEffect(() => {
         // Retrieve user data from local storage
         const userDataFromLocalStorage = localStorage.getItem('user');
@@ -85,10 +84,10 @@ export default function CarAdPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setIsLoading(true);
         setError(null);
-        console.log(formData);
+        // console.log(formData);
         // Create a FormData object
         const formDataToSend = new FormData();
         // Append all fields from formData to formDataToSend
@@ -101,29 +100,33 @@ export default function CarAdPage() {
                 formDataToSend.append(key, formData[key]);
             }
         }
-        // Make API call to send form data
-        fetch('http://localhost:3000/cars/upload-car-details', {
-            method: 'POST',
-            credentials: 'include',
-            body: formDataToSend, // Use FormData object as the body
-        })
-        .then(response => {
-            setIsLoading(false);
+        try{
+
+            // Make API call to send form data
+            const response = await fetch('http://localhost:3000/cars/upload-car-details', {
+                method: 'POST',
+                credentials: 'include',
+                body: formDataToSend, // Use FormData object as the body
+            });
+            console.log(response);
+            // Check if response is ok
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                const responseData = await response.json();
+                console.log('Error', responseData);
+                throw new Error(responseData.error); 
             }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Data received from server:', data);
+            
+            // Navigate to UserProfile if response is ok
             navigate('/UserProfile');
-        })
-        .catch(error => {
+        } catch (error) {
             setIsLoading(false);
-            setError(error.message);
-            console.error('There was a problem with the fetch operation:', error);
-            // Handle errors
-        });
+            if (error.message) {
+                setError(error.message); // Use error message from thrown error
+            } else {
+                setError('An unexpected error occurred. Please try again later.');
+            }
+            // console.error('There was a problem with the fetch operation:', error);
+        }
     };
 
     return (
@@ -131,43 +134,45 @@ export default function CarAdPage() {
             <div className='ctr-sub-content'>
                 <HeaderNav />
                 <div className='ctr-content-session'>
-                    <UserNav />
-                    <p className='user-title'>S e l l e r</p>
-                    <div className='ctr-user-content'>
-                        <div className='ctr-user-content-block'>
-                            <h3>Create A New Car Listing</h3>
-                                <div className="form">
-                                    <div className="form-container">
-                                        {PageDisplay()}
-                                    </div>
-                                    <div className='footer--button'>
-                                        {page === 0 ? (
+                <UserNav />
+                <p className='user-title'>S e l l e r</p>
+                <div className='ctr-user-content'>
+                    <div className='ctr-user-content-block'>
+                        <h3>Create A New Car Listing</h3>
+                            <div className="form">
+                                
+                                <div className="form-container">
+                                {error && <p style={{ color: 'red', fontWeight: 'bold' }}>{error}</p>}
+                                    {PageDisplay()}
+                                </div>
+                                <div className='footer--button'>
+                                    {page === 0 ? (
+                                        <button class="button-31" role="button"
+                                            disabled={page === FormPages.length - 1}
+                                            onClick={() => setPage((currPage) => currPage + 1)}
+                                        >Next</button>
+                                    ) : (
+                                        <>
+                                            <button class="button-6" role="button"
+                                                onClick={() => setPage((currPage) => currPage - 1)}
+                                            >Prev</button>
                                             <button class="button-31" role="button"
-                                                disabled={page === FormPages.length - 1}
-                                                onClick={() => setPage((currPage) => currPage + 1)}
-                                            >Next</button>
-                                        ) : (
-                                            <>
-                                                <button class="button-6" role="button"
-                                                    onClick={() => setPage((currPage) => currPage - 1)}
-                                                >Prev</button>
-                                                <button class="button-31" role="button"
-                                                    onClick={() => {
-                                                    if (page === FormPages.length - 1) {
-                                                        handleSubmit();
-                                                    } else {
-                                                        setPage((currPage) => currPage + 1);
-                                                    }
-                                                    }}
-                                                >
-                                                    {page === FormPages.length - 1 ? "Submit" : "Next"}
-                                                </button>
-                                            </>
-                                        )}
-                                    </div>
+                                                onClick={() => {
+                                                if (page === FormPages.length - 1) {
+                                                    handleSubmit();
+                                                } else {
+                                                    setPage((currPage) => currPage + 1);
+                                                }
+                                                }}
+                                            >
+                                                {page === FormPages.length - 1 ? "Submit" : "Next"}
+                                            </button>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             <Footer />
