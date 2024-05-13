@@ -130,39 +130,41 @@ export default function CarAdPage() {
         <div className='ctr-main'>
             <div className='ctr-sub-content'>
                 <HeaderNav />
-
-                <UserNav />
-                <div className='ctr-user-content'>
-                    <div className='ctr-user-content-block'>
-                        <h3>Create A New Car Listing</h3>
-                            <div className="form">
-                                <div className="form-container">
-                                    {PageDisplay()}
-                                </div>
-                                <div className='footer--button'>
-                                    {page === 0 ? (
-                                        <button class="button-31" role="button"
-                                            disabled={page === FormPages.length - 1}
-                                            onClick={() => setPage((currPage) => currPage + 1)}
-                                        >Next</button>
-                                    ) : (
-                                        <>
-                                            <button class="button-6" role="button"
-                                                onClick={() => setPage((currPage) => currPage - 1)}
-                                            >Prev</button>
+                <div className='ctr-content-session'>
+                    <UserNav />
+                    <p className='user-title'>S e l l e r</p>
+                    <div className='ctr-user-content'>
+                        <div className='ctr-user-content-block'>
+                            <h3>Create A New Car Listing</h3>
+                                <div className="form">
+                                    <div className="form-container">
+                                        {PageDisplay()}
+                                    </div>
+                                    <div className='footer--button'>
+                                        {page === 0 ? (
                                             <button class="button-31" role="button"
-                                                onClick={() => {
-                                                if (page === FormPages.length - 1) {
-                                                    handleSubmit();
-                                                } else {
-                                                    setPage((currPage) => currPage + 1);
-                                                }
-                                                }}
-                                            >
-                                                {page === FormPages.length - 1 ? "Submit" : "Next"}
-                                            </button>
-                                        </>
-                                    )}
+                                                disabled={page === FormPages.length - 1}
+                                                onClick={() => setPage((currPage) => currPage + 1)}
+                                            >Next</button>
+                                        ) : (
+                                            <>
+                                                <button class="button-6" role="button"
+                                                    onClick={() => setPage((currPage) => currPage - 1)}
+                                                >Prev</button>
+                                                <button class="button-31" role="button"
+                                                    onClick={() => {
+                                                    if (page === FormPages.length - 1) {
+                                                        handleSubmit();
+                                                    } else {
+                                                        setPage((currPage) => currPage + 1);
+                                                    }
+                                                    }}
+                                                >
+                                                    {page === FormPages.length - 1 ? "Submit" : "Next"}
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -330,7 +330,9 @@ function MechanicReport(props) {
                         <fieldset>
                             <legend>Steering and Suspension</legend>
                             <div>
-                                <p className='sub-topic-report'>Steering Components:</p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>Steering Components:</p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -365,7 +367,9 @@ function MechanicReport(props) {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>Shock Absorbers:</p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>Shock Absorbers:</p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -400,7 +404,9 @@ function MechanicReport(props) {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>Suspension System:</p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>Suspension System:</p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -585,7 +591,9 @@ function MechanicReport(props) {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>Child Restraint Anchorages:</p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>Child Restraint Anchorages:</p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -692,9 +700,11 @@ function MechanicReport(props) {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>
-                                    Visibility through Windows:
-                                </p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>
+                                        Visibility through Windows:
+                                    </p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -802,7 +812,6 @@ function MechanicReport(props) {
                         </fieldset>
                     </div>
 
-
                     {/* Topic 8: Engine and Driveline */}
                     <div className='ctr-report'>
                         <fieldset>
@@ -835,9 +844,11 @@ function MechanicReport(props) {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>
-                                    Exhaust System:
-                                </p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>
+                                        Exhaust System:
+                                    </p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -862,9 +873,11 @@ function MechanicReport(props) {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>
-                                    Driveline Components:
-                                </p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>
+                                        Driveline Components:
+                                    </p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input

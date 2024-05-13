@@ -76,7 +76,6 @@ function SellerSchedule() {
 
             {schedules.map((schedule, index) => (
                 <div key={index} className='ctr-schedule'>
-                    <img src={schedule.car.carPhotos[0]} alt={`Car Image`} />
                     <div className='ctr-schedule-buyer-detail'>
                                 {schedule.car ? (
                                     <div>
@@ -90,13 +89,16 @@ function SellerSchedule() {
                                         )}
                                     </div>
                                 ) : (
-                                    <p>No car details available</p>
+                                    <p className='align-p'>No car details available</p>
                                 )}
                                 </div>
                     <div className='ctr-schedule-option'>
-                        <button onClick={openEmailBuyerPopup}>Email Buyer</button>
-                        <button onClick={openAddRWCPopup}>Add RWC</button>
-                        <button onClick={() => openCancelPopup(schedule)}>Cancel booking</button>
+                      <img src={schedule.car.carPhotos[0]} alt={`Car Image`} />
+                        <div className="ctr-schedule-option-s">
+                          <button onClick={openEmailBuyerPopup}>Email Buyer</button>
+                          <button onClick={openAddRWCPopup}>Add RWC</button>
+                          <button onClick={() => openCancelPopup(schedule)}>Cancel booking</button>
+                        </div>
                     </div>
                 </div>
             ))}

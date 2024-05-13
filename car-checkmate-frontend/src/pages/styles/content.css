@@ -26,6 +26,10 @@
     margin-bottom: 30px;;
 }
 
+.align-p {
+    margin-left: 30px;
+}
+
 .nav-item {
     display: flex;
     font-size: 1rem;
@@ -107,7 +111,6 @@
     border-left: 2px solid #493930;*/
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
     display: flex;
-    background-color: red;
 }
 
 .ctr-user-content h3 {
@@ -116,13 +119,21 @@
 
 .ctr-user-content-left {
     width: 60%;
-    background-color: green;
 }
 
 .ctr-user-content-right {
     width: 40%;
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
-    background-color: yellow;
+    padding-right: 40px;
+}
+
+.ctr-user-content-left-button {
+    width: 85%;
+    margin-left: 50px;
+}
+
+.ctr-user-content-right-button {
+    margin-left: 50px;
 }
 
 .ctr-user-content-right-report {
@@ -135,20 +146,22 @@
 
 .ctr-user-content-right-report a {
     color: #ecb159;
-    text-decoration: none;;
+    text-decoration: none;
     font-weight: 525;
 }
 
 .ctr-user-content-right-report a:hover {
     color: rgba(0, 195, 112, 1);
-    text-decoration: none;;
+    text-decoration: none;
     font-weight: 525;
 }
 
 .ctr-user-content-right-report img {
-    height: 90px;
+    height: 110px;
     margin-right: 10px;
     float: left;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .ctr-user-content-right-report img:hover {
@@ -217,15 +230,11 @@
 
 .file-upload .file-name {
     margin-left: 0px;
-
 }
 
 .ctr-user-content .ctr-user-button {
-    width: 300px;
+    width: 70%;
     height: 30px;
-    float: right;
-    margin-right: 50px;
-    margin-bottom: 30px;
     border-radius: 10px;
     border: 1px solid #ecb159; 
     background-color: #ecb159;
@@ -234,6 +243,7 @@
     text-align: center;
     color: rgba(33,33,33,255);
     font-weight: bold;
+    margin: 5px 15% 20px 15%;
 }
 
 .ctr-user-content .ctr-user-button:hover {
@@ -257,13 +267,12 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
     transition: all 0.3s ease; /* Smooth transition */
     color: rgba(33,33,33,255);   
-    height:300px;
-    background-color: pink;
+    height:max-content;
 }
 
 .ctr-schedule img {
-    background-color: blue;
-    width: 38.5%;
+    width: 100%;
+    border-radius: 10px;
 }
 
 .ctr-schedule-buyer-detail {
@@ -271,13 +280,16 @@
     height: 100%;
     float: left;
     position: relative;
-    background-color: orange;
+}
+
+.ctr-schedule-buyer-no-details {
+    margin-left: 30px;
 }
 
 .ctr-schedule-option {
-    margin-top:-30px;
+    margin-top: auto;
     width: 40%;
-    height: 180px;
+    height: max-content;
     float: left; /* Float next to .ctr-schedule-buyer-detail */
     display: flex; /* Use flexbox */
     flex-direction: column; /* Stack items vertically */
@@ -303,8 +315,12 @@
     cursor: default;
 }
 
+.ctr-schedule-option-s {
+    text-align: center;
+}
+
 .ctr-schedule-option button {
-    width: 200px;
+    width: 70%;
     height: 30px;
     align-self: center;
     margin-top: 10px;
@@ -314,7 +330,7 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     text-align: center;
-    color: rgba(33,33,33,255);   
+    color: rgba(33,33,33,255);
 }
 
 .ctr-schedule-option button:hover {
@@ -397,7 +413,7 @@
 .ctr-report {
     display: flex; 
     margin-left: 70px;
-    margin-bottom: 30px;;
+    margin-bottom: 30px;
 }
 
 fieldset {
@@ -422,7 +438,7 @@ legend {
 .ctr-user-content .ctr-report .input-box input {
     width: 200px;
     margin-top: 5px;
-    height: 20px;
+    height: 30px;
 }
 
 .sub-topic-report {
@@ -430,11 +446,18 @@ legend {
     margin-right: 50px;
     margin-top: 10px;
     clear: both;
+    font-weight: bold;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
 }
 
 .ctr-user-content .role-container {
     margin-top: 7px;
     display: flex;
+    margin-left: 40px;
 }
 
 .ctr-user-content .role-container label {
@@ -501,7 +524,7 @@ legend {
 }*/
 
 .ctr-schedule-book {
-    margin: 0px 40px 0px 40px;
+    margin: 0px 0px 0px 40px;
     padding: 0px 15px 15px 15px;
     overflow: hidden; /* Clear floats */
     border-bottom: 1px solid #ccc; /* Only border at the bottom */
@@ -516,8 +539,20 @@ legend {
     font-weight: bold;
 }
 
+.ctr-schedule-seller h3 span,
+.ctr-user-content-right-report h3 span {
+    font-weight: bold;
+}
+
+.ctr-schedule-seller img {
+    border-radius: 10px;
+    margin-right: 10px;
+    height: 110px;
+    float: left;
+}
+
 .ctr-schedule-option-seller-request button {
-    width: 70px;
+    width: max-content;
     height: 30px;
     align-self: center;
     margin-top: 0px;
@@ -619,4 +654,329 @@ legend {
 
 .pagination {
     clear: both;
+}
+
+.ctr-inspection-report {
+    width: 100%;
+}
+
+.ctr-inspection-report h4 {
+    background-color: rgb(230, 235, 232);
+    height: 30px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    padding-left: 15px;
+    color: rgba(33, 33, 33, 255);
+    margin: 10px;
+}
+
+.ctr-inspection-report p {
+    margin: 5px 0px 5px 25px;
+    font-weight: bold;
+}
+
+.ctr-inspection-report img {
+    width: 97%;
+    height: 100%;
+    border-radius: 10px;
+    margin-right: 50px;
+}
+
+.ctr-inspection-report .report-title {
+    font-size: large;
+    width: 90%;
+    height: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    font-weight: bold;
+    margin: 0px 0px 15px 60px;
+    background-color: #ecb159;
+    color: rgba(33, 33, 33, 255);
+}
+
+.ctr-inspection-report .report-car-details {
+    margin: 0 auto 10px auto; 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 0px; 
+    width: calc(100% - 100px);
+    box-sizing: border-box;
+}
+
+.ctr-inspection-report .report-car-inspect-details {
+    margin: 0 auto 10px auto; 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 0px; 
+    width: calc(100% - 100px);
+    box-sizing: border-box;
+}
+
+.ctr-inspection-report .report-details {
+    width: 98%;
+}
+
+.ctr-inspection-report .report-details .report-details-span {
+    display: inline-block;
+    position: relative; 
+    font-weight: normal;
+}
+
+.ctr-inspection-report .report-details .report-details-span:hover {
+    text-decoration: none;
+    cursor: default;
+    color: #000;
+    font-weight: normal;
+}
+
+/* Hide the original content */
+/*.ctr-inspection-report .report-details .report-details-span::before {
+    content: "";
+    visibility: hidden;
+}
+
+.ctr-inspection-report .report-details .report-details-span::after {
+    content: attr(data-content);
+    text-transform: capitalize;
+}*/
+
+/* Adjustments for responsiveness tablet*/
+@media (max-width: 1024px) {
+    .ctr-user-content-right {
+        padding-right: 0px;
+    }
+
+    .ctr-user-content-left-button {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .ctr-user-content-right-button {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .ctr-schedule {
+        width: 90%;
+        margin: 20px;
+    }
+    
+    .ctr-schedule img {
+        width: 50%;
+        border-radius: 10px;
+        float: left;
+    }
+    
+    .ctr-schedule-buyer-detail {
+        width:100%;
+    }
+    
+    .ctr-schedule-option {
+        width: 100%;
+        float: left;
+        display: flex; 
+        flex-direction: row;
+    }
+    
+    .ctr-schedule-option button {
+        width: 90%;
+    }
+
+    .ctr-schedule-book {
+        margin: 0px auto 0px auto;
+        width: 80%;
+    }
+
+    .ctr-schedule-seller img {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 10px;
+    }
+
+    .ctr-user-content .ctr-user-button {
+        margin: 5px 15% 5px 15%;
+    }
+
+    .ctr-user-content-right-report {
+        margin-left: 30px;
+        margin-bottom: 30px;
+    }
+      
+    .ctr-user-content-right-report img {
+        width: 90%;
+        height: 100%;
+        clear: both;
+    }
+
+    .ctr-user-content-right-report h3 {
+        margin-left: 0px;
+        margin-bottom: 5px;
+    }
+
+    .ctr-report {
+        margin-left: 3%;
+        margin-right: 3%;
+    }
+    
+    fieldset {
+        width: 100%;
+    }
+    
+    .sub-topic-report {
+        margin-right: 10px;
+    }
+
+    .ctr-user-content textarea {
+        width: 500px;
+    }
+
+    .ctr-inspection-report h4 {
+        height: 35px;
+    }
+    
+    .ctr-inspection-report p {
+        margin: 5px 0px 7px 25px;
+    }
+    
+    .ctr-inspection-report img {
+        width: 100%;
+        height: 70%;
+        margin-top: 10px;
+    }
+    
+    .ctr-inspection-report .report-title {
+        width: 91%;
+        margin: 0px auto 15px auto;
+    }
+    
+    .ctr-inspection-report .report-car-details {
+        width: calc(100% - 60px);
+    }
+    
+    .ctr-inspection-report .report-car-inspect-details {
+        width: calc(100% - 60px);
+    }
+    
+    .ctr-inspection-report .report-details {
+        padding-right: 5px;
+        width: 98%;
+    }
+}
+
+/* Adjustments for responsiveness mobile*/
+@media (max-width: 768px) {
+    .ctr-user-content {
+        flex-direction: column;
+    }
+
+    .ctr-user-content-left {
+        width: 100%;
+        clear: both;
+    }
+    
+    .ctr-user-content-right {
+        width: 100%;
+        clear: both;
+        padding-right: 0px;
+    }
+
+    .ctr-user-content-right .ctr-unlock-profile button {
+        width: 150px;
+        height: 30px;
+        margin: 0 auto 30px auto; /* Center horizontally and add bottom margin */
+    }
+
+    .ctr-user-content .ctr-user-button {
+        width: 80%;
+        margin: 5px 10% 5px 10%;
+    }
+    
+    .sub-topic-report {
+        margin-right: 10px;
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .clearfix::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .ctr-user-content .role-container {
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-left: 40px;
+    }
+
+    .ctr-user-content .role-container .role-radio {
+        display: flex; 
+        align-items: center; 
+        margin-bottom: 5px;
+    }
+    
+    .ctr-user-content .role-container label {
+        margin-left: 5px;
+    }
+    
+    .ctr-user-content .role-container .role-radio input[type='radio'] {
+        height: 20px;
+        width: 20px;
+        margin-top: 0px;
+    }
+
+    .ctr-user-content textarea {
+        width: 100%;
+    }
+
+    .ctr-inspection-report {
+        width: 90%;
+    }
+    
+    .ctr-inspection-report h4 {
+        margin: 5px 0px 5px 25px;
+        margin: 10px 0px 10px 10px;
+    }
+    
+    .ctr-inspection-report p {
+        margin: 5px 0px 5px 25px;
+        font-weight: bold;
+    }
+    
+    .ctr-inspection-report img {
+        width: 100%;
+        height: max-content;
+        border-radius: 10px;
+        margin-right: 0px;
+    }
+    
+    .ctr-inspection-report .report-title {
+        width: 100%;
+        margin: 20px 20px 0px 20px;
+    }
+    
+    .ctr-inspection-report .report-car-details {
+        margin: 0 20px 10px 20px; 
+        grid-template-columns: 1fr; 
+        width: 100%;
+    }
+    
+    .ctr-inspection-report .report-car-inspect-details {
+        margin: 0 20px 10px 20px; 
+        grid-template-columns: 1fr; 
+        width: 100%;
+    }
+    
+    .ctr-inspection-report .report-details {
+        width: 98%;
+    }
 }

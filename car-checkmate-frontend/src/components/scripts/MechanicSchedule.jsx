@@ -73,11 +73,9 @@ useEffect(() => {
       <CancelPopup showCancelPopup={showCancelPopup} setShowCancelPopup={setShowCancelPopup} />
       {schedules.map((schedule, index) => (
         <div key={index} className='ctr-schedule'>
-          <img src={schedule.car.carPhotos[0]} alt="Car" />
           <div className='ctr-schedule-buyer-detail'>
             <h3>Car: <span>{schedule.car.make}</span> <span>{schedule.car.model}</span></h3>
             {/* <p>Name: <span>{schedule.name}</span></p> */}
-            
             <p>
                 Date: <span>{schedule.inspectionDate.slice(0, 10)}</span>
                 <br/><br/>
@@ -89,9 +87,12 @@ useEffect(() => {
             </p>
           </div>
           <div className='ctr-schedule-option'>
-            <button onClick={openEmailBuyerPopup}>Email Buyer</button>
-            <button><Link to={`/InspectionReport/${schedule.car_id}/${schedule.mechanic_id}/${schedule.seller_id}/${schedule.buyer_id}/${schedule._id}`}>Create A Report</Link></button>
-            <button onClick={openCancelPopup}>Cancel booking</button>
+            <img src={schedule.car.carPhotos[0]} alt="Car" />
+              <div className="ctr-schedule-option-s">
+                <button onClick={openEmailBuyerPopup}>Email Buyer</button>
+                <button><Link to={`/InspectionReport/${schedule.car_id}/${schedule.mechanic_id}/${schedule.seller_id}/${schedule.buyer_id}/${schedule._id}`}>Create A Report</Link></button>
+                <button onClick={openCancelPopup}>Cancel booking</button>
+              </div>
           </div>
         </div>
       ))}

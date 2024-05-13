@@ -99,48 +99,54 @@ function BuyerInspection() {
         setShowCancelPopup={setShowCancelPopup}
       />
 
-      <div className="container">
-        <div className="upcoming-inspections">
-          {upcomingInspections.length === 0 ? (
-            <p>No upcoming inspections</p>
-          ) : (
-            upcomingInspections.map((inspection, index) => (
-              <div key={index} className="ctr-schedule">
-                <div className="ctr-schedule-buyer-detail">
-                  {inspection.car ? (
-                    <div className="ctr-schedule-buyer-detail">
-                      <img
-                        src={inspection.car.carPhotos[0]}
-                        alt={`Car Image`}
-                      />
-                      <p>
-                        Car ID: <span>{inspection.car_id}</span>
-                      </p>
-                      <p>
-                        Date:{" "}
-                        <span>
-                          {formatDateString(inspection.inspectionDate)}
-                        </span>
-                      </p>
-                      <p>
-                        Time: <span>{inspection.inspectionTime}</span>
-                      </p>
-                      {inspection.mechanic_id ? (
-                        <p>
-                          Mechanic Status:{" "}
-                          <span>
-                            Your Inspection has been accepted by the mechanic
-                          </span>
-                        </p>
-                      ) : (
-                        <p>No Mechanic has accepted the inspection</p>
-                      )}
-                    </div>
+
+      {upcomingInspections.length === 0 ? (
+        <p className="ctr-schedule-buyer-no-details">No upcoming inspections</p>
+      ) : (
+        upcomingInspections.map((inspection, index) => (
+          <div key={index} className="ctr-schedule">
+            <div className="ctr-schedule-buyer-detail">
+              {inspection.car ? (
+                <>
+                  <h3>
+                    Car: <span>{inspection.car.make}</span> <span>{inspection.car.model}</span>
+                  </h3>
+                  <p>
+                    Date:{" "}
+                    <span>
+                      {formatDateString(inspection.inspectionDate)}
+                    </span>
+                  </p>
+                  <p>
+                    Time: <span>{inspection.inspectionTime}</span>
+                  </p>
+
+                  {inspection.mechanic_id ? (
+                    <p>
+                      Mechanic Status:{" "}
+                      <span>
+                        Your Inspection has been accepted by the mechanic
+                      </span>
+                    </p>
                   ) : (
-                    <p>No car details available</p>
+                    <p>No Mechanic has accepted the inspection</p>
                   )}
-                </div>
-                <div className="ctr-schedule-option">
+                </>
+              ) : (
+                <h3>No car details available</h3>
+              )}
+            </div>
+            <div className="ctr-schedule-option">
+            {inspection.car ? (
+                <>
+                  <img
+                    src={inspection.car.carPhotos[0]}
+                    alt={`Car Image`}
+                  />
+                </>
+              ) : ([]
+              )}
+                <div className="ctr-schedule-option-s">
                   <button onClick={openEmailSellerPopup}>Email Seller</button>
                   <button
                     onClick={() => openBookMechanicPopup(inspection.carId)}
@@ -152,11 +158,11 @@ function BuyerInspection() {
                   </button>
                 </div>
               </div>
-            ))
-          )}
-        </div>
-      </div>
+          </div>
+        ))
+      )}
     </div>
+
   );
 }
 
