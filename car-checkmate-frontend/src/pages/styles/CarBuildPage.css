@@ -1,33 +1,32 @@
-.build-box{
+.build-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
 }
 
-.basic-single{
+.basic-single {
     width: 200px;
 }
 
-.selects{
+.selects {
     display: flex;
     flex-direction: column;
-    
     justify-content: center;
     gap: 3px;
     text-align: left;
 }
 
-.select-two-by-two{
+.select-two-by-two {
     display: flex;
     gap:5px;
 }
 
-.reg-input-box{
+.reg-input-box {
     display: flex;
     flex-direction: column;
-   gap: 6px;
-   
+    gap: 6px;
+
 }
 
 .reg-input {
@@ -36,8 +35,23 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
-  }
+}
 
-  .labels{
+.labels {
     font-size: 13px;
-  }
+}
+
+/* Adjustments for responsiveness mobile*/
+@media (max-width: 768px) {
+    .build-box {
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding: 0px;
+        flex-direction: column;
+    }
+
+    .select-two-by-two {
+        flex-direction: column;
+    }
+}

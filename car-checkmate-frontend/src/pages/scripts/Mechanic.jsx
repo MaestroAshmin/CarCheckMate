@@ -14,6 +14,7 @@ export default function Mechanic() {
                 <HeaderNav />
                 <div className='ctr-content-session'>
                     <UserNav />
+                    <p className='user-title'>M e c h a n i c</p>
                     <MechanicContent />
                 </div>
             </div>

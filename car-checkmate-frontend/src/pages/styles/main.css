@@ -34,6 +34,17 @@ body {
     display: flex; /* Use flexbox */
 }
 
+.ctr-content-session .user-title {
+    font-style: italic;
+    font-weight: bold;
+    font-family: arial black;
+    color: #ebebeb;
+    text-transform: uppercase;
+    text-align: center;
+    margin: -20px 0px 0px 0px;
+    font-size: 25px;
+}
+
 .ctr-sub-content-lock {
     width: 100%;
 }
@@ -515,11 +526,19 @@ span:hover {
     position: relative;
 }
 
+.popup-content-inspection .ctr-schedule .ctr-schedule-option {
+    width: 40%;
+}
+
+.popup-content-inspection .ctr-schedule .ctr-schedule-option button {
+    width: 60%;
+}
+
 /* Date Picker */
 
 .popup-content .custom-datepicker input {
     width: 280px;
-    height: 30px;;
+    height: 30px;
 }
 
 .popup-content .custom-datepicker input::placeholder {
@@ -576,17 +595,12 @@ span:hover {
 }
 
 .detail {
-    margin-bottom: 10px;
+    margin-left: 60px;
 }
 
-.label {
-    font-weight: bold;
-}
-
-.image {
-    max-width: 100%;
-    height: auto;
-    margin-top: 5px;
+.detail img {
+    vertical-align: top;
+    width: 60%;
 }
 
 /* Adjustments for responsiveness tablet*/
@@ -649,6 +663,35 @@ span:hover {
     
     .popup-content-signup .role-container fieldset {
         width: 100%;
+    }
+
+    .detail {
+        margin-left: 40px;
+    }
+
+    .detail img {
+        width: 85%;
+    }
+
+    .popup-request-inspection {
+        width: 80%;
+    }
+
+    .popup-request-inspection .ctr-schedule {
+        width: 100%;
+        margin-left: 0px;
+    }
+    
+    .popup-content-inspection .ctr-schedule .ctr-schedule-request {
+        width: 70%;
+    }
+    
+    .popup-content-inspection .ctr-schedule .ctr-schedule-option {
+        width: 30%;
+    }
+    
+    .popup-content-inspection .ctr-schedule .ctr-schedule-option button {
+        width: 170%;
     }
 }
 
@@ -829,5 +872,36 @@ span:hover {
     .popup-content-signup button {
         margin-top: 20px;
         margin-bottom: 20px;
+    }
+
+    .popup-content-inspection .ctr-schedule {
+        height: max-content;
+    }
+
+    .popup-content-inspection .ctr-schedule .ctr-schedule-request {
+        width: 100%;
+    }
+
+    .popup-content-inspection .ctr-schedule .ctr-schedule-request h3,
+    .popup-content-inspection .ctr-schedule .ctr-schedule-request p {
+        margin-left: 0px ;
+    }
+    
+    .popup-content-inspection .ctr-schedule .ctr-schedule-option {
+        width: 100%;
+    }
+    
+    .popup-content-inspection .ctr-schedule .ctr-schedule-option button {
+        width: 170%;
+        margin-bottom: 0px;
+    }
+
+    .popup-content-signup .ctr-register-info .ctr-register-info-email-label {
+        width: 100%;
+    }
+
+    .popup-content-signup .ctr-register-info textarea {
+        width: 100%;
+        height: 200px;
     }
 }

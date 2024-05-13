@@ -14,7 +14,7 @@ export default function EmailBuyerPopup({ showEmailBuyerPopup, setShowEmailBuyer
                             <p>Car ID: <span>CR1234</span></p>
                             <form>
                                 <div className='ctr-register-info'>
-                                    <label htmlFor='emailContent'>Please write messages here</label>
+                                    <label className='ctr-register-info-email-label' htmlFor='emailContent'>Please write messages here</label>
                                     <textarea id='emailContent' name='emailContent' placeholder='Enter Your Message Here' required />
                                 </div>
                                 <div className='button-container'>

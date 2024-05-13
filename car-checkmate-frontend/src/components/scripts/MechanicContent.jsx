@@ -76,32 +76,37 @@ function UserContentMechanic() {
 
             <div className='ctr-user-content-left'>
                 <h3>Upcoming Schedule</h3>
-                <button className='ctr-user-button' onClick={openAvailableRequestsPopup}>View Available Inspection Requests</button>
+                <div className="ctr-user-content-left-button">
+                    <button className='ctr-user-button' onClick={openAvailableRequestsPopup}>View Available Inspection Requests</button>
+                </div>
                 <MechanicSchedule />
             </div>
             <div className='ctr-user-content-right'>
                 <h3>View Reports History</h3>
-                <br />
                 {inspectedData.map((report, index) => (
                     <div key={index} className='ctr-user-content-right-report'>
-                        <Link to={report.link}><img src={report.carId.carPhotos[1]} /></Link>
-                        <h6>Car</h6>&nbsp;-&nbsp;
-                        <span>{report.carId.make}</span>
-                        <span>{report.carId.model}</span>
-                        <h6>Address</h6>
-                        <span>{report.carId.streetName}</span>
-                        <span>{report.carId.suburb}</span>
-                        <span>{report.carId.state}</span>
-                        <span>{report.carId.postcode}</span>
-                        <br />
-                        <button onClick={() => handleClick(report._id)}>View Details</button>
+                        <Link to={`/InspectedReport/${report._id}`}><img src={report.carId.carPhotos[1]} /></Link>
+                        <h3><span>{report.carId.make}</span> - <span>{report.carId.model}</span></h3>
+                        <p><span>{report.carId.date}</span></p>
+                        {/*<p>
+                            Address:&nbsp;
+                                <span>{report.carId.streetName}</span>,&nbsp;
+                                <span>{report.carId.suburb}</span>&nbsp;
+                                <span>{report.carId.state}</span>&nbsp;
+                                <span>{report.carId.postcode}</span>
+                        </p>*/}
+                        <div className='ctr-schedule-option-seller-request'>
+                            <button onClick={() => handleClick(report._id)}>View Details</button>
+                        </div>
                     </div>
                 ))}
-                <div className="pagination">
-                    {Array.from({ length: Math.ceil(reports.length / reportsPerPage) }, (_, index) => (
-                        <button key={index} onClick={() => paginate(index + 1)}>{index + 1}</button>
-                    ))}
-                </div>
+                {inspectedData.length > 0 && (
+                    <div className="pagination">
+                        {Array.from({ length: Math.ceil(inspectedData.length / reportsPerPage) }, (_, index) => (
+                            <button key={index} onClick={() => paginate(index + 1)}>{index + 1}</button>
+                        ))}
+                    </div>
+                )}
             </div>
        </div>
     );

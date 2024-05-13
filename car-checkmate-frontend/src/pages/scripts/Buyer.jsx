@@ -14,6 +14,7 @@ export default function Buyer() {
                 <HeaderNav />
                 <div className='ctr-content-session'>
                     <UserNav />
+                    <p className='user-title'>B u y e r</p>
                     <BuyerContent />
                 </div>
             </div>

@@ -60,22 +60,23 @@ function SellerContent() {
         <br />
 
         <h3>View Your Car Listing</h3>
-        <Link to="/CarAdPage">
-          <button className="ctr-user-button">Add a new list</button>
-        </Link>
+        <div className="ctr-user-content-right-button">
+          <Link to="/CarAdPage">
+            <button className="ctr-user-button">Add a new list</button>
+          </Link>
+        </div>
         {currentCars.map((car, index) => (
           <div key={index} className="ctr-user-content-right-report">
             <Link to={`/seller-car/${car._id}`}>
               <img src={car.carPhotos[0]} />
             </Link>
-            <span>{car.id}</span>&nbsp;-&nbsp;
-            <span>{car.date}</span>
-            <br />
+            <h3>
+              <span>{car.make}</span>&nbsp;-&nbsp;
+              <span>{car.model}</span>
+            </h3>
             <Link to={`/car/${car._id}`}>View Details</Link>
           </div>
         ))}
-        <br />
-        <br />
         <div className="pagination">
           {Array.from(
             { length: Math.ceil(cars.length / carsPerPage) },

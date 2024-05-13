@@ -133,8 +133,9 @@ export default function CarAdPage() {
         <div className='ctr-main'>
             <div className='ctr-sub-content'>
                 <HeaderNav />
-
+                <div className='ctr-content-session'>
                 <UserNav />
+                <p className='user-title'>S e l l e r</p>
                 <div className='ctr-user-content'>
                     <div className='ctr-user-content-block'>
                         <h3>Create A New Car Listing</h3>
@@ -171,6 +172,7 @@ export default function CarAdPage() {
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             <Footer />

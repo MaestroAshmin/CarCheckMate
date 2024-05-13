@@ -5,7 +5,9 @@ import { faFileAlt, faCheckCircle  } from '@fortawesome/free-solid-svg-icons';
 
 function ProfileContent() {
     const [sellerVerificationData, setSellerVerificationData] = useState(null);
+    const [mechanicVerificationData, setMechanicVerificationData] = useState(null);
     const [isVerifyingDL, setIsVerifyingDL] = useState(false);
+    const [isVerifyingLVT, setIsVerifyingLVT] = useState(false);
     const [licenseData, setLicenseData] = useState({
         driverLicenseNumber: "",
         state: "",
@@ -14,9 +16,18 @@ function ProfileContent() {
         frontImage: null,
         backImage: null
     });
+    const [licenseLVTData, setLicenseLVTData] = useState({
+        licenseLVTNumber: "",
+        expiryDateLVT: "",
+        certificateNumber: "",
+    });
+
     const [daysDLLeft, setDaysDLLeft] = useState(null);
+    const [daysLVTLeft, setDaysLVTLeft] = useState(null);
     const [isSeller, setIsSeller] = useState(false); // State to store whether the user is a seller
+    const [isMechanic, setIsMechanic] = useState(false); // State to store whether the user is a seller
     const [sellerProfileUnlocked, setSellerProfileUnlocked] = useState(false);
+    const [mechenidProfileUnlocked, setMechanicProfileUnlocked] = useState(false);
 
     // Function to fetch seller verification details
     const fetchSellerVerificationDetails = async () => {
@@ -78,6 +89,10 @@ function ProfileContent() {
         setIsVerifyingDL(true);
     };
 
+    const handleVerifyLVTClick = () => {
+        setIsVerifyingLVT(true);
+    };
+
     const handleSaveDLClick = () => {
         handleSellerFeatures();
         // Implement save functionality here
@@ -85,6 +100,13 @@ function ProfileContent() {
         calculateDaysLeft();
         // You can save the license data to state or send it to the server
     };
+
+    const handleSaveLVTClick = () => {
+        // Implement save functionality here
+        setIsVerifyingLVT(false);
+        calculateDaysLeft('LVT');
+        // You can save the license data to state or send it to the server
+    };    
 
     const handleDLFileChange = async(e, type) => {
         const file = e.target.files[0];
@@ -109,6 +131,14 @@ function ProfileContent() {
             ...prevLicenseData,
             [type]: file // Append file
         }));
+    };
+
+    const handleLVTFileChange = (e) => {
+        const file = e.target.files[0];
+        setLicenseLVTData({
+            ...licenseLVTData,
+            fileUploadLVT: file
+        });
     };
 
     const handleChange = (e) => {
@@ -159,7 +189,8 @@ function ProfileContent() {
                 <UserDetails />
             </div>
             <div className='ctr-user-content-right'>
-            { isSeller && !sellerProfileUnlocked && ( // Render the section only if the user is a seller
+                {/* verify seller */}
+                { isSeller && !sellerProfileUnlocked && ( // Render the section only if the user is a seller
                     <div>
                     <h3>Unlock Seller Features</h3>
                         <div className='ctr-unlock-profile'>
@@ -208,55 +239,89 @@ function ProfileContent() {
                                 <button onClick={handleVerifyDLClick}>Verify ID</button>
                             )}
 
-                            {daysDLLeft !== null && (
+                            {/*{daysDLLeft !== null && (
                                 <>
                                     <p>License ID: {licenseData.licenseDLNumber}</p>
                                     <p>Expiry Date: {licenseData.expiryDateDL}</p>
                                     <p>Days Left Until Expiry: {daysDLLeft}</p>
                                 </>
-                            )}
+                            )}*/}
                             
                         </div>
                     </div>
-                 )}
-                 {sellerProfileUnlocked && ( // Render a message if the seller profile is already unlocked
-                 
-                    <div className="seller-verification-container">
-                    <h3>Your license data</h3>
-                    <div className="seller-verification-details">
-                        <div className="detail">
-                            <span className="label">Driver's License Number:</span>
+                    )}
+                    {sellerProfileUnlocked && ( // Render a message if the seller profile is already unlocked
+                    <>
+                        <h3>Your license data</h3>
+                        <p className="detail">
+                            <b>Driver's License Number:</b>&nbsp;
                             <span className="value">{sellerVerificationData.driverLicenseNumber}</span>
-                        </div>
-                        <div className="detail">
-                            <span className="label">State:</span>
+                        </p>
+                        <p className="detail">
+                            <b>State:</b>&nbsp;
                             <span className="value">{sellerVerificationData.state}</span>
-                        </div>
-                        <div className="detail">
-                            <span className="label">License Expiry:</span>
-                            <span className="value">{sellerVerificationData.licenseExpiry}</span>
-                        </div>
-                        <div className="detail">
-                            <span className="label">Card Number:</span>
+                        </p>
+                        <p className="detail">
+                            <b>License Expiry:</b>&nbsp;
+                            <span className="value">{new Date(sellerVerificationData.licenseExpiry).toLocaleDateString('en-GB')}</span>
+                        </p>
+                        <p className="detail">
+                            <b>Card Number:</b>&nbsp;
                             <span className="value">{sellerVerificationData.cardNumber}</span>
-                        </div>
-                        <div className="detail">
-                            <span className="label">Front Image:</span>
-                            <img className="image" src={sellerVerificationData.frontImage} alt="Front Image" />
-                        </div>
-                        <div className="detail">
-                            <span className="label">Back Image:</span>
-                            <img className="image" src={sellerVerificationData.backImage} alt="Back Image" />
-                        </div>
-                        Verification Status: {sellerVerificationData.verifiedByAdmin ? (
-                            <FontAwesomeIcon icon={faCheckCircle} color="green" />
-                        ) : (
-                            <span>Not Verified</span>
-                        )}
-                    </div>
-                </div>
-    
+                        </p>
+                        <p className="detail">
+                            <b>Front Image:</b>&nbsp;
+                            <img src={sellerVerificationData.frontImage} alt="Front Image" />
+                        </p>
+                        <p className="detail">
+                            <b>Back Image:</b>&nbsp;
+                            <img src={sellerVerificationData.backImage} alt="Back Image" />
+                        </p>
+                        <p className="detail">
+                            <b>Verification Status:</b> {sellerVerificationData.verifiedByAdmin ? (
+                                <FontAwesomeIcon icon={faCheckCircle} color="green" />
+                            ) : (
+                                <span>Not Verified</span>
+                            )}
+                        </p>
+                    </>
                 )}
+
+                <br />
+
+                {/*verify machenic*/}
+                <h3>Unlock Mechanic Features</h3>
+                    <div className='ctr-unlock-profile'>
+                        {isVerifyingLVT ? (
+                            <>
+                                <label name='licenseLVTNumber'>Licensed Vehicle Testers (LVT) Number:</label>
+                                <br />
+                                <input type="text" name="licenseLVTNumber" placeholder="Licensed Vehicle Testers (LVT) Number" value={licenseData.licenseLVTNumber} onChange={handleChange} />
+                                <br />
+                                <label name='expiryDateLVT'>Expiry Date:</label>
+                                <input type="date" name="expiryDateLVT" value={licenseData.expiryDateLVT} onChange={handleChange} />
+                                <br />
+                                <label name='fileUploadLVT'>Upload LVT License Document:</label>
+                                <div className='file-upload'>
+                                    <label className='file-upload-btn' htmlFor='fileUploadLVT'>Choose File</label>
+                                    <span className='file-name'>{licenseData.fileUploadLVT ? licenseData.fileUploadLVT.name : 'No file selected'}</span>
+                                    <input type='file' id='fileUploadLVT' name='fileUploadLVT' accept='image/*,.pdf' onChange={handleLVTFileChange} />
+                                </div>
+                                <br />
+                                <button onClick={handleSaveLVTClick}>Save</button>
+                            </>
+                        ) : (
+                            <button onClick={handleVerifyLVTClick}>Verify ID</button>
+                        )}
+
+                        {/*{daysLVTLeft !== null && (
+                            <>
+                                <p>License ID: {licenseData.licenseLVTNumber}</p>
+                                <p>Expiry Date: {licenseData.expiryDateLVT}</p>
+                                <p>Days Left Until Expiry: {daysLVTLeft}</p>
+                            </>
+                        )}*/}
+                    </div>
             </div>
        </div>
     );
