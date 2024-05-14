@@ -33,3 +33,12 @@
     flex-direction: column;
     gap: 4px;
 }
+
+/* Adjustments for responsiveness mobile*/
+@media (max-width: 768px) {
+    .loc-container{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

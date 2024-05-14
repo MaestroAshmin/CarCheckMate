@@ -347,12 +347,20 @@
 
     .ctr-main-header-login button {
         position: absolute;
-        bottom: 0; 
-        width: 96%;
+        bottom: 0;
+        width: 76%;
         height: 40px;
         margin-bottom: 2%;
-        margin-left: 2%;
-        margin-right: 2%;
+        margin-left: 20px;
+        left: 0;
+    }
+
+    .ctr-main-header-login .user-profile-icon {
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 3.5%;
+        margin-right: 20px;
+        right: 0; 
     }
 
     .ctr-toggle.show {
@@ -370,7 +378,7 @@
         height: 50px; 
         font-size: 24px; 
     }
-
+    
     .ctr-main-header-search,
     .ctr-main-header-search input {
         width: 100%;

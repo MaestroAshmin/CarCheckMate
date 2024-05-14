@@ -44,17 +44,35 @@ const uploadCarData = async (req, res) => {
       registrationNo,
     } = req.body;
 
+    // Check if there's already a car with the same registration number and seller ID
+    const existingCar = await Car.findOne({ seller_id, registrationNo });
+
+    if (existingCar) {
+      return res
+        .status(400)
+        .json({
+          status: false,
+          error:
+            "A car with the same registration number already exists for this seller",
+        });
+    }
+
     const user = await User.findOne({ _id: seller_id });
 
     // Check if the user exists and if their sellerVerified field is false
     if (user && !user.sellerVerified) {
-      return res.status(400).json({ error: "Seller is not Verified" });
+      return res
+        .status(400)
+        .json({ status: false, error: "Seller is not Verified" });
     }
     // Check if carPhotos are uploaded
     if (!req.files || Object.keys(req.files).length === 0) {
       return res
         .status(400)
-        .json({ error: "No car photos uploaded or invalid format" });
+        .json({
+          status: false,
+          error: "No car photos uploaded or invalid format",
+        });
     }
 
     // Get the array of carPhoto objects from req.files
@@ -67,10 +85,12 @@ const uploadCarData = async (req, res) => {
     if (numCarPhotos < 8 || numCarPhotos > 20) {
       return res
         .status(400)
-        .json({ error: "Number of car photos must be between 8 and 20" });
+        .json({
+          status: false,
+          error: "Number of car photos must be between 8 and 20",
+        });
     }
     // Ensure directory exists for saving car photos
-    // const uploadDirectory = path.join(__dirname, "..", "uploads", "car_photos");
     // Specify the directory where you want to serve static files (assuming it's accessible to clients)
     const publicDirectory = "uploads/car_photos";
     ensureDirectoryExists(publicDirectory);
@@ -98,9 +118,6 @@ const uploadCarData = async (req, res) => {
         }
       }
     }
-    // Convert carPhotos array to a comma-separated string
-    // const carPhotoPathsString = carPhotoPaths.join(',');
-    // console.log(carPhotoPathsString);
 
     // Create title based on make, model, and year
     const title = `${year} ${make} ${model}`;

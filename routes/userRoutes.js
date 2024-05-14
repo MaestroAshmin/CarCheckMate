@@ -10,7 +10,7 @@ router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.post('/forgotpassword', userController.forgotPassword);
 router.post('/updateuserpassword', userController.updateUserPassword);
-
-// router.post('/login', authenticateToken, userController.login);
+router.post('/availability/:userId', userController.saveAvailability);
+router.get('/get-availability/:userId', userController.getAvailability);
 
 module.exports = router;

@@ -84,14 +84,12 @@ function SellerRequest() {
         setShowCancelPopup={setShowCancelPopup}
         inspectionId={inspectionToCancel} // Pass inspection id as prop
       />
-      {showAcceptedMessage && <p>Inspection Accepted!</p>}
+      {showAcceptedMessage && <p className='align-p'>Inspection Accepted!</p>}
       {currentInspections.map((inspection, index) => (
         <div key={index} className="ctr-schedule-book">
           <div className="ctr-schedule-seller">
             <img src={inspection.car.carPhotos[0]} alt="Car" />
-            <p>
-              <span>Car ID: {inspection.car_id}</span>
-            </p>
+            <h3><span>{inspection.car.make}</span> <span>{inspection.car.model}</span></h3>
             <p>
               <span>
                 {new Date(inspection.inspectionDate).toLocaleDateString()}

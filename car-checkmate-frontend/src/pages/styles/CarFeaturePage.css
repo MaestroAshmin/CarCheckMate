@@ -17,3 +17,14 @@
     border-radius: 4px;
     resize: vertical;
 }
+
+/* Adjustments for responsiveness mobile*/
+@media (max-width: 768px) {
+    .odometer-input{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+}

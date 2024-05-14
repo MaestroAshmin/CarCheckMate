@@ -60,7 +60,7 @@ function BuyerInspection() {
             <div className="container">
                 <div className="past-inspections">
                     {pastInspections.length === 0 ? (
-                    <p>No past inspections</p>
+                    <p className='ctr-schedule-buyer-no-details'>No past inspections</p>
                 ) : (
 
                     <div className="past-inspections-list">
@@ -68,25 +68,25 @@ function BuyerInspection() {
                             <div key={index} className='ctr-schedule'>
                             <div className='ctr-schedule-buyer-detail'>
                             {inspection.car ? (
-                                        <div className='ctr-schedule-buyer-detail'>
-                                            <img src={inspection.car.carPhotos[0]} alt={`Car Image`} />
-                                            <p>Date: <span>{formatDateString(inspection.inspectionDate)}</span></p>
-                                            <p>Time: <span>{inspection.inspectionTime}</span></p>
-                                            
-                                            {inspection.mechanic_id ? (
-                                                <p>Mechanic Status: <span>Your Inspection has been accepted by the mechanic</span></p>
-                                            ) : (
-                                                <p>No Mechanic has accepted the inspection</p>
-                                            )}
-                                            {inspection.inspectionStatus ? (
-                                                <p>Inspection Status: <span>Inspection is completet</span></p>
-                                            ) : (
-                                                <p>Inspection Status: <span>Inspection has not been completed yet</span></p>
-                                            )}
-                                        </div>
+                                <>
+                                    <img src={inspection.car.carPhotos[0]} alt={`Car Image`} />
+                                    <p>Date: <span>{formatDateString(inspection.inspectionDate)}</span></p>
+                                    <p>Time: <span>{inspection.inspectionTime}</span></p>
+                                    
+                                    {inspection.mechanic_id ? (
+                                        <p>Mechanic Status: <span>Your Inspection has been accepted by the mechanic</span></p>
                                     ) : (
-                                        <p>No car details available</p>
+                                        <p>No Mechanic has accepted the inspection</p>
                                     )}
+                                    {inspection.inspectionStatus ? (
+                                        <p>Inspection Status: <span>Inspection is completet</span></p>
+                                    ) : (
+                                        <p>Inspection Status: <span>Inspection has not been completed yet</span></p>
+                                    )}
+                                </>
+                            ) : (
+                                <p>No car details available</p>
+                            )}
                             </div>
                             <div className='ctr-schedule-option'>
                                 <button onClick={openEmailSellerPopup}>Email Seller</button>
