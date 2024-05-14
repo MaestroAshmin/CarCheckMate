@@ -1,6 +1,6 @@
-const multer = require('multer');
+const multer = require("multer");
 // const { GridFsStorage } = require('multer-gridfs-storage');
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 // Create GridFS storage engine
 // const storage = new GridFsStorage({
@@ -24,15 +24,26 @@ const crypto = require('crypto');
 //     }
 // });
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        return cb( null, "./uploads");
-    },
-    filename: function (req, file, cb){
-        return cb(null, `${Date.now()}-${file.originalname}`)
-    }
- })
+  destination: function (req, file, cb) {
+    return cb(null, "./uploads");
+  },
+  filename: function (req, file, cb) {
+    return cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
 
 const upload = multer({ storage });
+
+const storageMV = multer.diskStorage({
+  destination: function (req, file, cb) {
+    return cb(null, "./uploads/mechanicData");
+  },
+  filename: function (req, file, cb) {
+    return cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
+const uploadMV = multer({ storage: storageMV });
 // const upload = multer({
 //     storage,
 //     fileFilter: (req, file, cb) => {
@@ -44,4 +55,4 @@ const upload = multer({ storage });
 //     }
 // }).fields([{ name: 'frontImage', maxCount: 1 }, { name: 'backImage', maxCount: 1 }]);
 
-module.exports = { upload };
+module.exports = { upload, uploadMV };
