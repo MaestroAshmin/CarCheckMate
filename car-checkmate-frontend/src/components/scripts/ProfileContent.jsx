@@ -29,6 +29,8 @@ function ProfileContent() {
     const [sellerProfileUnlocked, setSellerProfileUnlocked] = useState(false);
     const [mechenidProfileUnlocked, setMechanicProfileUnlocked] = useState(false);
 
+    const [mechanicRequest, setMechanicRequest] = useState({ findUser: false });
+
     // Function to fetch seller verification details
     const fetchSellerVerificationDetails = async () => {
         try {
@@ -70,7 +72,40 @@ function ProfileContent() {
                 seller_id: seller_id
             }));
         }
+
+    async function checkMechanicVerification() {
+        try {
+            const response = await fetch(
+            `http://localhost:3000/mechanic-verification/checkVerificationStatus/${userData._id}`
+            );
+    
+            const data = await response.json();
+            console.log("mechanic data", data);
+            if (data.findUser) {
+            setMechanicRequest({
+                findUser: data.findUser,
+                pending: data.userData.verificationPending,
+                reqStatus: data.userData.verificationStatus,
+                userData: {
+                ...data.userData,
+                expiryDate: new Date(
+                    data.userData.expiryDate
+                ).toLocaleDateString(),
+                },
+            });
+            }
+        } catch (error) {
+            console.log(
+            "Error while checking mechanic verfifcation request",
+            error
+            );
+        }
+    }
+        if (userData.mechanic) {
+        checkMechanicVerification();
+        }
     }, []);
+
     useEffect(() => {
         if (licenseData.driverLicenseNumber && licenseData.licenseExpiry) {
             calculateDaysLeft();
@@ -90,7 +125,10 @@ function ProfileContent() {
     };
 
     const handleVerifyLVTClick = () => {
-        setIsVerifyingLVT(true);
+        const userData = localStorage.getItem("user");
+        const user = JSON.parse(userData);
+        // console.log("user", user);
+        if (user.mechanic) setIsVerifyingLVT(true);
     };
 
     const handleSaveDLClick = () => {
@@ -101,12 +139,29 @@ function ProfileContent() {
         // You can save the license data to state or send it to the server
     };
 
-    const handleSaveLVTClick = () => {
+    const handleSaveLVTClick = async () => {
         // Implement save functionality here
         setIsVerifyingLVT(false);
-        calculateDaysLeft('LVT');
+     
+        calculateDaysLeft("LVT");
         // You can save the license data to state or send it to the server
-    };    
+        const user = localStorage.getItem("user");
+        const userData = JSON.parse(user);
+        const formData = new FormData();
+        formData.append("licenseLVTNumber", licenseLVTData.licenseLVTNumber);
+        formData.append("expiryDateLVT", licenseLVTData.expiryDateLVT);
+        formData.append("document", licenseLVTData.document);
+        formData.append("userID", userData._id);
+        console.log("license data", licenseLVTData);
+        console.log("form data", formData);
+        await fetch(
+            "http://localhost:3000/mechanic-verification/unlockFeaturesMechanic",
+            {
+                method: "POST",
+                body: formData,
+            }
+        );
+    }; 
 
     const handleDLFileChange = async(e, type) => {
         const file = e.target.files[0];
@@ -135,9 +190,9 @@ function ProfileContent() {
 
     const handleLVTFileChange = (e) => {
         const file = e.target.files[0];
-        setLicenseLVTData({
+        setLicenseLVTData ({
             ...licenseLVTData,
-            fileUploadLVT: file
+            document: file,
         });
     };
 
@@ -148,6 +203,14 @@ function ProfileContent() {
             [name]: value
         });
     };
+
+    const handleChangeLVT = (e) => {
+        const { name, value } = e.target;
+        setLicenseLVTData({
+            ...licenseLVTData,
+            [name]: value,
+        });
+    };   
 
     const handleSellerFeatures = async () => {
         try {
@@ -291,40 +354,95 @@ function ProfileContent() {
 
                 {/*verify machenic*/}
                 <h3>Unlock Mechanic Features</h3>
-                    <div className='ctr-unlock-profile'>
-                        {isVerifyingLVT ? (
-                            <>
-                                <label name='licenseLVTNumber'>Licensed Vehicle Testers (LVT) Number:</label>
-                                <br />
-                                <input type="text" name="licenseLVTNumber" placeholder="Licensed Vehicle Testers (LVT) Number" value={licenseData.licenseLVTNumber} onChange={handleChange} />
-                                <br />
-                                <label name='expiryDateLVT'>Expiry Date:</label>
-                                <input type="date" name="expiryDateLVT" value={licenseData.expiryDateLVT} onChange={handleChange} />
-                                <br />
-                                <label name='fileUploadLVT'>Upload LVT License Document:</label>
-                                <div className='file-upload'>
-                                    <label className='file-upload-btn' htmlFor='fileUploadLVT'>Choose File</label>
-                                    <span className='file-name'>{licenseData.fileUploadLVT ? licenseData.fileUploadLVT.name : 'No file selected'}</span>
-                                    <input type='file' id='fileUploadLVT' name='fileUploadLVT' accept='image/*,.pdf' onChange={handleLVTFileChange} />
-                                </div>
-                                <br />
-                                <button onClick={handleSaveLVTClick}>Save</button>
-                            </>
-                        ) : (
-                            <button onClick={handleVerifyLVTClick}>Verify ID</button>
-                        )}
-
-                        {/*{daysLVTLeft !== null && (
-                            <>
-                                <p>License ID: {licenseData.licenseLVTNumber}</p>
-                                <p>Expiry Date: {licenseData.expiryDateLVT}</p>
-                                <p>Days Left Until Expiry: {daysLVTLeft}</p>
-                            </>
-                        )}*/}
+                <div className="ctr-unlock-profile">
+                {isVerifyingLVT ? (
+                    mechanicRequest.findUser ? (
+                    <div>
+                        <p>
+                        Licensed Vehicle Testers (LVT) Number:{" "}
+                        {mechanicRequest.userData.licenseNumber}
+                        </p>
+                        <p>Expiry Date : {mechanicRequest.userData.expiryDate}</p>
+        
+                        <p>
+                        Verification Status :{" "}
+                        {mechanicRequest.pending
+                            ? "Pending"
+                            : mechanicRequest.reqStatus
+                            ? "Approved"
+                            : "Denied"}
+                        </p>
+                        <button
+                        onClick={() => {
+                            window.open(
+                            mechanicRequest.userData.documentPath,
+                            "_blank"
+                            );
+                        }}
+                        >
+                        {" "}
+                        Preview{" "}
+                        </button>
                     </div>
+                    ) : (
+                    <>
+                        <label name="licenseLVTNumber">
+                        Licensed Vehicle Testers (LVT) Number:
+                        </label>
+                        <br />
+                        <input
+                        type="text"
+                        name="licenseLVTNumber"
+                        placeholder="Licensed Vehicle Testers (LVT) Number"
+                        value={licenseData.licenseLVTNumber}
+                        onChange={handleChangeLVT}
+                        />
+                        <br />
+                        <label name="expiryDateLVT">Expiry Date:</label>
+                        <input
+                        type="date"
+                        name="expiryDateLVT"
+                        value={licenseData.expiryDateLVT}
+                        onChange={handleChangeLVT}
+                        />
+                        <br />
+                        <label name="fileUploadLVT">Upload LVT License Document:</label>
+                        <div className="file-upload">
+                        <label className="file-upload-btn" htmlFor="fileUploadLVT">
+                            Choose File
+                        </label>
+                        <span className="file-name">
+                            {licenseData.fileUploadLVT
+                            ? licenseData.fileUploadLVT.name
+                            : "No file selected"}
+                        </span>
+                        <input
+                            type="file"
+                            id="fileUploadLVT"
+                            name="fileUploadLVT"
+                            accept="image/*,.pdf"
+                            onChange={handleLVTFileChange}
+                        />
+                        </div>
+                        <br />
+                        <button onClick={handleSaveLVTClick}>Save</button>
+                    </>
+                    )
+                ) : (
+                    <button onClick={handleVerifyLVTClick}>Verify ID</button>
+                )}
+        
+                {/* {daysLVTLeft !== null && (
+                    <>
+                    <p>License ID: {licenseData.licenseLVTNumber}</p>
+                    <p>Expiry Date: {licenseData.expiryDateLVT}</p>
+                    <p>Days Left Until Expiry: {daysLVTLeft}</p>
+                    </>
+                )} */}
+                </div>
             </div>
-       </div>
-    );
-}
-
+            </div>
+        );
+    }
+ 
 export default ProfileContent;
