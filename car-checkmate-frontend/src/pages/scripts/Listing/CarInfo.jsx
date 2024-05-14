@@ -185,7 +185,6 @@ export default function CarInfoPage() {
                   </div>
                 </div>
               </div>
-
               <div className="details-section">
                 <div className="tab-content">
                   <div className="car-details">
