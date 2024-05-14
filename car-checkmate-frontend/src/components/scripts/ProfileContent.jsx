@@ -107,11 +107,11 @@ function ProfileContent() {
         );
       }
     }
-
     if (userData.mechanic) {
       checkMechanicVerification();
     }
   }, []);
+
   useEffect(() => {
     if (licenseData.driverLicenseNumber && licenseData.licenseExpiry) {
       calculateDaysLeft();
@@ -373,98 +373,50 @@ function ProfileContent() {
             </div>
           )}
         {sellerProfileUnlocked && ( // Render a message if the seller profile is already unlocked
-          <div className="seller-verification-container">
+          <>
             <h3>Your license data</h3>
-            <div className="seller-verification-details">
-              <div className="detail">
-                <span className="label">Driver's License Number:</span>
-                <span className="value">
-                  {sellerVerificationData.driverLicenseNumber}
-                </span>
-              </div>
-              <div className="detail">
-                <span className="label">State:</span>
-                <span className="value">{sellerVerificationData.state}</span>
-              </div>
-              <div className="detail">
-                <span className="label">License Expiry:</span>
-                <span className="value">
-                  {sellerVerificationData.licenseExpiry}
-                </span>
-              </div>
-              <div className="detail">
-                <span className="label">Card Number:</span>
-                <span className="value">
-                  {sellerVerificationData.cardNumber}
-                </span>
-              </div>
-              <div className="detail">
-                <span className="label">Front Image:</span>
-                <img
-                  className="image"
-                  src={sellerVerificationData.frontImage}
-                  alt="Front Image"
-                />
-              </div>
-              <div className="detail">
-                <span className="label">Back Image:</span>
-                <img
-                  className="image"
-                  src={sellerVerificationData.backImage}
-                  alt="Back Image"
-                />
-              </div>
-              Verification Status:{" "}
+            <p className="detail">
+              <b>Driver's License Number:</b>&nbsp;
+              <span className="value">
+                {sellerVerificationData.driverLicenseNumber}
+              </span>
+            </p>
+            <p className="detail">
+              <b>State:</b>&nbsp;
+              <span className="value">{sellerVerificationData.state}</span>
+            </p>
+            <p className="detail">
+              <b>License Expiry:</b>&nbsp;
+              <span className="value">
+                {new Date(
+                  sellerVerificationData.licenseExpiry
+                ).toLocaleDateString("en-GB")}
+              </span>
+            </p>
+            <p className="detail">
+              <b>Card Number:</b>&nbsp;
+              <span className="value">{sellerVerificationData.cardNumber}</span>
+            </p>
+            <p className="detail">
+              <b>Front Image:</b>&nbsp;
+              <img src={sellerVerificationData.frontImage} alt="Front Image" />
+            </p>
+            <p className="detail">
+              <b>Back Image:</b>&nbsp;
+              <img src={sellerVerificationData.backImage} alt="Back Image" />
+            </p>
+            <p className="detail">
+              <b>Verification Status:</b>{" "}
               {sellerVerificationData.verifiedByAdmin ? (
                 <FontAwesomeIcon icon={faCheckCircle} color="green" />
               ) : (
                 <span>Not Verified</span>
               )}
-            </div>
-          </div>
+            </p>
+          </>
         )}
-                            
-                        </div>
-                    </div>
-                    )}
-                    {sellerProfileUnlocked && ( // Render a message if the seller profile is already unlocked
-                    <>
-                        <h3>Your license data</h3>
-                        <p className="detail">
-                            <b>Driver's License Number:</b>&nbsp;
-                            <span className="value">{sellerVerificationData.driverLicenseNumber}</span>
-                        </p>
-                        <p className="detail">
-                            <b>State:</b>&nbsp;
-                            <span className="value">{sellerVerificationData.state}</span>
-                        </p>
-                        <p className="detail">
-                            <b>License Expiry:</b>&nbsp;
-                            <span className="value">{new Date(sellerVerificationData.licenseExpiry).toLocaleDateString('en-GB')}</span>
-                        </p>
-                        <p className="detail">
-                            <b>Card Number:</b>&nbsp;
-                            <span className="value">{sellerVerificationData.cardNumber}</span>
-                        </p>
-                        <p className="detail">
-                            <b>Front Image:</b>&nbsp;
-                            <img src={sellerVerificationData.frontImage} alt="Front Image" />
-                        </p>
-                        <p className="detail">
-                            <b>Back Image:</b>&nbsp;
-                            <img src={sellerVerificationData.backImage} alt="Back Image" />
-                        </p>
-                        <p className="detail">
-                            <b>Verification Status:</b> {sellerVerificationData.verifiedByAdmin ? (
-                                <FontAwesomeIcon icon={faCheckCircle} color="green" />
-                            ) : (
-                                <span>Not Verified</span>
-                            )}
-                        </p>
-                    </>
-                )}
 
-                <br />
+        <br />
 
         {/*verify machenic*/}
         <h3>Unlock Mechanic Features</h3>
@@ -547,12 +499,12 @@ function ProfileContent() {
           )}
 
           {/* {daysLVTLeft !== null && (
-            <>
-              <p>License ID: {licenseData.licenseLVTNumber}</p>
-              <p>Expiry Date: {licenseData.expiryDateLVT}</p>
-              <p>Days Left Until Expiry: {daysLVTLeft}</p>
-            </>
-          )} */}
+                    <>
+                    <p>License ID: {licenseData.licenseLVTNumber}</p>
+                    <p>Expiry Date: {licenseData.expiryDateLVT}</p>
+                    <p>Days Left Until Expiry: {daysLVTLeft}</p>
+                    </>
+                )} */}
         </div>
       </div>
     </div>
