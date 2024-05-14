@@ -12,7 +12,6 @@ function ProfileContent() {
         driverLicenseNumber: "",
         state: "",
         licenseExpiry: "",
-        cardNumber: "",
         frontImage: null,
         backImage: null
     });
