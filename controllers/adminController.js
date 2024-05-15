@@ -6,14 +6,15 @@ const User = require('../models/User');
 // Get all pending seller verifications
 async function getPendingSellerVerifications(req, res) {
     try {
-        const pendingVerifications = await SellerVerification.find({ verifiedByAdmin: false });
-        const pendingVerificationsWithUserDetails = await Promise.all(pendingVerifications.map(async (verification) => {
-            const user = await User.findById(verification.user);
-            return {
-                ...verification._doc,
-                user: user
-            };
-        }));
+        // const pendingVerifications = await SellerVerification.find({ verifiedByAdmin: false });
+        const verifications = await SellerVerification.find().lean();
+        const userIds = verifications.map(v => v.user);
+        const users = await User.find({ _id: { $in: userIds } }).lean();
+
+        const pendingVerificationsWithUserDetails = verifications.map(v => {
+        const user = users.find(u => u._id.equals(v.user));
+        return { ...v, user };
+        });
         res.status(200).json({ status: true, data: pendingVerificationsWithUserDetails });
     } catch (error) {
         console.error('Error getting pending verifications:', error);

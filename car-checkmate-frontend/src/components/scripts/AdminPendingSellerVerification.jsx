@@ -7,26 +7,22 @@ const AdminPendingSellerVerification = () => {
   const [pendingVerifications, setPendingVerifications] = useState([]);
   const tableRef = useRef(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/admin/pending-verifications');
-        const responseData = await response.json();
-        if (responseData.status) {
-          setPendingVerifications(responseData.data);
-        } else {
-          console.error('Error fetching data:', responseData.error);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/admin/pending-verifications');
+      const responseData = await response.json();
+      if (responseData.status) {
+        setPendingVerifications(responseData.data);
+      } else {
+        console.error('Error fetching data:', responseData.error);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
-
-    return () => {
-      // Cleanup code here if needed
-    };
   }, []);
 
   useEffect(() => {
@@ -40,6 +36,23 @@ const AdminPendingSellerVerification = () => {
       });
     }
   }, [pendingVerifications]);
+
+  const handleVerify = async (verificationId) => {
+    try {
+      const response = await fetch(`http://localhost:3000/admin/verify-verification/${verificationId}`, {
+        method: 'PUT',
+      });
+      const responseData = await response.json();
+      if (responseData.status) {
+        // Optionally refresh data after successful verification
+        fetchData();
+      } else {
+        console.error('Error verifying:', responseData.error);
+      }
+    } catch (error) {
+      console.error('Error verifying:', error);
+    }
+  };
 
   const paginate = (pageNumber) => {
     $(tableRef.current).DataTable().page(pageNumber - 1).draw('page');
@@ -58,6 +71,7 @@ const AdminPendingSellerVerification = () => {
             <th>Card Number</th>
             <th>Front Image</th>
             <th>Back Image</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -70,6 +84,13 @@ const AdminPendingSellerVerification = () => {
               <td>{verification.cardNumber}</td>
               <td><img src={verification.frontImage} alt="Front Image" /></td>
               <td><img src={verification.backImage} alt="Back Image" /></td>
+              <td>
+                {verification.verifiedByAdmin ? (
+                  <span>Verified</span>
+                ) : (
+                  <button onClick={() => handleVerify(verification._id)}>Accept</button>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
