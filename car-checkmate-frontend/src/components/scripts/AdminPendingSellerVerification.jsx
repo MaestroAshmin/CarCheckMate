@@ -66,7 +66,7 @@ const AdminPendingSellerVerification = () => {
               <td>{verification.user.email}</td>
               <td>{verification.driverLicenseNumber}</td>
               <td>{verification.state}</td>
-              <td>{verification.licenseExpiry}</td>
+              <td>{new Date(verification.licenseExpiry).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</td>
               <td>{verification.cardNumber}</td>
               <td><img src={verification.frontImage} alt="Front Image" /></td>
               <td><img src={verification.backImage} alt="Back Image" /></td>
