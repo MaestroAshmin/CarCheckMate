@@ -10,6 +10,10 @@
 
 /* User Type */
 
+p {
+    font-size: 1.1rem;
+}
+
 .ctr-user-type {
     height: 50px;
     display: flex;
