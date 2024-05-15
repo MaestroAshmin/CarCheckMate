@@ -1,6 +1,7 @@
 // adminController.js
 
 const SellerVerification = require('../models/SellerVerification');
+const MechanicVerification = require('../models/MechanicVerification');
 const User = require('../models/User');
 
 // Get all pending seller verifications
@@ -44,4 +45,24 @@ async function verifySellerVerification(req, res) {
     }
 }
 
-module.exports = { getPendingSellerVerifications, verifySellerVerification };
+
+
+// Get all pending mechanic verifications
+async function getPendingMechanicVerifications(req, res) {
+    try {
+        const verifications = await MechanicVerification.find().lean();
+        const userIds = verifications.map(v => v.mechanicId);
+        const users = await User.find({ _id: { $in: userIds } }).lean();
+
+        const pendingVerificationsWithUserDetails = verifications.map(v => {
+            const user = users.find(u => u._id.equals(v.mechanicId));
+            return { ...v, user };
+        });
+
+        res.status(200).json({ status: true, data: pendingVerificationsWithUserDetails });
+    } catch (error) {
+        console.error('Error getting pending verifications:', error);
+        res.status(500).json({ status: false, error: 'Internal Server Error' });
+    }
+}
+module.exports = { getPendingSellerVerifications, verifySellerVerification, getPendingMechanicVerifications };

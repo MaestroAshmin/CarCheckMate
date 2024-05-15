@@ -8,4 +8,7 @@ router.get('/pending-verifications', adminController.getPendingSellerVerificatio
 // Route to verify a single verification by ID
 router.put('/verify-verification/:id', adminController.verifySellerVerification);
 
+// Route to get all mechanic verifications
+router.get('/pending-mechanic-verifications', adminController.getPendingMechanicVerifications);
+
 module.exports = router;

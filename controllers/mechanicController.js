@@ -1,17 +1,19 @@
 const MechanicVerification = require("../models/MechanicVerification");
 const { ObjectId } = require("mongodb");
+const serverUrl = "http://localhost:3000/";
 
 const unlockFeaturesMechanic = async (req, res) => {
   try {
     const { licenseLVTNumber, expiryDateLVT, userID } = req.body;
     const filepath = req.file.path;
-    console.log(licenseLVTNumber, expiryDateLVT, userID, filepath);
+    const finalPath = serverUrl + filepath; // Concatenate baseURL with filepath
+    // console.log(licenseLVTNumber, expiryDateLVT, userID, finalpath);
     const newVerificationRequest = new MechanicVerification({
       licenseNumber: licenseLVTNumber,
 
       expiryDate: expiryDateLVT,
 
-      documentPath: filepath,
+      documentPath: finalPath,
 
       verificationPending: true,
 
@@ -76,22 +78,24 @@ const getPendingRequests = async (req, res) => {
 
 const acceptVerificationRequest = async (req, res) => {
   try {
-    const id = req.params.id;
-    const userRequest = await MechanicVerification.findOne({
-      mechanicId: new ObjectId(id),
-    });
+    const verificationId = req.params.id;
+    console.log(verificationId);
+    const userRequest = await MechanicVerification.findById(verificationId);
+
     if (!userRequest) {
-      console.log("user not found");
-      res.status(400).send("User not found");
-      return;
+      console.log("Verification request not found");
+      return res.status(400).send("Verification request not found");
     }
+
     userRequest.verificationPending = false;
     userRequest.verificationStatus = true;
-    await userRequest.save();
-    res.status(200).json({ msg: "request approved" });
-  } catch (error) {
-    console.log("Error while accepting mechanic verification request", error);
 
+    await userRequest.save();
+
+    console.log("Request approved");
+    res.status(200).json({ msg: "Request approved" });
+  } catch (error) {
+    console.error("Error while accepting mechanic verification request:", error);
     res.status(500).send("Error while accepting mechanic verification request");
   }
 };
