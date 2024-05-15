@@ -7,7 +7,14 @@ const User = require('../models/User');
 async function getPendingSellerVerifications(req, res) {
     try {
         const pendingVerifications = await SellerVerification.find({ verifiedByAdmin: false });
-        res.status(200).json({ status: true, data: pendingVerifications });
+        const pendingVerificationsWithUserDetails = await Promise.all(pendingVerifications.map(async (verification) => {
+            const user = await User.findById(verification.user);
+            return {
+                ...verification._doc,
+                user: user
+            };
+        }));
+        res.status(200).json({ status: true, data: pendingVerificationsWithUserDetails });
     } catch (error) {
         console.error('Error getting pending verifications:', error);
         res.status(500).json({ status: false, error: 'Internal Server Error' });

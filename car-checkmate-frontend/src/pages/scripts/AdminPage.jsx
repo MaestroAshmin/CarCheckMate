@@ -6,6 +6,7 @@ import HeaderNav from "../../components/scripts/HeaderNav";
 import AdminUserManagement from "../../components/scripts/AdminUserManagement";
 import AdminListingManagement from "../../components/scripts/AdminListingManagement";
 import AdminInspectionManagement from "../../components/scripts/AdminInspectionManagement";
+import AdminPendingSellerVerification from "../../components/scripts/AdminPendingSellerVerification";
 
 export default function AdminPage() {
   const [users, setUsers] = useState(0);
@@ -51,6 +52,9 @@ export default function AdminPage() {
         return <AdminListingManagement />;
       case "inspections":
         return <AdminInspectionManagement />;
+      case "pending-seller-verifications":
+        return <AdminPendingSellerVerification/>;
+
       default:
         return (
           <div className="dashboard">
@@ -79,6 +83,14 @@ export default function AdminPage() {
               >
                 <h3>Inspections</h3>
                 <p>{inspections}</p>
+              </a>
+              <a
+                href="#"
+                onClick={() => handleComponentChange("pending-seller-verfications")}
+                className="stat-card red"
+              >
+                <h3>Pending Seller Verifications</h3>
+                {/* <p>{inspections}</p> */}
               </a>
             </div>
           </div>
@@ -114,6 +126,14 @@ export default function AdminPage() {
                   onClick={() => handleComponentChange("inspections")}
                 >
                   Inspection Management
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  onClick={() => handleComponentChange("pending-seller-verifications")}
+                >
+                  Seller Verifications Management
                 </a>
               </li>
             </ul>

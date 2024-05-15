@@ -86,13 +86,15 @@ function App() {
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
 
           {/** Admin Pages */}
-
+          
           {/** This is for testing the styling of the existing page */}
           <Route path="/StyleTest" element={<StyleTest />} />
           <Route path="/ListingPage" element={<ListingPage />} />
           <Route path="/Listing" element={<Listing />} />
           {/* <SellerSchedule carId={car.id} /> */}
           <Route path="/InspectedReport/:id" element={<InspectedReport />} />
+
+          <Route path="/AdminPage" element ={<AdminPage />} />
         </Routes>
       </Router>
     </div>
