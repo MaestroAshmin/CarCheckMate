@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import UserListing from '../scripts/AdminUserManagementListing';
-// import '../styles/userlist.css';
+import $ from 'jquery'; // Import jQuery
+import 'datatables.net-bs4'; // DataTables JS
+import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css'; // DataTables CSS
 
 const AdminUserManagement = ({ currentPage, setCurrentPage }) => {
   const [users, setUsers] = useState([]);
@@ -27,6 +29,17 @@ const AdminUserManagement = ({ currentPage, setCurrentPage }) => {
 
     fetchUsers();
   }, [currentPage]);
+
+  useEffect(() => {
+    if (users.length > 0) {
+      $(tableRef.current).DataTable({
+        paging: true,
+        pageLength: 10,
+      });
+    }
+  }, [users]);
+
+  const tableRef = useRef(null);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);

@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import InspectionListing from './AdminInspectionManagementListing';
-import '../styles/carlist.css';
+import $ from 'jquery'; 
+import 'datatables.net-bs4'; 
+import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css'; 
 
 const AdminInspectionsManagement = ({ currentPage, setCurrentPage }) => {
   const [inspections, setInspections] = useState([]);
@@ -15,7 +17,7 @@ const AdminInspectionsManagement = ({ currentPage, setCurrentPage }) => {
           inspectionDate: inspection.inspectionDate,
           inspectionTime: inspection.inspectionTime,
           car_id: inspection.car_id,
-          seller_id: inspection.seller.id,
+          seller_id: inspection.seller._id,
           buyer_id: inspection.buyer_id,
           mechanic_id: inspection.mechanic_id,         
           sellerAcceptedInspectionRequest: inspection.sellerAcceptedInspectionRequest,         
@@ -30,6 +32,17 @@ const AdminInspectionsManagement = ({ currentPage, setCurrentPage }) => {
 
     fetchInspections();
   }, [currentPage]);
+
+  useEffect(() => {
+    if (inspections.length > 0) {
+      $(tableRef.current).DataTable({
+        paging: true,
+        pageLength: 10,
+      });
+    }
+  }, [inspections]);
+
+  const tableRef = useRef(null);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
