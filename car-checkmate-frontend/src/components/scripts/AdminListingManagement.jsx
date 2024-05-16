@@ -4,8 +4,6 @@ import $ from 'jquery';
 import 'datatables.net-bs4'; 
 import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css';
 
-import '../styles/carlist.css';
-
 const AdminListingManagement = () => {
   const [listings, setListings] = useState([]);
   const tableRef = useRef(null);
@@ -56,10 +54,10 @@ const AdminListingManagement = () => {
   }, [listings]);
 
   return (
-    <div className="admin-listing-container">
+    <div className="user-listing-container">
       <h2>Listing Management</h2>
       <div className="ctr-listing-page">
-        <div className="sub-ctr-listing-page">
+        <div>
           <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
             <thead>
               <tr>
@@ -76,6 +74,7 @@ const AdminListingManagement = () => {
                 <th>Odometer</th>
                 <th>Transmission</th>
                 <th>Address</th>
+                <th>Status</th>
                 <td>Image</td>
                 <th>Actions</th>
               </tr>
@@ -96,6 +95,7 @@ const AdminListingManagement = () => {
                   <td>{listing.odometer}</td>
                   <td>{listing.transmission}</td>
                   <td>{listing.streetName}</td>
+                  <td>{listing.hasBeenSold}</td>
                   <td><img src ={listing.carPhotos[0]}></img></td>
                   <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
                 </tr>
