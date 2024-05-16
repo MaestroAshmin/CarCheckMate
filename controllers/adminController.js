@@ -2,6 +2,8 @@
 
 const SellerVerification = require('../models/SellerVerification');
 const MechanicVerification = require('../models/MechanicVerification');
+const Inspection = require('../models/Inspection');
+const Car = require('../models/Car');
 const User = require('../models/User');
 
 // Get all pending seller verifications
@@ -65,4 +67,17 @@ async function getPendingMechanicVerifications(req, res) {
         res.status(500).json({ status: false, error: 'Internal Server Error' });
     }
 }
-module.exports = { getPendingSellerVerifications, verifySellerVerification, getPendingMechanicVerifications };
+async function getAllInspectionDetails (req, res){
+    try {
+        const inspections = await Inspection.find()
+            .populate('car_id')
+            .populate('seller_id')
+            .populate('buyer_id')
+            .populate('mechanic_id')
+            .exec()
+        res.status(200).json({ status: true, data: inspections });
+    } catch (error) {
+        res.status(500).json({ status: false, error: 'Internal Server Error' });
+    }
+}
+module.exports = { getPendingSellerVerifications, verifySellerVerification, getPendingMechanicVerifications, getAllInspectionDetails };

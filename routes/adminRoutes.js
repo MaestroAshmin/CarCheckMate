@@ -11,4 +11,7 @@ router.put('/verify-verification/:id', adminController.verifySellerVerification)
 // Route to get all mechanic verifications
 router.get('/pending-mechanic-verifications', adminController.getPendingMechanicVerifications);
 
+//Route to get all inspection details with car, user and their verification details
+router.get('/get-inspections', adminController.getAllInspectionDetails)
+
 module.exports = router;
