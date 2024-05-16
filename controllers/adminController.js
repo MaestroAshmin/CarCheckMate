@@ -80,4 +80,25 @@ async function getAllInspectionDetails (req, res){
         res.status(500).json({ status: false, error: 'Internal Server Error' });
     }
 }
-module.exports = { getPendingSellerVerifications, verifySellerVerification, getPendingMechanicVerifications, getAllInspectionDetails };
+
+async function getAllUserDetails (req, res){
+    try {
+        const users = await User.find()
+            .populate('firstname')
+            .populate('lastname')
+            .populate('email')
+            .populate('mobileNumber')
+            .populate('buyer')
+            .populate('seller')
+            .populate('mechanic')
+            .populate('sellerVerified')
+            .populate('mechanicVerified')
+            .populate('emailVerified')
+            .exec()
+        res.status(200).json({ status: true, data: users });
+    } catch (error) {
+        res.status(500).json({ status: false, error: 'Internal Server Error' });
+    }
+}
+
+module.exports = { getPendingSellerVerifications, verifySellerVerification, getPendingMechanicVerifications, getAllInspectionDetails, getAllUserDetails };

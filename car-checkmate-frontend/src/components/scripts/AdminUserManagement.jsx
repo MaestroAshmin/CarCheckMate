@@ -11,7 +11,7 @@ const AdminUserManagement = ({ currentPage, setCurrentPage }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/users?page=${currentPage}&limit=12`);
+        const response = await axios.get(`http://localhost:3000/get-users`);
         const userData = response.data.map(user => ({
           user_id: user._id,
           firstName: user.firstName,
