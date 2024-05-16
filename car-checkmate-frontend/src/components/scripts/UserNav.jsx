@@ -26,12 +26,12 @@ function UserNav() {
         }
     }, []);
 
-   const isUserInRole = (role) => userRoles.includes(role);
+    const isUserInRole = (role) => userRoles.includes(role);
 
     return (
         <div className='ctr-user-type'>
             <span className={`nav-item ${isUserInRole('user') ? 'active' : ''}`}>
-                <Link to='/UserProfile'>User Profile</Link>
+                <Link to='/UserProfile'>Profile</Link>
             </span>
             <span className={`nav-item ${isUserInRole('buyer') ? 'active' : ''}`}>
                 {isUserInRole('buyer') ? (

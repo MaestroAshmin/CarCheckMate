@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Popup({ message, onClose }) {
     useEffect(() => {
@@ -23,7 +24,7 @@ function Popup({ message, onClose }) {
     );
 }
 
-function MechanicReport() {
+function MechanicReport(props) {
     const [formState, setFormState] = useState({
         treadDepth: '',
         tyreCondition: '',
@@ -54,7 +55,36 @@ function MechanicReport() {
         additionalComments: '',
         eRWCSubmitted: false,
         informationTruthChecked: false,
+        carId:'',
+        mechanicId:'',
+        sellerId:'',
+        buyerId:''
+
     });
+
+    useEffect(() => {
+        // Your logic to fetch initial form state values goes here
+        // For example:
+        setFormState({
+            carId:props.carId,
+            mechanicId:props.mechanicId,
+            sellerId:props.sellerId,
+            buyerId:props.buyerId,
+            inspectionId:props.inspectionId
+
+          
+        });
+    }, []);
+
+    const sendFormData = async () => {
+        try {
+            const response = await axios.post('http://localhost:3000/inspections/submit-inspection-form', formState);
+            return response.data; // Return response data if needed
+        } catch (error) {
+            throw error; // Rethrow error to handle it in the caller function
+        }
+    };
+
     console.log(formState)
     const [showPopup, setShowPopup] = useState(false);
     const [invalidField, setInvalidField] = useState('');
@@ -70,7 +100,7 @@ function MechanicReport() {
     // Submit logic
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+        
         // Check if at least one radio button is selected for each set
         const isValid = (
             formState.tyreCondition !== '' &&
@@ -91,6 +121,8 @@ function MechanicReport() {
         }
 
         // Submit logic here
+        sendFormData();
+        console.log("sent")
     };
 
     const handleClosePopup = () => {
@@ -298,7 +330,9 @@ function MechanicReport() {
                         <fieldset>
                             <legend>Steering and Suspension</legend>
                             <div>
-                                <p className='sub-topic-report'>Steering Components:</p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>Steering Components:</p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -333,7 +367,9 @@ function MechanicReport() {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>Shock Absorbers:</p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>Shock Absorbers:</p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -368,7 +404,9 @@ function MechanicReport() {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>Suspension System:</p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>Suspension System:</p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -553,7 +591,9 @@ function MechanicReport() {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>Child Restraint Anchorages:</p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>Child Restraint Anchorages:</p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -660,9 +700,11 @@ function MechanicReport() {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>
-                                    Visibility through Windows:
-                                </p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>
+                                        Visibility through Windows:
+                                    </p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -770,7 +812,6 @@ function MechanicReport() {
                         </fieldset>
                     </div>
 
-
                     {/* Topic 8: Engine and Driveline */}
                     <div className='ctr-report'>
                         <fieldset>
@@ -803,9 +844,11 @@ function MechanicReport() {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>
-                                    Exhaust System:
-                                </p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>
+                                        Exhaust System:
+                                    </p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input
@@ -830,9 +873,11 @@ function MechanicReport() {
                                 </div>
                             </div>
                             <div>
-                                <p className='sub-topic-report'>
-                                    Driveline Components:
-                                </p>
+                                <div class="clearfix">
+                                    <p className='sub-topic-report'>
+                                        Driveline Components:
+                                    </p>
+                                </div>
                                 <div className='role-container'>
                                     <div className='role-radio'>
                                         <input

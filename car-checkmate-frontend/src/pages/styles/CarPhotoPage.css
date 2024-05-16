@@ -1,3 +1,29 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.overlay-content {
+    display: flex; /* Added */
+    justify-content: center; /* Added */
+    align-items: center; /* Added */
+}
+
+.overlay-content img {
+    min-width: 750%;
+    min-height: 750%;
+    margin: auto; 
+}
+
+
 .card {
     padding: 10px;
     box-shadow: 0 0 5px aliceblue;
@@ -5,16 +31,21 @@
     overflow: hidden;
 }
 
-.card .top{
+.card .top {
     text-align: center;
 }
 
-.card p{
+.card a {
     font-weight: bold;
     color: #0d0d0e;
 }
 
-.card button{
+.card p {
+    font-weight: bold;
+    color: #0d0d0e;
+}
+
+.card button {
     outline: 0;
     border: 0;
     color: #fff;
@@ -26,7 +57,7 @@
     background: #0d0d0e;
 }
 
-.card .drag-area{
+.card .drag-area {
     height: 150px;
     border-radius: 5px;
     border: 2px dashed #6c6c72;
@@ -40,22 +71,22 @@
     margin-top: 10px;
 }
 
-.card .drag-area .visible{
+.card .drag-area .visible {
     font-size: 18px;
 }
 
-.card .select{
+.card .select {
     color: #0d0d0e;
     margin-left: 5px;
     cursor: pointer;
     transition: 0.4s;
 }
 
-.card .select:hover{
+.card .select:hover {
     opacity: 0.6;
 }
 
-.card .upload-container{
+.card .upload-container {
     width: 100%;
     height: auto;
     display: flex;
@@ -67,7 +98,7 @@
     margin-top: 10px;
 }
 
-.card .upload-container .image{
+.card .upload-container .image {
     width: 75px;
     margin-right: 5px;
     height: 75px;
@@ -75,15 +106,15 @@
     margin-bottom: 8px;
 }
 
-.card .upload-container .image img{
+.card .upload-container .image img {
     width: 100%;
     height: 100%;
     border-radius: 5px;
 }
 
-.card .upload-container .image span{
+.card .upload-container .image span {
     position: absolute;
-    top:-2px;
+    top: -2px;
     right: 9px;
     font-size: 20px;
     cursor: pointer;
@@ -91,11 +122,11 @@
 
 .card input,
 .card .drag-area .on-drop,
-.card .drag-area .dragover .visible{
+.card .drag-area .dragover .visible {
     display: none;
 }
 
-.delete{
+.delete {
     z-index: 999;
     color: #0d0d0e;
 }

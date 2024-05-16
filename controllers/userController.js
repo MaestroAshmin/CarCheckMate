@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const User = require('../models/User');
 const token = require('crypto').randomBytes(20).toString('hex');
+const Availability = require('../models/Availability');
 // const session = require('express-session');
 // const jwt = require('jsonwebtoken');
 
@@ -231,8 +232,56 @@ async function updateUserPassword(req, res){
     }
 
 }
+// Save Seller Availability
+const saveAvailability = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { availabilities } = req.body;
 
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
 
+        let availability = await Availability.findOne({ user: user._id });
+        if (availability) {
+            // Update existing availability
+            availability.availabilities = availabilities;
+        } else {
+            // Create new availability
+            availability = new Availability({ user: user._id, availabilities });
+        }
 
+        await availability.save();
 
-module.exports = { register, sendVerificationEmail, verifyEmail, login, logout , forgotPassword, updateUserPassword};
+        res.json({ message: 'Availability saved successfully' });
+    } catch (error) {
+        console.error('Error while saving availability:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+// Get availability
+const getAvailability = async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        // Find the user
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Find the availability for the user
+        const availability = await Availability.findOne({ user: userId });
+        if (!availability) {
+            return res.status(404).json({ error: 'Availability not found for this user' });
+        }
+
+        res.json(availability);
+    } catch (error) {
+        console.error('Error while getting availability:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+module.exports = { register, sendVerificationEmail, verifyEmail, login, logout , forgotPassword, updateUserPassword, saveAvailability, getAvailability};
