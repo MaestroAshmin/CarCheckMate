@@ -1,13 +1,24 @@
 // adminController.js
 
 const SellerVerification = require('../models/SellerVerification');
+const MechanicVerification = require('../models/MechanicVerification');
+const Inspection = require('../models/Inspection');
+const Car = require('../models/Car');
 const User = require('../models/User');
 
 // Get all pending seller verifications
 async function getPendingSellerVerifications(req, res) {
     try {
-        const pendingVerifications = await SellerVerification.find({ verifiedByAdmin: false });
-        res.status(200).json({ status: true, data: pendingVerifications });
+        // const pendingVerifications = await SellerVerification.find({ verifiedByAdmin: false });
+        const verifications = await SellerVerification.find().lean();
+        const userIds = verifications.map(v => v.user);
+        const users = await User.find({ _id: { $in: userIds } }).lean();
+
+        const pendingVerificationsWithUserDetails = verifications.map(v => {
+        const user = users.find(u => u._id.equals(v.user));
+        return { ...v, user };
+        });
+        res.status(200).json({ status: true, data: pendingVerificationsWithUserDetails });
     } catch (error) {
         console.error('Error getting pending verifications:', error);
         res.status(500).json({ status: false, error: 'Internal Server Error' });
@@ -36,4 +47,59 @@ async function verifySellerVerification(req, res) {
     }
 }
 
-module.exports = { getPendingSellerVerifications, verifySellerVerification };
+
+
+// Get all pending mechanic verifications
+async function getPendingMechanicVerifications(req, res) {
+    try {
+        const verifications = await MechanicVerification.find().lean();
+        const userIds = verifications.map(v => v.mechanicId);
+        const users = await User.find({ _id: { $in: userIds } }).lean();
+
+        const pendingVerificationsWithUserDetails = verifications.map(v => {
+            const user = users.find(u => u._id.equals(v.mechanicId));
+            return { ...v, user };
+        });
+
+        res.status(200).json({ status: true, data: pendingVerificationsWithUserDetails });
+    } catch (error) {
+        console.error('Error getting pending verifications:', error);
+        res.status(500).json({ status: false, error: 'Internal Server Error' });
+    }
+}
+async function getAllInspectionDetails (req, res){
+    try {
+        const inspections = await Inspection.find()
+            .populate('car_id')
+            .populate('seller_id')
+            .populate('buyer_id')
+            .populate('mechanic_id')
+            .sort({ inspectionDate: 1 })
+            .exec()
+        res.status(200).json({ status: true, data: inspections });
+    } catch (error) {
+        res.status(500).json({ status: false, error: 'Internal Server Error' });
+    }
+}
+
+async function getAllUserDetails (req, res){
+    try {
+        const users = await User.find()
+            // .populate('firstname')
+            // .populate('lastname')
+            // .populate('email')
+            // .populate('mobileNumber')
+            // .populate('buyer')
+            // .populate('seller')
+            // .populate('mechanic')
+            // .populate('sellerVerified')
+            // .populate('mechanicVerified')
+            // .populate('emailVerified')
+            // .exec()
+        res.status(200).json({ status: true, data: users });
+    } catch (error) {
+        res.status(500).json({ status: false, error: 'Internal Server Error' });
+    }
+}
+
+module.exports = { getPendingSellerVerifications, verifySellerVerification, getPendingMechanicVerifications, getAllInspectionDetails, getAllUserDetails };
