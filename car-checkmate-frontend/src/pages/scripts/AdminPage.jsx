@@ -3,7 +3,7 @@ import "../styles/main.css";
 import "../styles/content.css";
 import "../styles/admin.css";
 import HeaderNav from "../../components/scripts/HeaderNav";
-import AdminUserManagement from "../../components/scripts/AdminUserManagement";
+import AdminSellerManagement from "../../components/scripts/AdminSellerManagement";
 import AdminListingManagement from "../../components/scripts/AdminListingManagement";
 import AdminInspectionManagement from "../../components/scripts/AdminInspectionManagement";
 import AdminPendingSellerVerification from "../../components/scripts/AdminPendingSellerVerification";
@@ -48,7 +48,7 @@ export default function AdminPage() {
   const renderComponent = () => {
     switch (activeComponent) {
       case "users":
-        return <AdminUserManagement />;
+        return <AdminSellerManagement />;
       case "listings":
         return <AdminListingManagement />;
       case "inspections":

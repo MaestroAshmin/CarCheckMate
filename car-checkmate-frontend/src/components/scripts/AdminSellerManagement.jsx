@@ -8,7 +8,7 @@ const AdminSellerManagement = () => {
   const [sellerManagement, setSellerManagement] = useState([]);
   const tableRef = useRef(null);
 
-  const fetchsellerManagement = async () => {
+  const fetchSellerManagement = async () => {
     try {
       const response = await axios.get('http://localhost:3000/admin/get-users');
       const sellerList = response.data.map(sellerList => ({
@@ -26,7 +26,7 @@ const AdminSellerManagement = () => {
   };
 
   useEffect(() => {
-    fetchsellerManagement();
+    fetchSellerManagement();
   }, []);
 
   useEffect(() => {
