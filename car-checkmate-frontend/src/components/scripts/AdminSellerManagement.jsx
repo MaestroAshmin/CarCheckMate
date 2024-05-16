@@ -5,79 +5,82 @@ import 'datatables.net-bs4';
 import axios from 'axios';
 
 const AdminSellerManagement = () => {
-  const [sellers, setSellers] = useState([]);
+  const [sellerManagement, setSellerManagement] = useState([]);
   const tableRef = useRef(null);
-  const dataTable = useRef(null);
+
+  const fetchSellerManagement = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/admin/get-users');
+      const sellerList = response.data.data.map(sellerList => ({
+        seller_id: sellerList._id,
+        firstname: sellerList.firstname,
+        lastname: sellerList.lastname,
+        email: sellerList.email,
+        mobileNumber: sellerList.mobileNumber
+      }));
+      
+      setSellerManagement(sellerList);
+    } catch (error) {
+      console.log('Error fetching Seller List:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchSellers = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/admin/get-users');
-        const sellerData = response.data.data
-          .filter(user => user.seller && user.sellerVerified)
-          .map(seller => ({
-            seller_id: seller._id,
-            firstName: seller.firstName,
-            lastName: seller.lastName,
-            email: seller.email,
-            mobileNumber: seller.mobileNumber,
-            sellerVerified: seller.sellerVerified,
-          }));
-        setSellers(sellerData);
-      } catch (error) {
-        console.log('Error fetching sellers:', error);
-      }
-    };
-    fetchSellers();
+    fetchSellerManagement();
   }, []);
 
   useEffect(() => {
-    if (tableRef.current && !dataTable.current) {
-      dataTable.current = $(tableRef.current).DataTable({
-        data: sellers,
-        columns: [
-          { data: 'seller_id' },
-          { data: 'firstName' },
-          { data: 'lastName' },
-          { data: 'email' },
-          { data: 'mobileNumber' },
-          { data: 'sellerVerified' },
-          {
-            data: null,
-            render: function (data, type, row) {
-              return `<button class="btn btn-primary btn-sm view-details">View Details</button>`;
-            }
-          }
-        ]
+    if (sellerManagement.length > 0 && tableRef.current) {
+      if ($.fn.DataTable.isDataTable(tableRef.current)) {
+        $(tableRef.current).DataTable().destroy();
+      }
+      $(tableRef.current).DataTable({
+        paging: false,
+        pageLength: 10,
       });
     }
-  }, [sellers]);
+  }, [sellerManagement]);
 
-  useEffect(() => {
-    return () => {
-      if (dataTable.current) {
-        dataTable.current.destroy(true);
-      }
-    };
-  }, []);
+  const paginate = (pageNumber) => {
+    $(tableRef.current).DataTable().page(pageNumber - 1).draw('page');
+  };
 
   return (
     <div className="user-listing-container">
       <h2>Seller Management</h2>
-      <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
-        <thead>
-          <tr>
-            <th>Seller ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Mobile Number</th>
-            <th>Seller Verified</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <div className="ctr-listing-page">
+        <div>
+          <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th> 
+                <th>Email</th>                               
+                <th>Mobile</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sellerManagement.map(sellerManagement => (
+                <tr key={sellerManagement.seller_id}>
+                  <td>{sellerManagement.firstname}</td>
+                  <td>{sellerManagement.lastname}</td>
+                  <td>{sellerManagement.email}</td> 
+                  <td>{sellerManagement.mobileNumber}</td>                                   
+                  <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="pagination">
+        {[...Array(Math.ceil(sellerManagement.length / 10)).keys()].map((pageNumber) => (
+          <button key={pageNumber + 1} onClick={() => paginate(pageNumber + 1)}>
+            {pageNumber + 1}
+          </button>
+        ))}
+      </div>
+        </div>
+      </div>
     </div>
   );
 };
