@@ -4,7 +4,7 @@ export default function ResponsePopup({ message, showResponsePopup, setShowRespo
 
     const handleClosePopup = () => {
         setShowResponsePopup(false);
-        //window.location.reload(); // Reload the page
+        window.location.reload(); // Reload the page
     };
 
     return (
@@ -15,7 +15,7 @@ export default function ResponsePopup({ message, showResponsePopup, setShowRespo
                     <div className='popup'>
                         <div className='popup-content'>
                             <span className='close' onClick={handleClosePopup}>&times;</span>
-                            <p>{message}</p>
+                            <h3>{message}</h3>
                             <br />
                             <div className='button-container'>
                                 <button onClick={handleClosePopup}>Close</button>
