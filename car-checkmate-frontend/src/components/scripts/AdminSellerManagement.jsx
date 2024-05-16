@@ -67,7 +67,7 @@ const AdminSellerManagement = () => {
       <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Seller ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
