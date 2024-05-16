@@ -11,15 +11,18 @@ const AdminSellerManagement = () => {
   const fetchSellerManagement = async () => {
     try {
       const response = await axios.get('http://localhost:3000/admin/get-users');
-      const sellerList = response.data.data.map(sellerList => ({
-        seller_id: sellerList._id,
-        firstName: sellerList.firstName,
-        lastName: sellerList.lastName,
-        email: sellerList.email,
-        mobileNumber: sellerList.mobileNumber
-      }));
+      const sellerData = response.data.data
+          .filter(user => user.seller && user.sellerVerified)
+          .map(seller => ({
+            seller_id: seller._id,
+            firstName: seller.firstName,
+            lastName: seller.lastName,
+            email: seller.email,
+            mobileNumber: seller.mobileNumber,
+            sellerVerified: seller.sellerVerified,
+          }));
       
-      setSellerManagement(sellerList);
+      setSellerManagement(sellerData);
     } catch (error) {
       console.log('Error fetching Seller List:', error);
     }
