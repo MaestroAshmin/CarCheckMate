@@ -4,6 +4,8 @@ import "../styles/content.css";
 import "../styles/admin.css";
 import HeaderNav from "../../components/scripts/HeaderNav";
 import AdminSellerManagement from "../../components/scripts/AdminSellerManagement";
+import AdminBuyerManagement from "../../components/scripts/AdminBuyerManagement";
+import AdminMechanicManagement from "../../components/scripts/AdminMechanicManagement";
 import AdminListingManagement from "../../components/scripts/AdminListingManagement";
 import AdminInspectionManagement from "../../components/scripts/AdminInspectionManagement";
 import AdminPendingSellerVerification from "../../components/scripts/AdminPendingSellerVerification";
@@ -47,8 +49,12 @@ export default function AdminPage() {
 
   const renderComponent = () => {
     switch (activeComponent) {
-      case "users":
+      case "sellers":
         return <AdminSellerManagement />;
+      case "buyers":
+        return <AdminBuyerManagement />;
+      case "mechanics":
+        return <AdminMechanicManagement />;
       case "listings":
         return <AdminListingManagement />;
       case "inspections":
@@ -64,11 +70,27 @@ export default function AdminPage() {
             <div className="stats-container">
               <a
                 href="#"
-                onClick={() => handleComponentChange("users")}
+                onClick={() => handleComponentChange("sellers")}
                 className="stat-card blue"
               >
-                <h3>Users</h3>
-                <p>{users}</p>
+                <h3>Sellers</h3>
+                <p>{sellers}</p>
+              </a>
+              <a
+                href="#"
+                onClick={() => handleComponentChange("buyers")}
+                className="stat-card blue"
+              >
+                <h3>Buyers</h3>
+                <p>{buyers}</p>
+              </a>
+              <a
+                href="#"
+                onClick={() => handleComponentChange("mechanics")}
+                className="stat-card blue"
+              >
+                <h3>Mechanics</h3>
+                <p>{mechanics}</p>
               </a>
               <a
                 href="#"
@@ -121,8 +143,18 @@ export default function AdminPage() {
                 </a>
               </li>
               <li>
-                <a href="#" onClick={() => handleComponentChange("users")}>
+                <a href="#" onClick={() => handleComponentChange("sellers")}>
                   Seller Management
+                </a>
+              </li>
+              <li>
+                <a href="#" onClick={() => handleComponentChange("buyers")}>
+                  Buyer Management
+                </a>
+              </li>
+              <li>
+                <a href="#" onClick={() => handleComponentChange("mechanics")}>
+                  Mechanic Management
                 </a>
               </li>
               <li>
