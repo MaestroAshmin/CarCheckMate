@@ -74,6 +74,7 @@ async function getAllInspectionDetails (req, res){
             .populate('seller_id')
             .populate('buyer_id')
             .populate('mechanic_id')
+            .sort({ inspectionDate: 1 })
             .exec()
         res.status(200).json({ status: true, data: inspections });
     } catch (error) {
