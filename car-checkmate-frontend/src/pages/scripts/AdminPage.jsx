@@ -12,7 +12,9 @@ import AdminPendingSellerVerification from "../../components/scripts/AdminPendin
 import AdminPendingMechanicVerification from "../../components/scripts/AdminPendingMechanicVerifications";
 
 export default function AdminPage() {
-  const [users, setUsers] = useState(0);
+  const [sellers, setSellers] = useState(0);
+  const [buyers, setBuyers] = useState(0);
+  const [mechanics, setMechanics] = useState(0);
   const [listings, setListings] = useState(0);
   const [inspections, setInspections] = useState(0);
   const [activeComponent, setActiveComponent] = useState("dashboard");
@@ -24,10 +26,20 @@ export default function AdminPage() {
 
   const fetchData = async () => {
     try {
+      // Fetch seller count
+      const sellersResponse = await fetch("/api/users/count");
+      const sellersCount = await sellersResponse.json();
+      setSellers(sellersCount);
+
       // Fetch user count
-      const usersResponse = await fetch("/api/users/count");
-      const usersCount = await usersResponse.json();
-      setUsers(usersCount);
+      const buyersResponse = await fetch("/api/users/count");
+      const buyersCount = await buyersResponse.json();
+      setBuyers(buyersCount);
+
+      // Fetch user count
+      const mechanicsResponse = await fetch("/api/users/count");
+      const mechanicsCount = await mechanicsResponse.json();
+      setMechanics(mechanicsCount);
 
       // Fetch listing count
       const listingsResponse = await fetch("/api/listings/count");
