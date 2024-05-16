@@ -13,8 +13,8 @@ const AdminSellerManagement = () => {
       const response = await axios.get('http://localhost:3000/admin/get-users');
       const sellerList = response.data.data.map(sellerList => ({
         seller_id: sellerList._id,
-        firstname: sellerList.firstname,
-        lastname: sellerList.lastname,
+        firstname: sellerList.firstName,
+        lastname: sellerList.lastName,
         email: sellerList.email,
         mobileNumber: sellerList.mobileNumber
       }));
@@ -53,7 +53,7 @@ const AdminSellerManagement = () => {
           <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Seller ID</th>
                 <th>First Name</th>
                 <th>Last Name</th> 
                 <th>Email</th>                               
@@ -63,8 +63,9 @@ const AdminSellerManagement = () => {
             <tbody>
               {sellerManagement.map(sellerManagement => (
                 <tr key={sellerManagement.seller_id}>
-                  <td>{sellerManagement.firstname}</td>
-                  <td>{sellerManagement.lastname}</td>
+                  <td>{sellerManagement.seller_id}</td>
+                  <td>{sellerManagement.firstName}</td>
+                  <td>{sellerManagement.lastName}</td>
                   <td>{sellerManagement.email}</td> 
                   <td>{sellerManagement.mobileNumber}</td>                                   
                   <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
