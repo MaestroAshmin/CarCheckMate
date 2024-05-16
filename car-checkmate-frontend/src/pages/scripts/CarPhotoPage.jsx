@@ -4,7 +4,6 @@ import '../styles/CarPhotoPage.css';
 export default function CarPhotoPage({ formData, setFormData }) {
     const [carPhotos, setCarPhotos] = useState([]);
     const [isDragging, setIsDragging] = useState(false);
-    const [isGuidanceVisible, setIsGuidanceVisible] = useState(false);
     const fileInputRef = useRef(null);
 
     function selectFiles() {
@@ -17,24 +16,21 @@ export default function CarPhotoPage({ formData, setFormData }) {
         const newPhotos = Array.from(files).filter(file => file.type.split('/')[0] === 'image');
         setCarPhotos(prevPhotos => [...prevPhotos, ...newPhotos]);
     }
-
     const handleImageUpload = (event) => {
         const files = event.target.files;
         if (files.length === 0) return;
-
+    
         const updatedFormData = { ...formData }; // Copy the existing formData
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             updatedFormData[`carPhoto[${i}]`] = file; // Append each file to the formData
         }
-
+    
         setFormData(updatedFormData); // Update the formData state
     };
-
     function deleteImage(index) {
         setCarPhotos(prevPhotos => prevPhotos.filter((_, i) => i !== index));
     }
-
     function onDragOver(event) {
         event.preventDefault();
         setIsDragging(true);
@@ -53,10 +49,10 @@ export default function CarPhotoPage({ formData, setFormData }) {
         onFileSelect({ target: { files } });
     }
 
-    function toggleGuidance() {
-        setIsGuidanceVisible(!isGuidanceVisible);
-    }
-
+    // function uploadImages() {
+    //     console.log('Images: ', carPhotos);
+    //     setFormData({ ...formData, carPhotos: carPhotos });
+    // }
     function uploadImages() {
         console.log('Images: ', carPhotos);
         setFormData(prevFormData => ({
@@ -64,20 +60,11 @@ export default function CarPhotoPage({ formData, setFormData }) {
             carPhotos: carPhotos,
         }));
     }
-
     return (
         <div className='card'>
             <div className='top'>
-                <a href="#" onClick={toggleGuidance}>Photo Guidance</a>
                 <p>Drag & Drop image uploading</p>
             </div>
-            {isGuidanceVisible && (
-                <div className="overlay" onClick={toggleGuidance}>
-                    <div className="overlay-content">
-                    <img src="./images/photo_guidance.png" alt="Photo Guidance" />
-                    </div>
-                </div>
-            )}
             <div className='drag-area' onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop}>
                 {isDragging ? (
                     <span className='select'>Drop images here</span>
