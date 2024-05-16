@@ -53,6 +53,10 @@ const AdminListingManagement = () => {
     }
   }, [listings]);
 
+  const paginate = (pageNumber) => {
+    $(tableRef.current).DataTable().page(pageNumber - 1).draw('page');
+  };
+
   return (
     <div className="user-listing-container">
       <h2>Listing Management</h2>
@@ -84,6 +88,13 @@ const AdminListingManagement = () => {
               ))}
             </tbody>
           </table>
+          <div className="pagination">
+        {[...Array(Math.ceil(listings.length / 10)).keys()].map((pageNumber) => (
+          <button key={pageNumber + 1} onClick={() => paginate(pageNumber + 1)}>
+            {pageNumber + 1}
+          </button>
+        ))}
+      </div>
         </div>
       </div>
     </div>
