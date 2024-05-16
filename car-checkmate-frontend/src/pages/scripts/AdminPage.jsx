@@ -7,6 +7,7 @@ import AdminUserManagement from "../../components/scripts/AdminUserManagement";
 import AdminListingManagement from "../../components/scripts/AdminListingManagement";
 import AdminInspectionManagement from "../../components/scripts/AdminInspectionManagement";
 import AdminPendingSellerVerification from "../../components/scripts/AdminPendingSellerVerification";
+import AdminPendingMechanicVerification from "../../components/scripts/AdminPendingMechanicVerifications";
 
 export default function AdminPage() {
   const [users, setUsers] = useState(0);
@@ -54,7 +55,8 @@ export default function AdminPage() {
         return <AdminInspectionManagement />;
       case "pending-seller-verifications":
         return <AdminPendingSellerVerification/>;
-
+      case "pending-mechanic-verifications":
+        return <AdminPendingMechanicVerification/>;
       default:
         return (
           <div className="dashboard">
@@ -90,6 +92,14 @@ export default function AdminPage() {
                 className="stat-card red"
               >
                 <h3>Pending Seller Verifications</h3>
+                {/* <p>{inspections}</p> */}
+              </a>
+              <a
+                href="#"
+                onClick={() => handleComponentChange("pending-mechanic-verfications")}
+                className="stat-card red"
+              >
+                <h3>Pending Mechanic Verifications</h3>
                 {/* <p>{inspections}</p> */}
               </a>
             </div>
@@ -134,6 +144,14 @@ export default function AdminPage() {
                   onClick={() => handleComponentChange("pending-seller-verifications")}
                 >
                   Seller Verifications Management
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  onClick={() => handleComponentChange("pending-mechanic-verifications")}
+                >
+                  Mechanic Verifications Management
                 </a>
               </li>
             </ul>

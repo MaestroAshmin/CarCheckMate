@@ -28,16 +28,14 @@ function ProfileContent() {
   const [isSeller, setIsSeller] = useState(false); // State to store whether the user is a seller
   const [isMechanic, setIsMechanic] = useState(false); // State to store whether the user is a seller
   const [sellerProfileUnlocked, setSellerProfileUnlocked] = useState(false);
-  const [mechenidProfileUnlocked, setMechanicProfileUnlocked] = useState(false);
+  const [mechanicProfileUnlocked, setMechanicProfileUnlocked] = useState(false);
 
   const [mechanicRequest, setMechanicRequest] = useState({ findUser: false });
-
+  const userDataFromLocalStorage = localStorage.getItem("user");
+  const userData = JSON.parse(userDataFromLocalStorage);
   // Function to fetch seller verification details
   const fetchSellerVerificationDetails = async () => {
     try {
-      // Fetch user data from local storage
-      const userDataFromLocalStorage = localStorage.getItem("user");
-      const userData = JSON.parse(userDataFromLocalStorage);
       const seller_id = userData._id;
       // Fetch seller verification details using seller ID
       const response = await fetch(
@@ -47,7 +45,6 @@ function ProfileContent() {
         const verificationDetails = await response.json();
         setSellerVerificationData(verificationDetails);
         setSellerProfileUnlocked(true);
-        console.log(sellerVerificationData);
       } else {
         console.error(
           "Failed to fetch seller verification details:",
@@ -58,12 +55,39 @@ function ProfileContent() {
       console.error("Error fetching seller verification details:", error);
     }
   };
+  const checkMechanicVerification = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/mechanic-verification/checkVerificationStatus/${userData._id}`
+      );
 
+      const data = await response.json();
+      console.log("mechanic data", data);
+      if (data.findUser) {
+        setMechanicProfileUnlocked(true);
+        setMechanicRequest({
+          findUser: data.findUser,
+          pending: data.userData.verificationPending,
+          reqStatus: data.userData.verificationStatus,
+          userData: {
+            ...data.userData,
+            expiryDate: new Date(
+              data.userData.expiryDate
+            ).toLocaleDateString(),
+          },
+        });
+      }
+    } catch (error) {
+      console.log(
+        "Error while checking mechanic verfifcation request",
+        error
+      );
+    }
+  }
   //Check if seller is verified or not
   useEffect(() => {
     // Fetch user data from local storage
-    const userDataFromLocalStorage = localStorage.getItem("user");
-    const userData = JSON.parse(userDataFromLocalStorage);
+    
     const seller_id = userData._id;
     // Check if the user is a seller
     if (userData && userData.seller) {
@@ -79,34 +103,6 @@ function ProfileContent() {
       }));
     }
 
-    async function checkMechanicVerification() {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/mechanic-verification/checkVerificationStatus/${userData._id}`
-        );
-
-        const data = await response.json();
-        console.log("mechanic data", data);
-        if (data.findUser) {
-          setMechanicRequest({
-            findUser: data.findUser,
-            pending: data.userData.verificationPending,
-            reqStatus: data.userData.verificationStatus,
-            userData: {
-              ...data.userData,
-              expiryDate: new Date(
-                data.userData.expiryDate
-              ).toLocaleDateString(),
-            },
-          });
-        }
-      } catch (error) {
-        console.log(
-          "Error while checking mechanic verfifcation request",
-          error
-        );
-      }
-    }
     if (userData.mechanic) {
       checkMechanicVerification();
     }
@@ -250,7 +246,6 @@ function ProfileContent() {
       };
     });
   };
-
   return (
     <div className="ctr-user-content">
       <div className="ctr-user-content-left">
@@ -418,40 +413,12 @@ function ProfileContent() {
 
         <br />
 
-        {/*verify machenic*/}
-        <h3>Unlock Mechanic Features</h3>
+        {!mechanicProfileUnlocked && (
+        <div>
+          <h3>Unlock Mechanic Features</h3>
         <div className="ctr-unlock-profile">
           {isVerifyingLVT ? (
-            mechanicRequest.findUser ? (
-              <div>
-                <p>
-                  Licensed Vehicle Testers (LVT) Number:{" "}
-                  {mechanicRequest.userData.licenseNumber}
-                </p>
-                <p>Expiry Date : {mechanicRequest.userData.expiryDate}</p>
-
-                <p>
-                  Verification Status :{" "}
-                  {mechanicRequest.pending
-                    ? "Pending"
-                    : mechanicRequest.reqStatus
-                    ? "Approved"
-                    : "Denied"}
-                </p>
-                <button
-                  onClick={() => {
-                    window.open(
-                      mechanicRequest.userData.documentPath,
-                      "_blank"
-                    );
-                  }}
-                >
-                  {" "}
-                  Preview{" "}
-                </button>
-              </div>
-            ) : (
-              <>
+            <div>
                 <label name="licenseLVTNumber">
                   Licensed Vehicle Testers (LVT) Number:
                 </label>
@@ -492,12 +459,12 @@ function ProfileContent() {
                 </div>
                 <br />
                 <button onClick={handleSaveLVTClick}>Save</button>
-              </>
-            )
+              </div>
           ) : (
             <button onClick={handleVerifyLVTClick}>Verify ID</button>
           )}
 
+          
           {/* {daysLVTLeft !== null && (
                     <>
                     <p>License ID: {licenseData.licenseLVTNumber}</p>
@@ -506,6 +473,39 @@ function ProfileContent() {
                     </>
                 )} */}
         </div>
+        </div>
+      )}
+         {mechanicProfileUnlocked && (
+              <div>
+                <h3>Mechanic Profile Details</h3>
+                <p className="detail">
+                  Licensed Vehicle Testers (LVT) Number:{" "}
+                  {mechanicRequest.userData.licenseNumber}
+                </p>
+                <p className="detail">Expiry Date : {mechanicRequest.userData.expiryDate}</p>
+
+                <p className="detail">
+                  Verification Status :{" "}
+                  {mechanicRequest.pending
+                    ? "Pending"
+                    : mechanicRequest.reqStatus
+                    ? "Approved"
+                    : "Denied"}
+                </p>
+                <button
+                  onClick={() => {
+                    window.open(
+                      mechanicRequest.userData.documentPath,
+                      "_blank"
+                    );
+                  }}
+                >
+                  {" "}
+                  Preview{" "}
+                </button>
+              </div>
+            )
+          }
       </div>
     </div>
   );
