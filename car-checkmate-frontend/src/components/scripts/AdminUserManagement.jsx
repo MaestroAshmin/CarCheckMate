@@ -11,27 +11,15 @@ const AdminSellerManagement = () => {
   const fetchsellerManagement = async () => {
     try {
       const response = await axios.get('http://localhost:3000/admin/get-users');
-      const unsoldCars = response.data.map(car => ({
-        car_id: car._id,
-        make: car.make,
-        model: car.model,
-        year: car.year,
-        price: car.price,
-        registrationNo: car.registrationNo,
-        bodyType: car.bodyType,
-        color: car.color,
-        engineType: car.engineType,
-        fuelType: car.fuelType,
-        odometer: car.odometer,
-        state: car.state,
-        streetName: car.streetName,
-        suburb: car.suburb,
-        postcode: car.postcode,
-        transmission: car.transmission,
-        hasBeenSold: car.hasBeenSold,
-        carPhotos: car.carPhotos
+      const sellerList = response.data.map(sellerList => ({
+        seller_id: sellerList.seller_id,
+        firatname: sellerList.firatname,
+        lastname: sellerList.lastname,
+        email: sellerList.email,
+        mobileNumber: sellerList.mobileNumber,
+        sellerVerified: sellerList.sellerVerified,
       }));
-      setsellerManagement(unsoldCars);
+      setSellerManagement(sellerList);
     } catch (error) {
       console.log('Error fetching Seller List:', error);
     }
@@ -65,25 +53,23 @@ const AdminSellerManagement = () => {
           <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
             <thead>
               <tr>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Price</th> 
-                <th>Year</th>                               
-                <th>Registration</th>
-                <td>Image</td>
-                <th>Actions</th>
+                <th>ID</th>
+                <th>Firat Name</th>
+                <th>Last Name</th> 
+                <th>Email</th>                               
+                <th>Mobile</th>
+                <td>Verification</td>
               </tr>
             </thead>
             <tbody>
               {sellerManagement.map(sellerManagement => (
-                <tr key={sellerManagement.car_id}>
-                  <td>{sellerManagement.make}</td>
-                  <td>{sellerManagement.model}</td>
-                  <td>${sellerManagement.price}</td> 
-                  <td>{sellerManagement.year}</td>                                   
-                  <td>{sellerManagement.registrationNo}</td>
-                  <td><img src ={sellerManagement.carPhotos[0]}></img></td>
-                  <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
+                <tr key={sellerManagement.seller_id}>
+                  <td>{sellerManagement.firatname}</td>
+                  <td>{sellerManagement.lastname}</td>
+                  <td>{sellerManagement.email}</td> 
+                  <td>{sellerManagement.mobileNumber}</td>                                   
+                  <td>{sellerManagement.sellerVerified}</td>
+                  {/* <td><button className="btn btn-primary btn-sm view-details">View Details</button></td> */}
                 </tr>
               ))}
             </tbody>
@@ -101,4 +87,4 @@ const AdminSellerManagement = () => {
   );
 };
 
-export default AdminsellerManagementManagement;
+export default AdminSellerManagement;
