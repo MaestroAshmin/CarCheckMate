@@ -29,7 +29,7 @@ const AdminListingManagement = () => {
         postcode: car.postcode,
         transmission: car.transmission,
         hasBeenSold: car.hasBeenSold,
-        carPhotos: car.carPhotos // Join the photo array into a string
+        carPhotos: car.carPhotos
       }));
       setListings(unsoldCars);
     } catch (error) {
@@ -47,7 +47,7 @@ const AdminListingManagement = () => {
         $(tableRef.current).DataTable().destroy();
       }
       $(tableRef.current).DataTable({
-        paging: true,
+        paging: false,
         pageLength: 10,
       });
     }
