@@ -67,8 +67,7 @@ const AdminListingManagement = () => {
               <tr>
                 <th>Make</th>
                 <th>Model</th>
-                <th>Price</th> 
-                <th>Year</th>                               
+                <th>Price</th>                          
                 <th>Registration</th>
                 <td>Image</td>
                 <th>Actions</th>
@@ -79,8 +78,7 @@ const AdminListingManagement = () => {
                 <tr key={listing.car_id}>
                   <td>{listing.make}</td>
                   <td>{listing.model}</td>
-                  <td>${listing.price}</td> 
-                  <td>{listing.year}</td>                                   
+                  <td>${listing.price}</td>                    
                   <td>{listing.registrationNo}</td>
                   <td><img src ={listing.carPhotos[0]}></img></td>
                   <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
