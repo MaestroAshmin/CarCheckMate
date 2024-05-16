@@ -1,73 +1,90 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css';
+import $ from 'jquery';
+import 'datatables.net-bs4';
 import axios from 'axios';
-import UserListing from '../scripts/AdminUserManagementListing';
-import $ from 'jquery'; // Import jQuery
-import 'datatables.net-bs4'; // DataTables JS
-import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css'; // DataTables CSS
 
-const AdminUserManagement = ({ currentPage, setCurrentPage }) => {
+const AdminUserManagement = () => {
   const [users, setUsers] = useState([]);
+  const tableRef = useRef(null);
+  const dataTable = useRef(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/get-users`);
-        const userData = response.data.map(user => ({
+        const response = await axios.get('http://localhost:3000/admin/get-users');
+        const userData = response.data.data.map(user => ({
           user_id: user._id,
-          firstName: user.firstName,
-          lastName: user.lastName,
+          firstName: user.firstname,
+          lastName: user.lastname,
           email: user.email,
           mobileNumber: user.mobileNumber,
-          // Add more user type and vertification key value pairs
+          userType: user.buyer ? 'Buyer' : user.seller ? 'Seller' : user.mechanic ? 'Mechanic' : 'Unknown',
+          sellerVerified: user.sellerVerified,
+          mechanicVerified: user.mechanicVerified,
+          emailVerified: user.emailVerified,
         }));
-
         setUsers(userData);
       } catch (error) {
         console.log('Error fetching users:', error);
       }
     };
-
     fetchUsers();
-  }, [currentPage]);
+  }, []);
 
   useEffect(() => {
-    if (users.length > 0) {
-      $(tableRef.current).DataTable({
-        paging: true,
-        pageLength: 10,
+    if (tableRef.current && !dataTable.current) {
+      dataTable.current = $(tableRef.current).DataTable({
+        data: users,
+        columns: [
+          { data: 'user_id' },
+          { data: 'firstName' },
+          { data: 'lastName' },
+          { data: 'email' },
+          { data: 'mobileNumber' },
+          { data: 'userType' },
+          { data: 'sellerVerified' },
+          { data: 'mechanicVerified' },
+          { data: 'emailVerified' },
+          {
+            data: null,
+            render: function (data, type, row) {
+              return `<button class="btn btn-primary btn-sm view-details">View Details</button>`;
+            },
+          },
+        ],
       });
     }
   }, [users]);
 
-  const tableRef = useRef(null);
-
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  useEffect(() => {
+    return () => {
+      if (dataTable.current) {
+        dataTable.current.destroy(true);
+      }
+    };
+  }, []);
 
   return (
     <div className="admin-user-container">
       <h2>User Management</h2>
-      <div className="ctr-user-page">
-        <div className="sub-ctr-user-page">
-          <div className="ctr-user">
-            {users.map(user => (
-              <UserListing
-                key={user.user_id}
-                user={user}
-                handleUserClick={() => {}}
-              />
-            ))}
-          </div>
-          <div className="pagination">
-            {[...Array(Math.ceil(users.length / 12)).keys()].map((pageNumber) => (
-              <button key={pageNumber + 1} onClick={() => paginate(pageNumber + 1)}>
-                {pageNumber + 1}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+      <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Mobile Number</th>
+            <th>User Type</th>
+            <th>Seller Verified</th>
+            <th>Mechanic Verified</th>
+            <th>Email Verified</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
   );
 };

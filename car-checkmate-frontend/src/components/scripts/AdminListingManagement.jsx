@@ -61,20 +61,11 @@ const AdminListingManagement = () => {
           <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Make</th>
                 <th>Model</th>
-                <th>Year</th>
-                <th>Price</th>
+                <th>Price</th> 
+                <th>Year</th>                               
                 <th>Registration</th>
-                <th>Body</th>
-                <th>Color</th>
-                <th>Engine</th>
-                <th>Fuel</th>
-                <th>Odometer</th>
-                <th>Transmission</th>
-                <th>Address</th>
-                <th>Status</th>
                 <td>Image</td>
                 <th>Actions</th>
               </tr>
@@ -82,20 +73,11 @@ const AdminListingManagement = () => {
             <tbody>
               {listings.map(listing => (
                 <tr key={listing.car_id}>
-                  <td>{listing.car_id}</td>
                   <td>{listing.make}</td>
                   <td>{listing.model}</td>
-                  <td>{listing.year}</td>
-                  <td>{listing.price}</td>
+                  <td>${listing.price}</td> 
+                  <td>{listing.year}</td>                                   
                   <td>{listing.registrationNo}</td>
-                  <td>{listing.bodyType}</td>
-                  <td>{listing.color}</td>
-                  <td>{listing.engineType}</td>
-                  <td>{listing.fuelType}</td>
-                  <td>{listing.odometer}</td>
-                  <td>{listing.transmission}</td>
-                  <td>{listing.streetName}</td>
-                  <td>{listing.hasBeenSold}</td>
                   <td><img src ={listing.carPhotos[0]}></img></td>
                   <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
                 </tr>
