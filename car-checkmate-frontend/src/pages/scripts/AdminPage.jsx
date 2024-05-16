@@ -122,7 +122,7 @@ export default function AdminPage() {
               </li>
               <li>
                 <a href="#" onClick={() => handleComponentChange("users")}>
-                  User Management
+                  Seller Management
                 </a>
               </li>
               <li>

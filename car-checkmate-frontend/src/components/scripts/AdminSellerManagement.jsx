@@ -10,7 +10,7 @@ const AdminSellerManagement = () => {
 
   const fetchSellerManagement = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/admin/get-users');
+      const response = await axios.get('http://localhost:3000/admin/pending-verifications');
       const sellerList = response.data.map(sellerList => ({
         seller_id: sellerList.seller_id,
         firatname: sellerList.firatname,
@@ -58,7 +58,6 @@ const AdminSellerManagement = () => {
                 <th>Last Name</th> 
                 <th>Email</th>                               
                 <th>Mobile</th>
-                <td>Verification</td>
               </tr>
             </thead>
             <tbody>
@@ -68,8 +67,7 @@ const AdminSellerManagement = () => {
                   <td>{sellerManagement.lastname}</td>
                   <td>{sellerManagement.email}</td> 
                   <td>{sellerManagement.mobileNumber}</td>                                   
-                  <td>{sellerManagement.sellerVerified}</td>
-                  {/* <td><button className="btn btn-primary btn-sm view-details">View Details</button></td> */}
+                  <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
                 </tr>
               ))}
             </tbody>
