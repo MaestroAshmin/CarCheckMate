@@ -1,34 +1,34 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/scripts/LandingPage';
-import Homepage from './pages/scripts/Homepage';
-import AboutUs from './pages/scripts/AboutUs';
-import CarAdPage from './pages/scripts/CarAdPage';
-import CarBuildPage from './pages/scripts/CarBuildPage';
-import CarFeaturePage from './pages/scripts/CarFeaturePage';
-import CarPhotoPage from './pages/scripts/CarPhotoPage';
-import CarLocationPage from './pages/scripts/CarLocationPage';
-import CarPricePage from './pages/scripts/CarPricePage';
-import CarInfoPage from './pages/scripts/Listing/CarInfoPage';
-import CarInfo from './pages/scripts/Listing/CarInfo';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/scripts/LandingPage";
+import Homepage from "./pages/scripts/Homepage";
+import AboutUs from "./pages/scripts/AboutUs";
+import CarAdPage from "./pages/scripts/CarAdPage";
+import CarBuildPage from "./pages/scripts/CarBuildPage";
+import CarFeaturePage from "./pages/scripts/CarFeaturePage";
+import CarPhotoPage from "./pages/scripts/CarPhotoPage";
+import CarLocationPage from "./pages/scripts/CarLocationPage";
+import CarPricePage from "./pages/scripts/CarPricePage";
+import CarInfoPage from "./pages/scripts/Listing/CarInfoPage";
+import CarInfo from "./pages/scripts/Listing/CarInfo";
 // import CarPostPage from './pages/scripts/Listing/CarPostPage';
 //import Mechanic from './pages/scripts/Mechanic';
 //import InspectionReport from './pages/scripts/InspectionReport';
-import SellerMechanicsListingPage from './pages/scripts/SellerMechanicsListingPage';
-import MechanicsListingPage from './pages/scripts/MechanicsListingPage';
-import MechanicPage from './pages/scripts/MechanicPage';
-import Mechanic from './pages/scripts/Mechanic';
-import InspectionReport from './pages/scripts/InspectionReport';
-import Seller from './pages/scripts/Seller';
-import Selling from './pages/scripts/Selling';
-import Buyer from './pages/scripts/Buyer';
-import UserProfile from './pages/scripts/UserProfile';
-import ForgotPassword from './pages/scripts/ForgotPassword';
-import StyleTest from './pages/scripts/StyleTest';
+import SellerMechanicsListingPage from "./pages/scripts/SellerMechanicsListingPage";
+import MechanicsListingPage from "./pages/scripts/MechanicsListingPage";
+import MechanicPage from "./pages/scripts/MechanicPage";
+import Mechanic from "./pages/scripts/Mechanic";
+import InspectionReport from "./pages/scripts/InspectionReport";
+import Seller from "./pages/scripts/Seller";
+import Selling from "./pages/scripts/Selling";
+import Buyer from "./pages/scripts/Buyer";
+import UserProfile from "./pages/scripts/UserProfile";
+import ForgotPassword from "./pages/scripts/ForgotPassword";
+import StyleTest from "./pages/scripts/StyleTest";
 
-import Listing from './pages/scripts/Listing/Listing';
-import ListingPage from './pages/scripts/Listing/ListingPage';
-import InspectedReport from './pages/scripts/InspectedReport';
-
+import Listing from "./pages/scripts/Listing/Listing";
+import ListingPage from "./pages/scripts/Listing/ListingPage";
+import InspectedReport from "./pages/scripts/InspectedReport";
+import AdminPage from "./pages/scripts/AdminPage";
 
 function App() {
   return (
@@ -40,10 +40,9 @@ function App() {
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/Selling" element={<Selling />} />
 
-
-          {/* Car listing */}   
+          {/* Car listing */}
           <Route path="/car/:_id" element={<CarInfoPage />} />
-          <Route path="/seller-car/:_id" element={<CarInfo/>} />
+          <Route path="/seller-car/:_id" element={<CarInfo />} />
           {/* <Route path="/listing" element={<CarPostPage />} /> */}
           {/*}<Route path="/CarAdPage" element={<CarAdPage />} />
           //<Route path="/CarBuildPage" element={<CarBuildPage />} />
@@ -58,35 +57,44 @@ function App() {
           <Route path="/ForgetPasswordPage" element= {<ForgetPasswordPage/>} /> */}
 
           {/** Car lising */}
-          <Route path="/CarAdPage" element={<CarAdPage/>} />
-          <Route path="/CarBuildPage" element={<CarBuildPage/>}/>
-          <Route path="/CarLocationPage" element={<CarLocationPage/>}/>
-          <Route path="/CarPhotoPage" element={<CarPhotoPage/>}/>
-          <Route path="/CarFeaturePage" element={<CarFeaturePage/>}/>
-          <Route path="/CarPricePage" element={<CarPricePage/>}/>
-          <Route path="/SellerMechanicsListingPage" element={<SellerMechanicsListingPage/>}/> 
-          <Route path="/MechanicsListingPage" element={<MechanicsListingPage/>}/> 
-          <Route path="/MechanicPage/:itemId" element={<MechanicPage/>}/> 
-            
-          {/** Login Page for each user */}
-          <Route path="/Mechanic" element= {<Mechanic />} />
-          <Route path="/InspectionReport/:carId/:mechanicId/:sellerId/:buyerId/:inspectionId" element= {<InspectionReport />} />
-        
+          <Route path="/CarAdPage" element={<CarAdPage />} />
+          <Route path="/CarBuildPage" element={<CarBuildPage />} />
+          <Route path="/CarLocationPage" element={<CarLocationPage />} />
+          <Route path="/CarPhotoPage" element={<CarPhotoPage />} />
+          <Route path="/CarFeaturePage" element={<CarFeaturePage />} />
+          <Route path="/CarPricePage" element={<CarPricePage />} />
+          <Route
+            path="/SellerMechanicsListingPage"
+            element={<SellerMechanicsListingPage />}
+          />
+          <Route
+            path="/MechanicsListingPage"
+            element={<MechanicsListingPage />}
+          />
+          <Route path="/MechanicPage/:itemId" element={<MechanicPage />} />
 
-          <Route path="/Seller" element= {<Seller />} />
-          <Route path="/Buyer" element= {<Buyer />} />
-          <Route path="/UserProfile" element= {<UserProfile />} />
-          <Route path="/ForgotPassword" element= {<ForgotPassword />} />
+          {/** Login Page for each user */}
+          <Route path="/Mechanic" element={<Mechanic />} />
+          <Route
+            path="/InspectionReport/:carId/:mechanicId/:sellerId/:buyerId/:inspectionId"
+            element={<InspectionReport />}
+          />
+
+          <Route path="/Seller" element={<Seller />} />
+          <Route path="/Buyer" element={<Buyer />} />
+          <Route path="/UserProfile" element={<UserProfile />} />
+          <Route path="/ForgotPassword" element={<ForgotPassword />} />
 
           {/** Admin Pages */}
-        
-
+          
           {/** This is for testing the styling of the existing page */}
-          <Route path="/StyleTest" element= {<StyleTest />} />
-          <Route path="/ListingPage" element= {<ListingPage />} /> 
-          <Route path="/Listing" element= {<Listing />} />
+          <Route path="/StyleTest" element={<StyleTest />} />
+          <Route path="/ListingPage" element={<ListingPage />} />
+          <Route path="/Listing" element={<Listing />} />
           {/* <SellerSchedule carId={car.id} /> */}
-          <Route path="/InspectedReport/:id" element= {<InspectedReport/>} />
+          <Route path="/InspectedReport/:id" element={<InspectedReport />} />
+
+          <Route path="/AdminPage" element ={<AdminPage />} />
         </Routes>
       </Router>
     </div>
