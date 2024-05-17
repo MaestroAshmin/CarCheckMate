@@ -14,6 +14,7 @@
   transition: width 0.3s ease;
 }
 
+
 .sidebar ul {
   list-style-type: none;
   padding: 0;
@@ -33,8 +34,9 @@
   transition: background-color 0.3s ease;
 }
 
-.sidebar a:hover {
-  background-color: #495057;
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #a2c0a7;
 }
 
 .content {
