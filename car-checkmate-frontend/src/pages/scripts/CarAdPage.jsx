@@ -11,11 +11,21 @@ import { useNavigate } from 'react-router-dom';
 import HeaderNav from '../../components/scripts/HeaderNav';
 import Footer from '../../components/scripts/footer';
 import UserNav from '../../components/scripts/UserNav';
+import ResponsePopup from '../../components/scripts/ResponsePopup';
 
 export default function CarAdPage() {
     const [page, setPage] = useState(0);
     const [isSeller, setIsSeller] = useState(false); // Flag to indicate if the user is a seller
     const navigate = useNavigate();
+
+    const [showResponsePopup, setShowResponsePopup] = useState(false);
+    const [responseMessage, setResponseMessage] = useState("");
+
+    const openResponsePopup = (message) => {
+        setResponseMessage(message);
+        setShowResponsePopup(true);
+    };
+
     const initialCarPhotos = {};
     for (let i = 0; i < 20; i++) {
         initialCarPhotos[`carPhoto[${i}]`] = null;
@@ -116,8 +126,9 @@ export default function CarAdPage() {
                 throw new Error(responseData.error); 
             }
             
+            openResponsePopup("Listing the car successfully!");
             // Navigate to UserProfile if response is ok
-            navigate('/UserProfile');
+            //navigate('/UserProfile');
         } catch (error) {
             setIsLoading(false);
             if (error.message) {
@@ -131,6 +142,13 @@ export default function CarAdPage() {
 
     return (
         <div className='ctr-main'>
+
+            <ResponsePopup
+                message={responseMessage}
+                showResponsePopup={showResponsePopup}
+                setShowResponsePopup={setShowResponsePopup}
+            />
+
             <div className='ctr-sub-content'>
                 <HeaderNav />
                 <div className='ctr-content-session'>

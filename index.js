@@ -10,7 +10,6 @@ const adminRoutes = require("./routes/adminRoutes");
 const carRoutes = require("./routes/carRoutes");
 const inspectionRoutes = require("./routes/inspectionRoutes");
 const searchRoutes = require("./routes/searchRoutes");
-const mechanicRouter = require("./routes/mechanicRoutes");
 
 const inspectionStatusRoutes = require("./routes/inspectionStatusRoutes");
 const path = require("path");
@@ -72,11 +71,9 @@ mongoose
     console.log("Connected to MongoDB");
 
     // Routes
-
     app.use("/user", upload.none(), userRoutes);
     app.use("/payment", paymentRoutes);
     app.use("/verification", sellerRoutes);
-    app.use("/mechanic-verification", mechanicRouter);
     app.use("/admin", adminRoutes);
     app.use("/cars", carRoutes);
     app.use("/inspections", upload.none(), inspectionRoutes);

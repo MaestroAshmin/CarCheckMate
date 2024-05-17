@@ -87,6 +87,7 @@ const PhotosSlide = () => {
 
   return (
     <div className="ctr-photosslide">
+      <h1>Most View Vehicles</h1>
       <Slider {...settings}>
         {/* <div className="slide-item">
           <img src="images/car-01.jpg" alt="" />

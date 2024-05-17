@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
 import CancelPopup from "./CancelPopup";
+import ResponsePopup from "./ResponsePopup";
 
 function SellerRequest() {
   const [pendingInspections, setPendingInspections] = useState([]);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
   const [inspectionToCancel, setInspectionToCancel] = useState(null);
   const [showAcceptedMessage, setShowAcceptedMessage] = useState(false);
+  const [showResponsePopup, setShowResponsePopup] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
+
+  const openResponsePopup = (message) => {
+      setResponseMessage(message);
+      setShowResponsePopup(true);
+  };
 
   const openCancelPopup = (inspectionId) => {
     setShowCancelPopup(true);
@@ -46,6 +54,7 @@ function SellerRequest() {
 
     fetchPendingInspections();
   }, []);
+
   const handleAccept = async (inspectionId) => {
     try {
       // Retrieve user data from local storage
@@ -64,7 +73,8 @@ function SellerRequest() {
       if (!response.ok) {
         throw new Error("Failed to accept inspection");
       }
-      setShowAcceptedMessage(true);
+      {/*setShowAcceptedMessage(true);*/}
+      openResponsePopup("The inspection request has been accepted!");
       const updatedResponse = await fetch(
         `http://localhost:3000/inspections/pending-inspections/${userId}`
       );
@@ -84,6 +94,14 @@ function SellerRequest() {
         setShowCancelPopup={setShowCancelPopup}
         inspectionId={inspectionToCancel} // Pass inspection id as prop
       />
+
+      <ResponsePopup
+          message={responseMessage}
+          showResponsePopup={showResponsePopup}
+          setShowResponsePopup={setShowResponsePopup}
+      />
+
+
       {showAcceptedMessage && <p className='align-p'>Inspection Accepted!</p>}
       {currentInspections.map((inspection, index) => (
         <div key={index} className="ctr-schedule-book">

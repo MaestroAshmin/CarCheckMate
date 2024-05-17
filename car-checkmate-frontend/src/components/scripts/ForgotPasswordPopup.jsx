@@ -1,27 +1,50 @@
+import { useState } from "react";
 import React from "react";
+import ResponsePopup from "./ResponsePopup";
 
 export default function ForgotPasswordPopup({ showForgotPassPopup, setShowForgotPassPopup }) {
+
+    const [showResponsePopup, setShowResponsePopup] = useState(false);
+    const [responseMessage, setResponseMessage] = useState("");
+
+    const openResponsePopup = (message) => {
+        setResponseMessage(message);
+        setShowResponsePopup(true);
+        setShowForgotPassPopup(false);
+    };
+
     async function handleforgotPassword(e){
         e.preventDefault();
         const email = e.target.forgotEmail.value;
-       console.log("email", email)
+        openResponsePopup("Email has been sent. Please check your inbox.");
+    
         try {
-            await fetch("http://localhost:3000/user/forgotpassword", {
+            const response = await fetch("http://localhost:3000/user/forgotpassword", {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
                 },
                 body: JSON.stringify({email:email}),
             });
-            e.target.forgotEmail.value = "";
+    
+            if(response.ok) {
+                e.target.forgotEmail.value = "";
+            } else {
+                throw new Error("Failed to send email");
+            }
         } catch (error) {
             console.log("Error while submitting form", error);
-        }  
-        
+        }
     }
 
     return (
         <>
+            <ResponsePopup
+                message={responseMessage}
+                showResponsePopup={showResponsePopup}
+                setShowResponsePopup={setShowResponsePopup}
+            />
+
             {showForgotPassPopup && (
                 <>
                     <div className='overlay'></div>

@@ -11,6 +11,10 @@ body {
     
 }*/
 
+p {
+    font-size: 1.1rem;
+}
+
 /* Blur the below popup */
 .overlay {
     position: fixed;
@@ -38,7 +42,7 @@ body {
     font-style: italic;
     font-weight: bold;
     font-family: arial black;
-    color: #ebebeb;
+    color: #777777;
     text-transform: uppercase;
     text-align: center;
     margin: -20px 0px 0px 0px;

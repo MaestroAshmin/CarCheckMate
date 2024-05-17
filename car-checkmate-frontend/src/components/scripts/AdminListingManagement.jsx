@@ -1,100 +1,72 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import $ from 'jquery'; 
-import 'datatables.net-bs4'; 
-import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css';
+import Listing from '../scripts/AdminListingManagementListing';
+import '../styles/carlist.css';
 
-const AdminListingManagement = () => {
+const AdminListingManagement = ({ currentPage, setCurrentPage }) => {
   const [listings, setListings] = useState([]);
-  const tableRef = useRef(null);
-
-  const fetchListings = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/cars/available-cars');
-      const unsoldCars = response.data.map(car => ({
-        car_id: car._id,
-        make: car.make,
-        model: car.model,
-        year: car.year,
-        price: car.price,
-        registrationNo: car.registrationNo,
-        bodyType: car.bodyType,
-        color: car.color,
-        engineType: car.engineType,
-        fuelType: car.fuelType,
-        odometer: car.odometer,
-        state: car.state,
-        streetName: car.streetName,
-        suburb: car.suburb,
-        postcode: car.postcode,
-        transmission: car.transmission,
-        hasBeenSold: car.hasBeenSold,
-        carPhotos: car.carPhotos
-      }));
-      setListings(unsoldCars);
-    } catch (error) {
-      console.log('Error fetching listings:', error);
-    }
-  };
 
   useEffect(() => {
-    fetchListings();
-  }, []);
+    const fetchListings = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/cars/available-cars?page=${currentPage}&limit=6`);
+        const unsoldCars = response.data.map(car => ({
+            car_id: car._id,
+            registrationNo: car.registrationNo,
+            bodyType: car.bodyType,
+            color: car.color,
+            engineType: car.engineType,
+            fuelType: car.fuelType,
+            hasBeenSold: car.hasBeenSold,
+            make: car.make,
+            model: car.model,
+            odometer: car.odometer,
+            postcode: car.postcode,
+            price: car.price,
+            seller_id: car.seller_id,
+            state: car.state,
+            streetName: car.streetName,
+            suburb: car.suburb,
+            title: car.title,
+            transmission: car.transmission,
+            year: car.year,
+            carPhotos: car.carPhotos // Split the photo string into an array
+        }));
 
-  useEffect(() => {
-    if (listings.length > 0 && tableRef.current) {
-      if ($.fn.DataTable.isDataTable(tableRef.current)) {
-        $(tableRef.current).DataTable().destroy();
+        setListings(unsoldCars);
+      } catch (error) {
+        console.log('Error fetching listings:', error);
       }
-      $(tableRef.current).DataTable({
-        paging: false,
-        pageLength: 10,
-      });
-    }
-  }, [listings]);
+    };
+
+    fetchListings();
+  }, [currentPage]);
 
   const paginate = (pageNumber) => {
-    $(tableRef.current).DataTable().page(pageNumber - 1).draw('page');
+    setCurrentPage(pageNumber);
   };
 
   return (
-    <div className="user-listing-container">
+    <div className="admin-listing-container">
       <h2>Listing Management</h2>
       <div className="ctr-listing-page">
-        <div>
-          <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
-            <thead>
-              <tr>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Price</th> 
-                <th>Year</th>                               
-                <th>Registration</th>
-                <td>Image</td>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {listings.map(listing => (
-                <tr key={listing.car_id}>
-                  <td>{listing.make}</td>
-                  <td>{listing.model}</td>
-                  <td>${listing.price}</td> 
-                  <td>{listing.year}</td>                                   
-                  <td>{listing.registrationNo}</td>
-                  <td><img src ={listing.carPhotos[0]}></img></td>
-                  <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="sub-ctr-listing-page">
+          <div className="ctr-listing">
+            {listings.map(listing => (
+              <Listing
+                key={listing.car_id}
+                car={listing}
+                handleCarClick={() => {}}
+              />
+            ))}
+          </div>
           <div className="pagination">
-        {[...Array(Math.ceil(listings.length / 10)).keys()].map((pageNumber) => (
-          <button key={pageNumber + 1} onClick={() => paginate(pageNumber + 1)}>
-            {pageNumber + 1}
-          </button>
-        ))}
-      </div>
+            {[...Array(Math.ceil(listings.length / 6)).keys()].map((pageNumber) => (
+              <button key={pageNumber + 1} onClick={() => paginate(pageNumber + 1)}>
+                {pageNumber + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

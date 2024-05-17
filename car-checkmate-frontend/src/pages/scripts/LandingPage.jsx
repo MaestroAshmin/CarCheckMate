@@ -5,7 +5,7 @@ import ForgotPasswordPopup from "../../components/scripts/ForgotPasswordPopup";
 import SignInPopup from "../../components/scripts/SignInPopup";
 import SignUpPopup from "../../components/scripts/SignUpPopup";
 
-export default function StyleTest() {
+export default function LandingPage() {
   const navigate = useNavigate(); // Access navigate hook
 
   const [showForgotPassPopup, setShowForgotPassPopup] = useState(false);
