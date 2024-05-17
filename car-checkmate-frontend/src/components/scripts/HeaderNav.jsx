@@ -129,7 +129,7 @@ export default function HeaderNav() {
                     {/* Main navigation */}
                     <div className='ctr-main-header-nav'>
                         <NavLink to="/ListingPage" activeClassName="active">Buy</NavLink>
-                        <NavLink to="/Selling" activeClassName="active">Sell</NavLink>
+                        <NavLink to="/Seller" activeClassName="active">Sell</NavLink>
                         <NavLink to="/AboutUs" activeClassName="active">About Us</NavLink>
                     </div>
                     
