@@ -1,4 +1,4 @@
-.overlay {
+/* .overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,16 +12,16 @@
 }
 
 .overlay-content {
-    display: flex; /* Added */
-    justify-content: center; /* Added */
-    align-items: center; /* Added */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
 }
 
 .overlay-content img {
     min-width: 750%;
     min-height: 750%;
     margin: auto; 
-}
+} */
 
 
 .card {
