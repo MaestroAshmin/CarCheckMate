@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import $ from 'jquery'; 
 import 'datatables.net-bs4'; 
 import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css';
@@ -7,6 +8,7 @@ import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css';
 const AdminListingManagement = () => {
   const [listings, setListings] = useState([]);
   const tableRef = useRef(null);
+  const navigate = useNavigate();
 
   const fetchListings = async () => {
     try {
@@ -83,7 +85,7 @@ const AdminListingManagement = () => {
                   <td>{listing.year}</td>                                   
                   <td>{listing.registrationNo}</td>
                   <td><img src ={listing.carPhotos[0]}></img></td>
-                  <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
+                  <td><button onClick={() => navigate(`/car/${listing.car_id}`)}>View Listing</button></td>
                 </tr>
               ))}
             </tbody>
