@@ -150,33 +150,54 @@ export default function AdminPage() {
           <div className="sidebar">
             <ul>
               <li>
-                <a href="#" onClick={() => handleComponentChange("dashboard")}>
+                <a
+                  href="#"
+                  className={activeComponent === "dashboard" ? "active" : ""}
+                  onClick={() => handleComponentChange("dashboard")}
+                >
                   Dashboard
                 </a>
               </li>
               <li>
-                <a href="#" onClick={() => handleComponentChange("sellers")}>
+                <a
+                  href="#"
+                  className={activeComponent === "sellers" ? "active" : ""}
+                  onClick={() => handleComponentChange("sellers")}
+                >
                   Seller Management
                 </a>
               </li>
               <li>
-                <a href="#" onClick={() => handleComponentChange("buyers")}>
+                <a
+                  href="#"
+                  className={activeComponent === "buyers" ? "active" : ""}
+                  onClick={() => handleComponentChange("buyers")}
+                >
                   Buyer Management
                 </a>
               </li>
               <li>
-                <a href="#" onClick={() => handleComponentChange("mechanics")}>
+                <a
+                  href="#"
+                  className={activeComponent === "mechanics" ? "active" : ""}
+                  onClick={() => handleComponentChange("mechanics")}
+                >
                   Mechanic Management
                 </a>
               </li>
               <li>
-                <a href="#" onClick={() => handleComponentChange("listings")}>
+                <a
+                  href="#"
+                  className={activeComponent === "listings" ? "active" : ""}
+                  onClick={() => handleComponentChange("listings")}
+                >
                   Listing Management
                 </a>
               </li>
               <li>
                 <a
                   href="#"
+                  className={activeComponent === "inspections" ? "active" : ""}
                   onClick={() => handleComponentChange("inspections")}
                 >
                   Inspection Management
@@ -185,6 +206,7 @@ export default function AdminPage() {
               <li>
                 <a
                   href="#"
+                  className={activeComponent === "pending-seller-verifications" ? "active" : ""}
                   onClick={() => handleComponentChange("pending-seller-verifications")}
                 >
                   Seller Verifications Management
@@ -193,6 +215,7 @@ export default function AdminPage() {
               <li>
                 <a
                   href="#"
+                  className={activeComponent === "pending-mechanic-verifications" ? "active" : ""}
                   onClick={() => handleComponentChange("pending-mechanic-verifications")}
                 >
                   Mechanic Verifications Management

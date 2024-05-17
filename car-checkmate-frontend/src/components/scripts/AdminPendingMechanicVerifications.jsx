@@ -70,7 +70,7 @@ const AdminPendingMechanicVerification = () => {
 
   return (
     <div className="admin-user-container">
-      <h2>Seller Verifications Requests</h2>
+      <h2>Mechanic Verifications Requests</h2>
       <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
         <thead>
           <tr>
