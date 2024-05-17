@@ -21,7 +21,8 @@ export default function CarInfoPage() {
 
   const [showBookSellerPopup, setShowBookSellerPopup] = useState(false);
   const [showBookMechanicPopup, setShowBookMechanicPopup] = useState(false);
-
+  const userDataFromLocalStorage = localStorage.getItem("user");
+  const userData = JSON.parse(userDataFromLocalStorage);
   const openBookSellerPopup = () => {
     setShowBookSellerPopup(true);
   };
@@ -163,9 +164,12 @@ export default function CarInfoPage() {
                   </div>
                   <div className="action-buttons">
                     <button>BUY THIS !</button>
+                    {userData &&
                     <button onClick={openBookSellerPopup}>
                       BOOK AN INSPECTION
                     </button>
+                    }
+                    
                     {/*<button onClick={openBookMechanicPopup}>BOOK A MECHANIC</button>*/}
                   </div>
                 </div>
