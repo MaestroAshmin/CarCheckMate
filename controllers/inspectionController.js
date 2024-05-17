@@ -259,12 +259,19 @@ async function getUpcomingUnclaimedInspectionsForMechanic(req, res) {
       inspectionDate: { $gte: new Date() },
     });
     // Fetch car details for each inspection
-
+    console.log(upcomingInspections);
     const inspectionsWithCarDetails = await Promise.all(
       upcomingInspections.map(async (inspection) => {
         let carDetails = await Car.findById(inspection.car_id);
+    
+        if (!carDetails) {
+          // If carDetails is not available, return the inspection without the car details
+          return inspection.toObject();
+        }
+    
         carDetails = carDetails.toObject();
         delete carDetails.__v; // Remove __v field
+    
         return { ...inspection.toObject(), car: carDetails };
       })
     );
@@ -326,9 +333,15 @@ async function getAcceptedInspectionsMechanic(req, res) {
 
     // Map the inspections with car details
     // Fetch car details for each inspection
+    console.log(sortedInspections);
     const inspectionsWithCarDetails = await Promise.all(
       sortedInspections.map(async (inspection) => {
         let carDetails = await Car.findById(inspection.car_id);
+        if (!carDetails) {
+          // If carDetails is not available, return the inspection without the car details
+          return inspection.toObject();
+        }
+    
         carDetails = carDetails.toObject();
         delete carDetails.__v; // Remove __v field
         return { ...inspection.toObject(), car: carDetails };

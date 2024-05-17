@@ -63,6 +63,7 @@ export default function ListingPage() {
                 <HeaderNav />
                 {/* <HeaderSearch /> */}
                 <HeaderFilters onSearch={handleSearchResults} />
+                <br />
                 {searchResults.length > 0 ? (
                     <SearchResults searchResults={searchResults} noPerPage={6} />
                 ) : (
