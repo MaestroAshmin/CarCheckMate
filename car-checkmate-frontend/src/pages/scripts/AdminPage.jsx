@@ -135,7 +135,7 @@ export default function AdminPage() {
               <a
                 href="#"
                 onClick={() => handleComponentChange("pending-seller-verifications")}
-                className="stat-card red"
+                className="stat-card yellow"
               >
                 <h3>Pending Seller Verifications</h3>
                 <p>{pendingSellerVerifications}</p>
@@ -143,7 +143,7 @@ export default function AdminPage() {
               <a
                 href="#"
                 onClick={() => handleComponentChange("pending-mechanic-verifications")}
-                className="stat-card red"
+                className="stat-card yellow"
               >
                 <h3>Pending Mechanic Verifications</h3>
                 <p>{pendingMechanicVerifications}</p>
