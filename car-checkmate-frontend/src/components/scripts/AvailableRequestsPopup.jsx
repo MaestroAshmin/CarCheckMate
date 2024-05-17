@@ -51,7 +51,7 @@ export default function AvailableRequestsPopup({ showAvailableRequestsPopup, set
     useEffect(() => {
         fetchCarData();
 
-    }, [data]);
+    }, []);
 
     // Calculate index of the last request on the current page
     const indexOfLastRequest = currentPage * requestsPerPage;
