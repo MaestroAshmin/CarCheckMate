@@ -16,7 +16,7 @@ function MechanicSchedule() {
   const fetchInspectionData = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/inspections/inspections-accepted-mechanic/${mechanic}`);
-      
+      // console.log(response);
       setSchedules(response.data.inspectionsWithCarDetails)
       // Set fetched data into schedules state
     } catch (error) {
@@ -74,25 +74,37 @@ useEffect(() => {
       {schedules.map((schedule, index) => (
         <div key={index} className='ctr-schedule'>
           <div className='ctr-schedule-buyer-detail'>
-            <h3>Car: <span>{schedule.car.make}</span> <span>{schedule.car.model}</span></h3>
+            {
+              schedule.car && 
+              <h3>Car: <span>{schedule.car.make}</span> <span>{schedule.car.model}</span></h3>
+            }
+            
             {/* <p>Name: <span>{schedule.name}</span></p> */}
             <p>
                 Date: <span>{schedule.inspectionDate.slice(0, 10)}</span>
                 <br/><br/>
                 Time: <span>{schedule.inspectionTime}</span>
             </p>
-            <p>Location:&nbsp;
-              <span>{schedule.car.streetName}</span><br />
-              <span>{schedule.car.suburb}</span>, <span>{schedule.car.state}</span> <span>{schedule.car.postcode}</span>
-            </p>
+            {
+                schedule.car && 
+              <p>Location:&nbsp;
+                <span>{schedule.car.streetName}</span><br />
+                <span>{schedule.car.suburb}</span>, <span>{schedule.car.state}</span> <span>{schedule.car.postcode}</span>
+              </p>
+            }
           </div>
           <div className='ctr-schedule-option'>
-            <img src={schedule.car.carPhotos[0]} alt="Car" />
-              <div className="ctr-schedule-option-s">
-                <button onClick={openEmailBuyerPopup}>Email Buyer</button>
-                <button><Link to={`/InspectionReport/${schedule.car_id}/${schedule.mechanic_id}/${schedule.seller_id}/${schedule.buyer_id}/${schedule._id}`}>Create A Report</Link></button>
-                <button onClick={openCancelPopup}>Cancel booking</button>
+          {
+              schedule.car &&
+              <div>
+                <img src={schedule.car.carPhotos[0]} alt="Car" />
+                <div className="ctr-schedule-option-s">
+                  <button onClick={openEmailBuyerPopup}>Email Buyer</button>
+                  <button><Link to={`/InspectionReport/${schedule.car_id}/${schedule.mechanic_id}/${schedule.seller_id}/${schedule.buyer_id}/${schedule._id}`}>Create A Report</Link></button>
+                  <button onClick={openCancelPopup}>Cancel booking</button>
+                </div>
               </div>
+            }
           </div>
         </div>
       ))}
