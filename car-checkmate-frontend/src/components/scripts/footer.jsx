@@ -14,9 +14,8 @@ const Footer = () => {
                 <p className='footer-links'>
                     <Link to='/Homepage'>Home</Link>
                     <Link to='/ListingPage'>Listing</Link>
-                    <Link to='/Selling'>Sell</Link>
+                    <Link to='/Seller'>Sell</Link>
                     <Link to='/AboutUs'>About Us</Link>
-                    <Link to='/Faq'>Faq</Link>
                 </p>
                 <p className='footer-company-name'>© 2024 AC3 Swinburne Project</p>
             </div>
