@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 function Popup({ message, onClose }) {
     useEffect(() => {
@@ -76,14 +78,7 @@ function MechanicReport(props) {
         });
     }, []);
 
-    const sendFormData = async () => {
-        try {
-            const response = await axios.post('http://localhost:3000/inspections/submit-inspection-form', formState);
-            return response.data; // Return response data if needed
-        } catch (error) {
-            throw error; // Rethrow error to handle it in the caller function
-        }
-    };
+    
 
     console.log(formState)
     const [showPopup, setShowPopup] = useState(false);
@@ -98,6 +93,15 @@ function MechanicReport(props) {
     };
 
     // Submit logic
+    const navigate = useNavigate();
+    const sendFormData = async () => {
+        try {
+            const response = await axios.post('http://localhost:3000/inspections/submit-inspection-form', formState);
+            navigate('/UserProfile');
+        } catch (error) {
+            throw error; // Rethrow error to handle it in the caller function
+        }
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
         
