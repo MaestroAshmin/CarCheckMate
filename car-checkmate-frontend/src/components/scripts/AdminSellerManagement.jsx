@@ -56,21 +56,21 @@ const AdminSellerManagement = () => {
           <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
             <thead>
               <tr>
+                <th>Seller ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th> 
-                <th>Mobile</th>                               
-                <th>Status</th>
+                <th>Mobile</th>
               </tr>
             </thead>
             <tbody>
               {sellerManagement.map(sellerManagement => (
                 <tr key={sellerManagement.seller_id}>
+                  <td>{sellerManagement.seller_id}</td>
                   <td>{sellerManagement.firstName}</td>
                   <td>{sellerManagement.lastName}</td>
                   <td>{sellerManagement.email}</td> 
-                  <td>{sellerManagement.mobileNumber}</td>                                   
-                  <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
+                  <td>{sellerManagement.mobileNumber}</td> 
                 </tr>
               ))}
             </tbody>

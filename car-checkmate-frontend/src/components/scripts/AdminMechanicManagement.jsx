@@ -55,21 +55,21 @@ const AdminMechanicManagement = () => {
           <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
             <thead>
               <tr>
+                <th>Mechanic ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th> 
                 <th>Mobile</th>                               
-                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {mechanicManagement.map(mechanic => (
                 <tr key={mechanic.mechanic_id}>
+                  <td>{mechanic.mechanic_id}</td>
                   <td>{mechanic.firstName}</td>
                   <td>{mechanic.lastName}</td>
                   <td>{mechanic.email}</td> 
-                  <td>{mechanic.mobileNumber}</td>                                   
-                  <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
+                  <td>{mechanic.mobileNumber}</td>
                 </tr>
               ))}
             </tbody>

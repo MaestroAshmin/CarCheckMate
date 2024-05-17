@@ -55,21 +55,21 @@ const AdminBuyerManagement = () => {
           <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
             <thead>
               <tr>
+                <th>Buyer ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th> 
                 <th>Mobile</th>                               
-                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {buyerManagement.map(buyer => (
                 <tr key={buyer.buyer_id}>
+                  <td>{buyer.buyer_id}</td>
                   <td>{buyer.firstName}</td>
                   <td>{buyer.lastName}</td>
                   <td>{buyer.email}</td> 
-                  <td>{buyer.mobileNumber}</td>                                   
-                  <td><button className="btn btn-primary btn-sm view-details">View Details</button></td>
+                  <td>{buyer.mobileNumber}</td>
                 </tr>
               ))}
             </tbody>
