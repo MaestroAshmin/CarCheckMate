@@ -42,8 +42,10 @@
 }
 
 .nav-item.active {
-    color: #ecb159;
+    color: #000000;
     text-shadow: 0 0 3px hsla(260, 100%, 70%, 0.7);
+    background-color: #ecb159;
+    font-weight: bold;
 }
 
 .nav-item:not(.active):hover {
