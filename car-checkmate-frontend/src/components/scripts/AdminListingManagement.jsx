@@ -67,11 +67,11 @@ const AdminListingManagement = () => {
           <table ref={tableRef} className="table table-striped table-bordered" style={{ width: '100%' }}>
             <thead>
               <tr>
+                <th>Registration</th>
                 <th>Make</th>
                 <th>Model</th>
                 <th>Price</th> 
-                <th>Year</th>                               
-                <th>Registration</th>
+                <th>Year</th> 
                 <td>Image</td>
                 <th>Actions</th>
               </tr>
@@ -79,11 +79,11 @@ const AdminListingManagement = () => {
             <tbody>
               {listings.map(listing => (
                 <tr key={listing.car_id}>
+                  <td>{listing.registrationNo}</td>
                   <td>{listing.make}</td>
                   <td>{listing.model}</td>
                   <td>${listing.price}</td> 
-                  <td>{listing.year}</td>                                   
-                  <td>{listing.registrationNo}</td>
+                  <td>{listing.year}</td>
                   <td><img src ={listing.carPhotos[0]}></img></td>
                   <td><button onClick={() => navigate(`/car/${listing.car_id}`)}>View Listing</button></td>
                 </tr>
