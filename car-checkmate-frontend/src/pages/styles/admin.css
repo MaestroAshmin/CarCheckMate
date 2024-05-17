@@ -14,10 +14,6 @@
   transition: width 0.3s ease;
 }
 
-.sidebar:hover {
-  width: 300px;
-}
-
 .sidebar ul {
   list-style-type: none;
   padding: 0;
