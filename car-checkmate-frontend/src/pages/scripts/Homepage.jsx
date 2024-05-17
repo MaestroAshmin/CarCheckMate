@@ -19,7 +19,7 @@ export default function Homepage() {
     <div className="ctr-main">
       <div className="ctr-sub-content">
         <HeaderNav />
-        <HeaderSearch />
+        {/* <HeaderSearch /> */}
         <br />
         <HeaderFilters onSearch={handleSearchResults} />
         {/* {searchResults.length > 0 ? */}
