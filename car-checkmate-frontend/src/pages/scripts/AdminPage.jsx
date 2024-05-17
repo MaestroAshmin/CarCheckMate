@@ -17,6 +17,8 @@ export default function AdminPage() {
   const [mechanics, setMechanics] = useState(0);
   const [listings, setListings] = useState(0);
   const [inspections, setInspections] = useState(0);
+  const [pendingSellerVerifications, setPendingSellerVerifications] = useState(0);
+  const [pendingMechanicVerifications, setPendingMechanicVerifications] = useState(0);
   const [activeComponent, setActiveComponent] = useState("dashboard");
 
   // Fetch data from your API or data source
@@ -50,6 +52,16 @@ export default function AdminPage() {
       const inspectionsResponse = await fetch("/api/inspections/count");
       const inspectionsCount = await inspectionsResponse.json();
       setInspections(inspectionsCount);
+
+      // Fetch pending seller verifications count
+      const pendingSellerVerificationsResponse = await fetch("/api/pending-seller-verifications/count");
+      const pendingSellerVerificationsCount = await pendingSellerVerificationsResponse.json();
+      setPendingSellerVerifications(pendingSellerVerificationsCount);
+
+      // Fetch pending mechanic verifications count
+      const pendingMechanicVerificationsResponse = await fetch("/api/pending-mechanic-verifications/count");
+      const pendingMechanicVerificationsCount = await pendingMechanicVerificationsResponse.json();
+      setPendingMechanicVerifications(pendingMechanicVerificationsCount);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -72,9 +84,9 @@ export default function AdminPage() {
       case "inspections":
         return <AdminInspectionManagement />;
       case "pending-seller-verifications":
-        return <AdminPendingSellerVerification/>;
+        return <AdminPendingSellerVerification />;
       case "pending-mechanic-verifications":
-        return <AdminPendingMechanicVerification/>;
+        return <AdminPendingMechanicVerification />;
       default:
         return (
           <div className="dashboard">
@@ -122,19 +134,19 @@ export default function AdminPage() {
               </a>
               <a
                 href="#"
-                onClick={() => handleComponentChange("pending-seller-verfications")}
-                className="stat-card red"
+                onClick={() => handleComponentChange("pending-seller-verifications")}
+                className="stat-card yellow"
               >
                 <h3>Pending Seller Verifications</h3>
-                {/* <p>{inspections}</p> */}
+                <p>{pendingSellerVerifications}</p>
               </a>
               <a
                 href="#"
-                onClick={() => handleComponentChange("pending-mechanic-verfications")}
-                className="stat-card red"
+                onClick={() => handleComponentChange("pending-mechanic-verifications")}
+                className="stat-card yellow"
               >
                 <h3>Pending Mechanic Verifications</h3>
-                {/* <p>{inspections}</p> */}
+                <p>{pendingMechanicVerifications}</p>
               </a>
             </div>
           </div>
