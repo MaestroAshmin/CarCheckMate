@@ -72,7 +72,7 @@ export default function CarPhotoPage({ formData, setFormData }) {
                 <p>Drag & Drop image uploading</p>
             </div>
             {isGuidanceVisible && (
-                <div className="overlay" onClick={toggleGuidance}>
+                <div className="overlay-ctr" onClick={toggleGuidance}>
                     <div className="overlay-content">
                     <img src="./images/photo_guidance.png" alt="Photo Guidance" />
                     </div>
