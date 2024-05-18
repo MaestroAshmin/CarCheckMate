@@ -99,7 +99,6 @@ function BuyerInspection() {
         setShowCancelPopup={setShowCancelPopup}
       />
 
-
       {upcomingInspections.length === 0 ? (
         <p className="ctr-schedule-buyer-no-details">No upcoming inspections</p>
       ) : (
@@ -148,11 +147,11 @@ function BuyerInspection() {
               )}
                 <div className="ctr-schedule-option-s">
                   <button onClick={openEmailSellerPopup}>Email Seller</button>
-                  <button
+                  {/*<button
                     onClick={() => openBookMechanicPopup(inspection.carId)}
                   >
                     Book A Mechanic
-                  </button>
+                  </button>*/}
                   <button onClick={() => openCancelPopup(inspection)}>
                     Cancel booking
                   </button>

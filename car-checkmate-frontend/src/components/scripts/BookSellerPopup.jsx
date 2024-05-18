@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Import the default CSS
 import { useNavigate } from "react-router-dom";
+import ResponsePopup from "./ResponsePopup";
 
 export default function BookSellerPopup({
   showBookSellerPopup,
@@ -12,6 +13,15 @@ export default function BookSellerPopup({
   const [selectedHour, setSelectedHour] = useState("09:00");
   const [userAvailability, setUserAvailability] = useState([]);
   const navigate = useNavigate();
+
+  const [showResponsePopup, setShowResponsePopup] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
+
+  const openResponsePopup = (message) => {
+      setResponseMessage(message);
+      setShowResponsePopup(true);
+      setShowBookSellerPopup(false);
+  };
 
   useEffect(() => {
     // Fetch user availability when the component mounts
@@ -62,7 +72,8 @@ export default function BookSellerPopup({
           }
         );
         // If booking is successful, navigate to the user profile page
-        navigate("/UserProfile");
+        // navigate("/UserProfile");
+        openResponsePopup("Booking an inspection successfully, Thank you!");
       } else {
         throw new Error("User is not authorised");
       }
@@ -73,6 +84,12 @@ export default function BookSellerPopup({
 
   return (
     <>
+      <ResponsePopup
+          message={responseMessage}
+          showResponsePopup={showResponsePopup}
+          setShowResponsePopup={setShowResponsePopup}
+      />
+
       {showBookSellerPopup && (
         <>
           <div className="overlay"></div>

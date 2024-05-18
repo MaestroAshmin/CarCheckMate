@@ -121,7 +121,7 @@ const FilterBar = ({ onSearch }) => {
                 <FilterDropdown options={colorOptions} value={color} onChange={(e) => setColor(e.target.value)} />
                 <button className="btn-apply-filter" onClick={applyFilters}>Apply</button>
             </div>
-            <div className="filter-advanced">
+            {/*<div className="filter-advanced">
                 <button className="btn-advanced-filter" onClick={toggleAdvancedFilters}>
                     {showAdvancedFilters ? 'Hide Advanced Filters' : 'Show Advanced Filters'}
                     <span className='filter-advanced-gap'></span>
@@ -129,11 +129,10 @@ const FilterBar = ({ onSearch }) => {
                 </button>
                 {showAdvancedFilters && (
                     <div className="advanced-filters-panel">
-                        {/* the advanced filter inputs go here */}
+                        the advanced filter inputs go here 
                     </div>
                 )}
-            </div>
-            
+            </div>*/}
         </div>
     );
 };
