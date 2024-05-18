@@ -9,8 +9,9 @@ function BuyerInspection() {
   const [showBookMechanicPopup, setShowBookMechanicPopup] = useState(false);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
 
-  const openEmailSellerPopup = () => {
-    setShowEmailSellerPopup(true);
+  const openEmailSellerPopup = (id) => {
+    setShowEmailSellerPopup(id);
+    //console.log(id);
   };
 
   const openBookMechanicPopup = (carId) => {
@@ -108,13 +109,12 @@ function BuyerInspection() {
               {inspection.car ? (
                 <>
                   <h3>
-                    Car: <span>{inspection.car.make}</span> <span>{inspection.car.model}</span>
+                    Car: <span>{inspection.car.make}</span>{" "}
+                    <span>{inspection.car.model}</span>
                   </h3>
                   <p>
                     Date:{" "}
-                    <span>
-                      {formatDateString(inspection.inspectionDate)}
-                    </span>
+                    <span>{formatDateString(inspection.inspectionDate)}</span>
                   </p>
                   <p>
                     Time: <span>{inspection.inspectionTime}</span>
@@ -136,32 +136,31 @@ function BuyerInspection() {
               )}
             </div>
             <div className="ctr-schedule-option">
-            {inspection.car ? (
+              {inspection.car ? (
                 <>
-                  <img
-                    src={inspection.car.carPhotos[0]}
-                    alt={`Car Image`}
-                  />
+                  <img src={inspection.car.carPhotos[0]} alt={`Car Image`} />
                 </>
-              ) : ([]
+              ) : (
+                []
               )}
-                <div className="ctr-schedule-option-s">
-                  <button onClick={openEmailSellerPopup}>Email Seller</button>
-                  {/*<button
+              <div className="ctr-schedule-option-s">
+                <button onClick={() => openEmailSellerPopup(inspection._id)}>
+                  Email Seller
+                </button>
+                {/*<button
                     onClick={() => openBookMechanicPopup(inspection.carId)}
                   >
                     Book A Mechanic
                   </button>*/}
-                  <button onClick={() => openCancelPopup(inspection)}>
-                    Cancel booking
-                  </button>
-                </div>
+                <button onClick={() => openCancelPopup(inspection)}>
+                  Cancel booking
+                </button>
               </div>
+            </div>
           </div>
         ))
       )}
     </div>
-
   );
 }
 

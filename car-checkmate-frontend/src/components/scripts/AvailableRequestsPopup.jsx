@@ -60,10 +60,6 @@ export default function AvailableRequestsPopup({
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
   const handleSubmit = async (requestId) => {
     try {
       // Make a POST request to your endpoint with requestId and mechanicId
@@ -73,6 +69,11 @@ export default function AvailableRequestsPopup({
           mechanicId: mechanic, // Include the mechanicId in the request body
         }
       );
+
+      // Handle the response
+      // console.log('Response:', response.data);
+
+      // Optionally close the popup
     } catch (error) {
       // Handle errors
       console.error("Error:", error);
@@ -93,39 +94,15 @@ export default function AvailableRequestsPopup({
               </span>
               <h2>Available Requested Inspections</h2>
               {currentRequests.map((request, index) => (
-                <div
-                  key={index}
-                  className="ctr-schedule"
-                  style={{ height: "220px" }}
-                >
+                <div key={index} className="ctr-schedule">
                   <div className="ctr-schedule-request">
-                    {/* {request.car && request.car.carPhotos && request.car.carPhotos.length > 0 && (
-                                                <div className='car-photo'>
-                                                    <img src={request.car.carPhotos[0]} alt="Car"  height="100px" width="auto"/>
-                                                </div>
-                                            )} */}
+                    <h3>
+                      Car ID: <span>{request.car_id}</span>
+                    </h3>
                     <p>
-                      Date: <span>{formatDate(request.inspectionDate)}</span>{" "}
-                      Time: <span>{request.inspectionTime}</span>
+                      Date: <span>{request.inspectionDate}</span> Time:{" "}
+                      <span>{request.inspectionTime}</span>
                     </p>
-                    {request.car && <p>{request.car.title}</p>}
-                    {request.car && (
-                      <p>
-                        Registration Number:{" "}
-                        <span>{request.car.registrationNo}</span>
-                      </p>
-                    )}
-                    {request.car && (
-                      <div>
-                        <p>
-                          Location:{" "}
-                          <span>
-                            {request.car.streetName} {request.car.suburb}{" "}
-                            {request.car.state} {request.car.postcode}
-                          </span>
-                        </p>
-                      </div>
-                    )}
                   </div>
                   <div className="ctr-schedule-option">
                     <form onSubmit={() => handleSubmit(request._id)}>
