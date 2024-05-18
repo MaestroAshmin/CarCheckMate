@@ -1,5 +1,7 @@
 const Inspection = require("../models/Inspection");
+const User = require("../models/User");
 const Car = require("../models/Car");
+const nodemailer = require("nodemailer");
 const FormModel = require("../models/InspectionForm");
 const fs = require("fs");
 const path = require("path");
@@ -42,6 +44,27 @@ async function createInspection(req, res) {
 
     // Save the inspection record to the database
     await inspection.save();
+
+    const sellerData = User.findById(seller_id);
+    console.log(sellerData);
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "karkiashmin1996@gmail.com",
+        pass: "tlwvzxqguvwqsbks",
+      },
+    });
+
+    // Send email with verification link
+    const info = await transporter.sendMail({
+      from: "<no-reply@carcheckmate.com>",
+      to: sellerData.email,
+      subject: "New Inspection Request",
+      text: "You have a new Inspection request. For further information, please login and check your portal",
+    });
+
+    console.log("Email sent: ", info);
 
     res
       .status(201)
@@ -263,15 +286,15 @@ async function getUpcomingUnclaimedInspectionsForMechanic(req, res) {
     const inspectionsWithCarDetails = await Promise.all(
       upcomingInspections.map(async (inspection) => {
         let carDetails = await Car.findById(inspection.car_id);
-    
+
         if (!carDetails) {
           // If carDetails is not available, return the inspection without the car details
           return inspection.toObject();
         }
-    
+
         carDetails = carDetails.toObject();
         delete carDetails.__v; // Remove __v field
-    
+
         return { ...inspection.toObject(), car: carDetails };
       })
     );
@@ -341,7 +364,7 @@ async function getAcceptedInspectionsMechanic(req, res) {
           // If carDetails is not available, return the inspection without the car details
           return inspection.toObject();
         }
-    
+
         carDetails = carDetails.toObject();
         delete carDetails.__v; // Remove __v field
         return { ...inspection.toObject(), car: carDetails };
