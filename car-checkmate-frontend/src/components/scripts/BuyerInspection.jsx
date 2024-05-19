@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import EmailSellerPopup from "./EmailSellerPopup";
-import BookMechanicPopup from "./BookMechaniePopup";
+import BookMechanicPopup from "./BookMechanicPopup";
 import CancelPopup from "./CancelPopup";
 
 function BuyerInspection() {
@@ -9,9 +9,11 @@ function BuyerInspection() {
   const [showBookMechanicPopup, setShowBookMechanicPopup] = useState(false);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const inspectionsPerPage = 5;
+
   const openEmailSellerPopup = (id) => {
     setShowEmailSellerPopup(id);
-    //console.log(id);
   };
 
   const openBookMechanicPopup = (carId) => {
@@ -24,17 +26,13 @@ function BuyerInspection() {
 
   const fetchInspections = async (endpoint, setStateFunction) => {
     try {
-      // Retrieve user data from local storage
       const userDataFromLocalStorage = localStorage.getItem("user");
       const userData = JSON.parse(userDataFromLocalStorage);
       const userId = userData._id;
-      // Make a request to the API with the user ID as a parameter
       const response = await fetch(
         `http://localhost:3000/inspections/${endpoint}/${userId}`
       );
       const data = await response.json();
-
-      // Update the component state with the fetched inspections data
       setStateFunction(data.inspectionsWithCarDetails || []);
     } catch (error) {
       console.error(`Error fetching ${endpoint} inspections:`, error);
@@ -43,12 +41,10 @@ function BuyerInspection() {
 
   const bookInspection = async (carId, inspectionDate, inspectionTime) => {
     try {
-      // Retrieve user data from local storage
       const userDataFromLocalStorage = localStorage.getItem("user");
       const userData = JSON.parse(userDataFromLocalStorage);
       const buyerId = userData._id;
 
-      // Make a POST request to the API to book an inspection
       await fetch("http://localhost:3000/inspections/inspection-form", {
         method: "POST",
         headers: {
@@ -62,7 +58,6 @@ function BuyerInspection() {
         }),
       });
 
-      // Refresh the list of upcoming inspections after booking
       fetchInspections("upcoming-buyer", setUpcomingInspections);
     } catch (error) {
       console.error("Error booking inspection:", error);
@@ -79,9 +74,14 @@ function BuyerInspection() {
   }
 
   useEffect(() => {
-    // Fetch upcoming inspections for the buyer
     fetchInspections("upcoming-buyer", setUpcomingInspections);
   }, []);
+
+  const indexOfLastInspection = currentPage * inspectionsPerPage;
+  const indexOfFirstInspection = indexOfLastInspection - inspectionsPerPage;
+  const currentInspections = upcomingInspections.slice(indexOfFirstInspection, indexOfLastInspection);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
@@ -100,10 +100,10 @@ function BuyerInspection() {
         setShowCancelPopup={setShowCancelPopup}
       />
 
-      {upcomingInspections.length === 0 ? (
+      {currentInspections.length === 0 ? (
         <p className="ctr-schedule-buyer-no-details">No upcoming inspections</p>
       ) : (
-        upcomingInspections.map((inspection, index) => (
+        currentInspections.map((inspection, index) => (
           <div key={index} className="ctr-schedule">
             <div className="ctr-schedule-buyer-detail">
               {inspection.car ? (
@@ -147,11 +147,6 @@ function BuyerInspection() {
                 <button onClick={() => openEmailSellerPopup(inspection._id)}>
                   Email Seller
                 </button>
-                {/*<button
-                    onClick={() => openBookMechanicPopup(inspection.carId)}
-                  >
-                    Book A Mechanic
-                  </button>*/}
                 <button onClick={() => openCancelPopup(inspection)}>
                   Cancel booking
                 </button>
@@ -160,6 +155,17 @@ function BuyerInspection() {
           </div>
         ))
       )}
+
+      <div className="pagination">
+        {Array.from(
+          { length: Math.ceil(upcomingInspections.length / inspectionsPerPage) },
+          (_, index) => (
+            <button key={index} onClick={() => paginate(index + 1)}>
+              {index + 1}
+            </button>
+          )
+        )}
+      </div>
     </div>
   );
 }

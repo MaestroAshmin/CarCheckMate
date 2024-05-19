@@ -8,7 +8,7 @@ import HeaderNav from "../../../components/scripts/HeaderNav";
 import HeaderSearch from "../../../components/scripts/HeaderSearch";
 import Footer from "../../../components/scripts/footer";
 import BookSellerPopup from "../../../components/scripts/BookSellerPopup";
-import BookMechanicPopup from "../../../components/scripts/BookMechaniePopup";
+import BookMechanicPopup from "../../../components/scripts/BookMechanicPopup";
 
 export default function CarInfoPage() {
   const { _id } = useParams(); // Use _id instead of carId

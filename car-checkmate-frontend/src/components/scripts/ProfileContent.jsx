@@ -479,20 +479,20 @@ function ProfileContent() {
               <div>
                 <h3>Mechanic Profile Details</h3>
                 <p className="detail">
-                  Licensed Vehicle Testers (LVT) Number:{" "}
+                  <b>Licensed Vehicle Testers (LVT) Number:</b>{" "}
                   {mechanicRequest.userData.licenseNumber}
                 </p>
-                <p className="detail">Expiry Date : {mechanicRequest.userData.expiryDate}</p>
+                <p className="detail"><b>Expiry Date:</b> {mechanicRequest.userData.expiryDate}</p>
 
                 <p className="detail">
-                  Verification Status :{" "}
+                  <b>Verification Status:</b>{" "}
                   {mechanicRequest.pending
                     ? "Pending"
                     : mechanicRequest.reqStatus
                     ? "Approved"
                     : "Denied"}
                 </p>
-                <button
+                <button className="ctr-user-details-btn"
                   onClick={() => {
                     window.open(
                       mechanicRequest.userData.documentPath,

@@ -1,20 +1,22 @@
-/*.footer {
+/* Ensure the html and body take full height */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Container for the entire page */
+.ctr-main {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: rgba(74, 74, 71, 0.944);
-    color: white;
-    padding: 1px;
-}*/
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Content should take all available space except the footer */
+.ctr-sub-content {
+    flex: 1;
+}
 
 .ctr-footer {
-    bottom: 0;
-    left: 0;
-    width: 100%;
     background: #d9cab3;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;

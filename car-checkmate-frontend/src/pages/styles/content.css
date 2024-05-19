@@ -392,6 +392,28 @@ p {
     background-color: rgba(0, 195, 112, 1);
 }
 
+.ctr-user-details-btn {
+    width: 90px;
+    height: 25px;
+    margin-left: 50px;
+    margin-bottom: 30px;;
+    border-radius: 10px;
+    border: 1px solid #ecb159; 
+    background-color: #ecb159;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease; /* Smooth transition */
+    text-align: center;
+    color: rgba(33,33,33,255);
+}
+
+.ctr-user-details-btn:hover {
+    font-weight: bold;
+    transform: scale(1.00); /* Grow the button a bit on hover */
+    color: #FFFFFF;
+    cursor: pointer;
+    background-color: rgba(0, 195, 112, 1);
+}
+
 /* User Content Mechanic Report */
 
 .ctr-user-content h4 {

@@ -9,6 +9,9 @@ function SellerSchedule() {
   const [showAddRWCPopup, setShowAddRWCPopup] = useState(false);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const schedulePerPage = 5;
+
   const openEmailBuyerPopup = (id) => {
     setShowEmailBuyerPopup(id);
   };
@@ -57,6 +60,12 @@ function SellerSchedule() {
     fetchSchedules();
   }, []);
 
+  const indexOfLastSchedule = currentPage * schedulePerPage;
+  const indexOfFirstSchedule = indexOfLastSchedule - schedulePerPage;
+  const currentSchedules = schedules.slice(indexOfFirstSchedule, indexOfLastSchedule);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>
       <EmailBuyerPopup
@@ -74,7 +83,7 @@ function SellerSchedule() {
         setShowCancelPopup={setShowCancelPopup}
       />
 
-      {schedules.map((schedule, index) => (
+{currentSchedules.map((schedule, index) => (
         <div key={index} className="ctr-schedule">
           <div className="ctr-schedule-buyer-detail">
             {schedule.car ? (
@@ -118,6 +127,17 @@ function SellerSchedule() {
           </div>
         </div>
       ))}
+
+      <div className="pagination">
+        {Array.from(
+          { length: Math.ceil(schedules.length / schedulePerPage) },
+          (_, index) => (
+            <button key={index} onClick={() => paginate(index + 1)}>
+              {index + 1}
+            </button>
+          )
+        )}
+      </div>
     </div>
   );
 }
