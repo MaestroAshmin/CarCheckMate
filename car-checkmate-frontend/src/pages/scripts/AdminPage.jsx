@@ -92,62 +92,68 @@ export default function AdminPage() {
           <div className="dashboard">
             <h2>Dashboard</h2>
             <div className="stats-container">
-              <a
-                href="#"
-                onClick={() => handleComponentChange("sellers")}
-                className="stat-card blue"
-              >
-                <h3>Sellers</h3>
-                <p>{sellers}</p>
-              </a>
-              <a
-                href="#"
-                onClick={() => handleComponentChange("buyers")}
-                className="stat-card blue"
-              >
-                <h3>Buyers</h3>
-                <p>{buyers}</p>
-              </a>
-              <a
-                href="#"
-                onClick={() => handleComponentChange("mechanics")}
-                className="stat-card blue"
-              >
-                <h3>Mechanics</h3>
-                <p>{mechanics}</p>
-              </a>
-              <a
-                href="#"
-                onClick={() => handleComponentChange("listings")}
-                className="stat-card green"
-              >
-                <h3>Listings</h3>
-                <p>{listings}</p>
-              </a>
-              <a
-                href="#"
-                onClick={() => handleComponentChange("inspections")}
-                className="stat-card red"
-              >
-                <h3>Inspections</h3>
-                <p>{inspections}</p>
-              </a>
-              <a
-                href="#"
-                onClick={() => handleComponentChange("pending-seller-verifications")}
-                className="stat-card yellow"
-              >
-                <h3>Pending Seller Verifications</h3>
-                <p>{pendingSellerVerifications}</p>
-              </a>
-              <a
-                href="#"
-                onClick={() => handleComponentChange("pending-mechanic-verifications")}
-                className="stat-card yellow"
-              >
-                <h3>Pending Mechanic Verifications</h3>
-                <p>{pendingMechanicVerifications}</p>
-              </a>
+              <div className="row">
+                <a
+                  href="#"
+                  onClick={() => handleComponentChange("sellers")}
+                  className="stat-card blue"
+                >
+                  <h3>Sellers</h3>
+                  <p>{sellers}</p>
+                </a>
+                <a
+                  href="#"
+                  onClick={() => handleComponentChange("pending-seller-verifications")}
+                  className="stat-card yellow"
+                >
+                  <h3>Pending Seller Verifications</h3>
+                  <p>{pendingSellerVerifications}</p>
+                </a>
+              </div>
+              <div className="row">
+                <a
+                  href="#"
+                  onClick={() => handleComponentChange("buyers")}
+                  className="stat-card blue"
+                >
+                  <h3>Buyers</h3>
+                  <p>{buyers}</p>
+                </a>
+                <a
+                  href="#"
+                  onClick={() => handleComponentChange("pending-mechanic-verifications")}
+                  className="stat-card yellow"
+                >
+                  <h3>Pending Mechanic Verifications</h3>
+                  <p>{pendingMechanicVerifications}</p>
+                </a>
+              </div>
+              <div className="row">
+                <a
+                  href="#"
+                  onClick={() => handleComponentChange("listings")}
+                  className="stat-card green"
+                >
+                  <h3>Listings</h3>
+                  <p>{listings}</p>
+                </a>
+                <a
+                  href="#"
+                  onClick={() => handleComponentChange("mechanics")}
+                  className="stat-card blue"
+                >
+                  <h3>Mechanics</h3>
+                  <p>{mechanics}</p>
+                </a>
+                <a
+                  href="#"
+                  onClick={() => handleComponentChange("inspections")}
+                  className="stat-card red"
+                >
+                  <h3>Inspections</h3>
+                  <p>{inspections}</p>
+                </a>
+              </div>
             </div>
           </div>
         );
