@@ -113,15 +113,15 @@ export default function AdminPage() {
                 </a>
               </div>
               <div className="row">
-                <a
+              <a
                   href="#"
-                  onClick={() => handleComponentChange("buyers")}
+                  onClick={() => handleComponentChange("mechanics")}
                   className="stat-card blue"
                 >
-                  <h3>Buyers</h3>
-                  <p>[ 10 ]</p>
-                  {/* <p>{buyers}</p> */}
-                </a>
+                  <h3>Mechanics</h3>
+                  <p>[ 9 ]</p>
+                  {/* <p>{mechanics}</p> */}
+                </a>                
                 <a
                   href="#"
                   onClick={() => handleComponentChange("pending-mechanic-verifications")}
@@ -144,12 +144,12 @@ export default function AdminPage() {
                 </a>
                 <a
                   href="#"
-                  onClick={() => handleComponentChange("mechanics")}
+                  onClick={() => handleComponentChange("buyers")}
                   className="stat-card blue"
                 >
-                  <h3>Mechanics</h3>
-                  <p>[ 9 ]</p>
-                  {/* <p>{mechanics}</p> */}
+                  <h3>Buyers</h3>
+                  <p>[ 10 ]</p>
+                  {/* <p>{buyers}</p> */}
                 </a>
                 <a
                   href="#"
@@ -195,12 +195,12 @@ export default function AdminPage() {
               <li>
                 <a
                   href="#"
-                  className={activeComponent === "buyers" ? "active" : ""}
-                  onClick={() => handleComponentChange("buyers")}
+                  className={activeComponent === "pending-seller-verifications" ? "active" : ""}
+                  onClick={() => handleComponentChange("pending-seller-verifications")}
                 >
-                  Buyers
+                  Seller Verifications
                 </a>
-              </li>
+              </li>              
               <li>
                 <a
                   href="#"
@@ -208,6 +208,24 @@ export default function AdminPage() {
                   onClick={() => handleComponentChange("mechanics")}
                 >
                   Mechanics
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className={activeComponent === "pending-mechanic-verifications" ? "active" : ""}
+                  onClick={() => handleComponentChange("pending-mechanic-verifications")}
+                >
+                  Mechanic Verifications
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className={activeComponent === "buyers" ? "active" : ""}
+                  onClick={() => handleComponentChange("buyers")}
+                >
+                  Buyers
                 </a>
               </li>
               <li>
@@ -226,24 +244,6 @@ export default function AdminPage() {
                   onClick={() => handleComponentChange("inspections")}
                 >
                   Inspections
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className={activeComponent === "pending-seller-verifications" ? "active" : ""}
-                  onClick={() => handleComponentChange("pending-seller-verifications")}
-                >
-                  Seller Verifications
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className={activeComponent === "pending-mechanic-verifications" ? "active" : ""}
-                  onClick={() => handleComponentChange("pending-mechanic-verifications")}
-                >
-                  Mechanic Verifications
                 </a>
               </li>
             </ul>
