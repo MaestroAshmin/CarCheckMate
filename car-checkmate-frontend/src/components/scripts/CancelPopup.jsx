@@ -14,7 +14,7 @@ export default function CancelPopup({
     try {
       const formData = new FormData();
       formData.append("inspectionMessage", cancellationReason);
-
+      console.log("Inspection ID", showCancelPopup);
       const response = await fetch(
         `http://localhost:3000/inspections/deny/${showCancelPopup._id}`,
         {

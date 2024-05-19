@@ -1,5 +1,7 @@
 const Inspection = require("../models/Inspection");
+const User = require("../models/User");
 const Car = require("../models/Car");
+const nodemailer = require("nodemailer");
 const FormModel = require("../models/InspectionForm");
 const fs = require("fs");
 const path = require("path");
@@ -42,6 +44,29 @@ async function createInspection(req, res) {
 
     // Save the inspection record to the database
     await inspection.save();
+
+    const sellerData = await User.findById(seller_id);
+    console.log("Seller data: ", sellerData);
+
+    //const sellerData = { email: "suryakella23@gmail.com" };
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "karkiashmin1996@gmail.com",
+        pass: "tlwvzxqguvwqsbks",
+      },
+    });
+
+    // Send email with verification link
+    const info = await transporter.sendMail({
+      from: "<no-reply@carcheckmate.com>",
+      to: sellerData.email,
+      subject: "New Inspection Request",
+      text: "You have a new Inspection request. For further information, please login and check your portal",
+    });
+
+    console.log("Email sent ");
 
     res
       .status(201)
@@ -95,9 +120,32 @@ async function acceptInspection(req, res) {
     const { inspectionId } = req.params;
 
     // Update the inspection record to mark it as accepted by the seller
-    await Inspection.findByIdAndUpdate(inspectionId, {
+    const inspectionData = await Inspection.findByIdAndUpdate(inspectionId, {
       sellerAcceptedInspectionRequest: true,
     });
+
+    const buyerData = await User.findById(inspectionData.buyer_id);
+    console.log("Seller data: ", buyerData);
+
+    //const buyerData = { email: "suryakella23@gmail.com" };
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "karkiashmin1996@gmail.com",
+        pass: "tlwvzxqguvwqsbks",
+      },
+    });
+
+    // Send email with verification link
+    const info = await transporter.sendMail({
+      from: "<no-reply@carcheckmate.com>",
+      to: buyerData.email,
+      subject: "Inspection Request Accepted",
+      text: "You inspection request has been accepted. For further information, please login and check your portal",
+    });
+
+    console.log("Email sent ");
 
     res
       .status(200)
@@ -115,10 +163,33 @@ async function denyInspection(req, res) {
     const { inspectionMessage } = req.body; // Extract inspectionMessage from request body
 
     // Update the inspection record to mark it as denied by the seller and include inspectionMessage
-    await Inspection.findByIdAndUpdate(inspectionId, {
+    const inspectionData = await Inspection.findByIdAndUpdate(inspectionId, {
       sellerAcceptedInspectionRequest: false,
       inspectionMessage: inspectionMessage, // Set inspectionMessage
     });
+    console.log("Inspection Data: ", inspectionData);
+    const buyerData = await User.findById(inspectionData.buyer_id);
+    console.log("Seller data: ", buyerData);
+
+    //const buyerData = { email: "suryakella23@gmail.com" };
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "karkiashmin1996@gmail.com",
+        pass: "tlwvzxqguvwqsbks",
+      },
+    });
+
+    // Send email with verification link
+    const info = await transporter.sendMail({
+      from: "<no-reply@carcheckmate.com>",
+      to: buyerData.email,
+      subject: "Inspection Request Denied",
+      text: "You inspection request has been denied. For further information, please login and check your portal",
+    });
+
+    console.log("Email sent ");
 
     res
       .status(200)
@@ -259,12 +330,19 @@ async function getUpcomingUnclaimedInspectionsForMechanic(req, res) {
       inspectionDate: { $gte: new Date() },
     });
     // Fetch car details for each inspection
-
+    // console.log(upcomingInspections);
     const inspectionsWithCarDetails = await Promise.all(
       upcomingInspections.map(async (inspection) => {
+        console.log(inspection);
         let carDetails = await Car.findById(inspection.car_id);
+        console.log(carDetails);
+        if (!carDetails) {
+          // If carDetails is not available, return the inspection without the car details
+          return inspection.toObject();
+        }
         carDetails = carDetails.toObject();
         delete carDetails.__v; // Remove __v field
+
         return { ...inspection.toObject(), car: carDetails };
       })
     );
@@ -301,9 +379,40 @@ async function acceptInspectionMechanic(req, res) {
     }
 
     // Update the inspection record to mark it as accepted by the mechanic
-    await Inspection.findByIdAndUpdate(inspectionId, {
+    const inspectionData = await Inspection.findByIdAndUpdate(inspectionId, {
       mechanic_id: mechanicId,
     });
+
+    const buyerData = await User.findById(inspectionData.buyer_id);
+    const sellerData = await User.findById(inspectionData.seller_id);
+    //console.log("Seller data: ", buyerData);
+
+    //const buyerData = { email: "suryakella23@gmail.com" };
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "karkiashmin1996@gmail.com",
+        pass: "tlwvzxqguvwqsbks",
+      },
+    });
+
+    // Send email with verification link
+    await transporter.sendMail({
+      from: "<no-reply@carcheckmate.com>",
+      to: buyerData.email,
+      subject: "Mechanic Inspection Request Accepted",
+      text: "You inspection request has been accepted by the Mechanic ",
+    });
+
+    await transporter.sendMail({
+      from: "<no-reply@carcheckmate.com>",
+      to: sellerData.email,
+      subject: " Mechanic Inspection Request Accepted",
+      text: "You inspection request has been accepted by the Mechanic",
+    });
+
+    console.log("Email sent ");
 
     res.status(200).json({ message: "Inspection accepted successfully." });
   } catch (error) {
@@ -326,9 +435,15 @@ async function getAcceptedInspectionsMechanic(req, res) {
 
     // Map the inspections with car details
     // Fetch car details for each inspection
+    console.log(sortedInspections);
     const inspectionsWithCarDetails = await Promise.all(
       sortedInspections.map(async (inspection) => {
         let carDetails = await Car.findById(inspection.car_id);
+        if (!carDetails) {
+          // If carDetails is not available, return the inspection without the car details
+          return inspection.toObject();
+        }
+
         carDetails = carDetails.toObject();
         delete carDetails.__v; // Remove __v field
         return { ...inspection.toObject(), car: carDetails };
@@ -438,6 +553,74 @@ async function getAllForms(req, res) {
   }
 }
 
+async function sendEmailToSeller(req, res) {
+  try {
+    const inspectionId = req.params.id;
+    const message = req.body.message;
+    const inspectionData = await Inspection.findById(inspectionId);
+
+    // const buyerData = await User.findById(inspectionData.buyer_id);
+    const sellerData = await User.findById(inspectionData.seller_id);
+    //console.log("Seller data: ", buyerData);
+
+    //const buyerData = { email: "suryakella23@gmail.com" };
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "karkiashmin1996@gmail.com",
+        pass: "tlwvzxqguvwqsbks",
+      },
+    });
+
+    // Send email with verification link
+    await transporter.sendMail({
+      from: "<no-reply@carcheckmate.com>",
+      to: sellerData.email,
+      subject: "Message from Buyer",
+      text: message,
+    });
+    res.status(200).send("Email sent successfully to the seller");
+  } catch (error) {
+    console.error("Error while sending email to the seller", error);
+    res.status(500).json({ error: "Error while sending email to the seller" });
+  }
+}
+
+async function sendEmailToBuyer(req, res) {
+  try {
+    const inspectionId = req.params.id;
+    const message = req.body.message;
+    const inspectionData = await Inspection.findById(inspectionId);
+
+    // const buyerData = await User.findById(inspectionData.buyer_id);
+    const buyerData = await User.findById(inspectionData.buyer_id);
+    //console.log("Seller data: ", buyerData);
+
+    //const buyerData = { email: "suryakella23@gmail.com" };
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "karkiashmin1996@gmail.com",
+        pass: "tlwvzxqguvwqsbks",
+      },
+    });
+
+    // Send email with verification link
+    await transporter.sendMail({
+      from: "<no-reply@carcheckmate.com>",
+      to: buyerData.email,
+      subject: "Message from Seller",
+      text: message,
+    });
+    res.status(200).send("Email sent successfully to the buyer");
+  } catch (error) {
+    console.error("Error while sending email to the buyer", error);
+    res.status(500).json({ error: "Error while sending email to the buyer" });
+  }
+}
+
 module.exports = {
   getAllForms,
   saveForm,
@@ -453,4 +636,6 @@ module.exports = {
   acceptInspectionMechanic,
   getAcceptedInspectionsMechanic,
   changeInspectionStatus,
+  sendEmailToSeller,
+  sendEmailToBuyer,
 };

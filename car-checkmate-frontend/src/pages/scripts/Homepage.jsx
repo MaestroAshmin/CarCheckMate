@@ -23,9 +23,16 @@ export default function Homepage() {
         <br />
         <HeaderFilters onSearch={handleSearchResults} />
         {/* {searchResults.length > 0 ? */}
-        <SearchResults searchResults={searchResults} noPerPage={6} />
+        {/* <SearchResults searchResults={searchResults} noPerPage={6} />*/}
+        <br />
+        <br />
         <PhotosSlide />
-        <CarList noPerPage={6} />
+        {/*<CarList noPerPage={6} />*/}
+        {searchResults.length > 0 ? (
+            <SearchResults searchResults={searchResults} noPerPage={6} />
+        ) : (
+            <CarList noPerPage={6} />
+        )}
         <Information />
       </div>
       <Footer />

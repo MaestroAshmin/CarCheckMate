@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function UserNav() {
     const [activeItem, setActiveItem] = useState('');
     const [userRoles, setUserRoles] = useState([]);
+    const location = useLocation();
 
     const handleItemClick = (item) => {
         setActiveItem(item);
+        localStorage.setItem('activeItem', item); // Store active item in local storage
     };
 
     useEffect(() => {
@@ -24,32 +26,46 @@ function UserNav() {
                 setUserRoles(roles);
             }
         }
+
+        // Initialize active item from local storage
+        const storedActiveItem = localStorage.getItem('activeItem');
+        if (storedActiveItem) {
+            setActiveItem(storedActiveItem);
+        }
     }, []);
 
     const isUserInRole = (role) => userRoles.includes(role);
 
     return (
         <div className='ctr-user-type'>
-            <span className={`nav-item ${isUserInRole('user') ? 'active' : ''}`}>
-                <Link to='/UserProfile'>Profile</Link>
+            <span className={`nav-item ${activeItem === 'profile' ? 'active' : ''}`}>
+                <Link to='/UserProfile' onClick={() => handleItemClick('profile')}>
+                    Profile
+                </Link>
             </span>
-            <span className={`nav-item ${isUserInRole('buyer') ? 'active' : ''}`}>
+            <span className={`nav-item ${activeItem === 'buyer' ? 'active' : ''}`}>
                 {isUserInRole('buyer') ? (
-                    <Link to='/Buyer'>Buyer</Link>
+                    <Link to='/Buyer' onClick={() => handleItemClick('buyer')}>
+                        Buyer
+                    </Link>
                 ) : (
                     <span className="lock-icon">🔒 Buyer</span>
                 )}
             </span>
-            <span className={`nav-item ${isUserInRole('seller') ? 'active' : ''}`}>
+            <span className={`nav-item ${activeItem === 'seller' ? 'active' : ''}`}>
                 {isUserInRole('seller') ? (
-                    <Link to='/Seller'>Seller</Link>
+                    <Link to='/Seller' onClick={() => handleItemClick('seller')}>
+                        Seller
+                    </Link>
                 ) : (
                     <span className="lock-icon">🔒 Seller</span>
                 )}
             </span>
-            <span className={`nav-item ${isUserInRole('mechanic') ? 'active' : ''}`}>
+            <span className={`nav-item ${activeItem === 'mechanic' ? 'active' : ''}`}>
                 {isUserInRole('mechanic') ? (
-                    <Link to='/Mechanic'>Mechanic</Link>
+                    <Link to='/Mechanic' onClick={() => handleItemClick('mechanic')}>
+                        Mechanic
+                    </Link>
                 ) : (
                     <span className="lock-icon">🔒 Mechanic</span>
                 )}

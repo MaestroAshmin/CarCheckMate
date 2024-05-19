@@ -9,8 +9,11 @@ function SellerSchedule() {
   const [showAddRWCPopup, setShowAddRWCPopup] = useState(false);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
 
-  const openEmailBuyerPopup = () => {
-    setShowEmailBuyerPopup(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const schedulePerPage = 5;
+
+  const openEmailBuyerPopup = (id) => {
+    setShowEmailBuyerPopup(id);
   };
 
   const openAddRWCPopup = () => {
@@ -57,6 +60,12 @@ function SellerSchedule() {
     fetchSchedules();
   }, []);
 
+  const indexOfLastSchedule = currentPage * schedulePerPage;
+  const indexOfFirstSchedule = indexOfLastSchedule - schedulePerPage;
+  const currentSchedules = schedules.slice(indexOfFirstSchedule, indexOfLastSchedule);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>
       <EmailBuyerPopup
@@ -74,36 +83,63 @@ function SellerSchedule() {
         setShowCancelPopup={setShowCancelPopup}
       />
 
-            {schedules.map((schedule, index) => (
-                <div key={index} className='ctr-schedule'>
-                    <div className='ctr-schedule-buyer-detail'>
-                                {schedule.car ? (
-                                    <div>
-                                        <h3>Car: <span>{schedule.car.make}</span> <span>{schedule.car.model}</span></h3>
-                                        <p>Date: <span>{formatDateString(schedule.inspectionDate)}</span></p>
-                                        <p>Time: <span>{schedule.inspectionTime}</span></p>
-                                        {schedule.mechanic_id ? (
-                                            <p>Mechanic Status: <span>Your Inspection has been accepted by the mechanic</span></p>
-                                        ) : (
-                                            <p>No Mechanic has accepted the inspection</p>
-                                        )}
-                                    </div>
-                                ) : (
-                                    <p className='align-p'>No car details available</p>
-                                )}
-                                </div>
-                    <div className='ctr-schedule-option'>
-                      <img src={schedule.car.carPhotos[0]} alt={`Car Image`} />
-                        <div className="ctr-schedule-option-s">
-                          <button onClick={openEmailBuyerPopup}>Email Buyer</button>
-                          <button onClick={openAddRWCPopup}>Add RWC</button>
-                          <button onClick={() => openCancelPopup(schedule)}>Cancel booking</button>
-                        </div>
-                    </div>
-                </div>
-            ))}
+{currentSchedules.map((schedule, index) => (
+        <div key={index} className="ctr-schedule">
+          <div className="ctr-schedule-buyer-detail">
+            {schedule.car ? (
+              <div>
+                <h3>
+                  Car: <span>{schedule.car.make}</span>{" "}
+                  <span>{schedule.car.model}</span>
+                </h3>
+                <p>
+                  Date: <span>{formatDateString(schedule.inspectionDate)}</span>
+                </p>
+                <p>
+                  Time: <span>{schedule.inspectionTime}</span>
+                </p>
+                {schedule.mechanic_id ? (
+                  <p>
+                    Mechanic Status:{" "}
+                    <span>
+                      Your Inspection has been accepted by the mechanic
+                    </span>
+                  </p>
+                ) : (
+                  <p>No Mechanic has accepted the inspection</p>
+                )}
+              </div>
+            ) : (
+              <p className="align-p">No car details available</p>
+            )}
+          </div>
+          <div className="ctr-schedule-option">
+            <img src={schedule.car.carPhotos[0]} alt={`Car Image`} />
+            <div className="ctr-schedule-option-s">
+              <button onClick={() => openEmailBuyerPopup(schedule._id)}>
+                Email Buyer
+              </button>
+              <button onClick={openAddRWCPopup}>Add RWC</button>
+              <button onClick={() => openCancelPopup(schedule)}>
+                Cancel booking
+              </button>
+            </div>
+          </div>
         </div>
-    );
+      ))}
+
+      <div className="pagination">
+        {Array.from(
+          { length: Math.ceil(schedules.length / schedulePerPage) },
+          (_, index) => (
+            <button key={index} onClick={() => paginate(index + 1)}>
+              {index + 1}
+            </button>
+          )
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default SellerSchedule;

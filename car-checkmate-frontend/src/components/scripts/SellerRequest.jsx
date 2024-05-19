@@ -1,14 +1,22 @@
 import { useState, useEffect } from "react";
 import CancelPopup from "./CancelPopup";
+import ResponsePopup from "./ResponsePopup";
 
 function SellerRequest() {
   const [pendingInspections, setPendingInspections] = useState([]);
   const [showCancelPopup, setShowCancelPopup] = useState(false);
   const [inspectionToCancel, setInspectionToCancel] = useState(null);
   const [showAcceptedMessage, setShowAcceptedMessage] = useState(false);
+  const [showResponsePopup, setShowResponsePopup] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
+
+  const openResponsePopup = (message) => {
+    setResponseMessage(message);
+    setShowResponsePopup(true);
+  };
 
   const openCancelPopup = (inspectionId) => {
-    setShowCancelPopup(true);
+    setShowCancelPopup({ _id: inspectionId });
     setInspectionToCancel(inspectionId);
   };
 
@@ -64,7 +72,12 @@ function SellerRequest() {
       if (!response.ok) {
         throw new Error("Failed to accept inspection");
       }
-      setShowAcceptedMessage(true);
+      {
+        /*setShowAcceptedMessage(true);*/
+      }
+
+      openResponsePopup("The inspection request has been accepted!");
+
       const updatedResponse = await fetch(
         `http://localhost:3000/inspections/pending-inspections/${userId}`
       );
@@ -79,17 +92,26 @@ function SellerRequest() {
   };
   return (
     <div>
+      <ResponsePopup
+        message={responseMessage}
+        showResponsePopup={showResponsePopup}
+        setShowResponsePopup={setShowResponsePopup}
+      />
+
       <CancelPopup
         showCancelPopup={showCancelPopup}
         setShowCancelPopup={setShowCancelPopup}
         inspectionId={inspectionToCancel} // Pass inspection id as prop
       />
-      {showAcceptedMessage && <p className='align-p'>Inspection Accepted!</p>}
+      {showAcceptedMessage && <p className="align-p">Inspection Accepted!</p>}
       {currentInspections.map((inspection, index) => (
         <div key={index} className="ctr-schedule-book">
           <div className="ctr-schedule-seller">
             <img src={inspection.car.carPhotos[0]} alt="Car" />
-            <h3><span>{inspection.car.make}</span> <span>{inspection.car.model}</span></h3>
+            <h3>
+              <span>{inspection.car.make}</span>{" "}
+              <span>{inspection.car.model}</span>
+            </h3>
             <p>
               <span>
                 {new Date(inspection.inspectionDate).toLocaleDateString()}

@@ -7,6 +7,10 @@ body {
     font-family: "Arial", "Verdana", "Tahoma", "Trebuchet MS", sans-serif;
 }
 
+p {
+    font-size: 1.1rem;
+}
+
 /*.ctr-main {
     
 }*/
@@ -38,7 +42,7 @@ body {
     font-style: italic;
     font-weight: bold;
     font-family: arial black;
-    color: #ebebeb;
+    color: #777777;
     text-transform: uppercase;
     text-align: center;
     margin: -20px 0px 0px 0px;
