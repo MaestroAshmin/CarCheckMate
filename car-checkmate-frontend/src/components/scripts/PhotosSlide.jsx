@@ -7,9 +7,11 @@ import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/photosslide.css";
+import { useNavigate } from "react-router-dom";
 
-const PhotosSlide = () => {
+const PhotosSlide = ({ car }) => {
   const [visitedCars, setVisitedCars] = useState([]);
+  const navigate = useNavigate();
   const settings = {
     dots: false,
     infinite: true,
@@ -85,6 +87,28 @@ const PhotosSlide = () => {
     fetchData();
   }, []);
 
+  const handleCarClick = async (unsoldCars) => {
+    if (!unsoldCars || !unsoldCars._id) {
+      console.log("Car object is undefined or does not have _id property");
+      return;
+    }
+  
+    try {
+      await fetch("http://localhost:3000/cars/carvisit", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ carId: car._id }),
+      });
+    } catch (error) {
+      console.log("error while updating car visits", error);
+    }
+  
+    // Navigate to the CarInfoPage when a car is clicked
+    navigate(`/car/${car._id}`);
+  };
+
   return (
     <div className="ctr-photosslide">
       <h1>Most Viewed Vehicles</h1>
@@ -94,9 +118,13 @@ const PhotosSlide = () => {
         </div> */}
 
         {visitedCars.map((car, index) => (
-          <div className="slide-item">
-            <img src={car.carPhotos[0]} alt="" />
-          </div>
+          <a key={index} href={`/car/${car.car_id}`}>
+            <div className="slide-item">
+              {car.carPhotos && car.carPhotos.length > 0 && (
+                <img src={car.carPhotos[0]} alt="" />
+              )}
+            </div>
+          </a>
         ))}
       </Slider>
     </div>
