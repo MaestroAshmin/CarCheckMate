@@ -128,7 +128,7 @@ export default function AdminPage() {
                   className="stat-card yellow"
                 >
                   <h3>Pending Mechanic Verifications</h3>
-                  <p>[ 0 ]</p>
+                  <p>[ 1 ]</p>
                   {/* <p>{pendingMechanicVerifications}</p> */}
                 </a>
               </div>
