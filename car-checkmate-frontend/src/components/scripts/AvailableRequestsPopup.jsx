@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 export default function AvailableRequestsPopup({
   showAvailableRequestsPopup,
   setShowAvailableRequestsPopup,
@@ -81,6 +83,11 @@ export default function AvailableRequestsPopup({
       console.error("Error:", error);
     }
   };
+  const navigate = useNavigate();
+  const handleViewDetailClick = async (carid) => {
+    navigate(`/car/${carid}`);
+  };
+
   return (
     <>
       {showAvailableRequestsPopup && (
@@ -99,11 +106,18 @@ export default function AvailableRequestsPopup({
                 <div key={index} className="ctr-schedule">
                   <div className="ctr-schedule-request">
                     <h3>
-                      Car ID: <span>{request.car_id}</span>
+                      Date: <span>{new Date(request.inspectionDate).toLocaleDateString('en-GB')}</span>&nbsp;
+                      Time:{" "}
+                      <span>{request.inspectionTime}</span>
                     </h3>
                     <p>
-                      Date: <span>{request.inspectionDate}</span> Time:{" "}
-                      <span>{request.inspectionTime}</span>
+                    <a
+                      href={`/car/${request.car_id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View car details
+                    </a>
                     </p>
                   </div>
                   <div className="ctr-schedule-option">
