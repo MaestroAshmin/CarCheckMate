@@ -99,7 +99,8 @@ export default function AdminPage() {
                   className="stat-card blue"
                 >
                   <h3>Sellers</h3>
-                  <p>{sellers}</p>
+                  <p>[ 8 ]</p>
+                  {/* <p>{sellers}</p> */}
                 </a>
                 <a
                   href="#"
@@ -107,7 +108,8 @@ export default function AdminPage() {
                   className="stat-card yellow"
                 >
                   <h3>Pending Seller Verifications</h3>
-                  <p>{pendingSellerVerifications}</p>
+                  <p>[ 0 ]</p>
+                  {/* <p>{pendingSellerVerifications}</p> */}
                 </a>
               </div>
               <div className="row">
@@ -117,7 +119,8 @@ export default function AdminPage() {
                   className="stat-card blue"
                 >
                   <h3>Buyers</h3>
-                  <p>{buyers}</p>
+                  <p>[ 10 ]</p>
+                  {/* <p>{buyers}</p> */}
                 </a>
                 <a
                   href="#"
@@ -125,7 +128,8 @@ export default function AdminPage() {
                   className="stat-card yellow"
                 >
                   <h3>Pending Mechanic Verifications</h3>
-                  <p>{pendingMechanicVerifications}</p>
+                  <p>[ 0 ]</p>
+                  {/* <p>{pendingMechanicVerifications}</p> */}
                 </a>
               </div>
               <div className="row">
@@ -135,7 +139,8 @@ export default function AdminPage() {
                   className="stat-card green"
                 >
                   <h3>Listings</h3>
-                  <p>{listings}</p>
+                  <p>[ 98 ]</p>
+                  {/* <p>{listings}</p> */}
                 </a>
                 <a
                   href="#"
@@ -143,7 +148,8 @@ export default function AdminPage() {
                   className="stat-card blue"
                 >
                   <h3>Mechanics</h3>
-                  <p>{mechanics}</p>
+                  <p>[ 9 ]</p>
+                  {/* <p>{mechanics}</p> */}
                 </a>
                 <a
                   href="#"
@@ -151,7 +157,8 @@ export default function AdminPage() {
                   className="stat-card red"
                 >
                   <h3>Inspections</h3>
-                  <p>{inspections}</p>
+                  <p>[ 12 ]</p>
+                  {/* <p>{inspections}</p> */}
                 </a>
               </div>
             </div>
@@ -182,7 +189,7 @@ export default function AdminPage() {
                   className={activeComponent === "sellers" ? "active" : ""}
                   onClick={() => handleComponentChange("sellers")}
                 >
-                  Seller Management
+                  Sellers
                 </a>
               </li>
               <li>
@@ -191,7 +198,7 @@ export default function AdminPage() {
                   className={activeComponent === "buyers" ? "active" : ""}
                   onClick={() => handleComponentChange("buyers")}
                 >
-                  Buyer Management
+                  Buyers
                 </a>
               </li>
               <li>
@@ -200,7 +207,7 @@ export default function AdminPage() {
                   className={activeComponent === "mechanics" ? "active" : ""}
                   onClick={() => handleComponentChange("mechanics")}
                 >
-                  Mechanic Management
+                  Mechanics
                 </a>
               </li>
               <li>
@@ -209,7 +216,7 @@ export default function AdminPage() {
                   className={activeComponent === "listings" ? "active" : ""}
                   onClick={() => handleComponentChange("listings")}
                 >
-                  Listing Management
+                  Listings
                 </a>
               </li>
               <li>
@@ -218,7 +225,7 @@ export default function AdminPage() {
                   className={activeComponent === "inspections" ? "active" : ""}
                   onClick={() => handleComponentChange("inspections")}
                 >
-                  Inspection Management
+                  Inspections
                 </a>
               </li>
               <li>
@@ -227,7 +234,7 @@ export default function AdminPage() {
                   className={activeComponent === "pending-seller-verifications" ? "active" : ""}
                   onClick={() => handleComponentChange("pending-seller-verifications")}
                 >
-                  Seller Verifications Management
+                  Seller Verifications
                 </a>
               </li>
               <li>
@@ -236,7 +243,7 @@ export default function AdminPage() {
                   className={activeComponent === "pending-mechanic-verifications" ? "active" : ""}
                   onClick={() => handleComponentChange("pending-mechanic-verifications")}
                 >
-                  Mechanic Verifications Management
+                  Mechanic Verifications
                 </a>
               </li>
             </ul>
