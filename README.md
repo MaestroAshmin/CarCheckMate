@@ -63,37 +63,45 @@ git clone https://github.com/MaestroAshmin/CarCheckMate.git
 Or download the zip file from the repository and unzip it.
 
 3. **Navigate to the project directory:**
+```
 cd CarCheckMate
-
+```
 
 4. **Switch Branch:**
 - The latest and final features are available in the following branch.
+```
 git checkout jay_new
-
+```
 
 5. **Install the required NodeJS dependencies:**
+```
 npm install
-
+```
 
 If there are any errors during installation, use the following:
+```
 npm install --legacy-peer-deps
-
+```
 
 6. **Navigate to the folder that has frontend files:**
+```
 cd car-checkmate-frontend
-
+```
 
 7. **Install the required dependencies:**
+```
 npm install
-
+```
 
 8. **Navigate to the root folder:**
+```
 cd ..
-
+```
 
 9. **Run the backend server:**
+```
 node index.js
-
+```
 
 - The backend server runs on port 3000.
 10. **Open a new terminal window or command prompt and navigate to the frontend folder:**
