@@ -60,9 +60,8 @@
 1. **Open terminal or Command Prompt to proceed.**
 2. **Clone the CarCheckMate repository from GitHub:**
 git clone https://github.com/MaestroAshmin/CarCheckMate.git
-
-
 Or download the zip file from the repository and unzip it.
+
 3. **Navigate to the project directory:**
 cd CarCheckMate
 
