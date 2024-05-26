@@ -1,5 +1,5 @@
 # CarCheckMate
-## 2. Installation <a name="installation"></a>
+## Installation <a name="installation"></a>
 
 ### Prerequisites
 
